@@ -5,6 +5,27 @@
 <title>4S Store — Classes</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+<!-- SEO básico -->
+<meta name="description" content="Guia completo das classes do jogo 4S Store, com atributos, skills e guias.">
+<meta name="keywords" content="4S Store, classes, Rune Knight, Royal Guard, Mechanic, Genetic, Arch Bishop">
+<meta name="author" content="Seu Nome ou Autor do Guia">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:title" content="4S Store — Classes">
+<meta property="og:description" content="Guias & Produtos.">
+<meta property="og:image" content="4sstore.png">
+<meta property="og:url" content="https://4-s-store.vercel.app/">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="4sstore.png">
+<meta name="twitter:title" content="4S STORE">
+<meta name="twitter:description" content="GuiaS & Produtos.">
+<meta name="twitter:image" content="og-image.jpg">
+
 <style>
 body{
   margin:0;
@@ -25,8 +46,30 @@ header{
   justify-content:space-between;
   border-bottom:1px solid rgba(56,189,248,.25);
 }
-.logo{font-size:30px;font-weight:bold;color:#38bdf8}
-nav a{color:#fff;text-decoration:none;margin-left:18px}
+.logo {
+  font-size: 30px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #38bdf8, #0ea5e9, #06b6d4, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  display: inline-block;
+  animation: gradientMove 5s linear infinite, glowPulse 2s ease-in-out infinite;
+}
+
+/* Gradiente animado */
+@keyframes gradientMove {
+  0% {background-position: 0%;}
+  50% {background-position: 200%;}
+  100% {background-position: 0%;}
+}
+
+/* Glow pulsante */
+@keyframes glowPulse {
+  0%, 100% {text-shadow: 0 0 5px #38bdf8, 0 0 10px #0ea5e9;}
+  50% {text-shadow: 0 0 15px #38bdf8, 0 0 25px #0ea5e9;}
+}
+nav a:hover{color:#38bdf8}
 nav a.active{color:#38bdf8}
 
 /* GRID — 5 POR LINHA */
@@ -38,15 +81,9 @@ nav a.active{color:#38bdf8}
   grid-template-columns:repeat(5,1fr);
   gap:22px;
 }
-@media(max-width:1200px){
-  .classes-grid{grid-template-columns:repeat(3,1fr);}
-}
-@media(max-width:768px){
-  .classes-grid{grid-template-columns:repeat(2,1fr);}
-}
-@media(max-width:480px){
-  .classes-grid{grid-template-columns:1fr;}
-}
+@media(max-width:1200px){.classes-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:768px){.classes-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.classes-grid{grid-template-columns:1fr;}}
 
 /* CARD */
 .class-card{
@@ -87,6 +124,7 @@ nav a.active{color:#38bdf8}
   -webkit-text-fill-color:transparent;
 }
 
+/* BOTAO GUIA */
 .btn-guide{
   padding:8px 16px;
   border:none;
@@ -219,25 +257,78 @@ nav a.active{color:#38bdf8}
 <header>
   <div class="logo">4S</div>
   <nav>
-    <a href="index.html">Pagina inicial</a>
+    <!-- Botão discreto: apenas o nome clicável -->
+    <a href="index.html">Página inicial</a>
   </nav>
 </header>
-<link rel="icon" href="favicon.ico" type="image/x-icon">
+
 <section class="classes-grid">
   <!-- TODAS AS CLASSES -->
-  <div class="class-card" onclick="openModal('Rune Knight')"><div class="card-image"><img src="rune-knight.jpg"></div><h3>Rune Knight</h3><button class="btn-guide">Ver Guia</button></div>
-  <div class="class-card" onclick="openModal('Royal Guard')"><div class="card-image"><img src="royal-guard.jpg"></div><h3>Royal Guard</h3><button class="btn-guide">Ver Guia</button></div>
-  <div class="class-card" onclick="openModal('Mechanic')"><div class="card-image"><img src="mechanic.jpg"></div><h3>Mechanic</h3><button class="btn-guide">Ver Guia</button></div>
-  <div class="class-card" onclick="openModal('Genetic')"><div class="card-image"><img src="genetic.jpg"></div><h3>Genetic</h3><button class="btn-guide">Ver Guia</button></div>
-  <div class="class-card" onclick="openModal('Arch Bishop')"><div class="card-image"><img src="arch-bishop.jpg"></div><h3>Arch Bishop</h3><button class="btn-guide">Ver Guia</button></div>
-  <div class="class-card" onclick="openModal('Sura')"><div class="card-image"><img src="sura.jpg"></div><h3>Sura</h3><button class="btn-guide">Ver Guia</button></div>
-  <div class="class-card" onclick="openModal('Warlock')"><div class="card-image"><img src="warlock.jpg"></div><h3>Warlock</h3><button class="btn-guide">Ver Guia</button></div>
-  <div class="class-card" onclick="openModal('Sorcerer')"><div class="card-image"><img src="sorcerer.jpg"></div><h3>Sorcerer</h3><button class="btn-guide">Ver Guia</button></div>
-  <div class="class-card" onclick="openModal('Ranger')"><div class="card-image"><img src="ranger.jpg"></div><h3>Ranger</h3><button class="btn-guide">Ver Guia</button></div>
-  <div class="class-card" onclick="openModal('Shadow Chaser')"><div class="card-image"><img src="shadow-chaser.jpg"></div><h3>Shadow Chaser</h3><button class="btn-guide">Ver Guia</button></div>
-  <div class="class-card" onclick="openModal('Guillotine Cross')"><div class="card-image"><img src="guillotine-cross.jpg"></div><h3>Guillotine Cross</h3><button class="btn-guide">Ver Guia</button></div>
-  <div class="class-card" onclick="openModal('Minstrel')"><div class="card-image"><img src="minstrel.jpg"></div><h3>Minstrel</h3><button class="btn-guide">Ver Guia</button></div>
-  <div class="class-card" onclick="openModal('Wanderer')"><div class="card-image"><img src="wanderer.jpg"></div><h3>Wanderer</h3><button class="btn-guide">Ver Guia</button></div>
+  <div class="class-card" onclick="openModal('Rune Knight')">
+    <div class="card-image"><img src="rune-knight.jpg"></div>
+    <h3>Rune Knight</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Royal Guard')">
+    <div class="card-image"><img src="royal-guard.jpg"></div>
+    <h3>Royal Guard</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Mechanic')">
+    <div class="card-image"><img src="mechanic.jpg"></div>
+    <h3>Mechanic</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Genetic')">
+    <div class="card-image"><img src="genetic.jpg"></div>
+    <h3>Genetic</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Arch Bishop')">
+    <div class="card-image"><img src="arch-bishop.jpg"></div>
+    <h3>Arch Bishop</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Sura')">
+    <div class="card-image"><img src="sura.jpg"></div>
+    <h3>Sura</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Warlock')">
+    <div class="card-image"><img src="warlock.jpg"></div>
+    <h3>Warlock</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Sorcerer')">
+    <div class="card-image"><img src="sorcerer.jpg"></div>
+    <h3>Sorcerer</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Ranger')">
+    <div class="card-image"><img src="ranger.jpg"></div>
+    <h3>Ranger</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Shadow Chaser')">
+    <div class="card-image"><img src="shadow-chaser.jpg"></div>
+    <h3>Shadow Chaser</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Guillotine Cross')">
+    <div class="card-image"><img src="guillotine-cross.jpg"></div>
+    <h3>Guillotine Cross</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Minstrel')">
+    <div class="card-image"><img src="minstrel.jpg"></div>
+    <h3>Minstrel</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Wanderer')">
+    <div class="card-image"><img src="wanderer.jpg"></div>
+    <h3>Wanderer</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
 </section>
 
 <div class="modal" id="modal">
@@ -255,9 +346,18 @@ nav a.active{color:#38bdf8}
     </div>
 
     <div class="tab-content active">
-      <div class="attr" data-value="100"><div class="attr-label"><span>FOR</span><span>100</span></div><div class="bar"><div class="bar-fill"></div></div></div>
-      <div class="attr" data-value="90"><div class="attr-label"><span>AGI</span><span>90</span></div><div class="bar"><div class="bar-fill"></div></div></div>
-      <div class="attr" data-value="80"><div class="attr-label"><span>VIT</span><span>80</span></div><div class="bar"><div class="bar-fill"></div></div></div>
+      <div class="attr" data-value="100">
+        <div class="attr-label"><span>FOR</span><span>100</span></div>
+        <div class="bar"><div class="bar-fill"></div></div>
+      </div>
+      <div class="attr" data-value="90">
+        <div class="attr-label"><span>AGI</span><span>90</span></div>
+        <div class="bar"><div class="bar-fill"></div></div>
+      </div>
+      <div class="attr" data-value="80">
+        <div class="attr-label"><span>VIT</span><span>80</span></div>
+        <div class="bar"><div class="bar-fill"></div></div>
+      </div>
     </div>
 
     <div class="tab-content">
@@ -299,8 +399,6 @@ function animateBars(){
 }
 </script>
 
-</body>
-</html>
 <script>
 document.querySelectorAll('a[href]').forEach(link => {
   const url = new URL(link.href, location.href);
@@ -311,3 +409,6 @@ document.querySelectorAll('a[href]').forEach(link => {
   }
 });
 </script>
+
+</body>
+</html>
