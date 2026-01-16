@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>4S Store — Itens de Jogos Online</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+/* ===== HEADER ===== */
+header{
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(0,153,255,.25);
+  padding:10px 20px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  
+}
+header .nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+header .logo{
+  font-size:20px;
+  font-weight:bold;
+  color:#00ddff;
+}
+header nav a{
+  margin-left:14px;
+  text-decoration:none;
+  color:#fff;
+  transition:.3s;
+}
+header nav a.active,
+header nav a:hover{
+  color:#00ddff;
+  text-decoration:underline;
+}
+
+/* ===== PROMOÇÕES ===== */
+.promos{
+  max-width:1200px;
+  margin:60px auto;
+  padding:0 20px;
+}
+
+.promos h2{
+  text-align:center;
+  font-size:28px;
+  margin-bottom:34px;
+  background:linear-gradient(135deg,#00aaff,#00ddff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 20px rgba(0,221,255,.25);
+}
+
+.promos-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
+}
+
+.promo-card{
+  position:relative;
+  background:linear-gradient(
+    180deg,
+    rgba(0,153,255,.12),
+    rgba(0,0,0,.35)
+  );
+  border-radius:20px;
+  padding:26px 22px;
+  box-shadow:
+    0 8px 24px rgba(0,153,255,.18),
+    inset 0 0 0 1px rgba(0,153,255,.15);
+  transition:.35s ease;
+  text-align:center;
+  overflow:hidden;
+}
+
+.promo-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(0,221,255,.18),
+    transparent
+  );
+  opacity:0;
+  transition:.35s;
+}
+
+.promo-card:hover{
+  transform:translateY(-8px) scale(1.03);
+  box-shadow:
+    0 14px 40px rgba(0,153,255,.35);
+}
+
+.promo-card:hover::before{
+  opacity:1;
+}
+
+.promo-card h3{
+  font-size:19px;
+  margin-bottom:8px;
+  background:linear-gradient(135deg,#00ddff,#00aaff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.promo-card p{
+  font-size:14px;
+  color:#cfd8dc;
+  margin-bottom:16px;
+}
+
+.promo-card span{
+  display:inline-block;
+  padding:8px 18px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#00ff88,#00dd66);
+  color:#001a0f;
+  font-weight:900;
+  font-size:13px;
+  box-shadow:0 0 14px rgba(0,255,136,.45);
+}
+
+
+/* ===== STREAMERS ===== */
+.streamers{
+  max-width:1200px;
+  margin:80px auto;
+  padding:0 20px;
+  text-align:center;
+}
+.streamers-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:22px;
+}
+
+/* CARD */
+.streamer-card{
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(0,153,255,.12), rgba(0,0,0,.35)),
+    rgba(0,0,0,.25);
+  border-radius:20px;
+  padding:14px;
+  box-shadow:0 8px 28px rgba(0,153,255,.28);
+  transition:.35s;
+  overflow:hidden;
+}
+.streamer-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:20px;
+  background:linear-gradient(135deg,transparent,rgba(0,153,255,.25),transparent);
+  opacity:0;
+  transition:.35s;
+  pointer-events:none; /* <<< CORREÇÃO */
+
+}
+.streamer-card:hover::after{
+  opacity:1;
+}
+.streamer-card:hover{
+  transform:translateY(-8px) scale(1.03);
+}
+
+/* IMAGEM */
+.streamer-img{
+  width:100%;
+  height:170px;
+  object-fit:contain;
+  background:radial-gradient(circle at top,#020617,#000);
+  border-radius:16px;
+  padding:10px;
+  box-shadow:inset 0 0 0 1px rgba(0,153,255,.15);
+}
+
+/* TEXTO */
+.streamer-card h3{
+  margin:10px 0 4px;
+  font-size:16px;
+  letter-spacing:.5px;
+  background:linear-gradient(135deg,#00aaff,#00ddff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.streamer-card span{
+  font-size:12px;
+  color:#9ca3af;
+}
+
+/* ===== STATUS ===== */
+.status-badge{
+  position:absolute;
+  top:12px;
+  left:12px;
+  padding:5px 12px;
+  font-size:11px;
+  font-weight:bold;
+  border-radius:14px;
+  backdrop-filter:blur(6px);
+  letter-spacing:.5px;
+}
+.status-badge.online{
+  background:linear-gradient(135deg,#00ff88,#00cc6a);
+  color:#001a0d;
+  box-shadow:0 0 14px rgba(0,255,136,.6);
+}
+.status-badge.offline{
+  background:rgba(0,0,0,.55);
+  color:#aaa;
+  border:1px solid rgba(255,255,255,.15);
+}
+
+/* ===== LINKS ===== */
+.streamer-links{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin-top:14px;
+}
+.streamer-links a{
+  background:rgba(0,0,0,.4);
+  padding:8px;
+  border-radius:12px;
+  transition:.3s;
+}
+.streamer-links a:hover{
+  transform:translateY(-3px) scale(1.15);
+  background:rgba(0,153,255,.25);
+}
+.streamer-links img{
+  width:24px;
+  height:24px;
+  object-fit:contain;
+  filter:drop-shadow(0 0 6px rgba(0,153,255,.35));
+}
+
+/* ===== PAINEL SECRETO (INALTERADO – SÓ POLIMENTO) ===== */
+#adminPanel{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+#adminPanel .panel{
+  background:#020617;
+  padding:20px;
+  border-radius:18px;
+  width:300px;
+  box-shadow:0 0 40px rgba(0,153,255,.45);
+}
+#adminPanel h3{
+  color:#00ddff;
+  text-align:center;
+  margin-bottom:14px;
+}
+.admin-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+.admin-item button{
+  padding:5px 12px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.btn-on{
+  background:#00ff88;
+}
+.btn-off{
+  background:#444;
+  color:#ccc;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg-animated"></div>
+<div class="particles"></div>
+
+<header>
+  <div class="nav">
+    <div class="logo">4S</div>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="classes.html">Guias</a>
+      <a href="itens.html">Itens</a>
+      <a href="#">Suporte</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>4S STORE<br></h1>
+    <p>Moedas, skins, VIP e vantagens entregues de barato rápida e seguro.</p>
+    <button onclick="location.href='itens.html'">Ver Itens</button>
+  </div>
+</section>
+
+<!-- PROMOÇÕES -->
+<section class="promos">
+  <h2>Promoções Ativas</h2>
+  <div class="promos-grid">
+    <div class="promo-card">
+      <h3>Começando bem o Ano</h3>
+      <p>Todo Mes de Janeiro</p>
+      <span>-10%</span>
+    </div>
+    <div class="promo-card">
+      <h3>Leve 3 Pague 2</h3>
+      <p>Na comra de 3 Visuais 1 Sai de Graça</p>
+      <span>Leve 3 Pague 2</span>
+    </div>
+    <div class="promo-card">
+      <h3>Combo Inicial</h3>
+      <p>Ideal para quem está começando</p>
+      <span>Ganhe 1 Visual</span>
+    </div>
+  </div>
+</section>
+
+<!-- STREAMERS (INALTERADO) -->
+<section class="streamers">
+<h2>Streamers Recomendados</h2>
+<p>Criadores de conteúdo que indicamos</p>
+
+<div class="streamers-grid">
+
+<div class="streamer-card" data-streamer="streamer1">
+  <div class="status-badge offline">OFFLINE</div>
+  <img src="noturno.png" class="streamer-img">
+  <h3>Noturnolll</h3>
+  <span>RO.Latam</span>
+  <div class="streamer-links">
+    <a href="https://www.youtube.com/@noturnoragnarok"><img src="youtube.png"></a>
+    <a href="#"><img src="twitch.png"></a>
+    <a href="#"><img src="kick.png"></a>
+  </div>
+</div>
+
+<div class="streamer-card" data-streamer="streamer2">
+  <div class="status-badge offline">OFFLINE</div>
+  <img src="yuukiiBr.png" class="streamer-img">
+  <h3>YuukiiBr</h3>
+  <span>RO.Latam & RO.Landverse</span>
+  <div class="streamer-links">
+    <a href="#"><img src="youtube.png"></a>
+    <a href="#"><img src="twitch.png"></a>
+    <a href="#"><img src="kick.png"></a>
+  </div>
+</div>
+
+<div class="streamer-card" data-streamer="streamer3">
+  <div class="status-badge offline">OFFLINE</div>
+  <img src="Julliezinha.png" class="streamer-img">
+  <h3>Julliezinha</h3>
+  <span>Myth of Yggdrasil</span>
+  <div class="streamer-links">
+    <a href="#"><img src="youtube.png"></a>
+    <a href="#"><img src="twitch.png"></a>
+    <a href="#"><img src="kick.png"></a>
+  </div>
+</div>
+
+<div class="streamer-card" data-streamer="streamer4">
+  <div class="status-badge offline">OFFLINE</div>
+  <img src="AkuaAB.png" class="streamer-img">
+  <h3>AkuaAB</h3>
+  <span>RO.Latam & RO.Landverse</span>
+  <div class="streamer-links">
+    <a href="#"><img src="youtube.png"></a>
+    <a href="#"><img src="twitch.png"></a>
+    <a href="#"><img src="kick.png"></a>
+  </div>
+</div>
+
+</div>
+</section>
+
+<footer>© 2026 4S Store — Todos os direitos reservados</footer>
+
+<!-- PAINEL SECRETO -->
+<div id="adminPanel">
+  <div class="panel">
+    <h3>Painel Streamers</h3>
+
+    <div class="admin-item">
+      <span>Noturnolll</span>
+      <div>
+        <button class="btn-on" onclick="setStatus('streamer1','online')">ON</button>
+        <button class="btn-off" onclick="setStatus('streamer1','offline')">OFF</button>
+      </div>
+    </div>
+
+    <div class="admin-item">
+      <span>YuukiiBr</span>
+      <div>
+        <button class="btn-on" onclick="setStatus('streamer2','online')">ON</button>
+        <button class="btn-off" onclick="setStatus('streamer2','offline')">OFF</button>
+      </div>
+    </div>
+
+    <div class="admin-item">
+      <span>Julliezinha</span>
+      <div>
+        <button class="btn-on" onclick="setStatus('streamer3','online')">ON</button>
+        <button class="btn-off" onclick="setStatus('streamer3','offline')">OFF</button>
+      </div>
+    </div>
+
+    <div class="admin-item">
+      <span>AkuaAB</span>
+      <div>
+        <button class="btn-on" onclick="setStatus('streamer4','online')">ON</button>
+        <button class="btn-off" onclick="setStatus('streamer4','offline')">OFF</button>
+      </div>
+    </div>
+
+    <button onclick="closePanel()" style="width:100%;margin-top:10px">Fechar</button>
+  </div>
+</div>
+
+<script>
+let secret="";
+document.addEventListener("keydown",e=>{
+  secret+=e.key.toUpperCase();
+  if(secret.includes("4S")){
+    adminPanel.style.display="flex";
+    secret="";
+  }
+  if(secret.length>5)secret="";
+});
+
+function closePanel(){
+  adminPanel.style.display="none";
+}
+
+function setStatus(id,status){
+  localStorage.setItem("streamer_"+id,status);
+  applyStatus();
+}
+
+function applyStatus(){
+  document.querySelectorAll(".streamer-card").forEach(card=>{
+    const id=card.dataset.streamer;
+    const badge=card.querySelector(".status-badge");
+    const saved=localStorage.getItem("streamer_"+id)||"offline";
+    badge.className="status-badge "+saved;
+    badge.textContent=saved.toUpperCase();
+  });
+}
+applyStatus();
+</script>
+
+</body>
+</html>
+<script>
+document.querySelectorAll('a[href]').forEach(link => {
+  const url = new URL(link.href, location.href);
+
+  if (url.origin !== location.origin) {
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener noreferrer');
+  }
+});
+</script>
