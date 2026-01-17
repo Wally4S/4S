@@ -23,7 +23,7 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="4S Store — Rápido e Barato">
-<meta name="twitter:description" content="GuiaS & Produtos.">
+<meta name="twitter:description" content="Guias & Produtos.">
 <meta name="twitter:image" content="og-image.jpg">
 
 <style>
@@ -71,6 +71,26 @@ header{
 }
 nav a:hover{color:#38bdf8}
 nav a.active{color:#38bdf8}
+
+/* Botão Página Inicial */
+.btn-home {
+  display: inline-block;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #000;
+  background: linear-gradient(135deg,#38bdf8,#0ea5e9);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(56,189,248,0.35);
+}
+
+.btn-home:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(56,189,248,0.45);
+  color: #000;
+}
 
 /* GRID — 5 POR LINHA */
 .classes-grid{
@@ -257,8 +277,7 @@ nav a.active{color:#38bdf8}
 <header>
   <div class="logo">4S</div>
   <nav>
-    <!-- Botão discreto: apenas o nome clicável -->
-    <a href="index.html">Página inicial</a>
+    <a href="index.html" class="btn-home">Página inicial</a>
   </nav>
 </header>
 
@@ -391,18 +410,11 @@ function resetBars(){
 }
 function animateBars(){
   resetBars();
-  setTimeout(()=>{
-    document.querySelectorAll('.attr').forEach(a=>{
-      a.querySelector('.bar-fill').style.width=a.dataset.value+'%';
-    });
-  },80);
+  setTimeout(()=>{document.querySelectorAll('.attr').forEach(a=>{a.querySelector('.bar-fill').style.width=a.dataset.value+'%';});},80);
 }
-</script>
 
-<script>
 document.querySelectorAll('a[href]').forEach(link => {
   const url = new URL(link.href, location.href);
-
   if (url.origin !== location.origin) {
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener noreferrer');
