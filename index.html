@@ -23,7 +23,7 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="4S Store — Rápido e Barato">
-<meta name="twitter:description" content="GuiaS & Produtos.">
+<meta name="twitter:description" content="Guias & Produtos.">
 <meta name="twitter:image" content="og-image.jpg">
 <style>
 
@@ -36,7 +36,6 @@ header{
   position:sticky;
   top:0;
   z-index:1000;
-  
 }
 header .nav{
   display:flex;
@@ -44,9 +43,11 @@ header .nav{
   align-items:center;
 }
 header .logo{
-  font-size:30px;
-  font-weight:bold;
-  color:#00ddff;
+  display:flex;
+  align-items:center;
+}
+header .logo img{
+  height:40px; /* Ajusta o tamanho do logo */
 }
 header nav a{
   margin-left:14px;
@@ -149,7 +150,6 @@ header nav a:hover{
   box-shadow:0 0 14px rgba(0,255,136,.45);
 }
 
-
 /* ===== STREAMERS ===== */
 .streamers{
   max-width:1200px;
@@ -183,8 +183,7 @@ header nav a:hover{
   background:linear-gradient(135deg,transparent,rgba(0,153,255,.25),transparent);
   opacity:0;
   transition:.35s;
-  pointer-events:none; /* <<< CORREÇÃO */
-
+  pointer-events:none;
 }
 .streamer-card:hover::after{
   opacity:1;
@@ -318,7 +317,11 @@ header nav a:hover{
 
 <header>
   <div class="nav">
-    <div class="logo">4S</div>
+    <div class="logo">
+      <a href="index.html">
+        <img src="logo.png" alt="4S Store">
+      </a>
+    </div>
     <nav>
       <a href="classes.html">Guias</a>
       <a href="itens.html">Loja</a>
