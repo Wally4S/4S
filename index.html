@@ -7,18 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;transition:all 0.3s ease}
 body{
   margin:0;
   font-family:'Inter',sans-serif;
-  background:radial-gradient(circle at top,#0f172a,#020617);
+  background:radial-gradient(circle at top,#0f0f1a,#02010f);
   color:#e5e7eb;
+  overflow-x:hidden;
 }
 
 /* HEADER */
 header{
   background:linear-gradient(90deg,#020617,#0b1220);
-  border-bottom:1px solid #1e40af;
+  border-bottom:1px solid #3b82f6;
   padding:14px 22px;
   display:flex;
   justify-content:space-between;
@@ -26,11 +27,17 @@ header{
   position:sticky;
   top:0;
   z-index:100;
+  box-shadow:0 2px 15px rgba(59,130,246,0.6);
 }
 .logo img{
   width:75px;
   height:75px;
-  border-radius:10px;
+  border-radius:0px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.logo img:hover{
+  transform: scale(1.1);
+  box-shadow:0 0 25px #2563eb,0 0 45px #60a5fa;
 }
 nav a{
   color:#cbd5f5;
@@ -38,21 +45,49 @@ nav a{
   margin-left:18px;
   padding:8px 14px;
   border-radius:8px;
+  text-shadow:0 0 5px #3b82f6;
 }
-nav a:hover{background:#1e40af;color:#fff}
+nav a:hover{
+  background:linear-gradient(90deg,#3b82f6,#60a5fa);
+  color:#fff;
+  box-shadow:0 0 15px #2563eb,0 0 25px #60a5fa;
+}
 
 /* BANNER */
-.banner{
-  padding:90px 20px;
+.banner {
+  position: relative;
+  padding:100px 20px;
   text-align:center;
-  background:
-  radial-gradient(circle at top,rgba(59,130,246,.25),transparent),
-  linear-gradient(rgba(2,6,23,.9),rgba(2,6,23,.95)),
-  url("https://images.unsplash.com/photo-1546443046-ed1ce6ffd1b1");
-  background-size:cover;
+  border-radius: 12px;
+  overflow: hidden;
 }
-.banner h1{font-size:42px;color:#bfdbfe}
-.banner p{max-width:680px;margin:auto;color:#cbd5f5}
+
+.banner-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: brightness(0.5) contrast(1.2);
+}
+
+.banner-content {
+  position: relative;
+  z-index: 1;
+}
+
+.banner h1 {
+  font-size: 48px;
+  color: #60a5fa;
+  text-shadow: 0 0 15px #3b82f6, 0 0 25px #60a5fa, 0 0 35px #93c5fd;
+}
+
+.banner p {
+  color: #cbd5f5;
+  text-shadow: 0 0 8px #3b82f6, 0 0 15px #60a5fa;
+}
 
 /* CONTAINER */
 .container{max-width:1200px;margin:auto;padding:70px 20px}
@@ -64,13 +99,21 @@ nav a:hover{background:#1e40af;color:#fff}
   gap:26px;
 }
 .card{
-  background:linear-gradient(180deg,#0b1220,#020617);
-  border:1px solid #1e40af;
+  background:linear-gradient(180deg,#0b0f2c,#020114);
+  border:1px solid #3b82f6;
   border-radius:16px;
   padding:30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
-.card:hover{transform:translateY(-6px);box-shadow:0 0 28px rgba(37,99,235,.4)}
-.card h3{color:#93c5fd}
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 0 40px #2563eb,0 0 60px #60a5fa,0 0 80px #93c5fd;
+  border-color:#60a5fa;
+}
+.card h3{
+  color:#60a5fa;
+  text-shadow:0 0 10px #3b82f6,0 0 20px #60a5fa,0 0 25px #93c5fd;
+}
 .card a{
   display:inline-block;
   margin-top:16px;
@@ -79,11 +122,22 @@ nav a:hover{background:#1e40af;color:#fff}
   background:linear-gradient(90deg,#2563eb,#3b82f6);
   color:#fff;
   text-decoration:none;
+  box-shadow:0 0 10px #3b82f6,0 0 20px #2563eb;
+  transition: all 0.3s ease, transform 0.3s ease;
+}
+.card a:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 25px #60a5fa,0 0 40px #2563eb,0 0 55px #93c5fd;
 }
 
 /* STREAMERS */
 .streamers{margin-top:110px}
-.streamers h2{text-align:center;color:#bfdbfe;margin-bottom:40px}
+.streamers h2{
+  text-align:center;
+  color:#60a5fa;
+  margin-bottom:40px;
+  text-shadow:0 0 12px #3b82f6,0 0 20px #60a5fa,0 0 28px #93c5fd;
+}
 
 .streamer-grid{
   display:grid;
@@ -92,17 +146,17 @@ nav a:hover{background:#1e40af;color:#fff}
 }
 
 .streamer-card{
-  background:linear-gradient(180deg,#0b1220,#020617);
-  border:1px solid #1e40af;
+  background:linear-gradient(180deg,#0b0f2c,#020114);
+  border:1px solid #3b82f6;
   border-radius:18px;
   padding:26px 20px;
   text-align:center;
   position:relative;
-  transition:.3s;
+  transition: all 0.3s ease, box-shadow 0.4s ease;
 }
 .streamer-card:hover{
   transform:translateY(-6px);
-  box-shadow:0 0 30px rgba(37,99,235,.45);
+  box-shadow:0 0 40px #2563eb,0 0 60px #60a5fa,0 0 80px #93c5fd;
 }
 
 /* AVATAR */
@@ -111,8 +165,14 @@ nav a:hover{background:#1e40af;color:#fff}
   height:88px;
   border-radius:50%;
   object-fit:cover;
-  border:3px solid #2563eb;
+  border:3px solid #3b82f6;
   margin-bottom:10px;
+  transition: all 0.3s ease;
+  box-shadow:0 0 10px #3b82f6;
+}
+.avatar:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 25px #2563eb,0 0 40px #60a5fa,0 0 60px #93c5fd;
 }
 
 /* AO VIVO */
@@ -127,6 +187,7 @@ nav a:hover{background:#1e40af;color:#fff}
   border-radius:999px;
   animation:pulse 1.2s infinite;
   display:none;
+  text-shadow:0 0 10px #16a34a,0 0 15px #34d399,0 0 20px #22c55e;
 }
 
 /* SOCIALS */
@@ -140,40 +201,48 @@ nav a:hover{background:#1e40af;color:#fff}
   width:26px;
   height:26px;
   object-fit:contain;
-  transition:.2s;
+  transition: all 0.3s ease;
 }
 .socials a:hover img{
-  transform:scale(1.2);
+  transform:scale(1.3);
+  filter:drop-shadow(0 0 15px #3b82f6) drop-shadow(0 0 10px #60a5fa) drop-shadow(0 0 15px #93c5fd);
 }
 
 /* FOOTER */
 footer{
-  background:#020617;
-  border-top:1px solid #1e40af;
+  background:#020114;
+  border-top:1px solid #3b82f6;
   text-align:center;
   padding:22px;
   font-size:13px;
   color:#94a3b8;
+  text-shadow:0 0 8px #3b82f6,0 0 15px #60a5fa;
 }
 
 /* PANEL */
 #panel{
   position:fixed;
   inset:0;
-  background:rgba(2,6,23,.9);
+  background:rgba(2,6,23,.95);
   display:none;
   align-items:center;
   justify-content:center;
   z-index:999;
 }
 .panel-box{
-  background:#020617;
-  border:1px solid #1e40af;
+  background:#020114;
+  border:1px solid #3b82f6;
   border-radius:16px;
   padding:30px;
   width:360px;
+  box-shadow:0 0 30px #2563eb,0 0 50px #60a5fa,0 0 70px #93c5fd;
 }
-.panel-box h3{text-align:center;color:#bfdbfe;margin-bottom:20px}
+.panel-box h3{
+  text-align:center;
+  color:#60a5fa;
+  margin-bottom:20px;
+  text-shadow:0 0 15px #3b82f6,0 0 25px #60a5fa,0 0 35px #93c5fd;
+}
 .panel-streamer{
   display:flex;
   justify-content:space-between;
@@ -186,10 +255,20 @@ footer{
   border-radius:6px;
   cursor:pointer;
   font-weight:600;
+  transition: all 0.3s ease;
 }
-.on{background:#16a34a;color:#fff}
-.off{background:#334155;color:#cbd5f5}
+.panel-streamer button.on{
+  background:#16a34a;
+  color:#fff;
+  box-shadow:0 0 15px #22c55e,0 0 25px #16a34a,0 0 35px #34d399;
+}
+.panel-streamer button.off{
+  background:#334155;
+  color:#cbd5f5;
+  box-shadow:0 0 8px #2563eb,0 0 12px #60a5fa;
+}
 
+/* PULSE ANIMATION */
 @keyframes pulse{
   0%{box-shadow:0 0 0 0 rgba(22,163,74,.7)}
   70%{box-shadow:0 0 0 10px rgba(22,163,74,0)}
@@ -210,16 +289,23 @@ footer{
 </header>
 
 <section class="banner">
-  <h1>4S STORE</h1>
-  <p>Plataforma moderna de vendas digitais e guias .</p>
+  <video class="banner-video" autoplay muted loop playsinline>
+    <source src="/public/banner.mp4" type="video/mp4">
+    <source src="/public/banner.webm" type="video/webm">
+    <source src="/public/banner.ogv" type="video/ogg">
+  </video>
+  <div class="banner-content">
+    <h1>4S STORE</h1>
+    <p>Plataforma moderna de vendas digitais e guias.</p>
+  </div>
 </section>
 
 <div class="container">
 
 <div class="grid">
-  <div class="card"><h3>Produtos</h3><p>Venda e compra de itens digitais.</p><a href="#">Acessar</a></div>
-  <div class="card"><h3>Guias</h3><p>Guias completos e atualizados.</p><a href="#">Ver Guias</a></div>
-  <div class="card"><h3>Referências</h3><p>Base de informações organizada.</p><a href="#">Explorar</a></div>
+  <div class="card"><h3>Produtos</h3><p>Venda e compra de itens digitais.</p><a href="/loja/">Acessar</a></div>
+  <div class="card"><h3>Guias</h3><p>Guias completos e atualizados.</p><a href="/guias/">Ver Guias</a></div>
+  <div class="card"><h3>Referências</h3><p>Base de informações organizada.</p><a href="/referencias/">Explorar</a></div>
 </div>
 
 <section class="streamers">
@@ -227,75 +313,48 @@ footer{
 
 <div class="streamer-grid">
 
-<!-- STREAMER 1 -->
+<!-- STREAMERS -->
 <div class="streamer-card" data-id="1">
 <span class="live">AO VIVO</span>
 <img class="avatar" src="assets/avatars/streamer01.png">
 <h4>YuukiiBr</h4>
 <div class="socials">
-  <a href="https://www.twitch.tv/yuukiibr" target="_blank">
-    <img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif">
-  </a>
-  <a href="https://kick.com/yuukiibr" target="_blank">
-    <img src="https://cdn3.emoji.gg/emojis/65897-kick.gif">
-  </a>
-  <a href="https://www.youtube.com/@YuukiiBr" target="_blank">
-    <img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif">
-  </a>
+  <a href="https://www.twitch.tv/yuukiibr" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
+  <a href="https://kick.com/yuukiibr" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
+  <a href="https://www.youtube.com/@YuukiiBr" target="_blank"><img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif"></a>
 </div>
 </div>
 
-<!-- STREAMER 2 -->
 <div class="streamer-card" data-id="2">
 <span class="live">AO VIVO</span>
 <img class="avatar" src="assets/avatars/streamer02.png">
 <h4>Noturnolll</h4>
 <div class="socials">
-  <a href="https://twitch.tv" target="_blank">
-    <img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif">
-  </a>
-  <a href="https://kick.com/noturnolll" target="_blank">
-    <img src="https://cdn3.emoji.gg/emojis/65897-kick.gif">
-  </a>
-  <a href="https://www.youtube.com/@noturnoragnarok" target="_blank">
-    <img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif">
-  </a>
+  <a href="https://twitch.tv" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
+  <a href="https://kick.com/noturnolll" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
+  <a href="https://www.youtube.com/@noturnoragnarok" target="_blank"><img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif"></a>
 </div>
 </div>
 
-<!-- STREAMER 3 -->
 <div class="streamer-card" data-id="3">
 <span class="live">AO VIVO</span>
 <img class="avatar" src="assets/avatars/streamer03.png">
 <h4>Julliezinha</h4>
 <div class="socials">
-  <a href="https://www.twitch.tv/julliezinha" target="_blank">
-    <img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif">
-  </a>
-  <a href="https://kick.com/meowmeowzinha" target="_blank">
-    <img src="https://cdn3.emoji.gg/emojis/65897-kick.gif">
-  </a>
-  <a href="https://www.youtube.com/@Julliezinhafloquinho" target="_blank">
-    <img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif">
-  </a>
+  <a href="https://www.twitch.tv/julliezinha" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
+  <a href="https://kick.com/meowmeowzinha" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
+  <a href="https://www.youtube.com/@Julliezinhafloquinho" target="_blank"><img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif"></a>
 </div>
 </div>
 
-<!-- STREAMER 4 -->
 <div class="streamer-card" data-id="4">
 <span class="live">AO VIVO</span>
 <img class="avatar" src="assets/avatars/streamer04.png">
 <h4>AkuaAB</h4>
 <div class="socials">
-  <a href="https://www.twitch.tv/akuaab" target="_blank">
-    <img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif">
-  </a>
-  <a href="https://kick.com" target="_blank">
-    <img src="https://cdn3.emoji.gg/emojis/65897-kick.gif">
-  </a>
-  <a href="https://www.youtube.com/@AkuaAB" target="_blank">
-    <img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif">
-  </a>
+  <a href="https://www.twitch.tv/akuaab" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
+  <a href="https://kick.com" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
+  <a href="https://www.youtube.com/@AkuaAB" target="_blank"><img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif"></a>
 </div>
 </div>
 
