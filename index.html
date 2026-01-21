@@ -464,20 +464,26 @@ apply();
 
 </body>
 </html>
-<!-- Seu código CSS já está encerrado com o </style> -->
-</style>
-</head>
+<script>
+  // Script de bloqueio Ctrl+U
+  document.onkeydown = function(e) {
+    if (e.ctrlKey && e.key === 'u') {
+      alert("Você não pode visualizar o código-fonte desta página!");
+      return false;
+    }
+    // Bloqueio do botão direito do mouse
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+      alert("Você não pode acessar as ferramentas de desenvolvedor.");
+      return false;
+    }
+  };
 
-<body>
-  <!-- Coloque o código JavaScript abaixo antes de fechar a tag body -->
-  <script>
-    document.onkeydown = function(e) {
-      if (e.ctrlKey && e.key === 'u') {
-        alert("Você não pode visualizar o código-fonte desta página!");
-        return false;
-      }
-    };
-  </script>
-  
+  // Desabilitar o clique com o botão direito do mouse
+  document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+    alert("Você não pode acessar o menu de contexto.");
+  });
+</script>
+
 </body>
 </html>
