@@ -87,10 +87,18 @@ button{
 </head>
 
 <body>
-
+<!-- Coloque o código abaixo antes de fechar a tag body -->
+  <script>
+    document.onkeydown = function(e) {
+      if (e.ctrlKey && e.key === 'u') {
+        alert("Você não pode visualizar o código-fonte desta página!");
+        return false;
+      }
+    };
+  </script>
 <header>
-  <h1>4S STORE REFERENCIAS</h1>
-  <a class="btn-home" href="https://4sstore.vercel.app/">Pagina inicial</a>
+  <h1>𝟺𝚂 𝚂𝚃𝙾𝚁𝙴 𝚁𝙴𝙵𝙴𝚁𝙴𝙽𝙲𝙸𝙰𝚂</h1>
+  <a class="btn-home" href="https://4sstore.vercel.app/">𝙿𝚊𝚐𝚒𝚗𝚊 𝚒𝚗𝚒𝚌𝚒𝚊𝚕</a>
 </header>
 
 <!-- ANEL LÍQUIDO -->
