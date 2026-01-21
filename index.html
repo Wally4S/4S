@@ -110,8 +110,52 @@ nav a:hover{
   border:1px solid #3b82f6;
   border-radius:16px;
   padding:30px;
+  position:relative;
+  overflow:hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
+
+/* Ajustando o estilo do ::before para cada card */
+.card:nth-child(1)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('public/card1.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.3;
+  z-index: -1; /* Garante que o ::before fique atrás do conteúdo do card */
+}
+
+.card:nth-child(2)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('public/card2.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.3;
+  z-index: -1; /* Garante que o ::before fique atrás do conteúdo do card */
+}
+
+.card:nth-child(3)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('public/card3.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0.3;
+  z-index: -1; /* Garante que o ::before fique atrás do conteúdo do card */
+}
+
+
 .card:hover{
   transform:translateY(-8px);
   box-shadow:0 0 40px #2563eb,0 0 60px #60a5fa,0 0 80px #93c5fd;
@@ -135,7 +179,7 @@ nav a:hover{
 .card a:hover{
   transform:scale(1.08);
   box-shadow:0 0 25px #60a5fa,0 0 40px #2563eb,0 0 55px #93c5fd;
-}
+}  
 
 /* STREAMERS */
 .streamers{margin-top:110px}
@@ -289,9 +333,9 @@ footer{
 <header>
   <div class="logo"><img src="logo.png"></div>
   <nav>
-    <a href="/loja">Produtos</a>
-    <a href="/guias">Guias</a>
-    <a href="/referencias">Referências</a>
+    <a href="/loja">𝙿𝚛𝚘𝚍𝚞𝚝𝚘𝚜</a>
+    <a href="/guias">𝙶𝚞𝚒𝚊𝚜</a>
+    <a href="/referencias">𝚁𝚎𝚏𝚎𝚛𝚎𝚗𝚌𝚒𝚊𝚜</a>
   </nav>
 </header>
 
@@ -302,21 +346,21 @@ footer{
     <source src="/public/banner.ogv" type="video/ogg">
   </video>
   <div class="banner-content">
-    <h1>4S STORE</h1>
-    <p>Plataforma moderna de vendas digitais e guias.</p>
+    <h1>𝟺𝚂 𝚂𝚃𝙾𝚁𝙴</h1>
+    <p>Rapido & Barato.</p>
   </div>
 </section>
 
 <div class="container">
 
 <div class="grid">
-  <div class="card"><h3>Produtos</h3><p>Venda e compra de itens digitais.</p><a href="/loja/">Acessar</a></div>
-  <div class="card"><h3>Guias</h3><p>Guias completos e atualizados.</p><a href="/guias/">Ver Guias</a></div>
-  <div class="card"><h3>Referências</h3><p>Base de informações organizada.</p><a href="/referencias/">Explorar</a></div>
+  <div class="card"><h3>𝙿𝚛𝚘𝚍𝚞𝚝𝚘𝚜</h3><p>Venda e compra de itens digitais.</p><a href="/loja/">Acessar</a></div>
+  <div class="card"><h3>𝙶𝚞𝚒𝚊𝚜</h3><p>Guias completos e atualizados.</p><a href="/guias/">Ver Guias</a></div>
+  <div class="card"><h3>𝚁𝚎𝚏𝚎𝚛𝚎𝚗𝚌𝚒𝚊𝚜</h3><p>Base de informações organizada.</p><a href="/referencias/">Explorar</a></div>
 </div>
 
 <section class="streamers">
-<h2>Streamers Recomendados</h2>
+<h2>🎮𝚂𝚝𝚛𝚎𝚊𝚖𝚎𝚛𝚜 𝚁𝚎𝚌𝚘𝚖𝚎𝚗𝚍𝚊𝚍𝚘𝚜</h2>
 
 <div class="streamer-grid">
 
@@ -324,7 +368,7 @@ footer{
 <div class="streamer-card" data-id="1">
 <span class="live">AO VIVO</span>
 <img class="avatar" src="assets/avatars/streamer01.png">
-<h4>YuukiiBr</h4>
+<h4>𝚈𝚞𝚞𝚔𝚒𝚒𝙱𝚁</h4>
 <div class="socials">
   <a href="https://www.twitch.tv/yuukiibr" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
   <a href="https://kick.com/yuukiibr" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
@@ -335,7 +379,7 @@ footer{
 <div class="streamer-card" data-id="2">
 <span class="live">AO VIVO</span>
 <img class="avatar" src="assets/avatars/streamer02.png">
-<h4>Noturnolll</h4>
+<h4>𝙽𝚘𝚝𝚞𝚛𝚗𝚘𝚕𝚕𝚕</h4>
 <div class="socials">
   <a href="https://twitch.tv" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
   <a href="https://kick.com/noturnolll" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
@@ -346,7 +390,7 @@ footer{
 <div class="streamer-card" data-id="3">
 <span class="live">AO VIVO</span>
 <img class="avatar" src="assets/avatars/streamer03.png">
-<h4>Julliezinha</h4>
+<h4>𝙹𝚞𝚕𝚕𝚒𝚎𝚣𝚒𝚗𝚑𝚊</h4>
 <div class="socials">
   <a href="https://www.twitch.tv/julliezinha" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
   <a href="https://kick.com/meowmeowzinha" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
@@ -357,7 +401,7 @@ footer{
 <div class="streamer-card" data-id="4">
 <span class="live">AO VIVO</span>
 <img class="avatar" src="assets/avatars/streamer04.png">
-<h4>AkuaAB</h4>
+<h4>𝙰𝚔𝚞𝚊𝙰𝙱</h4>
 <div class="socials">
   <a href="https://www.twitch.tv/akuaab" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
   <a href="https://kick.com" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
