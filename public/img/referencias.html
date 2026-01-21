@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Referências | 4S Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Arial,sans-serif;
+  background:radial-gradient(circle at top,#0b1a33,#02040a 65%);
+  color:#fff;
+}
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 40px;background:rgba(2,4,10,.9);
+  border-bottom:1px solid rgba(30,144,255,.25);
+}
+header h1{color:#1e90ff}
+.btn-home{
+  padding:10px 22px;border-radius:14px;
+  background:rgba(5,15,30,.9);
+  color:#cfe7ff;text-decoration:none;
+  box-shadow:0 0 18px rgba(30,144,255,.45);
+}
+
+/* CONTADOR - ANEL LÍQUIDO */
+#counter{
+  position:fixed;top:95px;right:30px;width:78px;height:78px;z-index:99;
+  display:flex;align-items:center;justify-content:center;
+}
+#counter svg{width:100%;height:100%;}
+#counter span{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Courier New',monospace;font-size:26px;font-weight:800;
+  color:#fff;text-shadow:0 0 10px #fff,0 0 25px #1e90ff;
+}
+.counter-pulse{animation:pulse .45s ease}
+@keyframes pulse{from{transform:scale(.7)}to{transform:scale(1)}}
+
+/* MAIN / SLIDER */
+main{max-width:900px;margin:90px auto;padding:20px}
+#slider-wrapper{position:relative;min-height:240px}
+.card{
+  background:rgba(5,15,30,.9);
+  border-radius:26px;padding:30px;
+  box-shadow:0 0 45px rgba(0,136,255,.45);
+}
+.ref-header{display:flex;gap:12px;margin-bottom:14px}
+.ref-header img{width:38px}
+.ref-header span{color:#1e90ff}
+.ref-text{white-space:pre-wrap;word-break:break-word}
+
+/* SETAS APENAS COM SETA */
+.arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:42px;height:42px;
+  border:none;background:none;color:#fff;font-size:26px;
+  cursor:pointer;outline:none;
+}
+.prev{left:-55px}.next{right:-55px}
+
+/* FORM */
+form{
+  margin-top:60px;background:rgba(5,15,30,.9);
+  padding:32px;border-radius:28px;
+  box-shadow:0 0 40px rgba(0,136,255,.4);
+}
+input,textarea{
+  width:100%;padding:14px;margin-bottom:14px;
+  border-radius:14px;border:none;
+  background:rgba(255,255,255,.07);color:#fff;
+}
+button{
+  width:100%;padding:15px;border:none;
+  border-radius:28px;
+  background:linear-gradient(135deg,#1e90ff,#0066ff);
+  color:#fff;font-weight:bold;
+}
+.success,.error{text-align:center;display:none;font-weight:bold}
+.success{color:#00ff9c}.error{color:#ff5c5c}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>4S STORE REFERENCIAS</h1>
+  <a class="btn-home" href="https://4-s-store.vercel.app/">Pagina inicial</a>
+</header>
+
+<!-- ANEL LÍQUIDO -->
+<div id="counter">
+  <svg viewBox="0 0 100 100">
+    <!-- Contorno do círculo -->
+    <circle cx="50" cy="50" r="42" stroke="rgba(30,144,255,.25)" stroke-width="8" fill="none"/>
+    
+    <!-- Máscara líquida -->
+    <mask id="mask-liquid">
+      <rect x="0" y="100" width="100" height="100" fill="white" id="liquid-fill"/>
+    </mask>
+    
+    <!-- Preenchimento líquido azul -->
+    <circle cx="50" cy="50" r="42" stroke="#1e90ff" stroke-width="8" fill="#1e90ff" mask="url(#mask-liquid)"/>
+  </svg>
+  <span>0</span>
+</div>
+
+<main>
+  <div id="slider-wrapper">
+    <button class="arrow prev">‹</button>
+    <div id="slider"></div>
+    <button class="arrow next">›</button>
+  </div>
+
+  <form id="form">
+    <input id="fullname" required placeholder="Nome real">
+    <input id="nickname" required placeholder="Nickname no jogo">
+    <input id="email" type="email" required placeholder="E-mail">
+    <textarea id="message" rows="4" maxlength="400" required placeholder="Sua referência..."></textarea>
+    <button>Enviar</button>
+    <div class="success" id="success">Referência enviada!</div>
+    <div class="error" id="error"></div>
+  </form>
+</main>
+
+<script>
+firebase.initializeApp({
+  apiKey:"AIzaSyBGeptReBViZ9CQoJ2G18SmnaxbnvO3kDw",
+  authDomain:"referenciasjogadores.firebaseapp.com",
+  projectId:"referenciasjogadores"
+});
+const db=firebase.firestore();
+
+let refs=[],index=0;
+const slider=document.getElementById("slider");
+const span=document.querySelector("#counter span");
+const liquidFill=document.getElementById("liquid-fill");
+
+// Render do card
+function render(){
+  if(!refs.length) return;
+  const r=refs[index];
+  slider.innerHTML=`
+    <div class="card">
+      <div class="ref-header">
+        <img src="https://cdn3.emoji.gg/emojis/701524-neon-gmail-icon.png">
+        <div>
+          <strong>${r.fullname}</strong><br>
+          <span>${r.nickname}</span>
+        </div>
+      </div>
+      <div class="ref-text">${r.message}</div>
+    </div>`;
+}
+
+// Atualiza contador e "nível de líquido"
+function updateCounter(total){
+  span.textContent = total;
+
+  let cycle = total % 100; // ciclo de 0 a 100 refs
+  let percent = cycle / 100;
+  // animação do líquido de baixo para cima
+  liquidFill.setAttribute("y", 100 - percent*100);
+  liquidFill.setAttribute("height", percent*100);
+
+  span.classList.remove("counter-pulse"); void span.offsetWidth;
+  span.classList.add("counter-pulse");
+}
+
+db.collection("referencias").orderBy("timestamp","desc").onSnapshot(qs=>{
+  refs=[]; qs.forEach(d=>refs.push(d.data()));
+  updateCounter(refs.length);
+  index=0; render();
+});
+
+setInterval(()=>{if(refs.length){index=(index+1)%refs.length;render()}},6000);
+document.querySelector(".next").onclick=()=>{index=(index+1)%refs.length;render();}
+document.querySelector(".prev").onclick=()=>{index=(index-1+refs.length)%refs.length;render();}
+
+/* BLOQUEIO DE DUPLICADOS */
+const form=document.getElementById("form");
+const fullname=document.getElementById("fullname");
+const nickname=document.getElementById("nickname");
+const email=document.getElementById("email");
+const message=document.getElementById("message");
+const success=document.getElementById("success");
+const error=document.getElementById("error");
+
+form.addEventListener("submit",async e=>{
+  e.preventDefault();
+  error.style.display="none"; success.style.display="none";
+  const data={
+    fullname:fullname.value.trim(),
+    nickname:nickname.value.trim(),
+    email:email.value.trim(),
+    message:message.value.trim(),
+    timestamp:firebase.firestore.FieldValue.serverTimestamp()
+  };
+
+  const [a,b,c]=await Promise.all([
+    db.collection("referencias").where("email","==",data.email).get(),
+    db.collection("referencias").where("fullname","==",data.fullname).get(),
+    db.collection("referencias").where("nickname","==",data.nickname).get()
+  ]);
+
+  if(!a.empty||!b.empty||!c.empty){
+    error.textContent="Nome, nickname ou e-mail já utilizado.";
+    error.style.display="block"; return;
+  }
+
+  await db.collection("referencias").add(data);
+  success.style.display="block"; form.reset();
+});
+</script>
+
+</body>
+</html>

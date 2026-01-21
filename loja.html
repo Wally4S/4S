@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>4S STORE | Loja</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:'Inter',sans-serif;
+ background:radial-gradient(circle at top,#0f172a,#020617);
+ color:#e5e7eb;
+ overflow-x:hidden;
+}
+
+/* HEADER */
+header{
+ background:rgba(2,6,23,.85);
+ border-bottom:1px solid rgba(59,130,246,.35);
+ padding:14px 22px;
+ display:flex;
+ justify-content:space-between;
+ backdrop-filter:blur(10px);
+ box-shadow:0 0 18px rgba(59,130,246,.25);
+}
+nav a{color:#cbd5f5;text-decoration:none}
+
+.container{max-width:1300px;margin:auto;padding:40px 20px}
+
+/* CATEGORIES */
+.categories{
+ display:flex;
+ flex-wrap:wrap;
+ gap:12px;
+ justify-content:center;
+ margin-bottom:26px;
+}
+.categories button{
+ padding:10px 18px;
+ border-radius:999px;
+ border:1px solid rgba(59,130,246,.35);
+ background:rgba(15,23,42,.85);
+ color:#e5e7eb;
+ cursor:pointer;
+ font-size:13px;
+ transition:.25s;
+ box-shadow:0 0 12px rgba(59,130,246,.25);
+}
+.categories button:hover{
+ box-shadow:0 0 18px rgba(59,130,246,.6);
+}
+.categories button.active{
+ background:linear-gradient(135deg,#2563eb,#3b82f6);
+ box-shadow:0 0 22px rgba(59,130,246,.85);
+}
+
+/* SEARCH */
+.search-box input{
+ width:100%;
+ padding:14px;
+ border-radius:14px;
+ border:1px solid rgba(59,130,246,.35);
+ background:rgba(2,6,23,.9);
+ color:#fff;
+ margin-bottom:26px;
+ box-shadow:0 0 16px rgba(59,130,246,.25) inset;
+}
+
+/* GRID */
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+ gap:18px;
+}
+
+/* CARD */
+.product{
+ background:linear-gradient(180deg,rgba(2,6,23,.95),rgba(2,6,23,.85));
+ border:1px solid rgba(59,130,246,.35);
+ border-radius:22px;
+ padding:16px;
+ text-align:center;
+ position:relative;
+ transition:.25s;
+ box-shadow:0 0 18px rgba(59,130,246,.25);
+}
+.product:hover{
+ transform:translateY(-6px);
+ box-shadow:0 0 32px rgba(59,130,246,.55);
+}
+
+.badge{
+ position:absolute;
+ top:10px;
+ left:10px;
+ background:linear-gradient(135deg,#2563eb,#3b82f6);
+ padding:4px 10px;
+ border-radius:999px;
+ font-size:11px;
+ box-shadow:0 0 14px rgba(59,130,246,.9);
+}
+.low-stock{
+ position:absolute;
+ top:10px;
+ right:10px;
+ background:#ef4444;
+ color:#fff;
+ padding:4px 10px;
+ border-radius:999px;
+ font-size:11px;
+ box-shadow:0 0 14px rgba(239,68,68,.8);
+}
+
+/* IMAGE */
+.image-box{
+ width:100%;
+ height:130px;
+ background:rgba(15,23,42,.6);
+ border-radius:16px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ margin-bottom:10px;
+ box-shadow:0 0 16px rgba(59,130,246,.25) inset;
+}
+.image-box img{
+ max-width:100%;
+ max-height:100%;
+ object-fit:contain;
+}
+
+.product h3{font-size:14px;margin:10px 0}
+.price{
+ font-weight:600;
+ color:#fde047;
+ text-shadow:0 0 14px rgba(250,204,21,.8);
+}
+.stock{font-size:12px;color:#94a3b8}
+
+.product button{
+ margin-top:12px;
+ padding:10px 16px;
+ border:none;
+ border-radius:14px;
+ background:linear-gradient(135deg,#2563eb,#3b82f6);
+ color:#fff;
+ cursor:pointer;
+ box-shadow:0 0 18px rgba(59,130,246,.7);
+ transition:.2s;
+}
+.product button:hover{transform:scale(1.05)}
+.product button:disabled{
+ background:#334155;
+ box-shadow:none;
+}
+
+/* PAGINATION */
+.pagination{
+ display:flex;
+ justify-content:center;
+ gap:10px;
+ margin-top:30px;
+}
+.pagination button{
+ padding:8px 14px;
+ border-radius:10px;
+ border:1px solid rgba(59,130,246,.35);
+ background:rgba(2,6,23,.85);
+ color:#fff;
+ cursor:pointer;
+ box-shadow:0 0 12px rgba(59,130,246,.25);
+}
+.pagination button.active{
+ background:#2563eb;
+ box-shadow:0 0 18px rgba(59,130,246,.9);
+}
+
+/* CART BUTTON */
+.cart-btn{
+ position:fixed;
+ bottom:22px;
+ right:22px;
+ background:linear-gradient(135deg,#2563eb,#3b82f6);
+ padding:16px 22px;
+ border-radius:50px;
+ box-shadow:0 0 30px rgba(59,130,246,.9);
+ color:#fff;
+ cursor:pointer;
+ z-index:999;
+ transition:.2s;
+}
+.cart-btn.bump{transform:scale(1.2)}
+
+/* CART MODAL */
+#cartModal{
+ position:fixed;
+ inset:0;
+ background:rgba(2,6,23,.9);
+ display:none;
+ justify-content:center;
+ align-items:center;
+}
+.cart-box{
+ background:linear-gradient(180deg,#020617,#020617ee);
+ border:1px solid rgba(59,130,246,.35);
+ border-radius:22px;
+ padding:24px;
+ width:420px;
+ box-shadow:0 0 40px rgba(59,130,246,.6);
+}
+.cart-item{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin:12px 0;
+}
+.qty-controls button{
+ padding:4px 10px;
+ border:none;
+ border-radius:6px;
+ background:#1e40af;
+ color:#fff;
+ cursor:pointer;
+ box-shadow:0 0 12px rgba(59,130,246,.7);
+}
+
+.cart-total{
+ margin-top:14px;
+ font-weight:700;
+ text-align:right;
+ color:#fde047;
+ text-shadow:0 0 14px rgba(250,204,21,.8);
+}
+.checkout-btn{
+ margin-top:16px;
+ width:100%;
+ padding:14px;
+ border:none;
+ border-radius:14px;
+ background:linear-gradient(90deg,#22c55e,#16a34a);
+ font-weight:700;
+ cursor:pointer;
+ box-shadow:0 0 26px rgba(34,197,94,.9);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+ <strong>4S STORE</strong>
+ <nav><a href="index.html">Pagina Inicial</a></nav>
+</header>
+
+<div class="container">
+ <div class="categories" id="categories"></div>
+ <div class="search-box">
+  <input id="search" placeholder="Buscar produto..." oninput="render()">
+ </div>
+ <div class="grid" id="products"></div>
+ <div class="pagination" id="pagination"></div>
+</div>
+
+<button class="cart-btn" onclick="openCart()" id="cartBtn">🛒 Carrinho (0)</button>
+
+<div id="cartModal">
+ <div class="cart-box">
+  <h3>Carrinho</h3>
+  <div id="cartItems"></div>
+  <div class="cart-total">Total: R$ <span id="total">0</span></div>
+  <button class="checkout-btn" onclick="checkout()">Finalizar no WhatsApp</button>
+  <p style="text-align:center;cursor:pointer;margin-top:12px" onclick="closeCart()">Fechar</p>
+ </div>
+</div>
+
+<script>
+const phone="5524999561861";
+const perPage=25;
+let page=1;
+let currentCategory="all";
+
+/* PRODUTOS */
+const productsData=[];
+const ADD=p=>productsData.push({...p,baseStock:p.stock});
+/* PRODUTOS CAPA*/
+ADD({id:1,name:"Asas Douradas da Justiça",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas Douradas da Justiça.png"});
+ADD({id:2,name:"Asas Negras do Arcanjo",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas Negras do Arcanjo.png"});
+ADD({id:3,name:"Asas de Tronos",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas de Tronos.png"});
+ADD({id:4,name:"Asas da Sarakura",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas da Sarakura.png"});
+ADD({id:5,name:"Asas do Tormento",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas do Tormento.png"});
+ADD({id:6,name:"Asas Holográficas",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas Holográficas.png"});
+ADD({id:7,name:"Asas Mecânicas de Borboleta",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas Mecânicas de Borboleta.png"});
+ADD({id:8,name:"Asas Pavão Roxo",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas Pavão Roxo.png"});
+ADD({id:9,name:"Pequenas Asas do Tormento",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Pequenas Asas do Tormento.png"});
+ADD({id:10,name:"Asa de Morcego Mutante",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asa de Morcego Mutante.png"});
+/* PRODUTOS MEIO*/
+ADD({id:30,name:"Pupilas Draconianas",price:7.99,stock:1,category:"meio",promo:true,img:"public/img/Pupilas Draconianas.png"});
+ADD({id:31,name:"Pupilas Avermelhadas",price:7.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Avermelhadas.png"});
+ADD({id:32,name:"Pupilas Douradas",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Douradas.png"});
+ADD({id:33,name:"Pupilas Cerúleas",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Cerúleas.png"});
+ADD({id:34,name:"Pupilas Azuladas",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Azuladas.png"});
+ADD({id:35,name:"Pupilas Carmesins",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Carmesins.png"});
+ADD({id:36,name:"Piscadela Congelante",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Piscadela Congelante.png"});
+ADD({id:37,name:"Piscadela",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Piscadela.png"});
+ADD({id:38,name:"Piscadela de Freya",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Piscadela de Freya.png"});
+ADD({id:39,name:"Piscadela Rosa",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Piscadela Rosa.png"});
+/* PRODUTOS BAIXO*/
+ADD({id:50,name:"Cachecol Celestial",price:4.99,stock:1,category:"baixo",promo:true,img:"public/img/Cachecol Celestial.png"});
+ADD({id:51,name:"Cachecol Preto do Eremes",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Preto do Eremes.png"});
+ADD({id:52,name:"Cachecol Azul do Eremes",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Azul do Eremes.png"});
+ADD({id:53,name:"Cachecol Marrom com Laço",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Marrom com Laço.png"});
+ADD({id:54,name:"Cachecol Glorioso",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Glorioso.png"});
+ADD({id:55,name:"Cachecol dos Corajosos",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol dos Corajosos.png"});
+ADD({id:56,name:"Ás Surpresa",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Ás Surpresa.png"});
+ADD({id:57,name:"Ás de Copas",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Ás de Copas.png"});
+ADD({id:58,name:"Estola Angelical",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Estola Angelical.png"});
+ADD({id:59,name:"Óculos da Persona",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Óculos da Persona.png"});
+/* PRODUTOS TOPO*/
+ADD({id:61,name:"Mestre Arcanista",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/mestre-arcanista.png"});
+ADD({id:62,name:"Mestre Arcanista Azul",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/mestre-arcanista-azul.png"});
+ADD({id:63,name:"Mestre Arcanista Amarelo",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/mestre-arcanista-amarelo.png"});
+ADD({id:64,name:"Mestre Arcanista Vermelho",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/mestre-arcanista-vermelho.png"});
+ADD({id:65,name:"Mestre Arcanista Branco",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/mestre-arcanista-branco.png"});
+ADD({id:66,name:"Capuz do Mestre Necromante",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/Capuz do Mestre Necromante.png"});
+ADD({id:67,name:"Chapéu de Tarlock",price:3.99,stock:2,category:"topo",promo:false,img:"public/img/Chapéu de Tarlock.png"});
+ADD({id:68,name:"Chapéu do Comissário",price:14.99,stock:2,category:"topo",promo:false,img:"public/img/Chapéu do Comissário.png"});
+ADD({id:69,name:"Capa do Timoneiro",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/Chapéu do Timoneiro.png"});
+ADD({id:69,name:"Boina Alada Branca",price:3.99,stock:2,category:"topo",promo:false,img:"public/img/Boina Alada Branca.png"});
+/* PRODUTOS CARTA*/
+ADD({id:80,name:"Carta Faraó",price:19.99,stock:1,category:"carta",promo:true,img:"public/img/Carta Faraó.png"});
+/* PRODUTOS EQUIPAMENTO*/
+ADD({id:90,name:"+14 Maça dos Orcs [2] EL8 EL7",price:29.99,stock:1,category:"equipamento",promo:true,img:"public/img/Maça dos Orcs.png"});
+ADD({id:91,name:"+14 Protetor Sagrado [1]",price:19.99,stock:1,category:"equipamento",promo:true,img:"public/img/Protetor Sagrado.png"});
+ADD({id:92,name:"+14 Faixa da Inquisição [1]",price:29.99,stock:1,category:"equipamento",promo:true,img:"public/img/Faixa da Inquisição.png"});
+ADD({id:93,name:"Orelhas em Chamas [1]",price:19.99,stock:1,category:"equipamento",promo:true,img:"public/img/Orelhas em Chamas.png"});
+ADD({id:94,name:"Asinhas de Detale [1]",price:19.99,stock:1,category:"equipamento",promo:true,img:"public/img/Asinhas de Detale.png"});
+/* PRODUTOS CONSUMIVEL*/
+ADD({id:100,name:"Pack [150] Poção de Guyak",price:19.99,stock:1,category:"consumivel",promo:true,img:"public/img/Poção de Guyak.png"});
+ADD({id:101,name:"Pack [40] Fruta dos Gatos",price:7.99,stock:1,category:"consumivel",promo:true,img:"public/img/Fruta dos Gatos.png"});
+ADD({id:101,name:"Caixa de Cupom Tintura",price:3.99,stock:4,category:"consumivel",promo:true,img:"public/img/Caixa de Cupom de Tintura.png"});
+
+/* CARRINHO */
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
+
+function syncStock(){
+ productsData.forEach(p=>{
+  const c=cart.find(i=>i.id===p.id);
+  p.stock=p.baseStock-(c?c.qty:0);
+ });
+}
+
+function updateCartBtn(){
+ const q=cart.reduce((s,i)=>s+i.qty,0);
+ cartBtn.innerText=`🛒 Carrinho (${q})`;
+ localStorage.setItem("cart",JSON.stringify(cart));
+}
+
+/* CATEGORIAS */
+function renderCategories(){
+ const cats=["all","equipamento","consumivel","carta","topo","meio","baixo","capa"];
+ categories.innerHTML="";
+ cats.forEach(c=>{
+  categories.innerHTML+=`
+   <button class="${c===currentCategory?"active":""}"
+    onclick="currentCategory='${c}';page=1;render()">
+    ${c==="all"?"Todos Produtos":c.charAt(0).toUpperCase()+c.slice(1)}
+   </button>`;
+ });
+}
+
+function render(){
+ products.innerHTML="";
+ pagination.innerHTML="";
+ const term=search.value.toLowerCase();
+
+ let filtered=productsData.filter(p=>
+  p.name.toLowerCase().includes(term) &&
+  (currentCategory==="all"||p.category===currentCategory)
+ );
+
+ const pages=Math.ceil(filtered.length/perPage);
+ const slice=filtered.slice((page-1)*perPage,page*perPage);
+
+ slice.forEach(p=>{
+  products.innerHTML+=`
+  <div class="product">
+   ${p.promo?`<div class="badge">PROMO</div>`:""}
+   ${p.stock<=0?`<div class="low-stock">SEM ESTOQUE</div>`:""}
+   <div class="image-box"><img src="${p.img}"></div>
+   <h3>${p.name}</h3>
+   <div class="price">R$ ${p.price}</div>
+   <div class="stock">Estoque: ${p.stock}</div>
+   <button ${p.stock<=0?"disabled":""} onclick="add(${p.id})">Adicionar</button>
+  </div>`;
+ });
+
+ for(let i=1;i<=pages;i++){
+  pagination.innerHTML+=`<button class="${i===page?"active":""}" onclick="page=${i};render()">${i}</button>`;
+ }
+ updateCartBtn();
+}
+
+function add(id){
+ const p=productsData.find(i=>i.id===id);
+ if(p.stock<=0)return;
+ const c=cart.find(i=>i.id===id);
+ c?c.qty++:cart.push({id:p.id,name:p.name,price:p.price,qty:1});
+ syncStock();render();
+}
+
+function openCart(){cartModal.style.display="flex";renderCart()}
+function closeCart(){cartModal.style.display="none"}
+
+function changeQty(id,d){
+ const c=cart.find(i=>i.id===id);
+ if(!c)return;
+ c.qty+=d;
+ if(c.qty<=0)cart=cart.filter(i=>i.id!==id);
+ syncStock();renderCart();render();
+}
+
+function renderCart(){
+ let t=0;
+ cartItems.innerHTML="";
+ cart.forEach(i=>{
+  const sub=i.price*i.qty;
+  t+=sub;
+  cartItems.innerHTML+=`
+  <div class="cart-item">
+   ${i.name}
+   <div class="qty-controls">
+    <button onclick="changeQty(${i.id},-1)">−</button>
+    ${i.qty}
+    <button onclick="changeQty(${i.id},1)">+</button>
+   </div>
+   <span>R$ ${sub.toFixed(2)}</span>
+  </div>`;
+ });
+ total.innerText=t.toFixed(2);
+ updateCartBtn();
+}
+
+function checkout(){
+ let msg="🛒 *Pedido 4S STORE*%0A%0A";
+ cart.forEach(i=>msg+=`• ${i.name} x${i.qty}%0A`);
+ msg+=`%0A💰 Total: R$ ${total.innerText}`;
+ window.open(`https://wa.me/${phone}?text=${msg}`);
+ cart=[];syncStock();render();closeCart();
+}
+
+renderCategories();
+syncStock();
+render();
+</script>
+
+</body>
+</html>

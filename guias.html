@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RagGuias — Personagens</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#050b18,#0f1b2c);
+  color:#fff;
+}
+#pagina{max-width:1256px;margin:auto;padding:20px}
+
+/* Header */
+#header{display:flex;align-items:center;gap:15px;margin-bottom:25px}
+#btn-voltar{
+  padding:8px 14px;border-radius:10px;border:none;
+  background:#020617;color:#7cfbff;font-weight:bold;cursor:pointer;
+  box-shadow:0 0 12px rgba(0,240,255,.4)
+}
+#btn-voltar:hover{box-shadow:0 0 22px rgba(0,240,255,.8)}
+
+/* ===== Logo texto com efeito relâmpago ===== */
+#logo-text{
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:3px;
+  color:transparent;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-image: linear-gradient(90deg, #00f0ff, #fff, #00f0ff);
+  background-size: 300% 100%;
+  text-shadow:0 0 10px rgba(0,240,255,0.5);
+  animation:flashLightning 2s infinite;
+}
+@keyframes flashLightning{
+  0% { background-position:0 0; text-shadow:0 0 10px rgba(0,240,255,0.3); }
+  5% { background-position:50% 0; text-shadow:0 0 30px rgba(255,255,255,0.9); }
+  10% { background-position:80% 0; text-shadow:0 0 25px rgba(0,255,255,0.8); }
+  15% { background-position:120% 0; text-shadow:0 0 5px rgba(0,240,255,0.4); }
+  20% { background-position:150% 0; text-shadow:0 0 40px rgba(255,255,255,1); }
+  30% { background-position:200% 0; text-shadow:0 0 10px rgba(0,240,255,0.5); }
+  50% { background-position:250% 0; text-shadow:0 0 20px rgba(0,255,255,0.7); }
+  70% { background-position:300% 0; text-shadow:0 0 15px rgba(0,240,255,0.6); }
+  100% { background-position:0 0; text-shadow:0 0 10px rgba(0,240,255,0.5); }
+}
+
+/* Search */
+#search-bar{
+  width:100%;padding:14px;margin-bottom:25px;
+  border-radius:14px;border:none;outline:none;
+  background:#020617;color:#fff;font-size:16px;
+  box-shadow:0 0 20px rgba(0,240,255,.3)
+}
+
+/* Grid */
+#character-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:18px
+}
+
+/* Card */
+.character-card{
+  background:linear-gradient(135deg,#0f1b2c,#020617);
+  border-radius:18px;padding:14px;
+  box-shadow:0 0 22px rgba(0,255,255,.35);
+  transition:.3s;display:flex;flex-direction:column
+}
+.character-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 40px rgba(0,255,255,.6)
+}
+.character-card img{
+  width:100%;height:160px;object-fit:contain;
+  background:#020617;border-radius:14px;margin-bottom:8px
+}
+.character-card h3{
+  margin:4px 0 6px;font-size:18px;
+  text-shadow:0 0 8px rgba(0,240,255,.7)
+}
+.character-info{font-size:13px;line-height:1.6}
+.character-info span{color:#7cfbff}
+
+/* Buttons */
+.card-actions{
+  display:flex;gap:8px;margin-top:auto
+}
+.card-actions button,
+.card-actions a{
+  flex:1;padding:8px;border-radius:10px;
+  border:none;background:#020617;color:#7cfbff;
+  font-size:13px;text-align:center;
+  cursor:pointer;text-decoration:none;
+  box-shadow:0 0 10px rgba(0,240,255,.3)
+}
+.card-actions button:hover,
+.card-actions a:hover{
+  box-shadow:0 0 18px rgba(0,240,255,.7)
+}
+
+/* Modal */
+.modal{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.85);
+  display:none;align-items:center;justify-content:center;
+  z-index:999
+}
+.modal.active{display:flex}
+.modal-box{
+  background:linear-gradient(135deg,#020617,#0f1b2c);
+  padding:22px;border-radius:20px;
+  min-width:320px;
+  box-shadow:0 0 40px rgba(0,255,255,.6)
+}
+.modal-box h2{
+  text-align:center;
+  color:#7cfbff;
+  margin-bottom:15px
+}
+
+/* Elementos */
+.element-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px
+}
+.element-item{
+  font-size:12px;
+  padding:6px;
+  border-radius:8px;
+  text-align:center;
+  background:#020617;
+  box-shadow:0 0 8px rgba(255,255,255,.15)
+}
+
+/* Cores */
+.el-STR{color:#ffffff}
+.el-VIT{color:#ff4d4d}
+.el-AGI{color:#4da6ff}
+.el-DEX{color:#4dff88}
+.el-INT{color:#b38b59}
+.el-LUK{color:#b84dff}
+.el-Sagrado{color:#ffd84d}
+.el-Sombrio{color:#9ca3af}
+.el-Fantasma{color:#d0b3ff}
+.el-Morto-Vivo{color:#ff944d}
+
+/* Pagination */
+#pagination{
+  display:flex;justify-content:center;
+  gap:10px;margin-top:30px
+}
+.page-btn{
+  padding:8px 14px;border-radius:10px;
+  border:none;background:#020617;color:#fff;
+  cursor:pointer;font-weight:bold
+}
+.page-btn.active{background:#00f0ff;color:#000}
+</style>
+</head>
+
+<body>
+<div id="pagina">
+
+<div id="header">
+  <button id="btn-voltar" onclick="location.href='index.html'">PAGINA INICIAL</button>
+  <div id="logo-text">Guias & Dicas de Classes</div>
+</div>
+
+<input id="search-bar" placeholder="Pesquisar personagem...">
+
+<div id="character-grid"></div>
+<div id="pagination"></div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h2 id="modal-title"></h2>
+    <div class="element-list" id="modal-elements"></div>
+  </div>
+</div>
+
+<script>
+/* ===== PERSONAGENS ===== */
+const characters=[
+  {name:"Cavaleiro Rúnico",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_rk.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Guardião Real",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_rg.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Sentinela",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_ra.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Trovador",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_mw_m.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Mecânico",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_mn.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Bioquimico",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_gn.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Arcebispo",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_ab.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Shura",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_sr.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Musa",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_mw_f.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Sicário",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_gc.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Renegado",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_sc.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Arcano",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_wl.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Feiticeiro",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_so.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Insurgente",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/gunslinger/job2_gs_002.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Mestre Estelar",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/taekwon-kid/job2_tk_003.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Ceifador de Alma",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/taekwon-kid/job2_tk_007.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Super Aprendiz",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/supernovice/job2_sn_003.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Kagerou",img:"https://media.discordapp.net/attachments/1462255639995744410/1462473887336890481/remove-photos-background-removed.png?ex=696e5272&is=696d00f2&hm=a83fb5cde4ece60e95ca160e6649cba45cf549cb335bb587cc8361b5285497b7&=&format=webp&quality=lossless&width=696&height=696",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Oboro",img:"https://media.discordapp.net/attachments/1462255639995744410/1462473096828031312/content.png?ex=696e51b5&is=696d0035&hm=15b7cf7daaadeac17b4e5344b49222ef0b15a114281db04c16efcc644b45d0f9&=&format=webp&quality=lossless&width=696&height=696",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+  {name:"Invocador",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/summoner/job2_do_021.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
+];
+
+/* ===== PERSONAGENS ===== */
+
+const perPage=8;
+let currentPage=1;
+let filtered=[...characters];
+
+const grid=document.getElementById("character-grid");
+const pagination=document.getElementById("pagination");
+
+function render(){
+  grid.innerHTML="";
+  const start=(currentPage-1)*perPage;
+  filtered.slice(start,start+perPage).forEach(c=>{
+    grid.innerHTML+=`
+    <div class="character-card">
+      <img src="${c.img}">
+      <h3>${c.name}</h3>
+      <div class="character-info">
+        <div><span>Função:</span> ${c.lv}</div>
+        <div><span>Dano:</span> ${c.hp}   <span>Defesa:</span> ${c.sp}</div>
+        <div><span>Skills:</span> ${c.class}</div>
+        <div><span>Obs:</span> ${c.element}</div>
+      </div>
+      <div class="card-actions">
+        <button onclick='openModal("${c.name}",${JSON.stringify(c.elements)})'>Atributos</button>
+        <a href="${c.link}" target="_blank">Referencia</a>
+      </div>
+    </div>`;
+  });
+  renderPagination();
+}
+
+function renderPagination(){
+  pagination.innerHTML="";
+  const pages=Math.ceil(filtered.length/perPage);
+  for(let i=1;i<=pages;i++){
+    pagination.innerHTML+=`<button class="page-btn ${i===currentPage?"active":""}" onclick="currentPage=${i};render()">${i}</button>`;
+  }
+}
+
+document.getElementById("search-bar").addEventListener("input",e=>{
+  const q=e.target.value.toLowerCase();
+  filtered=characters.filter(c=>c.name.toLowerCase().includes(q));
+  currentPage=1;render();
+});
+
+function openModal(name,elements){
+  document.getElementById("modal-title").textContent=name+" — Atributos";
+  const list=document.getElementById("modal-elements");
+  list.innerHTML="";
+  for(const e in elements){
+    const cls="el-"+e.replace(" ","-");
+    list.innerHTML+=`<div class="element-item ${cls}">${e}: ${elements[e]}</div>`;
+  }
+  document.getElementById("modal").classList.add("active");
+}
+
+document.getElementById("modal").onclick=e=>{
+  if(e.target.id==="modal") e.target.classList.remove("active");
+};
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape") document.getElementById("modal").classList.remove("active");
+});
+
+render();
+</script>
+
+</body>
+</html>

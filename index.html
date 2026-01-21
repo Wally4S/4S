@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Vanguard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:radial-gradient(circle at top,#0f172a,#020617);
+  color:#e5e7eb;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(90deg,#020617,#0b1220);
+  border-bottom:1px solid #1e40af;
+  padding:14px 22px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.logo img{
+  width:75px;
+  height:75px;
+  border-radius:10px;
+}
+nav a{
+  color:#cbd5f5;
+  text-decoration:none;
+  margin-left:18px;
+  padding:8px 14px;
+  border-radius:8px;
+}
+nav a:hover{background:#1e40af;color:#fff}
+
+/* BANNER */
+.banner{
+  padding:90px 20px;
+  text-align:center;
+  background:
+  radial-gradient(circle at top,rgba(59,130,246,.25),transparent),
+  linear-gradient(rgba(2,6,23,.9),rgba(2,6,23,.95)),
+  url("https://images.unsplash.com/photo-1546443046-ed1ce6ffd1b1");
+  background-size:cover;
+}
+.banner h1{font-size:42px;color:#bfdbfe}
+.banner p{max-width:680px;margin:auto;color:#cbd5f5}
+
+/* CONTAINER */
+.container{max-width:1200px;margin:auto;padding:70px 20px}
+
+/* CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;
+}
+.card{
+  background:linear-gradient(180deg,#0b1220,#020617);
+  border:1px solid #1e40af;
+  border-radius:16px;
+  padding:30px;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 0 28px rgba(37,99,235,.4)}
+.card h3{color:#93c5fd}
+.card a{
+  display:inline-block;
+  margin-top:16px;
+  padding:10px 22px;
+  border-radius:8px;
+  background:linear-gradient(90deg,#2563eb,#3b82f6);
+  color:#fff;
+  text-decoration:none;
+}
+
+/* STREAMERS */
+.streamers{margin-top:110px}
+.streamers h2{text-align:center;color:#bfdbfe;margin-bottom:40px}
+
+.streamer-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:26px;
+}
+
+.streamer-card{
+  background:linear-gradient(180deg,#0b1220,#020617);
+  border:1px solid #1e40af;
+  border-radius:18px;
+  padding:26px 20px;
+  text-align:center;
+  position:relative;
+  transition:.3s;
+}
+.streamer-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 0 30px rgba(37,99,235,.45);
+}
+
+/* AVATAR */
+.avatar{
+  width:88px;
+  height:88px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #2563eb;
+  margin-bottom:10px;
+}
+
+/* AO VIVO */
+.live{
+  position:absolute;
+  top:14px;
+  right:14px;
+  background:#16a34a;
+  color:#fff;
+  font-size:11px;
+  padding:5px 10px;
+  border-radius:999px;
+  animation:pulse 1.2s infinite;
+  display:none;
+}
+
+/* SOCIALS */
+.socials{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  margin-top:12px;
+}
+.socials img{
+  width:26px;
+  height:26px;
+  object-fit:contain;
+  transition:.2s;
+}
+.socials a:hover img{
+  transform:scale(1.2);
+}
+
+/* FOOTER */
+footer{
+  background:#020617;
+  border-top:1px solid #1e40af;
+  text-align:center;
+  padding:22px;
+  font-size:13px;
+  color:#94a3b8;
+}
+
+/* PANEL */
+#panel{
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.panel-box{
+  background:#020617;
+  border:1px solid #1e40af;
+  border-radius:16px;
+  padding:30px;
+  width:360px;
+}
+.panel-box h3{text-align:center;color:#bfdbfe;margin-bottom:20px}
+.panel-streamer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+.panel-streamer button{
+  padding:6px 16px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:600;
+}
+.on{background:#16a34a;color:#fff}
+.off{background:#334155;color:#cbd5f5}
+
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(22,163,74,.7)}
+  70%{box-shadow:0 0 0 10px rgba(22,163,74,0)}
+  100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo"><img src="logo.png"></div>
+  <nav>
+    <a href="/produto.html">Produtos</a>
+    <a href="#">Guias</a>
+    <a href="/referencias.html">Referências</a>
+  </nav>
+</header>
+
+<section class="banner">
+  <h1>Vanguard</h1>
+  <p>Plataforma moderna de conteúdos, vendas digitais e recomendações.</p>
+</section>
+
+<div class="container">
+
+<div class="grid">
+  <div class="card"><h3>Produtos</h3><p>Venda e compra de itens digitais.</p><a href="#">Acessar</a></div>
+  <div class="card"><h3>Guias</h3><p>Guias completos e atualizados.</p><a href="#">Ver Guias</a></div>
+  <div class="card"><h3>Referências</h3><p>Base de informações organizada.</p><a href="#">Explorar</a></div>
+</div>
+
+<section class="streamers">
+<h2>Streamers Recomendados</h2>
+
+<div class="streamer-grid">
+
+<!-- STREAMER 1 -->
+<div class="streamer-card" data-id="1">
+<span class="live">AO VIVO</span>
+<img class="avatar" src="assets/avatars/streamer01.png">
+<h4>YuukiiBr</h4>
+<div class="socials">
+  <a href="https://www.twitch.tv/yuukiibr" target="_blank">
+    <img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif">
+  </a>
+  <a href="https://kick.com/yuukiibr" target="_blank">
+    <img src="https://cdn3.emoji.gg/emojis/65897-kick.gif">
+  </a>
+  <a href="https://www.youtube.com/@YuukiiBr" target="_blank">
+    <img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif">
+  </a>
+</div>
+</div>
+
+<!-- STREAMER 2 -->
+<div class="streamer-card" data-id="2">
+<span class="live">AO VIVO</span>
+<img class="avatar" src="assets/avatars/streamer02.png">
+<h4>Noturnolll</h4>
+<div class="socials">
+  <a href="https://twitch.tv" target="_blank">
+    <img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif">
+  </a>
+  <a href="https://kick.com/noturnolll" target="_blank">
+    <img src="https://cdn3.emoji.gg/emojis/65897-kick.gif">
+  </a>
+  <a href="https://www.youtube.com/@noturnoragnarok" target="_blank">
+    <img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif">
+  </a>
+</div>
+</div>
+
+<!-- STREAMER 3 -->
+<div class="streamer-card" data-id="3">
+<span class="live">AO VIVO</span>
+<img class="avatar" src="assets/avatars/streamer03.png">
+<h4>Julliezinha</h4>
+<div class="socials">
+  <a href="https://www.twitch.tv/julliezinha" target="_blank">
+    <img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif">
+  </a>
+  <a href="https://kick.com/meowmeowzinha" target="_blank">
+    <img src="https://cdn3.emoji.gg/emojis/65897-kick.gif">
+  </a>
+  <a href="https://www.youtube.com/@Julliezinhafloquinho" target="_blank">
+    <img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif">
+  </a>
+</div>
+</div>
+
+<!-- STREAMER 4 -->
+<div class="streamer-card" data-id="4">
+<span class="live">AO VIVO</span>
+<img class="avatar" src="assets/avatars/streamer04.png">
+<h4>AkuaAB</h4>
+<div class="socials">
+  <a href="https://www.twitch.tv/akuaab" target="_blank">
+    <img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif">
+  </a>
+  <a href="https://kick.com" target="_blank">
+    <img src="https://cdn3.emoji.gg/emojis/65897-kick.gif">
+  </a>
+  <a href="https://www.youtube.com/@AkuaAB" target="_blank">
+    <img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif">
+  </a>
+</div>
+</div>
+
+</div>
+</section>
+
+</div>
+
+<footer>© 2026 Vanguard</footer>
+
+<div id="panel">
+<div class="panel-box">
+<h3>Painel de Streamers</h3>
+<div class="panel-streamer">YuukiiBr <button data-id="1"></button></div>
+<div class="panel-streamer">Noturnolll <button data-id="2"></button></div>
+<div class="panel-streamer">Julliezinha <button data-id="3"></button></div>
+<div class="panel-streamer">AkuaAB <button data-id="4"></button></div>
+</div>
+</div>
+
+<script>
+const panel=document.getElementById("panel");
+const state=JSON.parse(localStorage.getItem("streamers"))||{};
+let buffer="";
+
+function apply(){
+document.querySelectorAll(".streamer-card").forEach(card=>{
+const id=card.dataset.id;
+card.querySelector(".live").style.display=state[id]?"block":"none";
+});
+document.querySelectorAll(".panel-streamer button").forEach(btn=>{
+const id=btn.dataset.id;
+btn.textContent=state[id]?"ON":"OFF";
+btn.className=state[id]?"on":"off";
+});
+localStorage.setItem("streamers",JSON.stringify(state));
+}
+
+document.addEventListener("keydown",e=>{
+buffer+=e.key.toUpperCase();
+if(buffer.includes("4S")) panel.style.display="flex";
+if(e.key==="Escape") panel.style.display="none";
+if(buffer.length>2) buffer=buffer.slice(-2);
+});
+
+document.querySelectorAll(".panel-streamer button").forEach(btn=>{
+btn.onclick=()=>{
+const id=btn.dataset.id;
+state[id]=!state[id];
+apply();
+};
+});
+
+apply();
+</script>
+
+</body>
+</html>

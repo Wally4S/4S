@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>4S Store — Classes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+
+<!-- SEO básico -->
+<meta name="description" content="Guia completo das classes do jogo 4S Store, com atributos, skills e guias.">
+<meta name="keywords" content="4S Store, classes, Rune Knight, Royal Guard, Mechanic, Genetic, Arch Bishop">
+<meta name="author" content="Seu Nome ou Autor do Guia">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:title" content="4S Store — Classes">
+<meta property="og:description" content="Guias & Produtos.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:url" content="https://4-s-store.vercel.app/">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="4S Store — Rápido e Barato">
+<meta name="twitter:description" content="Guias & Produtos.">
+<meta name="twitter:image" content="og-image.jpg">
+
+<style>
+body{
+  margin:0;
+  background:#0b0f1a;
+  font-family:Arial,sans-serif;
+  color:#fff;
+}
+
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(10,15,30,.8);
+  backdrop-filter:blur(14px);
+  padding:16px 30px;
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid rgba(56,189,248,.25);
+}
+.logo {
+  font-size: 30px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #38bdf8, #0ea5e9, #06b6d4, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  display: inline-block;
+  animation: gradientMove 5s linear infinite, glowPulse 2s ease-in-out infinite;
+}
+
+/* Gradiente animado */
+@keyframes gradientMove {
+  0% {background-position: 0%;}
+  50% {background-position: 200%;}
+  100% {background-position: 0%;}
+}
+
+/* Glow pulsante */
+@keyframes glowPulse {
+  0%, 100% {text-shadow: 0 0 5px #38bdf8, 0 0 10px #0ea5e9;}
+  50% {text-shadow: 0 0 15px #38bdf8, 0 0 25px #0ea5e9;}
+}
+nav a:hover{color:#38bdf8}
+nav a.active{color:#38bdf8}
+
+/* Botão Página Inicial */
+.btn-home {
+  display: inline-block;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #000;
+  background: linear-gradient(135deg,#38bdf8,#0ea5e9);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(56,189,248,0.35);
+}
+
+.btn-home:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(56,189,248,0.45);
+  color: #000;
+}
+
+/* GRID — 5 POR LINHA */
+.classes-grid{
+  max-width:1400px;
+  margin:110px auto 40px;
+  padding:0 20px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:22px;
+}
+@media(max-width:1200px){.classes-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:768px){.classes-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:480px){.classes-grid{grid-template-columns:1fr;}}
+
+/* CARD */
+.class-card{
+  background:linear-gradient(180deg,#020617,#020617ee);
+  border-radius:22px;
+  padding:16px;
+  text-align:center;
+  transition:.35s;
+  cursor:pointer;
+}
+.class-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 0 40px rgba(56,189,248,.45);
+}
+
+/* IMAGEM */
+.card-image{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:16px;
+  overflow:hidden;
+  margin-bottom:14px;
+  background:#020617;
+}
+.card-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.4s;
+}
+.class-card:hover img{transform:scale(1.08)}
+
+.class-card h3{
+  font-size:16px;
+  margin:6px 0 10px;
+  background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* BOTAO GUIA */
+.btn-guide{
+  padding:8px 16px;
+  border:none;
+  border-radius:12px;
+  font-weight:bold;
+  cursor:pointer;
+  background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+  color:#000;
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.88);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:3000;
+}
+.modal.active{display:flex}
+
+.modal-box{
+  position:relative;
+  background:linear-gradient(180deg,#020617,#020617ee);
+  width:92%;
+  max-width:960px;
+  max-height:90vh;
+  overflow:auto;
+  border-radius:32px;
+  padding:36px;
+  box-shadow:0 0 80px rgba(56,189,248,.45);
+}
+
+.close{
+  position:absolute;
+  top:22px;
+  right:26px;
+  font-size:26px;
+  cursor:pointer;
+}
+
+.modal-header{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:26px;
+  align-items:center;
+  margin-bottom:30px;
+}
+.modal-image{
+  aspect-ratio:1/1;
+  border-radius:20px;
+  overflow:hidden;
+}
+.modal-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.modal-header h2{
+  font-size:28px;
+  background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* TABS */
+.tabs{
+  display:flex;
+  gap:14px;
+  margin-bottom:24px;
+}
+.tabs button{
+  background:transparent;
+  border:1px solid rgba(56,189,248,.45);
+  color:#fff;
+  padding:10px 22px;
+  border-radius:14px;
+  cursor:pointer;
+}
+.tabs button.active{
+  background:linear-gradient(135deg,#38bdf8,#0ea5e9);
+  color:#000;
+}
+
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ATRIBUTOS */
+.attr{margin-bottom:16px}
+.attr-label{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+}
+.bar{
+  height:10px;
+  background:#020617;
+  border-radius:10px;
+  overflow:hidden;
+}
+.bar-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#38bdf8,#0ea5e9);
+  transition:width .9s ease;
+}
+
+/* SKILLS */
+.skill{
+  background:rgba(255,255,255,.06);
+  padding:14px 18px;
+  border-radius:16px;
+  margin-bottom:12px;
+}
+
+/* CREDIT */
+.credit{
+  margin-top:30px;
+  text-align:center;
+  font-size:13px;
+  color:#aaa;
+}
+.credit a{color:#38bdf8;text-decoration:none}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">4S</div>
+  <nav>
+    <a href="index.html" class="btn-home">Página inicial</a>
+  </nav>
+</header>
+
+<section class="classes-grid">
+  <!-- TODAS AS CLASSES -->
+  <div class="class-card" onclick="openModal('Rune Knight')">
+    <div class="card-image"><img src="rune-knight.jpg"></div>
+    <h3>Rune Knight</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Royal Guard')">
+    <div class="card-image"><img src="royal-guard.jpg"></div>
+    <h3>Royal Guard</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Mechanic')">
+    <div class="card-image"><img src="mechanic.jpg"></div>
+    <h3>Mechanic</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Genetic')">
+    <div class="card-image"><img src="genetic.jpg"></div>
+    <h3>Genetic</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Arch Bishop')">
+    <div class="card-image"><img src="arch-bishop.jpg"></div>
+    <h3>Arch Bishop</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Sura')">
+    <div class="card-image"><img src="sura.jpg"></div>
+    <h3>Sura</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Warlock')">
+    <div class="card-image"><img src="warlock.jpg"></div>
+    <h3>Warlock</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Sorcerer')">
+    <div class="card-image"><img src="sorcerer.jpg"></div>
+    <h3>Sorcerer</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Ranger')">
+    <div class="card-image"><img src="ranger.jpg"></div>
+    <h3>Ranger</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Shadow Chaser')">
+    <div class="card-image"><img src="shadow-chaser.jpg"></div>
+    <h3>Shadow Chaser</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Guillotine Cross')">
+    <div class="card-image"><img src="guillotine-cross.jpg"></div>
+    <h3>Guillotine Cross</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Minstrel')">
+    <div class="card-image"><img src="minstrel.jpg"></div>
+    <h3>Minstrel</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+  <div class="class-card" onclick="openModal('Wanderer')">
+    <div class="card-image"><img src="wanderer.jpg"></div>
+    <h3>Wanderer</h3>
+    <button class="btn-guide">Ver Guia</button>
+  </div>
+</section>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <span class="close" onclick="closeModal()">✖</span>
+
+    <div class="modal-header">
+      <div class="modal-image"><img id="modalImg"></div>
+      <h2 id="modalTitle"></h2>
+    </div>
+
+    <div class="tabs">
+      <button class="active" onclick="openTab(0)">Atributos</button>
+      <button onclick="openTab(1)">Skills</button>
+    </div>
+
+    <div class="tab-content active">
+      <div class="attr" data-value="100">
+        <div class="attr-label"><span>FOR</span><span>100</span></div>
+        <div class="bar"><div class="bar-fill"></div></div>
+      </div>
+      <div class="attr" data-value="90">
+        <div class="attr-label"><span>AGI</span><span>90</span></div>
+        <div class="bar"><div class="bar-fill"></div></div>
+      </div>
+      <div class="attr" data-value="80">
+        <div class="attr-label"><span>VIT</span><span>80</span></div>
+        <div class="bar"><div class="bar-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="tab-content">
+      <div class="skill">Skill principal — Nv 10</div>
+      <div class="skill">Skill secundária — Nv 5</div>
+    </div>
+
+    <div class="credit">
+      Guia por <strong>Autor do Guia</strong><br>
+      <a href="#">Guia original</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const modal=document.getElementById('modal');
+function openModal(name){
+  modal.classList.add('active');
+  document.getElementById('modalTitle').innerText=name;
+  document.getElementById('modalImg').src=name.toLowerCase().replace(/ /g,'-')+'.jpg';
+  resetBars();
+}
+function closeModal(){modal.classList.remove('active')}
+function openTab(i){
+  document.querySelectorAll('.tabs button').forEach((b,idx)=>b.classList.toggle('active',idx===i));
+  document.querySelectorAll('.tab-content').forEach((c,idx)=>c.classList.toggle('active',idx===i));
+  if(i===0) animateBars();
+}
+function resetBars(){
+  document.querySelectorAll('.bar-fill').forEach(b=>b.style.width='0%');
+}
+function animateBars(){
+  resetBars();
+  setTimeout(()=>{document.querySelectorAll('.attr').forEach(a=>{a.querySelector('.bar-fill').style.width=a.dataset.value+'%';});},80);
+}
+
+document.querySelectorAll('a[href]').forEach(link => {
+  const url = new URL(link.href, location.href);
+  if (url.origin !== location.origin) {
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener noreferrer');
+  }
+});
+</script>
+
+</body>
+</html>
