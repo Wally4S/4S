@@ -286,7 +286,7 @@ let currentCategory="all";
 const productsData=[];
 const ADD=p=>productsData.push({...p,baseStock:p.stock});
 /* PRODUTOS CAPA*/
-ADD({id:1,name:"Asas Douradas da Justiça",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas Douradas da Justiça.png"});
+ADD({id:1,name:"Asas Douradas da Justiça",price:3.39,stock:1,category:"capa",promo:15,img:"public/img/Asas Douradas da Justiça.png"});
 ADD({id:2,name:"Asas Negras do Arcanjo",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas Negras do Arcanjo.png"});
 ADD({id:3,name:"Asas de Tronos",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas de Tronos.png"});
 ADD({id:4,name:"Asas da Sarakura",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas da Sarakura.png"});
@@ -297,7 +297,7 @@ ADD({id:8,name:"Asas Pavão Roxo",price:3.99,stock:1,category:"capa",promo:false
 ADD({id:9,name:"Pequenas Asas do Tormento",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Pequenas Asas do Tormento.png"});
 ADD({id:10,name:"Asa de Morcego Mutante",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asa de Morcego Mutante.png"});
 /* PRODUTOS MEIO*/
-ADD({id:30,name:"Pupilas Draconianas",price:7.99,stock:1,category:"meio",promo:true,img:"public/img/Pupilas Draconianas.png"});
+ADD({id:30,name:"Pupilas Draconianas",price:7.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Draconianas.png"});
 ADD({id:31,name:"Pupilas Avermelhadas",price:7.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Avermelhadas.png"});
 ADD({id:32,name:"Pupilas Douradas",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Douradas.png"});
 ADD({id:33,name:"Pupilas Cerúleas",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Cerúleas.png"});
@@ -308,7 +308,7 @@ ADD({id:37,name:"Piscadela",price:4.99,stock:1,category:"meio",promo:false,img:"
 ADD({id:38,name:"Piscadela de Freya",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Piscadela de Freya.png"});
 ADD({id:39,name:"Piscadela Rosa",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Piscadela Rosa.png"});
 /* PRODUTOS BAIXO*/
-ADD({id:50,name:"Cachecol Celestial",price:4.99,stock:1,category:"baixo",promo:true,img:"public/img/Cachecol Celestial.png"});
+ADD({id:50,name:"Cachecol Celestial",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Celestial.png"});
 ADD({id:51,name:"Cachecol Preto do Eremes",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Preto do Eremes.png"});
 ADD({id:52,name:"Cachecol Azul do Eremes",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Azul do Eremes.png"});
 ADD({id:53,name:"Cachecol Marrom com Laço",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Marrom com Laço.png"});
@@ -332,15 +332,15 @@ ADD({id:69,name:"Boina Alada Branca",price:3.99,stock:2,category:"topo",promo:fa
 /* PRODUTOS CARTA*/
 ADD({id:80,name:"Carta Faraó",price:19.99,stock:1,category:"carta",promo:true,img:"public/img/Carta Faraó.png"});
 /* PRODUTOS EQUIPAMENTO*/
-ADD({id:90,name:"+14 Maça dos Orcs [2] EL8 EL7",price:29.99,stock:1,category:"equipamento",promo:true,img:"public/img/maça dos orcs.png"});
+ADD({id:90,name:"+14 Maça dos Orcs [2] EL8 EL7",price:29.99,stock:1,category:"equipamento",promo:false,img:"public/img/maça dos orcs.png"});
 ADD({id:91,name:"+14 Protetor Sagrado [1]",price:19.99,stock:1,category:"equipamento",promo:true,img:"public/img/protetor sagrado.png"});
 ADD({id:92,name:"+14 Faixa da Inquisição [1]",price:29.99,stock:1,category:"equipamento",promo:true,img:"public/img/Faixa da Inquisição.png"});
 ADD({id:93,name:"Orelhas em Chamas [1]",price:19.99,stock:1,category:"equipamento",promo:true,img:"public/img/Orelhas em Chamas.png"});
 ADD({id:94,name:"Asinhas de Detale [1]",price:19.99,stock:1,category:"equipamento",promo:true,img:"public/img/Asinhas de Detale.png"});
 /* PRODUTOS CONSUMIVEL*/
-ADD({id:100,name:"Pack [150] Poção de Guyak",price:19.99,stock:1,category:"consumivel",promo:true,img:"public/img/Poção de Guyak.png"});
+ADD({id:100,name:"Pack [150] Poção de Guyak",price:19.99,stock:1,category:"consumivel",promo:false,img:"public/img/Poção de Guyak.png"});
 ADD({id:101,name:"Pack [40] Fruta dos Gatos",price:7.99,stock:1,category:"consumivel",promo:true,img:"public/img/Fruta dos Gatos.png"});
-ADD({id:101,name:"Caixa de Cupom Tintura",price:3.99,stock:4,category:"consumivel",promo:true,img:"public/img/Caixa de Cupom de Tintura.png"});
+ADD({id:101,name:"Caixa de Cupom Tintura",price:3.99,stock:4,category:"consumivel",promo:false,img:"public/img/Caixa de Cupom de Tintura.png"});
 
 /* CARRINHO */
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
@@ -387,8 +387,8 @@ function render(){
  slice.forEach(p=>{
   products.innerHTML+=`
   <div class="product">
-   ${p.promo?`<div class="badge">PROMO</div>`:""}
-   ${p.stock<=0?`<div class="low-stock">SEM ESTOQUE</div>`:""}
+  <div class="product-card" data-promo="${p.promo}">
+  ${p.promo ? `<div class="promo-badge">${p.promo}% OFF</div>` : ""}
    <div class="image-box"><img src="${p.img}"></div>
    <h3>${p.name}</h3>
    <div class="price">R$ ${p.price}</div>
@@ -477,8 +477,153 @@ render();
     alert("Você não pode acessar o menu de contexto.");
   });
 </script>
+<script>
+/* ===== RPG EFFECTS: BUY BUTTON + PRICE ===== */
+(function(){
 
-</body>
-</html>
+  /* ===== CSS INJETADO ===== */
+  const style = document.createElement("style");
+  style.innerHTML = `
+    /* BOTÃO COMPRAR — SKILL CLICK */
+    .rpg-buy{
+      position:relative;
+      overflow:hidden;
+    }
+    .rpg-buy::after{
+      content:"";
+      position:absolute;
+      inset:-60%;
+      background:
+        radial-gradient(circle,
+          rgba(99,102,241,.55),
+          transparent 60%);
+      opacity:0;
+      transition:.25s;
+      mix-blend-mode:screen;
+    }
+    .rpg-buy:active{
+      transform:scale(.92);
+      box-shadow:
+        0 0 25px #4338ca,
+        0 0 50px rgba(99,102,241,.9) !important;
+    }
+    .rpg-buy:active::after{
+      opacity:1;
+    }
+
+    /* PREÇO — RUNA ARCANA */
+    .rpg-price{
+      position:relative;
+      color:#c7d2fe;
+      text-shadow:
+        0 0 10px rgba(99,102,241,.6),
+        0 0 25px rgba(99,102,241,.9);
+      animation:pricePulse 2.6s infinite alternate;
+    }
+    .rpg-price::before{
+      content:"";
+      position:absolute;
+      inset:-6px;
+      border-radius:8px;
+      background:
+        conic-gradient(
+          from 0deg,
+          transparent,
+          rgba(99,102,241,.6),
+          transparent
+        );
+      filter:blur(6px);
+      opacity:.7;
+      z-index:-1;
+      animation:priceSpin 4.5s linear infinite;
+    }
+
+    @keyframes pricePulse{
+      from{opacity:.85}
+      to{opacity:1}
+    }
+    @keyframes priceSpin{
+      to{transform:rotate(360deg)}
+    }
+  `;
+  document.head.appendChild(style);
+
+  /* ===== DETECÇÃO FLEXÍVEL ===== */
+  const buyButtons = document.querySelectorAll(
+    "button, a"
+  );
+
+  buyButtons.forEach(btn=>{
+    const txt = btn.innerText?.toLowerCase() || "";
+    if(
+      txt.includes("comprar") ||
+      txt.includes("buy") ||
+      txt.includes("adicionar") ||
+      txt.includes("checkout")
+    ){
+      btn.classList.add("rpg-buy");
+    }
+  });
+
+  const prices = document.querySelectorAll(
+    ".price, .preco, .valor, span, strong"
+  );
+
+  prices.forEach(p=>{
+    const txt = p.innerText || "";
+    if(txt.match(/R\\$|\\$|\\d+,\\d{2}|\\d+\\.\\d{2}/)){
+      p.classList.add("rpg-price");
+    }
+  });
+
+})();
+</script>
+<script>
+(function(){
+
+  const style = document.createElement("style");
+  style.innerHTML = `
+    .promo-badge{
+      position:absolute;
+      top:14px;
+      right:14px;
+      padding:6px 14px;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      color:#fff;
+      background:linear-gradient(135deg,#ff2d55,#b8001f);
+      border-radius:999px;
+      box-shadow:
+        0 0 15px rgba(255,45,85,.9),
+        0 0 35px rgba(255,45,85,.6);
+      animation:pulsePromo 1.6s infinite;
+      z-index:10;
+      pointer-events:none;
+    }
+
+    @keyframes pulsePromo{
+      0%{transform:scale(1)}
+      50%{transform:scale(1.08)}
+      100%{transform:scale(1)}
+    }
+  `;
+  document.head.appendChild(style);
+
+  document.querySelectorAll(".product-card").forEach(card=>{
+    card.style.position = "relative";
+
+    if(card.dataset.promo === "true"){
+      const badge = document.createElement("div");
+      badge.className = "promo-badge";
+      badge.innerText = "PROMOÇÃO";
+      card.appendChild(badge);
+    }
+  });
+
+})();
+</script>
+
 </body>
 </html>
