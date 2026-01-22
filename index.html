@@ -99,88 +99,116 @@ nav a:hover{
 /* CONTAINER */
 .container{max-width:1200px;margin:auto;padding:70px 20px}
 
+/* BANNER */
+.banner{position:relative;padding:100px 20px;text-align:center;overflow:hidden}
+.banner-video{
+position:absolute;inset:0;
+width:100%;height:100%;
+object-fit:cover;
+filter:brightness(.5) contrast(1.2);
+}
+.banner-content{position:relative;z-index:1}
+.banner h1{
+font-size:48px;
+color:#60a5fa;
+text-shadow:0 0 15px #3b82f6,0 0 25px #60a5fa;
+}
+.banner p{color:#cbd5f5}
+
+/* CONTAINER */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:70px 20px;
+}
+
 /* CARDS */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:26px;
 }
+
 .card{
   background:linear-gradient(180deg,#0b0f2c,#020114);
   border:1px solid #3b82f6;
   border-radius:16px;
-  padding:30px;
+  padding:20px 30px 30px; /* espaço extra pro personagem */
   position:relative;
-  overflow:hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  overflow:visible;
 }
 
-/* Ajustando o estilo do ::before para cada card */
-.card:nth-child(1)::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('public/card1.png') no-repeat center center;
-  background-size: cover;
-  opacity: 0.3;
-  z-index: -1; /* Garante que o ::before fique atrás do conteúdo do card */
+/* ===========================
+   PERSONAGEM SENTADO (BASE)
+=========================== */
+.card-character{
+  position:absolute;
+  top:-160px;               /* metade do corpo pra fora */
+  left:50%;
+  transform:translateX(-50%);
+  width:180px;
+  z-index:10;
+  pointer-events:none;
+
+  /* realismo */
+  filter:
+    drop-shadow(0 25px 25px rgba(0,0,0,.65))
+    drop-shadow(0 10px 10px rgba(0,0,0,.45));
 }
 
-.card:nth-child(2)::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('public/card2.png') no-repeat center center;
-  background-size: cover;
-  opacity: 0.3;
-  z-index: -1; /* Garante que o ::before fique atrás do conteúdo do card */
+/* ===========================
+   AJUSTE INDIVIDUAL POR CARD
+   (NÃO interfere nos outros)
+=========================== */
+
+/* CARD 1 */
+.grid .card:nth-child(1) .card-character{
+  top:32px;
+  left:65%;
+  transform:translateX(-50%) rotate(-3deg);
 }
 
-.card:nth-child(3)::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('public/card3.png') no-repeat center center;
-  background-size: cover;
-  opacity: 0.3;
-  z-index: -1; /* Garante que o ::before fique atrás do conteúdo do card */
+/* CARD 2 */
+.grid .card:nth-child(2) .card-character{
+  top:39px;
+  left:70%;
+  transform:translateX(-50%) scale(1.05);
 }
 
+/* CARD 3 */
+.grid .card:nth-child(3) .card-character{
+  top:30px;
+  left:70%;
+  transform:translateX(-50%) rotate(2deg);
+}
+
+/* ===========================
+   MICRO MOVIMENTO (REALISMO)
+=========================== */
+.card:hover .card-character{
+  transform:
+    translateX(-50%)
+    translateY(6px);
+}
+
+
+/* BACKGROUND DOS CARDS */
 
 .card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 0 40px #2563eb,0 0 60px #60a5fa,0 0 80px #93c5fd;
-  border-color:#60a5fa;
+transform:translateY(-8px);
+box-shadow:0 0 40px #2563eb,0 0 60px #60a5fa;
 }
-.card h3{
-  color:#60a5fa;
-  text-shadow:0 0 10px #3b82f6,0 0 20px #60a5fa,0 0 25px #93c5fd;
-}
-.card a{
-  display:inline-block;
-  margin-top:16px;
-  padding:10px 22px;
-  border-radius:8px;
-  background:linear-gradient(90deg,#2563eb,#3b82f6);
-  color:#fff;
-  text-decoration:none;
-  box-shadow:0 0 10px #3b82f6,0 0 20px #2563eb;
-  transition: all 0.3s ease, transform 0.3s ease;
-}
-.card a:hover{
-  transform:scale(1.08);
-  box-shadow:0 0 25px #60a5fa,0 0 40px #2563eb,0 0 55px #93c5fd;
-}  
 
+.card h3{color:#60a5fa}
+.card a{
+display:inline-block;
+margin-top:16px;
+padding:10px 22px;
+border-radius:8px;
+background:linear-gradient(90deg,#2563eb,#3b82f6);
+color:#fff;
+text-decoration:none;
+}
 /* STREAMERS */
 .streamers{margin-top:110px}
 .streamers h2{
@@ -354,9 +382,26 @@ footer{
 <div class="container">
 
 <div class="grid">
-  <div class="card"><h3>𝙿𝚛𝚘𝚍𝚞𝚝𝚘𝚜</h3><p>Venda e compra de itens digitais.</p><a href="/loja">Acessar</a></div>
-  <div class="card"><h3>𝙶𝚞𝚒𝚊𝚜</h3><p>Guias completos e atualizados.</p><a href="/guias">Ver Guias</a></div>
-  <div class="card"><h3>𝚁𝚎𝚏𝚎𝚛𝚎𝚗𝚌𝚒𝚊𝚜</h3><p>Base de informações organizada.</p><a href="/referencias">Explorar</a></div>
+<div class="card">
+<img src="/public/produtos.png" class="card-character">
+<h3>Produtos</h3>
+<p>Vitrine de produtos.</p>
+<a href="/loja">Acessar</a>
+</div>
+
+<div class="card">
+<img src="/public/guias.png" class="card-character">
+<h3>Guias</h3>
+<p>Guias Básicos.</p>
+<a href="/guias">Ver Guias</a>
+</div>
+
+<div class="card">
+<img src="/public/referencias.png" class="card-character">
+<h3>Referências</h3>
+<p>Minhas Referencias.</p>
+<a href="/referencias">Explorar</a>
+</div>
 </div>
 
 <section class="streamers">
