@@ -392,7 +392,7 @@ function render(){
   products.innerHTML+=`
   <div class="product">
   <div class="product-card" data-promo="${p.promo}">
-  ${p.promo ? `<div class="promo-badge">${p.promo}% OFF</div>` : ""}
+  ${p.promo && p.stock > 0 ? `<div class="promo-badge">${p.promo}% OFF</div>` : ""}
    <div class="image-box"><img src="${p.img}"></div>
    <h3>${p.name}</h3>
    <div class="price">R$ ${p.price}</div>
@@ -597,11 +597,11 @@ render();
       letter-spacing:1px;
       text-transform:uppercase;
       color:#fff;
-      background:linear-gradient(135deg,#ff2d55,#b8001f);
+      background:linear-gradient(135deg,#22c55e,#22c55e);
       border-radius:999px;
       box-shadow:
-        0 0 15px rgba(255,45,85,.9),
-        0 0 35px rgba(255,45,85,.6);
+        0 0 15px rgba(22, 163,74),
+        0 0 35px rgba(22, 163,74);
       animation:pulsePromo 1.6s infinite;
       z-index:1;
       pointer-events:none;
@@ -626,6 +626,178 @@ render();
     }
   });
 
+})();
+</script>
+<script>
+/* 🔥 PATCH SIMPLES DE ESTOQUE — FINAL DA PÁGINA */
+
+(function(){
+  // tenta carregar estoque salvo
+  const saved = JSON.parse(localStorage.getItem("products"));
+  if(saved && Array.isArray(saved)){
+    saved.forEach(sp=>{
+      const p = productsData.find(p=>p.id===sp.id);
+      if(p){
+        p.baseStock = sp.baseStock;
+        p.stock = sp.stock;
+      }
+    });
+  }
+
+  // intercepta checkout original
+  const originalCheckout = window.checkout;
+  window.checkout = function(){
+    // baixa estoque definitivo
+    cart.forEach(item=>{
+      const p = productsData.find(p=>p.id===item.id);
+      if(p){
+        p.baseStock -= item.qty;
+        if(p.baseStock < 0) p.baseStock = 0;
+      }
+    });
+
+    // salva estoque
+    localStorage.setItem("products", JSON.stringify(productsData));
+
+    // chama checkout original
+    originalCheckout.apply(this, arguments);
+  };
+})();
+</script>
+<script>
+/* 🔥 AJUSTE BADGE "SEM ESTOQUE" — POSIÇÃO + COR */
+
+(function(){
+  const originalRender = window.render;
+
+  window.render = function(){
+    if(originalRender) originalRender.apply(this, arguments);
+
+    document.querySelectorAll(".product").forEach(card=>{
+      const stockEl = card.querySelector(".stock");
+      if(!stockEl) return;
+
+      const stock = Number(stockEl.innerText.replace(/\D/g,""));
+      let badge = card.querySelector(".badge-sem-estoque");
+
+      if(stock <= 0){
+        if(!badge){
+          badge = document.createElement("div");
+          badge.className = "badge-sem-estoque";
+          badge.innerText = "SEM ESTOQUE";
+          card.style.position = "relative";
+          card.appendChild(badge);
+        }
+      }else{
+        if(badge) badge.remove();
+      }
+    });
+  };
+})();
+</script>
+
+<style>
+/* 🟡 BADGE SEM ESTOQUE — AMARELO + NOVA POSIÇÃO */
+.badge-sem-estoque{
+  position:absolute;
+  bottom:15px;          /* ⬅️ fica embaixo */
+  left:50%;
+  transform:translateX(-50%);
+  padding:12px 16px;
+  font-size:10px;
+  font-weight:70;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#ffffff;
+  background:linear-gradient(135deg,hsl(0, 98%, 51%),#f30909);
+  border-radius:14px;
+  box-shadow:
+    0 0 12px rgba(255, 12, 12, 0.9),
+    0 0 24px rgba(255, 12, 12, 0.9);
+  z-index:3;
+  pointer-events:none;
+  
+}
+
+</style>
+<script>
+function updateProductUI(productId){
+  const card = document.querySelector(`.product-card[data-id="${productId}"]`);
+  if(!card) return;
+
+  const estoqueEl = card.querySelector('.estoque');
+  const promoBadge = card.querySelector('.promo-badge');
+  const addBtn = card.querySelector('.add-btn');
+
+  // pega estoque atual do texto
+  let estoque = parseInt(estoqueEl.textContent.replace(/\D/g,''));
+
+  if(estoque <= 0){
+    // texto estoque
+    estoqueEl.textContent = 'Estoque=: 0';
+
+    // remove promo
+    if(promoBadge) promoBadge.remove();
+
+    // botão SEM ESTOQUE
+    if(addBtn){
+      addBtn.disabled = true;
+      addBtn.textContent = 'SEM ESTOQUE';
+      addBtn.style.background = 'linear-gradient(135deg,#dc2626,#991b1b)';
+      addBtn.style.cursor = 'not-allowed';
+      addBtn.style.boxShadow = '0 0 20px rgba(220,38,38,.8)';
+    }
+  }
+}
+
+/* ⚡ INTERCEPTA clique no botão Adicionar */
+document.addEventListener('click', e=>{
+  if(!e.target.classList.contains('add-btn')) return;
+
+  const card = e.target.closest('.product-card');
+  const estoqueEl = card.querySelector('.estoque');
+
+  let estoque = parseInt(estoqueEl.textContent.replace(/\D/g,''));
+  estoque--;
+
+  estoqueEl.textContent = `Estoque: ${estoque}`;
+
+  const id = card.dataset.id;
+  updateProductUI(id);
+});
+</script>
+<script>
+(function(){
+  const style = document.createElement("style");
+  style.innerHTML = `
+    /* animação de respiração */
+    @keyframes breatheRed {
+      0%{
+        transform:scale(1);
+        box-shadow:0 0 16px rgba(239,68,68,.6);
+      }
+      50%{
+        transform:scale(1.08);
+        box-shadow:0 0 28px rgba(239,68,68,.95);
+      }
+      100%{
+        transform:scale(1);
+        box-shadow:0 0 16px rgba(239,68,68,.6);
+      }
+    }
+
+    /* SEM ESTOQUE com hover vivo */
+    .product button[disabled]{
+      pointer-events:auto !important;
+      transition:.25s;
+    }
+
+    .product button[disabled]:hover{
+      animation:breatheRed 1.6s ease-in-out infinite;
+      filter:brightness(1.12);
+    }
+  `;
+  document.head.appendChild(style);
 })();
 </script>
 
