@@ -190,7 +190,7 @@ nav a{color:#cbd5f5;text-decoration:none}
  box-shadow:0 0 30px rgba(59,130,246,.9);
  color:#fff;
  cursor:pointer;
- z-index:999;
+ z-index:50;
  transition:.2s;
 }
 .cart-btn.bump{transform:scale(1.2)}
@@ -203,6 +203,7 @@ nav a{color:#cbd5f5;text-decoration:none}
  display:none;
  justify-content:center;
  align-items:center;
+ z-index:10000;
 }
 .cart-box{
  background:linear-gradient(180deg,#020617,#020617ee);
@@ -211,6 +212,8 @@ nav a{color:#cbd5f5;text-decoration:none}
  padding:24px;
  width:420px;
  box-shadow:0 0 40px rgba(59,130,246,.6);
+ position:relative;
+ z-index:10001;
 }
 .cart-item{
  display:flex;
@@ -535,7 +538,7 @@ render();
         );
       filter:blur(6px);
       opacity:.7;
-      z-index:-1;
+      z-index:1;
       animation:priceSpin 4.5s linear infinite;
     }
 
@@ -600,7 +603,7 @@ render();
         0 0 15px rgba(255,45,85,.9),
         0 0 35px rgba(255,45,85,.6);
       animation:pulsePromo 1.6s infinite;
-      z-index:10;
+      z-index:1;
       pointer-events:none;
     }
 
