@@ -286,7 +286,7 @@ let currentCategory="all";
 const productsData=[];
 const ADD=p=>productsData.push({...p,baseStock:p.stock});
 /* PRODUTOS CAPA*/
-ADD({id:1,name:"Asas Douradas da Justiça",price:3.39,stock:1,category:"capa",promo:15,img:"public/img/Asas Douradas da Justiça.png"});
+ADD({id:1,name:"Asas Douradas da Justiça",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas Douradas da Justiça.png"});
 ADD({id:2,name:"Asas Negras do Arcanjo",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas Negras do Arcanjo.png"});
 ADD({id:3,name:"Asas de Tronos",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas de Tronos.png"});
 ADD({id:4,name:"Asas da Sarakura",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asas da Sarakura.png"});
@@ -297,50 +297,50 @@ ADD({id:8,name:"Asas Pavão Roxo",price:3.99,stock:1,category:"capa",promo:false
 ADD({id:9,name:"Pequenas Asas do Tormento",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Pequenas Asas do Tormento.png"});
 ADD({id:10,name:"Asa de Morcego Mutante",price:3.99,stock:1,category:"capa",promo:false,img:"public/img/Asa de Morcego Mutante.png"});
 /* PRODUTOS MEIO*/
-ADD({id:30,name:"Pupilas Draconianas",price:7.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Draconianas.png"});
-ADD({id:31,name:"Pupilas Avermelhadas",price:7.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Avermelhadas.png"});
-ADD({id:32,name:"Pupilas Douradas",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Douradas.png"});
+ADD({id:30,name:"Pupilas Draconianas",price:5.99,stock:1,category:"meio",promo:15,img:"public/img/Pupilas Draconianas.png"});
+ADD({id:31,name:"Pupilas Avermelhadas",price:5.99,stock:1,category:"meio",promo:15,img:"public/img/Pupilas Avermelhadas.png"});
+ADD({id:32,name:"Pupilas Douradas",price:5.99,stock:1,category:"meio",promo:15,img:"public/img/Pupilas Douradas.png"});
 ADD({id:33,name:"Pupilas Cerúleas",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Cerúleas.png"});
 ADD({id:34,name:"Pupilas Azuladas",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Azuladas.png"});
 ADD({id:35,name:"Pupilas Carmesins",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Pupilas Carmesins.png"});
-ADD({id:36,name:"Piscadela Congelante",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Piscadela Congelante.png"});
+ADD({id:36,name:"Piscadela Congelante",price:5.99,stock:1,category:"meio",promo:15,img:"public/img/Piscadela Congelante.png"});
 ADD({id:37,name:"Piscadela",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Piscadela.png"});
-ADD({id:38,name:"Piscadela de Freya",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Piscadela de Freya.png"});
-ADD({id:39,name:"Piscadela Rosa",price:4.99,stock:1,category:"meio",promo:false,img:"public/img/Piscadela Rosa.png"});
+ADD({id:38,name:"Piscadela de Freya",price:4.99,stock:0,category:"meio",promo:false,img:"public/img/Piscadela de Freya.png"});
+ADD({id:39,name:"Piscadela Rosa",price:4.99,stock:0,category:"meio",promo:false,img:"public/img/Piscadela Rosa.png"});
 /* PRODUTOS BAIXO*/
 ADD({id:50,name:"Cachecol Celestial",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Celestial.png"});
 ADD({id:51,name:"Cachecol Preto do Eremes",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Preto do Eremes.png"});
 ADD({id:52,name:"Cachecol Azul do Eremes",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Azul do Eremes.png"});
-ADD({id:53,name:"Cachecol Marrom com Laço",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Marrom com Laço.png"});
-ADD({id:54,name:"Cachecol Glorioso",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Glorioso.png"});
-ADD({id:55,name:"Cachecol dos Corajosos",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol dos Corajosos.png"});
-ADD({id:56,name:"Ás Surpresa",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Ás Surpresa.png"});
-ADD({id:57,name:"Ás de Copas",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Ás de Copas.png"});
-ADD({id:58,name:"Estola Angelical",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Estola Angelical.png"});
-ADD({id:59,name:"Óculos da Persona",price:4.99,stock:1,category:"baixo",promo:false,img:"public/img/Óculos da Persona.png"});
+ADD({id:53,name:"Cachecol Marrom com Laço",price:3.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Marrom com Laço.png"});
+ADD({id:54,name:"Cachecol Glorioso",price:3.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol Glorioso.png"});
+ADD({id:55,name:"Cachecol dos Corajosos",price:3.99,stock:1,category:"baixo",promo:false,img:"public/img/Cachecol dos Corajosos.png"});
+ADD({id:56,name:"Ás Surpresa",price:3.99,stock:1,category:"baixo",promo:false,img:"public/img/Ás Surpresa.png"});
+ADD({id:57,name:"Ás de Copas",price:3.99,stock:1,category:"baixo",promo:false,img:"public/img/Ás de Copas.png"});
+ADD({id:58,name:"Estola Angelical",price:3.99,stock:1,category:"baixo",promo:false,img:"public/img/Estola Angelical.png"});
+ADD({id:59,name:"Óculos da Persona",price:3.99,stock:1,category:"baixo",promo:false,img:"public/img/Óculos da Persona.png"});
 /* PRODUTOS TOPO*/
-ADD({id:61,name:"Mestre Arcanista",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/mestre-arcanista.png"});
-ADD({id:62,name:"Mestre Arcanista Azul",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/mestre-arcanista-azul.png"});
-ADD({id:63,name:"Mestre Arcanista Amarelo",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/mestre-arcanista-amarelo.png"});
-ADD({id:64,name:"Mestre Arcanista Vermelho",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/mestre-arcanista-vermelho.png"});
-ADD({id:65,name:"Mestre Arcanista Branco",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/mestre-arcanista-branco.png"});
-ADD({id:66,name:"Capuz do Mestre Necromante",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/Capuz do Mestre Necromante.png"});
+ADD({id:61,name:"Mestre Arcanista",price:4.99,stock:2,category:"topo",promo:15,img:"public/img/mestre-arcanista.png"});
+ADD({id:62,name:"Mestre Arcanista Azul",price:4.99,stock:2,category:"topo",promo:15,img:"public/img/mestre-arcanista-azul.png"});
+ADD({id:63,name:"Mestre Arcanista Amarelo",price:4.99,stock:2,category:"topo",promo:15,img:"public/img/mestre-arcanista-amarelo.png"});
+ADD({id:64,name:"Mestre Arcanista Vermelho",price:4.99,stock:2,category:"topo",promo:15,img:"public/img/mestre-arcanista-vermelho.png"});
+ADD({id:65,name:"Mestre Arcanista Branco",price:4.99,stock:2,category:"topo",promo:15,img:"public/img/mestre-arcanista-branco.png"});
+ADD({id:66,name:"Capuz do Mestre Necromante",price:3.99,stock:2,category:"topo",promo:false,img:"public/img/Capuz do Mestre Necromante.png"});
 ADD({id:67,name:"Chapéu de Tarlock",price:3.99,stock:2,category:"topo",promo:false,img:"public/img/Chapéu de Tarlock.png"});
-ADD({id:68,name:"Chapéu do Comissário",price:14.99,stock:2,category:"topo",promo:false,img:"public/img/Chapéu do Comissário.png"});
-ADD({id:69,name:"Capa do Timoneiro",price:4.99,stock:2,category:"topo",promo:false,img:"public/img/Chapéu do Timoneiro.png"});
+ADD({id:68,name:"Chapéu do Comissário",price:14.99,stock:2,category:"topo",promo:15,img:"public/img/Chapéu do Comissário.png"});
+ADD({id:69,name:"Capa do Timoneiro",price:3.99,stock:2,category:"topo",promo:false,img:"public/img/Chapéu do Timoneiro.png"});
 ADD({id:69,name:"Boina Alada Branca",price:3.99,stock:2,category:"topo",promo:false,img:"public/img/Boina Alada Branca.png"});
 /* PRODUTOS CARTA*/
-ADD({id:80,name:"Carta Faraó",price:19.99,stock:1,category:"carta",promo:true,img:"public/img/Carta Faraó.png"});
+ADD({id:80,name:"Carta Faraó",price:19.99,stock:1,category:"carta",promo:15,img:"public/img/Carta Faraó.png"});
 /* PRODUTOS EQUIPAMENTO*/
-ADD({id:90,name:"+14 Maça dos Orcs [2] EL8 EL7",price:29.99,stock:1,category:"equipamento",promo:false,img:"public/img/maça dos orcs.png"});
-ADD({id:91,name:"+14 Protetor Sagrado [1]",price:19.99,stock:1,category:"equipamento",promo:true,img:"public/img/protetor sagrado.png"});
-ADD({id:92,name:"+14 Faixa da Inquisição [1]",price:29.99,stock:1,category:"equipamento",promo:true,img:"public/img/Faixa da Inquisição.png"});
-ADD({id:93,name:"Orelhas em Chamas [1]",price:19.99,stock:1,category:"equipamento",promo:true,img:"public/img/Orelhas em Chamas.png"});
-ADD({id:94,name:"Asinhas de Detale [1]",price:19.99,stock:1,category:"equipamento",promo:true,img:"public/img/Asinhas de Detale.png"});
+ADD({id:90,name:"+14 Maça dos Orcs [2] EL8 EL7",price:29.99,stock:1,category:"equipamento",promo:15,img:"public/img/maça dos orcs.png"});
+ADD({id:91,name:"+14 Protetor Sagrado [1]",price:19.99,stock:1,category:"equipamento",promo:15,img:"public/img/protetor sagrado.png"});
+ADD({id:92,name:"+14 Faixa da Inquisição [1]",price:29.99,stock:1,category:"equipamento",promo:15,img:"public/img/Faixa da Inquisição.png"});
+ADD({id:93,name:"Orelhas em Chamas [1]",price:19.99,stock:1,category:"equipamento",promo:15,img:"public/img/Orelhas em Chamas.png"});
+ADD({id:94,name:"Asinhas de Detale [1]",price:19.99,stock:1,category:"equipamento",promo:15,img:"public/img/Asinhas de Detale.png"});
 /* PRODUTOS CONSUMIVEL*/
-ADD({id:100,name:"Pack [150] Poção de Guyak",price:19.99,stock:1,category:"consumivel",promo:false,img:"public/img/Poção de Guyak.png"});
-ADD({id:101,name:"Pack [40] Fruta dos Gatos",price:7.99,stock:1,category:"consumivel",promo:true,img:"public/img/Fruta dos Gatos.png"});
-ADD({id:101,name:"Caixa de Cupom Tintura",price:3.99,stock:4,category:"consumivel",promo:false,img:"public/img/Caixa de Cupom de Tintura.png"});
+ADD({id:100,name:"Pack [150] Poção de Guyak",price:19.99,stock:1,category:"consumivel",promo:10,img:"public/img/Poção de Guyak.png"});
+ADD({id:101,name:"Pack [40] Fruta dos Gatos",price:7.99,stock:1,category:"consumivel",promo:15,img:"public/img/Fruta dos Gatos.png"});
+ADD({id:101,name:"Caixa de Cupom Tintura",price:3.99,stock:4,category:"consumivel",promo:15,img:"public/img/Caixa de Cupom de Tintura.png"});
 
 /* CARRINHO */
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
