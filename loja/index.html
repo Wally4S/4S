@@ -332,7 +332,7 @@ ADD({id:66,name:"Capuz do Mestre Necromante",price:3.99,stock:2,category:"topo",
 ADD({id:67,name:"Chapéu de Tarlock",price:3.99,stock:2,category:"topo",promo:false,img:"public/img/Chapéu de Tarlock.png"});
 ADD({id:68,name:"Chapéu do Comissário",price:14.99,stock:2,category:"topo",promo:15,img:"public/img/Chapéu do Comissário.png"});
 ADD({id:69,name:"Capa do Timoneiro",price:3.99,stock:2,category:"topo",promo:false,img:"public/img/Chapéu do Timoneiro.png"});
-ADD({id:69,name:"Boina Alada Branca",price:3.99,stock:2,category:"topo",promo:false,img:"public/img/Boina Alada Branca.png"});
+ADD({id:70,name:"Boina Alada Branca",price:3.99,stock:2,category:"topo",promo:false,img:"public/img/Boina Alada Branca.png"});
 /* PRODUTOS CARTA*/
 ADD({id:80,name:"Carta Faraó",price:19.99,stock:1,category:"carta",promo:15,img:"public/img/Carta Faraó.png"});
 /* PRODUTOS EQUIPAMENTO*/
@@ -344,7 +344,7 @@ ADD({id:94,name:"Asinhas de Detale [1]",price:19.99,stock:1,category:"equipament
 /* PRODUTOS CONSUMIVEL*/
 ADD({id:100,name:"Pack [150] Poção de Guyak",price:19.99,stock:1,category:"consumivel",promo:10,img:"public/img/Poção de Guyak.png"});
 ADD({id:101,name:"Pack [40] Fruta dos Gatos",price:7.99,stock:1,category:"consumivel",promo:15,img:"public/img/Fruta dos Gatos.png"});
-ADD({id:101,name:"Caixa de Cupom Tintura",price:3.99,stock:4,category:"consumivel",promo:15,img:"public/img/Caixa de Cupom de Tintura.png"});
+ADD({id:102,name:"Caixa de Cupom Tintura",price:3.99,stock:4,category:"consumivel",promo:15,img:"public/img/Caixa de Cupom de Tintura.png"});
 
 /* CARRINHO */
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
@@ -632,17 +632,16 @@ render();
 /* 🔥 PATCH SIMPLES DE ESTOQUE — FINAL DA PÁGINA */
 
 (function(){
-  // tenta carregar estoque salvo
-  const saved = JSON.parse(localStorage.getItem("products"));
-  if(saved && Array.isArray(saved)){
-    saved.forEach(sp=>{
-      const p = productsData.find(p=>p.id===sp.id);
-      if(p){
-        p.baseStock = sp.baseStock;
-        p.stock = sp.stock;
-      }
-    });
-  }
+  const savedStock = JSON.parse(localStorage.getItem("products"));
+if(savedStock){
+  savedStock.forEach(s=>{
+    const p = productsData.find(p=>p.id===s.id);
+    if(p){
+      p.baseStock = s.baseStock;
+      p.stock = s.baseStock;
+    }
+  });
+}
 
   // intercepta checkout original
   const originalCheckout = window.checkout;
@@ -798,6 +797,148 @@ document.addEventListener('click', e=>{
     }
   `;
   document.head.appendChild(style);
+})();
+
+</script>
+<!-- 🔐 PAINEL SECRETO 4S -->
+<style>
+#painel4s{
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,.92);
+  display:none;
+  z-index:999999;
+  align-items:center;
+  justify-content:center;
+  font-family:Inter,sans-serif;
+}
+#painel4s .box{
+  width:520px;
+  max-height:80vh;
+  overflow:auto;
+  background:#020617;
+  border:1px solid rgba(59,130,246,.4);
+  border-radius:20px;
+  padding:18px;
+  box-shadow:0 0 40px rgba(59,130,246,.6);
+}
+#painel4s h3{
+  margin:0 0 12px;
+  text-align:center;
+}
+#painel4s input{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  background:#020617;
+  color:#fff;
+  box-shadow:0 0 14px rgba(59,130,246,.3) inset;
+  margin-bottom:12px;
+}
+.item4s{
+  border-bottom:1px solid #1e293b;
+  padding:10px 0;
+}
+.item4s strong{font-size:13px}
+.ctrl4s{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:6px;
+}
+.ctrl4s button{
+  padding:4px 10px;
+  border:none;
+  border-radius:8px;
+  background:#2563eb;
+  color:#fff;
+  cursor:pointer;
+}
+.ctrl4s span{
+  min-width:30px;
+  text-align:center;
+}
+.hint4s{
+  text-align:center;
+  font-size:11px;
+  opacity:.6;
+  margin-top:10px;
+}
+</style>
+
+<div id="painel4s">
+  <div class="box">
+    <h3>🔐 Painel 4S — Estoque</h3>
+    <input id="busca4s" placeholder="Buscar por nome ou ID…">
+    <div id="lista4s"></div>
+    <div class="hint4s">ESC para fechar</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const painel = document.getElementById("painel4s");
+  const lista  = document.getElementById("lista4s");
+  const busca  = document.getElementById("busca4s");
+
+  /* ===== ABRIR COM CÓDIGO 4S ===== */
+  let buffer = "";
+  document.addEventListener("keydown",e=>{
+    if(e.key === "Escape"){
+      painel.style.display="none";
+      return;
+    }
+    if(e.target.tagName==="INPUT") return;
+
+    buffer = (buffer + e.key.toLowerCase()).slice(-2);
+    if(buffer === "4s"){
+      painel.style.display="flex";
+      busca.value="";
+      renderPainel();
+      buffer="";
+    }
+  });
+
+  /* ===== RENDER PAINEL ===== */
+  function renderPainel(){
+    lista.innerHTML="";
+    productsData.forEach(p=>{
+      const div=document.createElement("div");
+      div.className="item4s";
+      div.dataset.search=(p.name+" "+p.id).toLowerCase();
+      div.innerHTML=`
+        <strong>${p.name}</strong> (ID: ${p.id})<br>
+        <div class="ctrl4s">
+          <button onclick="ajuste4s(${p.id},-1)">−</button>
+          <span>${p.baseStock}</span>
+          <button onclick="ajuste4s(${p.id},1)">+</button>
+        </div>
+      `;
+      lista.appendChild(div);
+    });
+  }
+
+  /* ===== BUSCA ===== */
+  busca.addEventListener("input",()=>{
+    const v=busca.value.toLowerCase();
+    lista.querySelectorAll(".item4s").forEach(i=>{
+      i.style.display = i.dataset.search.includes(v) ? "block" : "none";
+    });
+  });
+
+  /* ===== AJUSTE DE ESTOQUE ===== */
+  window.ajuste4s=function(id,delta){
+    const p=productsData.find(p=>p.id===id);
+    if(!p) return;
+
+    p.baseStock = Math.max(0,p.baseStock+delta);
+    p.stock = p.baseStock;
+
+    localStorage.setItem("products",JSON.stringify(productsData));
+    renderPainel();
+    render(); // atualiza loja
+  };
 })();
 </script>
 
