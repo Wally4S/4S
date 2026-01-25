@@ -5,6 +5,7 @@
 <title>Referências | 4S Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/public/favicon.png" type="image/png">
+
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
@@ -15,104 +16,299 @@ body{
   background:radial-gradient(circle at top,#0b1a33,#02040a 65%);
   color:#fff;
 }
+
+/* ================= HEADER ================= */
 header{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:18px 40px;background:rgba(2,4,10,.9);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 40px;
+  background:rgba(2,4,10,.9);
   border-bottom:1px solid rgba(30,144,255,.25);
+  box-shadow:0 0 25px rgba(30,144,255,.35);
 }
 header h1{color:#1e90ff}
+
 .btn-home{
-  padding:10px 22px;border-radius:14px;
+  padding:10px 22px;
+  border-radius:14px;
   background:rgba(5,15,30,.9);
-  color:#cfe7ff;text-decoration:none;
+  color:#cfe7ff;
+  text-decoration:none;
   box-shadow:0 0 18px rgba(30,144,255,.45);
+  transition:.3s;
+}
+.btn-home:hover{
+  background:linear-gradient(135deg,#1e90ff,#4da3ff);
+  box-shadow:0 0 25px rgba(30,144,255,.85);
+  transform:translateY(-2px);
 }
 
-/* CONTADOR - ANEL LÍQUIDO */
+/* ===============================
+   CONTADOR – APPLE VISION / HUD
+   =============================== */
 #counter{
-  position:fixed;top:95px;right:30px;width:78px;height:78px;z-index:99;
-  display:flex;align-items:center;justify-content:center;
+  position:fixed;
+  right:26px;
+  top:50%;
+  transform:translateY(-50%);
+  width:90px;
+  height:90px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
 }
-#counter svg{width:100%;height:100%;}
-#counter span{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:'Courier New',monospace;font-size:26px;font-weight:800;
-  color:#fff;text-shadow:0 0 10px #fff,0 0 25px #1e90ff;
-}
-.counter-pulse{animation:pulse .45s ease}
-@keyframes pulse{from{transform:scale(.7)}to{transform:scale(1)}}
 
-/* MAIN / SLIDER */
-main{max-width:900px;margin:90px auto;padding:20px}
+#counter svg{
+  width:100%;
+  height:100%;
+}
+
+#counter span{
+  position:absolute;
+  font-size:20px;
+  font-weight:700;
+  color:#e5f0ff;
+  text-shadow:
+    0 0 10px rgba(59,130,246,.9),
+    0 0 20px rgba(59,130,246,.6);
+  pointer-events:none;
+}
+
+
+/* reflexo */
+#counter::before{
+  content:"";
+  position:absolute;
+  top:12%;
+  left:14%;
+  width:55%;
+  height:35%;
+  border-radius:50%;
+  background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,.6),
+    rgba(235, 10, 10, 0.05)
+  );
+  filter:blur(6px);
+  pointer-events:none;
+}
+
+/* número */
+#counter span{
+  position:absolute;
+  font-family:'Courier New',monospace;
+  font-size:24px;
+  font-weight:800;
+  color:#08acf8;
+
+  text-shadow:
+    0 0 8px rgba(5, 163, 255, 0.7),
+    0 0 18px rgba(59,130,246,.9);
+
+  transition:text-shadow .3s ease, transform .3s ease;
+}
+
+/* pulso sincronizado */
+.counter-pulse{
+  animation:counterPulse .35s ease;
+}
+
+@keyframes counterPulse{
+  0%{transform:scale(.92)}
+  100%{transform:scale(1)}
+}
+
+/* anel */
+#liquidCircle{
+  filter:drop-shadow(0 0 8px rgba(59,130,246,.6));
+  transition:filter .3s ease;
+}
+
+/* ================= MAIN ================= */
+main{
+  max-width:900px;
+  margin:90px auto;
+  padding:20px;
+}
 #slider-wrapper{position:relative;min-height:240px}
+
+/* ================= CARD ================= */
 .card{
   background:rgba(5,15,30,.9);
-  border-radius:26px;padding:30px;
-  box-shadow:0 0 45px rgba(0,136,255,.45);
+  border-radius:26px;
+  padding:30px;
+  position:relative;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.04),
+    0 0 20px rgba(30,144,255,.28),
+    0 18px 45px rgba(2,4,10,.9);
+  animation:fadeSlide .55s ease;
+  transition:.3s;
 }
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.06),
+    0 0 26px rgba(30,144,255,.45),
+    0 22px 55px rgba(2,4,10,.95);
+}
+@keyframes fadeSlide{
+  from{opacity:0;transform:translateY(12px) scale(.98);filter:blur(6px)}
+  to{opacity:1;transform:none;filter:none}
+}
+
 .ref-header{display:flex;gap:12px;margin-bottom:14px}
 .ref-header img{width:38px}
 .ref-header span{color:#1e90ff}
-.ref-text{white-space:pre-wrap;word-break:break-word}
+.ref-text{
+  margin-top:10px;
+  flex:1;
+  overflow-y:auto;
+  padding-right:6px;
 
-/* SETAS APENAS COM SETA */
+  /* scroll bonito e discreto */
+  scrollbar-width:thin;
+  scrollbar-color:#1e90ff transparent;
+}
+
+/* Scroll Chrome / Edge */
+.ref-text::-webkit-scrollbar{
+  width:6px;
+}
+.ref-text::-webkit-scrollbar-thumb{
+  background:#1e90ff;
+  border-radius:6px;
+}
+.ref-text{
+  mask-image:linear-gradient(
+    to bottom,
+    black 85%,
+    transparent 100%
+  );
+}
+
+
+/* ================= SETAS ================= */
 .arrow{
-  position:absolute;top:50%;transform:translateY(-50%);
-  width:42px;height:42px;
-  border:none;background:none;color:#fff;font-size:26px;
-  cursor:pointer;outline:none;
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:42px;
+  height:42px;
+  background:none;
+  border:none;
+  color:#fff;
+  font-size:26px;
+  cursor:pointer;
+  opacity:.6;
+  transition:.25s;
 }
-.prev{left:-55px}.next{right:-55px}
+.arrow:hover{opacity:1;transform:translateY(-50%) scale(1.25)}
+.prev{left:-55px}
+.next{right:-55px}
 
-/* FORM */
+/* ================= FORM ================= */
 form{
-  margin-top:60px;background:rgba(5,15,30,.9);
-  padding:32px;border-radius:28px;
-  box-shadow:0 0 40px rgba(0,136,255,.4);
+  margin-top:60px;
+  background:rgba(5,15,30,.9);
+  padding:32px;
+  border-radius:28px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.05),
+    0 0 35px rgba(30,144,255,.35),
+    0 20px 60px rgba(2,4,10,.95);
 }
-input,textarea{
-  width:100%;padding:14px;margin-bottom:14px;
-  border-radius:14px;border:none;
-  background:rgba(255,255,255,.07);color:#fff;
+input,
+textarea{
+  width:100%;
+  padding:14px 16px;
+  margin-bottom:14px;
+
+  border-radius:14px;
+  border:1px solid rgba(59,130,246,.25);
+
+  background:rgba(8,18,35,.85);
+  color:#e5e7eb;
+
+  outline:none;
+  resize:none;
+
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,.05),
+    0 0 0 rgba(0,0,0,0);
+
+  transition:border .25s ease, box-shadow .25s ease;
+}
+
+input:focus,
+textarea:focus{
+  border-color:#3b82f6;
+  box-shadow:
+    0 0 0 2px rgba(59,130,246,.25),
+    inset 0 1px 2px rgba(255,255,255,.05);
 }
 button{
-  width:100%;padding:15px;border:none;
+  width:100%;
+  padding:15px;
+  border:none;
   border-radius:28px;
   background:linear-gradient(135deg,#1e90ff,#0066ff);
-  color:#fff;font-weight:bold;
+  color:#fff;
+  font-weight:bold;
+  position:relative;
+  overflow:hidden;
 }
+button::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,
+    transparent 30%,
+    rgba(255,255,255,.45),
+    transparent 70%);
+  transform:translateX(-120%);
+}
+button:hover::after{
+  transform:translateX(120%);
+  transition:.6s;
+}
+
 .success,.error{text-align:center;display:none;font-weight:bold}
-.success{color:#00ff9c}.error{color:#ff5c5c}
+.success{color:#00ff9c}
+.error{color:#ff5c5c}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+  #counter{transform:scale(.9)}
+  .card{animation:none}
+}
+/* Card sempre na mesma altura */
+.card{
+  height:260px;              /* ajuste se quiser mais/menos */
+  display:flex;
+  flex-direction:column;
+}
+
+
 </style>
 </head>
 
 <body>
-<!-- Coloque o código abaixo antes de fechar a tag body -->
-  <script>
-    document.onkeydown = function(e) {
-      if (e.ctrlKey && e.key === 'u') {
-        alert("Você não pode visualizar o código-fonte desta página!");
-        return false;
-      }
-    };
-  </script>
+
 <header>
   <h1>𝟺𝚂 𝚂𝚃𝙾𝚁𝙴 𝚁𝙴𝙵𝙴𝚁𝙴𝙽𝙲𝙸𝙰𝚂</h1>
   <a class="btn-home" href="https://4sstore.vercel.app/">𝙿𝚊𝚐𝚒𝚗𝚊 𝚒𝚗𝚒𝚌𝚒𝚊𝚕</a>
 </header>
 
-<!-- ANEL LÍQUIDO -->
+<!-- CONTADOR -->
 <div id="counter">
   <svg viewBox="0 0 100 100">
-    <!-- Contorno do círculo -->
     <circle cx="50" cy="50" r="42" stroke="rgba(30,144,255,.25)" stroke-width="8" fill="none"/>
-    
-    <!-- Máscara líquida -->
     <mask id="mask-liquid">
       <rect x="0" y="100" width="100" height="100" fill="white" id="liquid-fill"/>
     </mask>
-    
-    <!-- Preenchimento líquido azul -->
     <circle cx="50" cy="50" r="42" stroke="#1e90ff" stroke-width="8" fill="#1e90ff" mask="url(#mask-liquid)"/>
   </svg>
   <span>0</span>
@@ -149,48 +345,50 @@ const slider=document.getElementById("slider");
 const span=document.querySelector("#counter span");
 const liquidFill=document.getElementById("liquid-fill");
 
-// Render do card
 function render(){
   if(!refs.length) return;
   const r=refs[index];
-  slider.innerHTML=`
-    <div class="card">
-      <div class="ref-header">
-        <img src="https://cdn3.emoji.gg/emojis/701524-neon-gmail-icon.png">
-        <div>
-          <strong>${r.fullname}</strong><br>
-          <span>${r.nickname}</span>
+
+  slider.style.opacity="0";
+  slider.style.transform="translateY(10px)";
+
+  setTimeout(()=>{
+    slider.innerHTML=`
+      <div class="card">
+        <div class="ref-header">
+          <img src="https://cdn3.emoji.gg/emojis/701524-neon-gmail-icon.png">
+          <div>
+            <strong>${r.fullname}</strong><br>
+            <span>${r.nickname}</span>
+          </div>
         </div>
-      </div>
-      <div class="ref-text">${r.message}</div>
-    </div>`;
+        <div class="ref-text">${r.message}</div>
+      </div>`;
+    slider.style.opacity="1";
+    slider.style.transform="translateY(0)";
+  },180);
 }
 
-// Atualiza contador e "nível de líquido"
 function updateCounter(total){
-  span.textContent = total;
-
-  let cycle = total % 100; // ciclo de 0 a 100 refs
-  let percent = cycle / 100;
-  // animação do líquido de baixo para cima
-  liquidFill.setAttribute("y", 100 - percent*100);
-  liquidFill.setAttribute("height", percent*100);
-
-  span.classList.remove("counter-pulse"); void span.offsetWidth;
+  span.textContent=total;
+  let percent=(total%100)/100;
+  liquidFill.setAttribute("y",100-percent*100);
+  liquidFill.setAttribute("height",percent*100);
+  span.classList.remove("counter-pulse");void span.offsetWidth;
   span.classList.add("counter-pulse");
 }
 
 db.collection("referencias").orderBy("timestamp","desc").onSnapshot(qs=>{
-  refs=[]; qs.forEach(d=>refs.push(d.data()));
+  refs=[];qs.forEach(d=>refs.push(d.data()));
   updateCounter(refs.length);
-  index=0; render();
+  index=0;render();
 });
 
 setInterval(()=>{if(refs.length){index=(index+1)%refs.length;render()}},6000);
-document.querySelector(".next").onclick=()=>{index=(index+1)%refs.length;render();}
-document.querySelector(".prev").onclick=()=>{index=(index-1+refs.length)%refs.length;render();}
+document.querySelector(".next").onclick=()=>{index=(index+1)%refs.length;render()}
+document.querySelector(".prev").onclick=()=>{index=(index-1+refs.length)%refs.length;render()}
 
-/* BLOQUEIO DE DUPLICADOS */
+/* ENVIO */
 const form=document.getElementById("form");
 const fullname=document.getElementById("fullname");
 const nickname=document.getElementById("nickname");
@@ -201,7 +399,9 @@ const error=document.getElementById("error");
 
 form.addEventListener("submit",async e=>{
   e.preventDefault();
-  error.style.display="none"; success.style.display="none";
+  error.style.display="none";
+  success.style.display="none";
+
   const data={
     fullname:fullname.value.trim(),
     nickname:nickname.value.trim(),
@@ -218,37 +418,14 @@ form.addEventListener("submit",async e=>{
 
   if(!a.empty||!b.empty||!c.empty){
     error.textContent="Nome, nickname ou e-mail já utilizado.";
-    error.style.display="block"; return;
+    error.style.display="block";return;
   }
 
   await db.collection("referencias").add(data);
-  success.style.display="block"; form.reset();
+  success.style.display="block";
+  form.reset();
 });
 </script>
-</body>
-</html>
-<script>
-  // Script de bloqueio Ctrl+U
-  document.onkeydown = function(e) {
-    if (e.ctrlKey && e.key === 'u') {
-      alert("Você não pode visualizar o código-fonte desta página!");
-      return false;
-    }
-    // Bloqueio do botão direito do mouse
-    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-      alert("Você não pode acessar as ferramentas de desenvolvedor.");
-      return false;
-    }
-  };
 
-  // Desabilitar o clique com o botão direito do mouse
-  document.addEventListener("contextmenu", function(e) {
-    e.preventDefault();
-    alert("Você não pode acessar o menu de contexto.");
-  });
-</script>
-
-</body>
-</html>
 </body>
 </html>
