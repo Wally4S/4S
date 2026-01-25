@@ -109,6 +109,7 @@
     padding:18px;
   }
 }
+
 .streamer-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -119,5 +120,57 @@
 @media (min-width:1100px){
   .streamer-grid{
     grid-template-columns:repeat(4,1fr);
+  }
+}
+
+/* 📱 GRID MOBILE */
+@media (max-width: 768px){
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+
+  .product{
+    padding:14px;
+  }
+
+  .image-box{
+    height:120px;
+  }
+
+  .product h3{
+    font-size:13px;
+  }
+
+  .price{
+    font-size:16px;
+  }
+}
+
+/* 📱 CELULARES PEQUENOS */
+@media (max-width: 480px){
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .cart-btn{
+    bottom:14px;
+    right:14px;
+    padding:14px 18px;
+    font-size:14px;
+  }
+
+  .categories{
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    padding-bottom:8px;
+  }
+
+  .categories button{
+    white-space:nowrap;
+    font-size:12px;
+    padding:8px 14px;
   }
 }
