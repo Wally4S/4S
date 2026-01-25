@@ -463,52 +463,116 @@ nav a{color:#cbd5f5;text-decoration:none}
 
 
 
-/* CART MODAL */
 #cartModal{
  position:fixed;
  inset:0;
- background:rgba(2,6,23,.9);
+ background:rgba(2,6,23,.92);
+ backdrop-filter:blur(8px);
  display:none;
  justify-content:center;
  align-items:center;
  z-index:10000;
+ animation:fadeIn .25s ease;
 }
+
+@keyframes fadeIn{
+ from{opacity:0}
+ to{opacity:1}
+}
+
 
 .cart-box{
- background:linear-gradient(180deg,#020617,#020617ee);
- border:1px solid rgba(59,130,246,.35);
- border-radius:22px;
- padding:24px;
+ background:
+  linear-gradient(180deg,rgba(2,6,23,.98),rgba(2,6,23,.92));
+ border:1px solid rgba(59,130,246,.45);
+ border-radius:26px;
+ padding:22px;
  width:420px;
- box-shadow:0 0 40px rgba(59,130,246,.6);
- position:relative;
- z-index:10001;
+ max-height:85vh;
+ display:flex;
+ flex-direction:column;
+ gap:14px;
+
+ box-shadow:
+  0 0 0 1px rgba(255,255,255,.05),
+  0 0 40px rgba(59,130,246,.75);
+
+ animation:scaleIn .3s ease;
 }
+
+@keyframes scaleIn{
+ from{transform:scale(.9);opacity:0}
+ to{transform:scale(1);opacity:1}
+}
+.cart-box h3{
+ margin:0;
+ font-size:18px;
+ font-weight:800;
+ text-align:center;
+
+ background:linear-gradient(90deg,#60a5fa,#a78bfa);
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent;
+
+ text-shadow:0 0 18px rgba(96,165,250,.7);
+}
+
 .cart-item{
  display:flex;
- justify-content:space-between;
  align-items:center;
- margin:12px 0;
-}
-.qty-controls button{
- padding:6px 12px;
- border:none;
- border-radius:8px;
+ justify-content:space-between;
+ gap:10px;
 
- background:linear-gradient(135deg,#1e40af,#2563eb);
+ background:rgba(15,23,42,.75);
+ border:1px solid rgba(59,130,246,.25);
+ border-radius:14px;
+ padding:10px 12px;
+
+ box-shadow:
+  inset 0 0 0 1px rgba(255,255,255,.05),
+  0 0 14px rgba(59,130,246,.25);
+}
+
+.qty-controls{
+ display:flex;
+ align-items:center;
+ gap:6px;
+}
+
+.qty-controls button{
+ min-width:34px;
+ height:34px;
+
+ padding:0;
+ border:none;
+ border-radius:10px;
+
+ background:linear-gradient(135deg,#2563eb,#3b82f6);
  color:#fff;
- font-weight:700;
+ font-size:16px;
+ font-weight:800;
 
  cursor:pointer;
 
  box-shadow:
-   0 0 14px rgba(59,130,246,.6),
-   inset 0 0 0 1px rgba(255,255,255,.15);
+  0 0 16px rgba(59,130,246,.8),
+  inset 0 0 0 1px rgba(255,255,255,.2);
 
- transition:
-   transform .2s ease,
-   box-shadow .2s ease;
+ transition:.2s;
 }
+
+.qty-controls button:hover{
+ transform:scale(1.15);
+ box-shadow:0 0 26px rgba(59,130,246,1);
+}
+
+.qty-controls span{
+ min-width:20px;
+ text-align:center;
+ font-weight:700;
+}
+
 
 .qty-controls button:hover{
  transform:scale(1.15);
@@ -522,23 +586,60 @@ nav a{color:#cbd5f5;text-decoration:none}
 
 
 .cart-total{
- margin-top:14px;
- font-weight:700;
+ margin-top:6px;
+ font-size:18px;
+ font-weight:800;
  text-align:right;
+
  color:#fde047;
- text-shadow:0 0 14px rgba(250, 189, 21, 0.8);
+ text-shadow:
+  0 0 10px rgba(253,224,71,.6),
+  0 0 22px rgba(253,224,71,.4);
 }
+
 .checkout-btn{
- margin-top:16px;
+ margin-top:8px;
  width:100%;
- padding:14px;
+ padding:16px;
  border:none;
- border-radius:14px;
+ border-radius:16px;
+
  background:linear-gradient(90deg,#22c55e,#16a34a);
- font-weight:700;
+ color:#052e16;
+ font-size:15px;
+ font-weight:900;
+ letter-spacing:.3px;
+
  cursor:pointer;
- box-shadow:0 0 26px rgba(34,197,94,.9);
+
+ box-shadow:
+  0 0 30px rgba(34,197,94,.95),
+  inset 0 0 0 1px rgba(255,255,255,.35);
+
+ transition:.25s;
 }
+
+.checkout-btn:hover{
+ transform:translateY(-2px) scale(1.03);
+ box-shadow:0 0 42px rgba(34,197,94,1);
+}
+
+/* NOME DO PRODUTO NO MODAL DO CARRINHO */
+.cart-item{
+  gap:10px;
+}
+
+.cart-item .item-name{
+ flex:1;
+ font-size:13px;
+ font-weight:600;
+ white-space:nowrap;
+ overflow:hidden;
+ text-overflow:ellipsis;
+ color:#e5e7eb;
+}
+
+
 </style>
 </head>
 
@@ -570,7 +671,21 @@ nav a{color:#cbd5f5;text-decoration:none}
   <div id="cartItems"></div>
   <div class="cart-total">Total: R$ <span id="total">0</span></div>
   <button class="checkout-btn" onclick="checkout()">Finalizar no WhatsApp</button>
-  <p style="text-align:center;cursor:pointer;margin-top:12px" onclick="closeCart()">Fechar</p>
+  <p style="text-align:center;cursor:pointer;margin-top:12px" onclick="closeCart()">Fechar</.close-cart{
+ background:none;
+ border:none;
+ color:#93c5fd;
+ font-weight:600;
+ cursor:pointer;
+ margin-top:4px;
+ transition:.2s;
+}
+
+.close-cart:hover{
+ color:#fff;
+ text-shadow:0 0 12px rgba(147,197,253,.8);
+}
+>
  </div>
 </div>
 
@@ -583,25 +698,6 @@ let currentCategory="all";
 /* PRODUTOS */
 const productsData=[];
 const ADD=p=>productsData.push({...p,baseStock:p.stock});
-/* ====== ESTOQUE PERSISTENTE (localStorage) ====== */
-const STOCK_KEY = "4sstore_stock";
-
-/* carrega estoque salvo */
-function loadStock(){
-  const saved = JSON.parse(localStorage.getItem(STOCK_KEY) || "{}");
-  productsData.forEach(p=>{
-    if(saved[p.id] !== undefined){
-      p.stock = saved[p.id];
-    }
-  });
-}
-
-/* salva estoque atual */
-function saveStock(){
-  const data = {};
-  productsData.forEach(p => data[p.id] = p.stock);
-  localStorage.setItem(STOCK_KEY, JSON.stringify(data));
-}
 
 /* PRODUTOS CAPA*/
 ADD({id:20727,name:"Asas Douradas da Justiça",price:3.99,stock:1,categories:"capa",promo:false,img:"../public/img/Asas Douradas da Justiça.png"});
@@ -832,13 +928,6 @@ ADD({id:102,name:"Caixa de Cupom Tintura",price:3.99,stock:4,categories:"consumi
 /* CARRINHO */
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
 
-function syncStock(){
- productsData.forEach(p=>{
-  const c=cart.find(i=>i.id===p.id);
-  p.stock=p.baseStock-(c?c.qty:0);
- });
-}
-
 function updateCartBtn(){
  const q = cart.reduce((s,i)=>s+i.qty,0);
 
@@ -889,11 +978,7 @@ function render(){
    <div class="image-box"><img src="${p.img}"></div>
    <h3>${p.name}</h3>
    <div class="price">R$ ${p.price}</div>
-   <div class="stock ${p.stock <= 0 ? "zero" : ""}">
-  Estoque: ${p.stock}
-</div>
-
-   <button ${p.stock<=0?"disabled":""} onclick="add(${p.id})">Adicionar</button>
+   <button onclick="add(${p.id})">Adicionar</button>
   </div>`;
  });
 
@@ -904,23 +989,52 @@ function render(){
 }
 
 function add(id){
- const p=productsData.find(i=>i.id===id);
- if(p.stock<=0)return;
- const c=cart.find(i=>i.id===id);
- c?c.qty++:cart.push({id:p.id,name:p.name,price:p.price,qty:1});
- syncStock();render();
+ const p = productsData.find(i => i.id === id);
+ if(!p) return;
+
+ let c = cart.find(i => i.id === id);
+
+ if(c){
+  if(c.qty >= p.stock) return; // limite
+  c.qty++;
+ }else{
+  cart.push({
+   id: p.id,
+   name: p.name,
+   price: p.price,
+   qty: 1
+  });
+ }
+
+ render();
+ renderCart();
 }
+
+
+
+
 
 function openCart(){cartModal.style.display="flex";renderCart()}
 function closeCart(){cartModal.style.display="none"}
 
-function changeQty(id,d){
- const c=cart.find(i=>i.id===id);
- if(!c)return;
- c.qty+=d;
- if(c.qty<=0)cart=cart.filter(i=>i.id!==id);
- syncStock();renderCart();render();
+function changeQty(id, d){
+ const c = cart.find(i=>i.id===id);
+ const p = productsData.find(i=>i.id===id);
+ if(!c || !p) return;
+
+ // 🔒 trava no limite
+ if(d > 0 && c.qty >= p.stock) return;
+
+ c.qty += d;
+
+ if(c.qty <= 0){
+  cart = cart.filter(i=>i.id !== id);
+ }
+
+ renderCart();
+ render();
 }
+
 
 function renderCart(){
  let t=0;
@@ -930,7 +1044,7 @@ function renderCart(){
   t+=sub;
   cartItems.innerHTML+=`
   <div class="cart-item">
-   ${i.name}
+  <span class="item-name">${i.name}</span>
    <div class="qty-controls">
     <button onclick="changeQty(${i.id},-1)">−</button>
     ${i.qty}
@@ -944,15 +1058,25 @@ function renderCart(){
 }
 
 function checkout(){
- let msg="🛒 *Pedido 4S STORE*%0A%0A";
- cart.forEach(i=>msg+=`• ${i.name} x${i.qty}%0A`);
- msg+=`%0A💰 Total: R$ ${total.innerText}`;
- window.open(`https://wa.me/${phone}?text=${msg}`);
- cart=[];syncStock();render();closeCart();
+  let msg = "🛒 *Pedido 4S STORE*%0A%0A";
+
+  cart.forEach(i=>{
+    msg += `• ${i.name} x${i.qty}%0A`;
+  });
+
+  msg += `%0A💰 Total: R$ ${total.innerText}`;
+
+  window.open(`https://wa.me/${phone}?text=${msg}`);
+
+  cart = [];
+  renderCart();
+  render();
+  closeCart();
 }
 
+
+
 renderCategories();
-syncStock();
 render();
 </script>
 </body>
@@ -1185,6 +1309,7 @@ if(savedStock){
   pointer-events:none;
   
 }
+
 /* ===============================
    RESET TOTAL DO CONTADOR DO CARRINHO
    =============================== */
@@ -1462,6 +1587,7 @@ document.addEventListener('click', e=>{
     renderPainel();
     render(); // atualiza loja
   };
+  
 })();
 </script>
 <audio id="cartSound" preload="auto">
