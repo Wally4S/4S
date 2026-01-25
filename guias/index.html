@@ -64,16 +64,16 @@
 .card-actions a:hover{
   box-shadow:0 0 22px rgba(4, 160, 233,0.9);
 }
-#btn-voltar{
-  padding:8px 14px;
-  border-radius:10px;
-  border:none;
-  background:#020617;
-  color:rgba(4, 160, 233,0.9);
-  font-weight:800;
-  cursor:pointer;
-  box-shadow:0 0 14px rgba(4, 160, 233,0.9);
+#btn-voltar:hover{
+  background:linear-gradient(90deg,#2563eb,#3b82f6);
+  box-shadow:
+    0 0 18px #2563eb,
+    0 0 35px #60a5fa;
+  transform:translateY(-1px);
 }
+
+
+
 #btn-voltar:hover{
   box-shadow:0 0 26px rgba(4, 160, 233, 0.9);
 }
@@ -94,11 +94,43 @@ body{
 /* Header */
 #header{display:flex;align-items:center;gap:15px;margin-bottom:25px}
 #btn-voltar{
-  padding:8px 14px;border-radius:10px;border:none;
-  background:#020617;color:#93c5fd;font-weight:bold;cursor:pointer;
-  box-shadow:0 0 12px rgba(37,99,235,.4)
+  position:relative;
+  padding:8px 14px;
+  border-radius:10px;
+  border:1px solid transparent;
+  background:#020617;
+  color:#93c5fd;
+  font-weight:bold;
+  cursor:pointer;
+  overflow:hidden;
+  transition:.25s;
 }
-#btn-voltar:hover{box-shadow:0 0 22px rgba(37,99,235,.7)}
+
+#btn-voltar::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:10px;
+  padding:1px;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    #3b82f6,
+    transparent
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  opacity:0;
+}
+
+#btn-voltar:hover::before{
+  opacity:1;
+  animation:borderRun 1.2s linear infinite;
+}
+
 
 /* Logo */
 #logo-text{
