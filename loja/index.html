@@ -806,8 +806,6 @@ ADD({id:20075,name:"Chapéu do Doram de Botas",price:3.99,stock:1,categories:"to
 ADD({id:19800,name:"Flores do Amanhecer",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Flores do Amanhecer.png"});
 ADD({id:19895,name:"Touca Lunar",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Touca Lunar.png"});
 ADD({id:400708,name:"Quepe Branco do Serumaninho",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Quepe Branco do Serumaninho.png"});
-ADD({id:31202,name:"Quepe do Serumaninho",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Quepe do Serumaninho.png"});
-
 /* PRODUTOS MULTI SLOTS*/
 ADD({id:19540,name:"Protetor com Coelhinhos",price:3.99,stock:1,categories:["topo","meio"],promo:false,img:"../public/img/Protetor com Coelhinhos.png"});
 ADD({id:31205,name:"Coroa do Chefe dos Orcs",price:5.99,stock:1,categories:["topo","meio"],promo:false,img:"../public/img/Coroa do Chefe dos Orcs.png"});
@@ -826,8 +824,6 @@ ADD({id:94,name:"Asinhas de Detale [1]",price:19.99,stock:1,categories:"equipame
 ADD({id:100,name:"Pack [150] Poção de Guyak",price:19.99,stock:1,categories:"consumivel",promo:10,img:"../public/img/Poção de Guyak.png"});
 ADD({id:101,name:"Pack [40] Fruta dos Gatos",price:7.99,stock:1,categories:"consumivel",promo:15,img:"../public/img/Fruta dos Gatos.png"});
 ADD({id:102,name:"Caixa de Cupom Tintura",price:3.99,stock:4,categories:"consumivel",promo:15,img:"../public/img/Caixa de Cupom de Tintura.png"});
-loadStock();
-render();
 /* CARRINHO */
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
 
@@ -969,6 +965,7 @@ render();
       return false;
     }
   };
+
   // Desabilitar o clique com o botão direito do mouse
   document.addEventListener("contextmenu", function(e) {
     e.preventDefault();
