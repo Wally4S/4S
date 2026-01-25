@@ -51,12 +51,29 @@ nav a{color:#cbd5f5;text-decoration:none}
  box-shadow:0 0 12px rgba(59,130,246,.25);
 }
 .categories button:hover{
- box-shadow:0 0 18px rgba(59,130,246,.6);
- background:linear-gradient(135deg,#2563eb,#3b82f6);
- 
+  background: linear-gradient(135deg,#2563eb,#3b82f6);
+  color:#fff;
+  border-color:#3b82f6;
+
+  box-shadow:
+    0 0 16px rgba(59,130,246,.85),
+    0 0 34px rgba(59,130,246,.55);
+
+  transform: scale(1.06);
 }
+
 .categories button.active{
+  background: linear-gradient(135deg,#2563eb,#3b82f6);
+  color:#ffffff;
+  border-color:#3b82f6;
+
+  box-shadow:
+    0 0 16px rgba(59,130,246,.85),
+    0 0 34px rgba(59,130,246,.55);
+
+  transform: scale(1.06);
 }
+
 
 /* SEARCH */
 .search-box input{
@@ -1172,10 +1189,17 @@ render();
   `;
   document.head.appendChild(style);
 
-  /* ===== DETECÇÃO FLEXÍVEL ===== */
-  const buyButtons = document.querySelectorAll(
-    "button, a"
-  );
+  // todo seu código aqui em cima
+
+document.querySelectorAll(".categories button").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".categories button")
+      .forEach(b => b.classList.remove("active"));
+
+    btn.classList.add("active");
+  });
+});
+
 
   buyButtons.forEach(btn=>{
     const txt = btn.innerText?.toLowerCase() || "";
