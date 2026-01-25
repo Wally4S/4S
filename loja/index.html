@@ -44,7 +44,37 @@ header{
  backdrop-filter:blur(10px);
  box-shadow:0 0 18px rgba(59,130,246,.25);
 }
-nav a{color:#cbd5f5;text-decoration:none}
+nav a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:10px 18px;
+  border-radius:999px;
+
+  color:#cbd5f5;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:500;
+
+  border:1px solid rgba(59,130,246,.35);
+  background:rgba(15,23,42,.85);
+
+  transition:.25s;
+  box-shadow:0 0 12px rgba(59,130,246,.25);
+}
+
+nav a:hover{
+  background: linear-gradient(135deg,#2563eb,#3b82f6);
+  color:#fff;
+  border-color:#3b82f6;
+
+  box-shadow:
+    0 0 16px rgba(59,130,246,.85),
+    0 0 34px rgba(59,130,246,.55);
+
+  transform: scale(1.06);
+}
 
 .container{max-width:1300px;margin:auto;padding:40px 20px}
 
