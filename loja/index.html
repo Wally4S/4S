@@ -15,6 +15,24 @@ body{
  color:#e5e7eb;
  overflow-x:hidden;
 }
+@keyframes cartEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(.92);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-6px) scale(1.03);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.cart-box{
+  animation: cartEnter .45s cubic-bezier(.16,1,.3,1);
+}
+
 
 /* HEADER */
 header{
@@ -687,7 +705,7 @@ nav a{color:#cbd5f5;text-decoration:none}
   <h3>Carrinho</h3>
   <div id="cartItems"></div>
   <div class="cart-total">Total: R$ <span id="total">0</span></div>
-  <button class="checkout-btn" onclick="checkout()">Finalizar no WhatsApp</button>
+  <button class="checkout-btn" onclick="checkout()">💚Finalizar no WhatsApp✔️</button>
   <p style="text-align:center;cursor:pointer;margin-top:12px" onclick="closeCart()">Fechar</.close-cart{
  background:none;
  border:none;
@@ -1332,6 +1350,16 @@ if(savedStock){
   z-index:3;
   pointer-events:none;
   
+}
+@keyframes cartEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(.94);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* ===============================
