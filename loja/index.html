@@ -583,6 +583,26 @@ let currentCategory="all";
 /* PRODUTOS */
 const productsData=[];
 const ADD=p=>productsData.push({...p,baseStock:p.stock});
+/* ====== ESTOQUE PERSISTENTE (localStorage) ====== */
+const STOCK_KEY = "4sstore_stock";
+
+/* carrega estoque salvo */
+function loadStock(){
+  const saved = JSON.parse(localStorage.getItem(STOCK_KEY) || "{}");
+  productsData.forEach(p=>{
+    if(saved[p.id] !== undefined){
+      p.stock = saved[p.id];
+    }
+  });
+}
+
+/* salva estoque atual */
+function saveStock(){
+  const data = {};
+  productsData.forEach(p => data[p.id] = p.stock);
+  localStorage.setItem(STOCK_KEY, JSON.stringify(data));
+}
+
 /* PRODUTOS CAPA*/
 ADD({id:20727,name:"Asas Douradas da Justiça",price:3.99,stock:1,categories:"capa",promo:false,img:"../public/img/Asas Douradas da Justiça.png"});
 ADD({id:20764,name:"Asas Negras do Arcanjo",price:3.99,stock:1,categories:"capa",promo:false,img:"../public/img/Asas Negras do Arcanjo.png"});
@@ -752,7 +772,7 @@ ADD({id:31907,name:"Capuz Felino",price:3.99,stock:1,categories:"topo",promo:fal
 ADD({id:31906,name:"Gorro do Gatinho Amoroso",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Gorro do Gatinho Amoroso.png"});
 ADD({id:31060,name:"Tiara do Mar",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Tiara do Mar.png"});
 ADD({id:15858,name:"Cartola Recheada",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Cartola Recheada.png"});
-ADD({id:400214,name:"Chapéu Aclamado",price:3.99,stock:1,categor:"topo",promo:false,img:"../public/img/Chapéu Aclamado.png"});
+ADD({id:400214,name:"Chapéu Aclamado",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Chapéu Aclamado.png"});
 ADD({id:19575,name:"Chapéu de Dragão",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Chapéu de Dragão.png"});
 ADD({id:20094,name:"Tiara de Laço Verde",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Tiara de Laço Verde.png"});
 ADD({id:20096,name:"Tiara de Laço Azul",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Tiara de Laço Azul.png"});
@@ -787,6 +807,7 @@ ADD({id:19800,name:"Flores do Amanhecer",price:3.99,stock:1,categories:"topo",pr
 ADD({id:19895,name:"Touca Lunar",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Touca Lunar.png"});
 ADD({id:400708,name:"Quepe Branco do Serumaninho",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Quepe Branco do Serumaninho.png"});
 ADD({id:31202,name:"Quepe do Serumaninho",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Quepe do Serumaninho.png"});
+
 /* PRODUTOS MULTI SLOTS*/
 ADD({id:19540,name:"Protetor com Coelhinhos",price:3.99,stock:1,categories:["topo","meio"],promo:false,img:"../public/img/Protetor com Coelhinhos.png"});
 ADD({id:31205,name:"Coroa do Chefe dos Orcs",price:5.99,stock:1,categories:["topo","meio"],promo:false,img:"../public/img/Coroa do Chefe dos Orcs.png"});
@@ -805,7 +826,8 @@ ADD({id:94,name:"Asinhas de Detale [1]",price:19.99,stock:1,categories:"equipame
 ADD({id:100,name:"Pack [150] Poção de Guyak",price:19.99,stock:1,categories:"consumivel",promo:10,img:"../public/img/Poção de Guyak.png"});
 ADD({id:101,name:"Pack [40] Fruta dos Gatos",price:7.99,stock:1,categories:"consumivel",promo:15,img:"../public/img/Fruta dos Gatos.png"});
 ADD({id:102,name:"Caixa de Cupom Tintura",price:3.99,stock:4,categories:"consumivel",promo:15,img:"../public/img/Caixa de Cupom de Tintura.png"});
-
+loadStock();
+render();
 /* CARRINHO */
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
 
@@ -947,7 +969,6 @@ render();
       return false;
     }
   };
-
   // Desabilitar o clique com o botão direito do mouse
   document.addEventListener("contextmenu", function(e) {
     e.preventDefault();
