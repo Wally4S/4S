@@ -25,19 +25,82 @@ body{
   overflow-x:hidden;
 }
 
-/* HEADER */
+/* =========================
+   HEADER PREMIUM + ENERGIA
+========================= */
+
 header{
   background:linear-gradient(90deg,#020617,#0b1220);
-  border-bottom:1px solid #3b82f6;
   padding:14px 22px;
+
   display:flex;
   justify-content:space-between;
   align-items:center;
+
   position:sticky;
   top:0;
   z-index:100;
-  box-shadow:0 2px 15px rgba(59,130,246,0.6);
+
+  /* arredondamento real */
+  border-radius:18px;
+
+  /* essencial pro efeito */
+  overflow:hidden;
+
+  box-shadow:
+    0 0 25px rgba(59,130,246,.35),
+    inset 0 -1px 0 rgba(255,255,255,.05);
 }
+
+/* BORDA COM ENERGIA CORRENDO */
+header::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+
+  border-radius:inherit;
+  padding:3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 25%,
+      rgba(96,165,250,.8),
+      rgba(59,130,246,.9),
+      rgba(147,197,253,.7),
+      rgba(59,130,246,.9),
+      rgba(96,165,250,.8),
+      transparent 75%
+    );
+
+  background-size:300% 100%;
+  animation:energyRun 6s ease-in-out infinite;
+
+  /* recorte correto da borda */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite:exclude;
+
+  /* brilho controlado */
+  filter:
+    drop-shadow(0 0 4px rgba(59,130,246,.6))
+    drop-shadow(0 0 10px rgba(96,165,250,.5));
+}
+
+/* ANIMAÇÃO */
+@keyframes energyRun{
+  from{background-position:0% 50%}
+  to{background-position:300% 50%}
+}
+
+
 .logo img{
   width:75px;
   height:75px;
@@ -67,6 +130,13 @@ nav a:hover{
   text-align:center;
   border-radius: 0px;
   overflow: hidden;
+}
+.banner{
+  position:relative;
+  margin-top:-2px;
+
+  box-shadow:
+    inset 0 25px 30px -20px rgba(59,130,246,.35);
 }
 
 .banner-video{
@@ -109,6 +179,7 @@ width:100%;height:100%;
 object-fit:cover;
 filter:brightness(.5) contrast(1.2);
 }
+
 .banner-content{position:relative;z-index:1}
 .banner h1{
 font-size:48px;
@@ -369,6 +440,18 @@ footer{
       drop-shadow(0 0 35px rgba(96,165,250,.9));
   }
 }
+.banner-divider{
+  height:2px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #3b82f6,
+    #60a5fa,
+    #3b82f6,
+    transparent
+  );
+  box-shadow:0 0 12px #3b82f6;
+}
 
 </style>
 </head>
@@ -390,11 +473,16 @@ footer{
     <source src="/public/banner.webm" type="video/webm">
     <source src="/public/banner.ogv" type="video/ogg">
   </video>
+
   <div class="banner-content">
     <h1>𝟺𝚂 𝚂𝚃𝙾𝚁𝙴</h1>
     <p>Rapido & Barato.</p>
   </div>
 </section>
+
+<!-- TRAÇO AZUL IGUAL AO HEADER -->
+<div class="banner-divider"></div>
+
 
 <div class="container">
 
