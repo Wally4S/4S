@@ -529,16 +529,40 @@ nav a:hover{
 
 
 #cartModal{
- position:fixed;
- inset:0;
- background:rgba(2,6,23,.92);
- backdrop-filter:blur(8px);
- display:none;
- justify-content:center;
- align-items:center;
- z-index:10000;
- animation:fadeIn .25s ease;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
 }
+
+.cart-box{
+  width:420px;
+  max-height:85vh;              /* ⬅️ limite do modal */
+  background:#020617;
+  border-radius:14px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+}
+
+#cartItems{
+  flex:1;                       /* ⬅️ ocupa espaço disponível */
+  overflow-y:auto;              /* ⬅️ scroll interno */
+  padding-right:6px;
+}
+
+/* scrollbar bonita (opcional) */
+#cartItems::-webkit-scrollbar{
+  width:6px;
+}
+#cartItems::-webkit-scrollbar-thumb{
+  background:#38bdf8;
+  border-radius:999px;
+}
+
 
 @keyframes fadeIn{
  from{opacity:0}
@@ -737,20 +761,6 @@ nav a:hover{
   <div class="cart-total">Total: R$ <span id="total">0</span></div>
   <button class="checkout-btn" onclick="checkout()">💚Finalizar no WhatsApp✔️</button>
   <p style="text-align:center;cursor:pointer;margin-top:12px" onclick="closeCart()">Fechar</.close-cart{
- background:none;
- border:none;
- color:#93c5fd;
- font-weight:600;
- cursor:pointer;
- margin-top:4px;
- transition:.2s;
-}
-
-.close-cart:hover{
- color:#fff;
- text-shadow:0 0 12px rgba(147,197,253,.8);
-}
->
  </div>
 </div>
 
@@ -767,7 +777,7 @@ const ADD=p=>productsData.push({...p,baseStock:p.stock});
 /* PRODUTOS CAPA*/
 ADD({id:20727,name:"Asas Douradas da Justiça",price:2.99,stock:1,categories:"capa",promo:false,img:"../public/img/Asas Douradas da Justiça.png"});
 ADD({id:20764,name:"Asas Negras do Arcanjo",price:2.99,stock:1,categories:"capa",promo:false,img:"../public/img/Asas Negras do Arcanjo.png"});
-ADD({id:480201,name:"Asas de Tronos",price:2.99,stock:0,categories:"capa",promo:false,img:"../public/img/Asas de Tronos.png"});
+ADD({id:480201,name:"Asas de Tronos",price:2.99,stock:1,categories:["capa"],promo:false,img:"../public/img/Asas de Tronos.png"});
 ADD({id:20504,name:"Asas da Sarakura",price:2.99,stock:1,categories:"capa",promo:false,img:"../public/img/Asas da Sarakura.png"});
 ADD({id:20516,name:"Asas de Miguel",price:2.99,stock:1,categories:"capa",promo:false,img:"../public/img/Asas de Miguel.png"});
 ADD({id:480199,name:"Asas de Azazel",price:2.99,stock:1,categories:"capa",promo:false,img:"../public/img/Asas de Azazel.png"});
@@ -1047,100 +1057,193 @@ function render(){
  updateCartBtn();
 }
 
-function add(id){
- const p = productsData.find(i => i.id === id);
- if(!p) return;
+function updateCartBtn() {
+  const q = cart.reduce((s, i) => s + i.qty, 0);
+  const count = cartBtn.querySelector(".cart-count");
+  count.innerText = q;
 
- let c = cart.find(i => i.id === id);
+  if (q > 0) {
+    cartBtn.classList.add("bump");
+    setTimeout(() => cartBtn.classList.remove("bump"), 300);
+  }
 
- if(c){
-  if(c.qty >= p.stock) return; // limite
-  c.qty++;
- }else{
-  cart.push({
-   id: p.id,
-   name: p.name,
-   price: p.price,
-   qty: 1
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+/* CATEGORIAS */
+function renderCategories() {
+  const cats = ["all", "equipamento", "consumivel", "carta", "topo", "meio", "baixo", "capa"];
+  categories.innerHTML = "";
+  cats.forEach(c => {
+    categories.innerHTML += `
+      <button class="${c === currentCategory ? "active" : ""}"
+        onclick="currentCategory='${c}';page=1;render()">
+        ${c === "all" ? "Todos Produtos" : c.charAt(0).toUpperCase() + c.slice(1)}
+      </button>`;
   });
- }
+}
 
- render();
- renderCart();
+function render() {
+  products.innerHTML = "";
+  pagination.innerHTML = "";
+  const term = search.value.toLowerCase();
+
+  let filtered = productsData.filter(p =>
+    p.name.toLowerCase().includes(term) &&
+    (currentCategory === "all" || p.categories?.includes(currentCategory))
+  );
+
+  const pages = Math.ceil(filtered.length / perPage);
+  const slice = filtered.slice((page - 1) * perPage, page * perPage);
+
+  slice.forEach(p => {
+    products.innerHTML += `
+      <div class="product">
+        <div class="product-card" data-promo="${p.promo}" data-id="${p.id}">
+          ${p.promo && p.stock > 0 ? `<div class="promo-badge">${p.promo}% OFF</div>` : ""}
+          <div class="image-box"><img src="${p.img}"></div>
+          <h3>${p.name}</h3>
+          <div class="price">R$ ${p.price}</div>
+          <button onclick="add(${p.id})">Adicionar</button>
+        </div>
+      </div>`;
+  });
+
+  for (let i = 1; i <= pages; i++) {
+    pagination.innerHTML += `<button class="${i === page ? "active" : ""}" onclick="page=${i};render()">${i}</button>`;
+  }
+
+  updateCartBtn();
+}
+
+/* ===============================
+   ADD + CHANGEQTY + CHECKOUT CORRIGIDOS
+   =============================== */
+function add(id){
+  const p = productsData.find(i => i.id === id);
+  if(!p) return;
+
+  const c = cart.find(i => i.id === id);
+
+  // limita pela quantidade máxima do produto
+  if(c && c.qty >= p.baseStock) return;
+  if(!c && p.baseStock <= 0) return;
+
+  if(c){
+    c.qty++;
+  }else{
+    cart.push({
+      id: p.id,
+      name: p.name,
+      price: p.price,
+      qty: 1
+    });
+  }
+
+  renderCart();
+  updateCartBtn();
 }
 
 
+function changeQty(id, d) {
+  const c = cart.find(i => i.id === id);
+  const p = productsData.find(i => i.id === id);
+  if (!c || !p) return;
 
+  // 🔒 limite de estoque real
+  if (d > 0 && c.qty >= p.baseStock) return;
 
+  c.qty += d;
 
-function openCart(){cartModal.style.display="flex";renderCart()}
-function closeCart(){cartModal.style.display="none"}
+  if (c.qty <= 0) {
+    cart = cart.filter(i => i.id !== id);
+  }
 
-function changeQty(id, d){
- const c = cart.find(i=>i.id===id);
- const p = productsData.find(i=>i.id===id);
- if(!c || !p) return;
-
- // 🔒 trava no limite
- if(d > 0 && c.qty >= p.stock) return;
-
- c.qty += d;
-
- if(c.qty <= 0){
-  cart = cart.filter(i=>i.id !== id);
- }
-
- renderCart();
- render();
+  renderCart();
+  updateCartBtn();
 }
 
-
-function renderCart(){
- let t=0;
- cartItems.innerHTML="";
- cart.forEach(i=>{
-  const sub=i.price*i.qty;
-  t+=sub;
-  cartItems.innerHTML+=`
-  <div class="cart-item">
-  <span class="item-name">${i.name}</span>
-   <div class="qty-controls">
-    <button onclick="changeQty(${i.id},-1)">−</button>
-    ${i.qty}
-    <button onclick="changeQty(${i.id},1)">+</button>
-   </div>
-   <span>R$ ${sub.toFixed(2)}</span>
-  </div>`;
- });
- total.innerText=t.toFixed(2);
- updateCartBtn();
+function renderCart() {
+  let t = 0;
+  cartItems.innerHTML = "";
+  cart.forEach(i => {
+    const sub = i.price * i.qty;
+    t += sub;
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <span class="item-name">${i.name}</span>
+        <div class="qty-controls">
+          <button onclick="changeQty(${i.id},-1)">−</button>
+          ${i.qty}
+          <button onclick="changeQty(${i.id},1)">+</button>
+        </div>
+        <span>R$ ${sub.toFixed(2)}</span>
+      </div>`;
+  });
+  total.innerText = t.toFixed(2);
+  updateCartBtn();
 }
 
-function checkout(){
+function openCart() { cartModal.style.display = "flex"; renderCart(); }
+function closeCart() { cartModal.style.display = "none"; }
+
+function checkout() {
   let msg = "🛒 *Pedido 4S STORE*%0A%0A";
 
-  cart.forEach(i=>{
+  cart.forEach(i => {
     msg += `• ${i.name} x${i.qty}%0A`;
   });
 
   msg += `%0A💰 Total: R$ ${total.innerText}`;
 
   window.open(`https://wa.me/${phone}?text=${msg}`);
-
-  cart = [];
-  renderCart();
-  render();
-  closeCart();
 }
 
+/* ===============================
+   PATCH ESTOQUE SÓ NO CHECKOUT
+   =============================== */
+(function () {
+  const originalCheckout = window.checkout;
 
+  window.checkout = function () {
 
+    // 🔥 baixa estoque real
+    cart.forEach(item => {
+      const p = productsData.find(p => p.id === item.id);
+      if (p) {
+        p.baseStock = Math.max(0, p.baseStock - item.qty);
+      }
+    });
+
+    // 💾 salva estoque
+    localStorage.setItem(
+      "products",
+      JSON.stringify(
+        productsData.map(p => ({
+          id: p.id,
+          baseStock: p.baseStock
+        }))
+      )
+    );
+
+    // 📤 envia pedido (WhatsApp)
+    originalCheckout.apply(this, arguments);
+
+    // 🧹 limpa carrinho DEPOIS
+    cart = [];
+    renderCart();
+    render();
+    closeCart();
+  };
+})();
+
+/* ===============================
+   INICIALIZAÇÃO
+   =============================== */
 renderCategories();
 render();
-</script>
-</body>
-</html>
-<script>
+
+
   // Script de bloqueio Ctrl+U
   document.onkeydown = function(e) {
     if (e.ctrlKey && e.key === 'u') {
@@ -1315,42 +1418,6 @@ document.querySelectorAll(".categories button").forEach(btn=>{
 })();
 </script>
 <script>
-/* 🔥 PATCH SIMPLES DE ESTOQUE — FINAL DA PÁGINA */
-
-(function(){
-  const savedStock = JSON.parse(localStorage.getItem("products"));
-if(savedStock){
-  savedStock.forEach(s=>{
-    const p = productsData.find(p=>p.id===s.id);
-    if(p){
-      p.baseStock = s.baseStock;
-      p.stock = s.baseStock;
-    }
-  });
-}
-
-  // intercepta checkout original
-  const originalCheckout = window.checkout;
-  window.checkout = function(){
-    // baixa estoque definitivo
-    cart.forEach(item=>{
-      const p = productsData.find(p=>p.id===item.id);
-      if(p){
-        p.baseStock -= item.qty;
-        if(p.baseStock < 0) p.baseStock = 0;
-      }
-    });
-
-    // salva estoque
-    localStorage.setItem("products", JSON.stringify(productsData));
-
-    // chama checkout original
-    originalCheckout.apply(this, arguments);
-  };
-})();
-</script>
-<script>
-
 </script>
 
 <style>
