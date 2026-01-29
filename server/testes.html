@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Projeto Yufa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:#fff;
+      color:#111;
+    }
+    .container{
+      max-width:1100px;
+      margin:auto;
+      padding:20px;
+    }
+    header{
+      text-align:center;
+      padding:40px 0;
+    }
+    header h1{
+      font-size:36px;
+      margin:0;
+    }
+    .button-register{
+      display:inline-block;
+      margin-top:12px;
+      padding:12px 24px;
+      background:#28a745;
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      border-radius:6px;
+    }
+    .section{
+      margin-top:40px;
+    }
+    .section h2{
+      font-size:28px;
+      border-bottom:2px solid #eee;
+      padding-bottom:10px;
+      margin-bottom:20px;
+    }
+    .cards{
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+    }
+    .card{
+      flex:1 1 calc(33% - 20px);
+      background:#f9f9f9;
+      border-radius:8px;
+      padding:14px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.1);
+      text-align:center;
+    }
+    .card img{
+      width:100%;
+      max-height:160px;
+      object-fit:cover;
+      border-radius:6px;
+    }
+    .card h3{
+      font-size:18px;
+      margin:12px 0 6px;
+    }
+    .info-box{
+      text-align:center;
+      padding:30px 0;
+    }
+    .info-box h3{font-size:24px;margin-bottom:12px}
+    .footer{
+      background:#111;
+      color:#fff;
+      padding:18px;
+      text-align:center;
+      margin-top:60px;
+    }
+    .footer a{
+      color:#0af;
+      text-decoration:none;
+      margin:0 8px;
+    }
+    @media(max-width:800px){
+      .card{flex:1 1 100%}
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- CABEÇALHO -->
+  <header>
+    <h1>✨ Projeto Yufa</h1>
+    <p>O clássico ressurge, puro e verdadeiro. Sem sombras de dúvidas.</p>
+    <a href="#registrar" class="button-register">Registre-se agora</a>
+  </header>
+
+  <!-- EVENTOS / DESTAQUES -->
+  <section class="section">
+    <h2>Eventos e Conteúdo</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="img-inauguracao.jpg" alt="Inauguração do Servidor">
+        <h3>Inauguração do servidor!</h3>
+      </div>
+      <div class="card">
+        <img src="img-mvps.jpg" alt="Caçadas de MVPs">
+        <h3>Caçadas de MVPs</h3>
+      </div>
+      <div class="card">
+        <img src="img-corrida99.jpg" alt="Corrida ao 99!">
+        <h3>Corrida ao 99!</h3>
+      </div>
+      <div class="card">
+        <img src="img-loja.jpg" alt="Loja de Itens Cosméticos">
+        <h3>Loja de Itens Cosméticos</h3>
+      </div>
+      <div class="card">
+        <img src="img-batalha.jpg" alt="Campo de Batalha Frenético">
+        <h3>Campo de Batalha Frenético</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFORMAÇÕES -->
+  <section class="section info-box">
+    <h2>📊 Rates & Info</h2>
+    <h3>Rates 1x/1x/1x</h3>
+    <p>Rates baixas para você se divertir e reviver a nostalgia de evoluir seu personagem!</p>
+    <h3>Nível máximo: 99/50</h3>
+    <p>O servidor é Clássico e você poderá evoluir até o nível 99/50.</p>
+    <h3>Episódio: Umbala & Niflheim</h3>
+    <p>Explore os episódios de Umbala e Niflheim como nos velhos tempos.</p>
+  </section>
+
+  <!-- RANKINGS -->
+  <section class="section">
+    <h2>Rankings</h2>
+    <div class="cards">
+      <div class="card"><h3>MvP - Rougrot</h3><p>Abates: 3239</p></div>
+      <div class="card"><h3>MvP - CruxReborn</h3><p>Abates: 2461</p></div>
+      <div class="card"><h3>MvP - Shen Long</h3><p>Abates: 1653</p></div>
+
+      <div class="card"><h3>PvP - Crux</h3><p>MvPs: 2608</p></div>
+      <div class="card"><h3>PvP - Bafo MvP</h3><p>MvPs: 1382</p></div>
+      <div class="card"><h3>PvP - Sileeeent</h3><p>MvPs: 1128</p></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- RODAPÉ -->
+<footer class="footer">
+  <p>Projeto Yufa</p>
+  <div>
+    <a href="https://www.instagram.com">Instagram</a> |
+    <a href="https://www.twitch.tv">Twitch</a> |
+    <a href="#inicio">Início</a> |
+    <a href="#downloads">Downloads</a> |
+    <a href="#informacoes">Informações</a>
+  </div>
+  <p>© 2024 Projeto Yufa, Inc. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

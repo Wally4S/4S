@@ -768,7 +768,7 @@ nav a:hover{
 const phone="5524999561861";
 const perPage=15;
 let page=1;
-let currentCategory="all";
+let currentCategories="all";
 
 /* PRODUTOS */
 const productsData=[];
@@ -918,6 +918,7 @@ ADD({id:400458,name:"Faixa da Preula Azul",price:3.99,stock:1,categories:"topo",
 ADD({id:20086,name:"Dragão Ancião",price:2.99,stock:1,categories:"topo",promo:false,img:"../public/img/Dragão Ancião.png"});
 ADD({id:400634,name:"Lacinhos Oníricos",price:4.99,stock:1,categories:"topo",promo:15,img:"../public/img/Lacinhos Oníricos.png"});
 ADD({id:31314,name:"Chifres de Oni Adornados",price:4.99,stock:1,categories:"topo",promo:15,img:"../public/img/Chifres de Oni Adornados.png"});
+ADD({id:19836,name:"Chifres Majestosos do Bafomé",price:4.99,stock:1,categories:"topo",promo:15,img:"../public/img/Chifres Majestosos do Bafomé.png"});
 ADD({id:19851,name:"Touca de Ursinho",price:2.99,stock:1,categories:"topo",promo:false,img:"../public/img/Touca de Ursinho.png"});
 ADD({id:19834,name:"Boné do Melhor Pai do Mundo",price:2.99,stock:1,categories:"topo",promo:false,img:"../public/img/Boné do Melhor Pai do Mundo.png"});
 ADD({id:400311,name:"Elmo do Arcanjo",price:2.99,stock:1,categories:"topo",promo:false,img:"../public/img/Elmo do Arcanjo.png"});
@@ -1019,8 +1020,8 @@ function renderCategories(){
  categories.innerHTML="";
  cats.forEach(c=>{
   categories.innerHTML+=`
-   <button class="${c===currentCategory?"active":""}"
-    onclick="currentCategory='${c}';page=1;render()">
+   <button class="${c===currentCategories?"active":""}"
+    onclick="currentCategories='${c}';page=1;render()">
     ${c==="all"?"Todos Produtos":c.charAt(0).toUpperCase()+c.slice(1)}
    </button>`;
  });
@@ -1033,7 +1034,7 @@ function render(){
 
  let filtered = productsData.filter(p =>
   p.name.toLowerCase().includes(term) &&
-  (currentCategory === "all" || p.categories?.includes(currentCategory))
+  (currentCategories === "all" || p.categories?.includes(currentCategories))
 );
 
  const pages=Math.ceil(filtered.length/perPage);
@@ -1076,8 +1077,8 @@ function renderCategories() {
   categories.innerHTML = "";
   cats.forEach(c => {
     categories.innerHTML += `
-      <button class="${c === currentCategory ? "active" : ""}"
-        onclick="currentCategory='${c}';page=1;render()">
+      <button class="${c === currentCategories ? "active" : ""}"
+        onclick="currentCategories='${c}';page=1;render()">
         ${c === "all" ? "Todos Produtos" : c.charAt(0).toUpperCase() + c.slice(1)}
       </button>`;
   });
@@ -1090,7 +1091,7 @@ function render() {
 
   let filtered = productsData.filter(p =>
     p.name.toLowerCase().includes(term) &&
-    (currentCategory === "all" || p.categories?.includes(currentCategory))
+    (currentCategories === "all" || p.categories?.includes(currentCategories))
   );
 
   const pages = Math.ceil(filtered.length / perPage);
