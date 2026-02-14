@@ -731,6 +731,16 @@ nav a:hover{
 
 </style>
 </head>
+<div id="productModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); justify-content:center; align-items:center;">
+  <div style="background:#111; padding:20px; border-radius:12px; max-width:400px; color:#fff; position:relative;">
+    <span id="closeModal" style="position:absolute; top:8px; right:12px; cursor:pointer;">✖</span>
+    <h2 id="modalName"></h2>
+    <img id="modalImg" src="" style="width:100%; border-radius:8px;">
+    <p id="modalPrice"></p>
+    <p id="modalStock"></p>
+    <button id="modalAddBtn">Adicionar</button>
+  </div>
+</div>
 
 <body>
 
@@ -824,7 +834,6 @@ ADD({id:410297,name:"Pupilas Draconianas",price:4.99,stock:1,categories:"meio",p
 ADD({id:410278,name:"Pupilas Avermelhadas",price:4.99,stock:1,categories:"meio",promo:15,img:"../public/img/Pupilas Avermelhadas.png"});
 ADD({id:410220,name:"Piscadela Congelante",price:4.99,stock:1,categories:"meio",promo:15,img:"../public/img/Piscadela Congelante.png"});
 ADD({id:410049,name:"Pupilas Douradas",price:4.99,stock:1,categories:"meio",promo:15,img:"../public/img/Pupilas Douradas.png"});
-ADD({id:31924,name:"Pupilas Cerúleas",price:2.99,stock:1,categories:"meio",promo:false,img:"../public/img/Pupilas Cerúleas.png"});
 ADD({id:31847,name:"Pupilas Azuladas",price:2.99,stock:1,categories:"meio",promo:false,img:"../public/img/Pupilas Azuladas.png"});
 ADD({id:31716,name:"Pupilas Carmesins",price:2.99,stock:1,categories:"meio",promo:false,img:"../public/img/Pupilas Carmesins.png"});
 ADD({id:31301,name:"Piscadela",price:2.99,stock:1,categories:"meio",promo:false,img:"../public/img/Piscadela.png"});
@@ -912,7 +921,6 @@ ADD({id:31597,name:"Chapéu de Peixinho",price:2.99,stock:1,categories:"topo",pr
 ADD({id:19657,name:"Quepe do Capitão",price:4.99,stock:1,categories:"topo",promo:15,img:"../public/img/Quepe do Capitão.png"});
 ADD({id:19523,name:"Pequeno Laço Verde",price:2.99,stock:1,categories:"topo",promo:false,img:"../public/img/Pequeno Laço Verde.png"});
 ADD({id:19715,name:"Lenço da Memória Secreta",price:2.99,stock:1,categories:"topo",promo:false,img:"../public/img/Lenço da Memória Secreta.png"});
-ADD({id:20232,name:"Fita Macabra da Celine",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Fita Macabra da Celine.png"});
 ADD({id:31180,name:"Faixa do Shurão da Preula",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Faixa do Shurão da Preula.png"});
 ADD({id:400458,name:"Faixa da Preula Azul",price:3.99,stock:1,categories:"topo",promo:false,img:"../public/img/Faixa da Preula Azul.png"});
 ADD({id:20086,name:"Dragão Ancião",price:2.99,stock:1,categories:"topo",promo:false,img:"../public/img/Dragão Ancião.png"});
@@ -1735,6 +1743,33 @@ document.addEventListener('click', e=>{
       buffer="";
     }
   });
+const productModal = document.getElementById("productModal");
+const modalName = document.getElementById("modalName");
+const modalImg = document.getElementById("modalImg");
+const modalPrice = document.getElementById("modalPrice");
+const modalStock = document.getElementById("modalStock");
+const modalAddBtn = document.getElementById("modalAddBtn");
+const closeModal = document.getElementById("closeModal");
+
+// FECHAR modal
+closeModal.addEventListener("click", ()=> productModal.style.display="none");
+window.addEventListener("click", e=> {
+  if(e.target === productModal) productModal.style.display="none";
+});
+
+// ABRIR modal pelo ID do produto
+function openProductModal(id){
+  const p = productsData.find(item => item.id === id);
+  if(!p) return;
+
+  modalName.textContent = p.name;
+  modalImg.src = p.img;
+  modalPrice.textContent = `R$ ${p.price}`;
+  modalStock.textContent = `Estoque: ${p.baseStock}`;
+
+  modalAddBtn.onclick = ()=> add(p.id); // reusa sua função de adicionar
+  productModal.style.display = "flex";
+}
 
   /* ===== RENDER PAINEL ===== */
   function renderPainel(){
@@ -1747,6 +1782,7 @@ document.addEventListener('click', e=>{
         <strong>${p.name}</strong> (ID: ${p.id})<br>
         <div class="ctrl4s">
           <button onclick="ajuste4s(${p.id},-1)">−</button>
+          
           <span>${p.baseStock}</span>
           <button onclick="ajuste4s(${p.id},1)">+</button>
         </div>

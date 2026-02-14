@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Naruto Project</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+body {
+  background: #cfcfcf;
+}
+
+/* CONTAINER */
+.site {
+  width: 1000px;
+  margin: 10px auto;
+  background: #e6e6e6;
+  border: 1px solid #999;
+}
+
+/* HEADER */
+.header {
+  height: 130px;
+  background: linear-gradient(#ffb347, #ff7a00);
+  border-bottom: 4px solid #cc6600;
+  padding: 15px;
+  color: #fff;
+}
+
+/* LAYOUT */
+.content {
+  display: flex;
+  padding: 10px;
+}
+
+/* SIDEBARS */
+.sidebar {
+  width: 200px;
+}
+
+.menu-item {
+  background: linear-gradient(#ffa94d, #ff7a00);
+  border: 1px solid #cc6600;
+  margin-bottom: 8px;
+  padding: 8px;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.menu-item:hover {
+  filter: brightness(1.1);
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  margin: 0 10px;
+  background: #fff;
+  border: 2px solid #ff7a00;
+  padding: 10px;
+}
+
+/* DESTAQUE */
+.highlight {
+  background: linear-gradient(#ffb347, #ff8c00);
+  border: 2px solid #cc6600;
+  padding: 12px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+/* CARROSSEL */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #cc6600;
+  background: #ffe0b2;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform .4s ease;
+}
+
+.product {
+  min-width: 200px;
+  padding: 10px;
+  border-right: 1px solid #cc6600;
+  text-align: center;
+  background: #ffd28a;
+}
+
+.product strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ff7a00;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.carousel-btn.left { left: 5px; }
+.carousel-btn.right { right: 5px; }
+
+/* FOOTER */
+.footer {
+  background: #ff8c00;
+  color: #fff;
+  text-align: center;
+  padding: 8px;
+  font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="site">
+
+  <div class="header">
+    <h1>NARUTO PROJECT</h1>
+    <p>Loja • Downloads • Produtos Otaku</p>
+  </div>
+
+  <div class="content">
+
+    <!-- ESQUERDA -->
+    <div class="sidebar" id="leftMenu"></div>
+
+    <!-- CENTRO -->
+    <div class="main">
+
+      <div class="highlight">
+        <h2 id="categoryTitle">Produtos em Destaque</h2>
+      </div>
+
+      <div class="carousel">
+        <button class="carousel-btn left" onclick="prev()">‹</button>
+        <div class="carousel-track" id="carousel"></div>
+        <button class="carousel-btn right" onclick="next()">›</button>
+      </div>
+
+    </div>
+
+    <!-- DIREITA -->
+    <div class="sidebar" id="rightMenu"></div>
+
+  </div>
+
+  <div class="footer">
+    © Naruto Project
+  </div>
+
+</div>
+
+<script>
+/* ===== CATEGORIAS ===== */
+const categoriesLeft = [
+  "Naruto",
+  "Shippuuden",
+  "Bleach",
+  "One Piece"
+];
+
+const categoriesRight = [
+  "Acessórios",
+  "Roupas",
+  "Colecionáveis",
+  "Promoções"
+];
+
+/* ===== PRODUTOS ===== */
+const products = [
+  { name: "Camiseta Naruto", price: "R$ 28,00", category: "Roupas" },
+  { name: "Kunai Ninja", price: "R$ 37,90", category: "Acessórios" },
+  { name: "Cosplay Ninja", price: "R$ 159,00", category: "Roupas" },
+  { name: "Pen Drive 8GB", price: "R$ 49,00", category: "Acessórios" },
+  { name: "Celular Naruto", price: "R$ 279,99", category: "Colecionáveis" }
+];
+
+let position = 0;
+
+/* ===== RENDER MENUS ===== */
+function renderMenu(list, elementId) {
+  const el = document.getElementById(elementId);
+  list.forEach(cat => {
+    const div = document.createElement("div");
+    div.className = "menu-item";
+    div.innerText = cat;
+    div.onclick = () => loadCategory(cat);
+    el.appendChild(div);
+  });
+}
+
+/* ===== RENDER PRODUTOS ===== */
+function renderProducts(list) {
+  const track = document.getElementById("carousel");
+  track.innerHTML = "";
+  position = 0;
+  track.style.transform = "translateX(0)";
+
+  list.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "product";
+    div.innerHTML = `<strong>${p.name}</strong>${p.price}`;
+    track.appendChild(div);
+  });
+}
+
+/* ===== FILTRO ===== */
+function loadCategory(cat) {
+  document.getElementById("categoryTitle").innerText = cat;
+  const filtered = products.filter(p => p.category === cat);
+  renderProducts(filtered.length ? filtered : products);
+}
+
+/* ===== CARROSSEL ===== */
+function next() {
+  const track = document.getElementById("carousel");
+  const max = track.children.length * 200 - 600;
+  position = Math.min(position + 200, max);
+  track.style.transform = `translateX(-${position}px)`;
+}
+
+function prev() {
+  position = Math.max(position - 200, 0);
+  document.getElementById("carousel").style.transform =
+    `translateX(-${position}px)`;
+}
+
+/* INIT */
+renderMenu(categoriesLeft, "leftMenu");
+renderMenu(categoriesRight, "rightMenu");
+renderProducts(products);
+</script>
+
+</body>
+</html>
