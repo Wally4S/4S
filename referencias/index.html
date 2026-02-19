@@ -320,6 +320,31 @@ button:hover::after{
     <div id="slider"></div>
     <button class="arrow next">›</button>
   </div>
+<!-- CARROSSEL DE PROVAS -->
+<div style="margin-top:40px; text-align:center;">
+
+  <h3 style="
+    margin-bottom:20px;
+    color:#1e90ff;
+  ">
+    📸 Galeria de Fotos
+  </h3>
+
+  <img id="proofCarouselImage"
+    style="
+      width:100%;
+      max-width:900px;
+      height:380px;
+      object-fit:cover;
+      border-radius:18px;
+      display:block;
+      margin:auto;
+    ">
+    
+</div>
+
+</div>
+
 
   <form id="form">
     <input id="fullname" required placeholder="Nome real">
@@ -425,6 +450,74 @@ form.addEventListener("submit",async e=>{
   success.style.display="block";
   form.reset();
 });
+</script>
+<script>
+/* ===== CONFIGURAR IMAGENS AQUI ===== */
+const proofFolder = "/public/provas/";
+const proofFiles = [
+  "Simarillion Keeper.gif",
+  
+];
+
+/* =================================== */
+
+const proofImages = proofFiles.map(file => proofFolder + file);
+
+let proofIndex = 0;
+const proofImg = document.getElementById("proofCarouselImage");
+
+function updateProof(){
+  proofImg.style.opacity = "0";
+  setTimeout(()=>{
+    proofImg.src = proofImages[proofIndex];
+    proofImg.style = `
+  width:100%;
+  height:380px;
+  object-fit:cover;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.06);
+  transition:opacity .3s ease;
+`;
+
+  },200);
+}
+
+function nextProof(){
+  proofIndex = (proofIndex + 1) % proofImages.length;
+  updateProof();
+}
+
+updateProof();
+setInterval(nextProof, 4000);
+
+/* ===== ZOOM AO CLICAR ===== */
+proofImg.onclick = function(){
+  const modal = document.createElement("div");
+  modal.style = `
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+  `;
+
+  const img = document.createElement("img");
+  img.src = this.src;
+  img.style = `
+    max-width:90%;
+    max-height:90%;
+    border-radius:20px;
+    box-shadow:0 0 50px rgba(30,144,255,.7);
+  `;
+
+  modal.appendChild(img);
+  document.body.appendChild(modal);
+
+  modal.onclick = () => modal.remove();
+};
+
 </script>
 
 </body>
