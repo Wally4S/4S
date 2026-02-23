@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>4S STORE</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/public/favicon.png" type="image/png">
+<head>
+  <meta property="og:image" content="https://4sstore.vercel.app/logo.png">
+  <meta name="description" content="Rapido & Barato">
+  <meta property="og:title" content="4S STORE">
+  <meta property="og:description" content="Venda de Produtos de Jogos">
+  <meta property="og:url" content="https://4sstore.vercel.app/">
+  <!-- Outros metadados... -->
+</head>
+
+<style>
+*{box-sizing:border-box;transition:all 0.3s ease}
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:radial-gradient(circle at top,#0f0f1a,#02010f);
+  color:#e5e7eb;
+  overflow-x:hidden;
+}
+
+/* =========================
+   HEADER PREMIUM + ENERGIA
+========================= */
+
+header{
+  background:linear-gradient(90deg,#020617,#0b1220);
+  padding:14px 22px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  position:sticky;
+  top:0;
+  z-index:100;
+
+  /* arredondamento real */
+  border-radius:18px;
+
+  /* essencial pro efeito */
+  overflow:hidden;
+
+  box-shadow:
+    0 0 25px rgba(59,130,246,.35),
+    inset 0 -1px 0 rgba(255,255,255,.05);
+}
+
+/* BORDA COM ENERGIA CORRENDO */
+header::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+
+  border-radius:inherit;
+  padding:3px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 25%,
+      rgba(96,165,250,.8),
+      rgba(59,130,246,.9),
+      rgba(147,197,253,.7),
+      rgba(59,130,246,.9),
+      rgba(96,165,250,.8),
+      transparent 75%
+    );
+
+  background-size:300% 100%;
+  animation:energyRun 6s ease-in-out infinite;
+
+  /* recorte correto da borda */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite:exclude;
+
+  /* brilho controlado */
+  filter:
+    drop-shadow(0 0 4px rgba(59,130,246,.6))
+    drop-shadow(0 0 10px rgba(96,165,250,.5));
+}
+
+/* ANIMAÇÃO */
+@keyframes energyRun{
+  from{background-position:0% 50%}
+  to{background-position:300% 50%}
+}
+
+
+.logo img{
+  width:75px;
+  height:75px;
+  border-radius:0px;
+}
+.logo img:hover{
+  transform: scale(1.1);
+}
+nav a{
+  color:#cbd5f5;
+  text-decoration:none;
+  margin-left:18px;
+  padding:8px 14px;
+  border-radius:8px;
+  text-shadow:0 0 5px #3b82f6;
+}
+nav a:hover{
+  background:linear-gradient(90deg,#3b82f6,#60a5fa);
+  color:#fff;
+  box-shadow:0 0 15px #2563eb,0 0 25px #60a5fa;
+}
+
+/* BANNER */
+.banner {
+  position: relative;
+  padding:100px 20px;
+  text-align:center;
+  border-radius: 0px;
+  overflow: hidden;
+}
+.banner{
+  position:relative;
+  margin-top:-2px;
+
+  box-shadow:
+    inset 0 25px 30px -20px rgba(59,130,246,.35);
+}
+
+.banner-video{
+  inset:-1px;
+}
+
+.banner::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:12px;
+  pointer-events:none;
+}
+
+
+.banner-content {
+  position: relative;
+  z-index: 1;
+}
+
+.banner h1 {
+  font-size: 48px;
+  color: #60a5fa;
+  text-shadow: 0 0 15px #3b82f6, 0 0 25px #60a5fa, 0 0 35px #93c5fd;
+}
+
+.banner p {
+  color: #cbd5f5;
+  text-shadow: 0 0 8px #3b82f6, 0 0 15px #60a5fa;
+}
+
+/* CONTAINER */
+.container{max-width:1200px;margin:auto;padding:70px 20px}
+
+/* BANNER */
+.banner{position:relative;padding:100px 20px;text-align:center;overflow:hidden}
+.banner-video{
+position:absolute;inset:0;
+width:100%;height:100%;
+object-fit:cover;
+filter:brightness(.5) contrast(1.2);
+}
+
+.banner-content{position:relative;z-index:1}
+.banner h1{
+font-size:48px;
+color:#60a5fa;
+text-shadow:0 0 15px #3b82f6,0 0 25px #60a5fa;
+}
+.banner p{color:#cbd5f5}
+
+/* CONTAINER */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:70px 20px;
+}
+
+/* CARDS */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:26px;
+}
+
+.card{
+  background:linear-gradient(180deg,#0b0f2c,#020114);
+  border:1px solid #3b82f6;
+  border-radius:16px;
+  padding:20px 30px 30px; /* espaço extra pro personagem */
+  position:relative;
+  overflow:visible;
+}
+
+/* ===========================
+   PERSONAGEM SENTADO (BASE)
+=========================== */
+.card-character{
+  position:absolute;
+  top:-160px;               /* metade do corpo pra fora */
+  left:50%;
+  transform:translateX(-50%);
+  width:180px;
+  z-index:10;
+  pointer-events:none;
+
+  /* realismo */
+  filter:
+    drop-shadow(0 25px 25px rgba(0,0,0,.65))
+    drop-shadow(0 10px 10px rgba(0,0,0,.45));
+}
+
+/* ===========================
+   AJUSTE INDIVIDUAL POR CARD
+   (NÃO interfere nos outros)
+=========================== */
+
+/* CARD 1 */
+.grid .card:nth-child(1) .card-character{
+  top:32px;
+  left:65%;
+  transform:translateX(-50%) rotate(-3deg);
+}
+
+/* CARD 2 */
+.grid .card:nth-child(2) .card-character{
+  top:39px;
+  left:70%;
+  transform:translateX(-50%) scale(1.05);
+}
+
+/* CARD 3 */
+.grid .card:nth-child(3) .card-character{
+  top:30px;
+  left:70%;
+  transform:translateX(-50%) rotate(2deg);
+}
+
+/* ===========================
+   MICRO MOVIMENTO (REALISMO)
+=========================== */
+.card:hover .card-character{
+  transform:
+    translateX(-50%)
+    translateY(6px);
+}
+
+
+/* BACKGROUND DOS CARDS */
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card h3{color:#60a5fa}
+.card a{
+display:inline-block;
+margin-top:16px;
+padding:10px 22px;
+border-radius:8px;
+background:linear-gradient(90deg,#2563eb,#3b82f6);
+color:#fff;
+text-decoration:none;
+}
+/* STREAMERS */
+.streamers{margin-top:110px}
+.streamers h2{
+  text-align:center;
+  color:#60a5fa;
+  margin-bottom:40px;
+  text-shadow:0 0 12px #3b82f6,0 0 20px #60a5fa,0 0 28px #93c5fd;
+}
+
+.streamer-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:26px;
+}
+
+.streamer-card{
+  background:linear-gradient(180deg,#0b0f2c,#020114);
+  border:1px solid #3b82f6;
+  border-radius:18px;
+  padding:26px 20px;
+  text-align:center;
+  position:relative;
+  transition: all 0.3s ease, box-shadow 0.4s ease;
+}
+.streamer-card:hover{
+  transform:translateY(-6px);
+}
+
+/* AVATAR */
+.avatar{
+  width:88px;
+  height:88px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #3b82f6;
+  margin-bottom:10px;
+  transition: all 0.3s ease;
+  box-shadow:0 0 10px #3b82f6;
+}
+.avatar:hover{
+  transform:scale(1.3);
+}
+
+/* AO VIVO */
+.live{
+  position:absolute;
+  top:14px;
+  right:14px;
+  background:#16a34a;
+  color:#fff;
+  font-size:11px;
+  padding:5px 10px;
+  border-radius:999px;
+  animation:pulse 1.2s infinite;
+  display:none;
+  text-shadow:0 0 10px #16a34a,0 0 15px #34d399,0 0 20px #22c55e;
+}
+
+/* SOCIALS */
+.socials{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  margin-top:12px;
+}
+.socials img{
+  width:26px;
+  height:26px;
+  object-fit:contain;
+  transition: all 0.3s ease;
+}
+.socials a:hover img{
+  transform:scale(1.3);
+  filter:drop-shadow(0 0 15px #3b82f6) drop-shadow(0 0 10px #60a5fa) drop-shadow(0 0 15px #93c5fd);
+}
+
+/* FOOTER */
+footer{
+  background:#020114;
+  border-top:1px solid #3b82f6;
+  text-align:center;
+  padding:22px;
+  font-size:13px;
+  color:#94a3b8;
+  text-shadow:0 0 8px #3b82f6,0 0 15px #60a5fa;
+}
+
+/* PANEL */
+#panel{
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,.95);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+.panel-box{
+  background:#020114;
+  border:1px solid #3b82f6;
+  border-radius:16px;
+  padding:30px;
+  width:360px;
+  box-shadow:0 0 30px #2563eb,0 0 50px #60a5fa,0 0 70px #93c5fd;
+}
+.panel-box h3{
+  text-align:center;
+  color:#60a5fa;
+  margin-bottom:20px;
+  text-shadow:0 0 15px #3b82f6,0 0 25px #60a5fa,0 0 35px #93c5fd;
+}
+.panel-streamer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+.panel-streamer button{
+  padding:6px 16px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:600;
+  transition: all 0.3s ease;
+}
+.panel-streamer button.on{
+  background:#16a34a;
+  color:#fff;
+  box-shadow:0 0 15px #22c55e,0 0 25px #16a34a,0 0 35px #34d399;
+}
+.panel-streamer button.off{
+  background:#334155;
+  color:#cbd5f5;
+  box-shadow:0 0 8px #2563eb,0 0 12px #60a5fa;
+}
+
+/* PULSE ANIMATION */
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(22,163,74,.7)}
+  70%{box-shadow:0 0 0 10px rgba(22,163,74,0)}
+  100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}
+}
+/* ===== AURA ANIME ===== */
+.avatar, .card-character{
+  animation:auraPulse 2.5s infinite alternate;
+}
+
+@keyframes auraPulse{
+  from{
+    filter:
+      drop-shadow(0 0 8px #60a5fa)
+      drop-shadow(0 0 18px rgba(96,165,250,.6));
+  }
+  to{
+    filter:
+      drop-shadow(0 0 18px #2563eb)
+      drop-shadow(0 0 35px rgba(96,165,250,.9));
+  }
+}
+.banner-divider{
+  height:2px;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    #3b82f6,
+    #60a5fa,
+    #3b82f6,
+    transparent
+  );
+  box-shadow:0 0 12px #3b82f6;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo"><img src="logo.gif"></div>
+  <nav>
+    <a href="/loja">𝙿𝚛𝚘𝚍𝚞𝚝𝚘𝚜</a>
+    <a href="/guias">𝙶𝚞𝚒𝚊𝚜</a>
+    <a href="/referencias">𝚁𝚎𝚏𝚎𝚛𝚎𝚗𝚌𝚒𝚊𝚜</a>
+  </nav>
+</header>
+
+<section class="banner">
+  <video class="banner-video" autoplay muted loop playsinline>
+    <source src="/public/banner.mp4" type="video/mp4">
+    <source src="/public/banner.webm" type="video/webm">
+    <source src="/public/banner.ogv" type="video/ogg">
+  </video>
+
+  <div class="banner-content">
+    <h1>𝟺𝚂 𝚂𝚃𝙾𝚁𝙴</h1>
+    <p>Rapido & Barato.</p>
+  </div>
+</section>
+
+<!-- TRAÇO AZUL IGUAL AO HEADER -->
+<div class="banner-divider"></div>
+
+
+<div class="container">
+
+<div class="grid">
+<div class="card">
+<img src="/public/produtos.png" class="card-character">
+<h3>Produtos</h3>
+<p>Vitrine de produtos.</p>
+<a href="/loja">Acessar</a>
+</div>
+
+<div class="card">
+<img src="/public/guias.png" class="card-character">
+<h3>Guias</h3>
+<p>Guias Básicos.</p>
+<a href="/guias">Ver Guias</a>
+</div>
+
+<div class="card">
+<img src="/public/referencias.png" class="card-character">
+<h3>Referências</h3>
+<p>Minhas Referencias.</p>
+<a href="/referencias">Explorar</a>
+</div>
+</div>
+
+<section class="streamers">
+<h2>🎮𝚂𝚝𝚛𝚎𝚊𝚖𝚎𝚛𝚜 𝚁𝚎𝚌𝚘𝚖𝚎𝚗𝚍𝚊𝚍𝚘𝚜</h2>
+
+<div class="streamer-grid">
+
+<!-- STREAMERS -->
+<div class="streamer-card" data-id="1">
+<span class="live">AO VIVO</span>
+<img class="avatar" src="assets/avatars/streamer01.png">
+<h4>𝚈𝚞𝚞𝚔𝚒𝚒𝙱𝚁</h4>
+<div class="socials">
+  <a href="https://www.twitch.tv/yuukiibr" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
+  <a href="https://kick.com/yuukiibr" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
+  <a href="https://www.youtube.com/@YuukiiBr" target="_blank"><img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif"></a>
+</div>
+</div>
+
+<div class="streamer-card" data-id="2">
+<span class="live">AO VIVO</span>
+<img class="avatar" src="assets/avatars/streamer02.png">
+<h4>𝙽𝚘𝚝𝚞𝚛𝚗𝚘𝚕𝚕𝚕</h4>
+<div class="socials">
+  <a href="https://twitch.tv" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
+  <a href="https://kick.com/noturnolll" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
+  <a href="https://www.youtube.com/@noturnoragnarok" target="_blank"><img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif"></a>
+</div>
+</div>
+
+<div class="streamer-card" data-id="3">
+<span class="live">AO VIVO</span>
+<img class="avatar" src="assets/avatars/streamer03.png">
+<h4>𝙹𝚞𝚕𝚕𝚒𝚎𝚣𝚒𝚗𝚑𝚊</h4>
+<div class="socials">
+  <a href="https://www.twitch.tv/julliezinha" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
+  <a href="https://kick.com/meowmeowzinha" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
+  <a href="https://www.youtube.com/@Julliezinhafloquinho" target="_blank"><img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif"></a>
+</div>
+</div>
+
+<div class="streamer-card" data-id="4">
+<span class="live">AO VIVO</span>
+<img class="avatar" src="assets/avatars/streamer04.png">
+<h4>𝙰𝚔𝚞𝚊𝙰𝙱</h4>
+<div class="socials">
+  <a href="https://www.twitch.tv/akuaab" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
+  <a href="https://kick.com" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
+  <a href="https://www.youtube.com/@AkuaAB" target="_blank"><img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif"></a>
+</div>
+</div>
+
+</div>
+</section>
+
+</div>
+
+<footer>© 2026 4S STORE Rapido & Barato⏱️</footer>
+
+<div id="panel">
+<div class="panel-box">
+<h3>Painel de Streamers</h3>
+<div class="panel-streamer">YuukiiBr <button data-id="1"></button></div>
+<div class="panel-streamer">Noturnolll <button data-id="2"></button></div>
+<div class="panel-streamer">Julliezinha <button data-id="3"></button></div>
+<div class="panel-streamer">AkuaAB <button data-id="4"></button></div>
+</div>
+</div>
+
+<script>
+const panel=document.getElementById("panel");
+const state=JSON.parse(localStorage.getItem("streamers"))||{};
+let buffer="";
+
+function apply(){
+document.querySelectorAll(".streamer-card").forEach(card=>{
+const id=card.dataset.id;
+card.querySelector(".live").style.display=state[id]?"block":"none";
+});
+document.querySelectorAll(".panel-streamer button").forEach(btn=>{
+const id=btn.dataset.id;
+btn.textContent=state[id]?"ON":"OFF";
+btn.className=state[id]?"on":"off";
+});
+localStorage.setItem("streamers",JSON.stringify(state));
+}
+
+document.addEventListener("keydown",e=>{
+buffer+=e.key.toUpperCase();
+if(buffer.includes("4S")) panel.style.display="flex";
+if(e.key==="Escape") panel.style.display="none";
+if(buffer.length>2) buffer=buffer.slice(-2);
+});
+
+document.querySelectorAll(".panel-streamer button").forEach(btn=>{
+btn.onclick=()=>{
+const id=btn.dataset.id;
+state[id]=!state[id];
+apply();
+};
+});
+
+apply();
+</script>
+
+</body>
+</html>
+<script>
+  // Script de bloqueio Ctrl+U
+  document.onkeydown = function(e) {
+    if (e.ctrlKey && e.key === 'u') {
+      alert("Você não pode visualizar o código-fonte desta página!");
+      return false;
+    }
+    // Bloqueio do botão direito do mouse
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+      alert("Você não pode acessar as ferramentas de desenvolvedor.");
+      return false;
+    }
+  };
+
+  // Desabilitar o clique com o botão direito do mouse
+  document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+    alert("Você não pode acessar o menu de contexto.");
+  });
+</script>
+<script>
+/* ===== DARK ANIME RPG PARTICLES ===== */
+(function(){
+  const canvas = document.createElement("canvas");
+  canvas.id = "dark-anime-particles";
+  document.body.appendChild(canvas);
+
+  const style = document.createElement("style");
+  style.innerHTML = `
+    #dark-anime-particles{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      opacity:.45;
+    }
+  `;
+  document.head.appendChild(style);
+
+  const ctx = canvas.getContext("2d");
+  let w,h;
+
+  function resize(){
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener("resize",resize);
+
+  const particles = [];
+  const TOTAL = 55;
+
+  for(let i=0;i<TOTAL;i++){
+    particles.push({
+      x:Math.random()*w,
+      y:Math.random()*h,
+      r:Math.random()*2.4 + .6,
+      s:Math.random()*.35 + .1,
+      a:Math.random()*Math.PI*2,
+      o:Math.random()*.5 + .25
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+
+    particles.forEach(p=>{
+      ctx.save();
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.a);
+
+      ctx.beginPath();
+      ctx.arc(0,0,p.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(99,102,241,${p.o})`; /* azul arcano */
+      ctx.shadowColor = "#1e1b4b";
+      ctx.shadowBlur = 12;
+      ctx.fill();
+
+      ctx.restore();
+
+      p.y -= p.s;
+      p.a += 0.002;
+
+      if(p.y < -20){
+        p.y = h + 20;
+        p.x = Math.random()*w;
+      }
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+<script>
+/* ===== MANA SURGE (HOVER DOS CARDS) ===== */
+(function(){
+  const style = document.createElement("style");
+  style.innerHTML = `
+    .mana-surge{
+      position:absolute;
+      inset:-40%;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at center,
+          rgba(99,102,241,.45),
+          rgba(30,27,75,.35),
+          transparent 65%);
+      opacity:0;
+      transition:opacity .3s ease;
+      animation:manaSpin 3.5s linear infinite;
+      mix-blend-mode:screen;
+    }
+
+    @keyframes manaSpin{
+      to{transform:rotate(360deg)}
+    }
+  `;
+  document.head.appendChild(style);
+
+  document.querySelectorAll(".card, .streamer-card").forEach(card=>{
+    card.style.position = "relative";
+    card.style.overflow = "hidden";
+
+    const surge = document.createElement("div");
+    surge.className = "mana-surge";
+    card.appendChild(surge);
+
+    card.addEventListener("mouseenter",()=>{
+      surge.style.opacity = "1";
+      card.style.boxShadow =
+        "0 0 35px #4338ca, 0 0 65px rgba(99,102,241,.8)";
+    });
+
+    card.addEventListener("mouseleave",()=>{
+      surge.style.opacity = "0";
+      card.style.boxShadow = "";
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
