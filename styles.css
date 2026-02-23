@@ -325,3 +325,68 @@
     grid-template-columns:repeat(4,1fr);
   }
 }
+/* ===== RESPONSIVIDADE GLOBAL ===== */
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Layout flexível */
+.container {
+  width: 100%;
+  padding: 10px;
+}
+
+/* ===== AJUSTES PARA CELULAR ===== */
+@media (max-width: 768px) {
+
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .products {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .product-card {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
