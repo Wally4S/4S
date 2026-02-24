@@ -530,13 +530,57 @@ nav a:hover{
 
 
 #cartModal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.65);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:999;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+
+  width: 380px;
+  max-height: 80vh;
+  overflow-y: auto;
+
+  display: none;
+  z-index: 9999;
+
+  animation: slideCart .35s ease;
+}
+
+/* animação */
+@keyframes slideCart{
+  from{
+    opacity:0;
+    transform: translateY(30px) scale(.95);
+  }
+  to{
+    opacity:1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px){
+
+  #cartModal{
+    right: 50%;
+    bottom: 0;
+    transform: translateX(50%);
+    
+    width: 100%;
+    max-height: 90vh;
+    border-radius: 20px 20px 0 0;
+
+    animation: slideUpMobile .3s ease;
+  }
+
+  @keyframes slideUpMobile{
+    from{
+      opacity:0;
+      transform: translateX(50%) translateY(100%);
+    }
+    to{
+      opacity:1;
+      transform: translateX(50%) translateY(0);
+    }
+  }
 }
 
 .cart-box{
@@ -747,7 +791,7 @@ nav a:hover{
 
 <header>
     <strong>
-        📢 
+        <span class="emoji">✔️</span>
         <span class="promo-text">
             5 Visuais ou mais 
             <span class="desconto">-15%</span> 
@@ -755,10 +799,20 @@ nav a:hover{
         </span>
     </strong>
 
+    <nav>
+        <a href="https://4sstore.vercel.app/">𝙿𝚊𝚐𝚒𝚗𝚊 𝙸𝚗𝚒𝚌𝚒𝚊𝚕</a>
+    </nav>
+
     <style>
+        .emoji {
+            color: #ffffff;
+            margin-right: 6px;
+            font-size: 20px; /* mesmo tamanho do texto */
+        }
+
         .promo-text {
-            font-weight: 700;
-            font-size: 20px;
+            font-size: 20px; /* 🔥 aqui está o ajuste */
+            font-weight: 800;
             letter-spacing: 1px;
 
             background: linear-gradient(
@@ -786,7 +840,7 @@ nav a:hover{
         .desconto {
             color: #ff2a2a;
             font-weight: 900;
-            text-shadow: 0 0 10px rgba(255,0,0,.7);
+            text-shadow: 0 0 10px #ff0000;
         }
     </style>
 </header>
@@ -807,13 +861,73 @@ nav a:hover{
 
 
 <div id="cartModal">
- <div class="cart-box">
-  <h3>Carrinho</h3>
-  <div id="cartItems"></div>
-  <div class="cart-total">Total: R$ <span id="total">0</span></div>
-  <button class="checkout-btn" onclick="checkout()">💚Finalizar no WhatsApp✔️</button>
-  <p style="text-align:center;cursor:pointer;margin-top:12px" onclick="closeCart()">Fechar</.close-cart{
- </div>
+  <div class="cart-box" style="
+    width:340px;
+    max-width:90%;
+    padding:18px;
+    border-radius:18px;
+    font-size:14px;
+  ">
+
+    <h3 style="font-size:16px; margin-bottom:12px;">
+      🛒Carrinho
+    </h3>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total" style="margin-top:10px; font-size:14px;">
+      Total: R$ <span id="total">0</span>
+    </div>
+
+    <!-- BOTÃO WHATSAPP -->
+    <button 
+      onclick="checkout()" 
+      style="
+        width:100%;
+        margin-top:12px;
+        padding:10px 16px;
+        border:none;
+        border-radius:12px;
+        background:#16a34a;
+        color:#fff;
+        font-weight:600;
+        font-size:13px;
+        cursor:pointer;
+        transition:.25s;
+        box-shadow:0 0 14px rgba(34,197,94,.6);
+      "
+      onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 0 22px rgba(34,197,94,1)'"
+      onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 14px rgba(34,197,94,.6)'"
+    >
+      💚 Finalizar no WhatsApp ✔️
+    </button>
+
+    <!-- BOTÃO FECHAR -->
+    <div style="text-align:center;">
+      <button 
+        onclick="closeCart()" 
+        style="
+          display:inline-block;
+          margin:12px auto 0 auto;
+          padding:8px 18px;
+          border:none;
+          border-radius:12px;
+          background:#dc2626;
+          color:#fff;
+          font-weight:600;
+          font-size:13px;
+          cursor:pointer;
+          transition:.25s;
+          box-shadow:0 0 14px rgba(220,38,38,.6);
+        "
+        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 0 22px rgba(220,38,38,1)'"
+        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 14px rgba(220,38,38,.6)'"
+      >
+        ❌ Fechar
+      </button>
+    </div>
+
+  </div>
 </div>
 
 <script>
@@ -1214,20 +1328,110 @@ function changeQty(id, d) {
 function renderCart() {
   let t = 0;
   cartItems.innerHTML = "";
+
   cart.forEach(i => {
+
+    const product = productsData.find(p => p.id === i.id);
+    const img = product ? product.img : "";
+
     const sub = i.price * i.qty;
     t += sub;
+
     cartItems.innerHTML += `
-      <div class="cart-item">
-        <span class="item-name">${i.name}</span>
-        <div class="qty-controls">
-          <button onclick="changeQty(${i.id},-1)">−</button>
-          ${i.qty}
-          <button onclick="changeQty(${i.id},1)">+</button>
+      <div class="cart-item" style="
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:14px;
+        padding:14px;
+        margin-bottom:14px;
+        background:rgba(15,23,42,.6);
+        border-radius:18px;
+        transition:.25s;
+      "
+      onmouseover="this.style.boxShadow='0 0 20px rgba(59,130,246,.35)'"
+      onmouseout="this.style.boxShadow='none'"
+      >
+        
+        <img src="${img}" style="
+  width:85px;
+  height:85px;
+  object-fit:contain;
+  border-radius:22px;
+  background:#fff;
+  padding:6px;
+  display:block;
+  transition:.25s;
+"
+onmouseover="this.style.transform='scale(1.05)'"
+onmouseout="this.style.transform='scale(1)'"
+>
+
+        <div style="flex:1;">
+          <span style="
+            display:block;
+            font-size:14px;
+            margin-bottom:8px;
+          ">${i.name}</span>
+
+          <div style="
+            display:flex;
+            align-items:center;
+            gap:12px;
+          ">
+
+            <button 
+  onclick="changeQty(${i.id},-1)" 
+  style="
+    width:34px;
+    height:34px;
+    border:none;
+    border-radius:50%;
+    background:#dc2626;
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+    transition:.2s;
+    box-shadow:0 0 12px rgba(220,38,38,.7);
+    animation:pulseRed 1.2s infinite;
+  "
+  onmouseover="this.style.transform='scale(1.15)'"
+  onmouseout="this.style.transform='scale(1)'"
+>−</button>
+
+            <span style="min-width:20px; text-align:center;">${i.qty}</span>
+
+            <button 
+  onclick="changeQty(${i.id},1)" 
+  style="
+    width:34px;
+    height:34px;
+    border:none;
+    border-radius:50%;
+    background:#16a34a;
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+    transition:.2s;
+    box-shadow:0 0 12px rgba(22,163,74,.7);
+    animation:pulseGreen 1.2s infinite;
+  "
+  onmouseover="this.style.transform='scale(1.15)'"
+  onmouseout="this.style.transform='scale(1)'"
+>+</button>
+
+          </div>
         </div>
-        <span>R$ ${sub.toFixed(2)}</span>
+
+        <span style="
+          font-weight:600;
+          font-size:15px;
+          color:#facc15;
+        ">R$ ${sub.toFixed(2)}</span>
+
       </div>`;
   });
+
   total.innerText = t.toFixed(2);
   updateCartBtn();
 }
@@ -1485,15 +1689,6 @@ document.querySelectorAll(".categories button").forEach(btn=>{
   `;
   document.head.appendChild(style);
 
-  document.querySelectorAll(".product-card").forEach(card=>{
-    card.style.position = "relative";
-
-    if(card.dataset.promo === "true"){
-      const badge = document.createElement("div");
-      badge.className = "promo-badge";
-      card.appendChild(badge);
-    }
-  });
 
 })();
 </script>
