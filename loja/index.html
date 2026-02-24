@@ -746,20 +746,21 @@ nav a:hover{
 <body>
 
 <header>
-    <strong class="promo-text">
-        ✔️5 Visuais ou mais 
-        <span class="desconto">-15%</span> 
-        Do Valor da Compra
+    <strong>
+        📢 
+        <span class="promo-text">
+            5 Visuais ou mais 
+            <span class="desconto">-15%</span> 
+            Do Valor da Compra
+        </span>
     </strong>
-
-    <nav>
-        <a href="https://4sstore.vercel.app/">𝙿𝚊𝚐𝚒𝚗𝚊 𝙸𝚗𝚒𝚌𝚒𝚊𝚕</a>
-    </nav>
 
     <style>
         .promo-text {
-            font-weight: 800;
+            font-weight: 700;
+            font-size: 20px;
             letter-spacing: 1px;
+
             background: linear-gradient(
                 90deg,
                 #ffffff 0%,
@@ -769,25 +770,23 @@ nav a:hover{
                 #ffffff 100%
             );
             background-size: 200% auto;
+
             color: transparent;
             background-clip: text;
             -webkit-background-clip: text;
+
             animation: brilhoCorrendo 3s linear infinite;
         }
 
         @keyframes brilhoCorrendo {
-            0% {
-                background-position: -200% center;
-            }
-            100% {
-                background-position: 200% center;
-            }
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
 
         .desconto {
             color: #ff2a2a;
             font-weight: 900;
-            text-shadow: 0 0 10px #ff0000;
+            text-shadow: 0 0 10px rgba(255,0,0,.7);
         }
     </style>
 </header>

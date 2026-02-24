@@ -299,8 +299,44 @@ button:hover::after{
 <body>
 
 <header>
-  <h1>𝟺𝚂 𝚂𝚃𝙾𝚁𝙴 𝚁𝙴𝙵𝙴𝚁𝙴𝙽𝙲𝙸𝙰𝚂</h1>
-  <a class="btn-home" href="https://4sstore.vercel.app/">𝙿𝚊𝚐𝚒𝚗𝚊 𝚒𝚗𝚒𝚌𝚒𝚊𝚕</a>
+  <h1>
+  ✔️ <span class="titulo-energia">Deixe sua Referencia</span>
+</h1>
+  </h1>
+
+  <a class="btn-home" href="https://4sstore.vercel.app/">
+    𝙿𝚊𝚐𝚒𝚗𝚊 𝚒𝚗𝚒𝚌𝚒𝚊𝚕
+  </a>
+
+  <style>
+    .titulo-energia {
+  font-weight: 600;
+  font-size: 20px; /* controla o tamanho aqui */
+  letter-spacing: 1px;
+      background: linear-gradient(
+        90deg,
+        #ffffff 0%,
+        #ffffff 40%,
+        #00e1ff 50%,
+        #ffffff 60%,
+        #ffffff 100%
+      );
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: brilhoCorrendo 3s linear infinite;
+    }
+
+    @keyframes brilhoCorrendo {
+      0% {
+        background-position: -200% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+  </style>
 </header>
 
 <!-- CONTADOR -->
