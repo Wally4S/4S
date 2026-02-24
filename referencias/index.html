@@ -534,7 +534,12 @@ proofImg.onclick = function(){
 
   modal.onclick = () => modal.remove();
 };
-
+document.getElementById("slider").addEventListener("click", function(){
+  if(refs.length > 1){
+    index = (index + 1) % refs.length;
+    render();
+  }
+});
 </script>
 
 </body>
