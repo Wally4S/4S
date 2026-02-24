@@ -341,20 +341,29 @@ button:hover::after{
   </h3>
 
    <img id="proofCarouselImage"
-  style="
-    width:100%;
-    max-width:900px;
-    height:380px;
-    object-fit:cover;
-    border-radius:22px;
-    display:block;
-    margin:auto;
-    border:1px solid rgba(30,144,255,.35);
-    box-shadow:
-      0 0 0 1px rgba(30,144,255,.15),
-      0 15px 40px rgba(0,0,0,.6);
-    transition:all .3s ease;
-  ">
+ style="
+  width:100%;
+  max-width:900px;
+  height:380px;
+  object-fit:cover;
+  border-radius:22px;
+  display:block;
+  margin:auto;
+
+  border:1px solid rgba(30,144,255,.25);
+
+  box-shadow:
+    0 0 20px rgba(30,144,255,.18),
+    0 15px 40px rgba(0,0,0,.6);
+
+  transition:transform .3s ease, box-shadow .3s ease;
+
+  cursor:default;
+"
+onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 0 30px rgba(30,144,255,.3), 0 20px 50px rgba(0,0,0,.7)'"
+onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 20px rgba(30,144,255,.18), 0 15px 40px rgba(0,0,0,.6)'"
+onclick="return false;"
+>
 
 </div>
     
