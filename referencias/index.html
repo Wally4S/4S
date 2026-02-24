@@ -45,87 +45,6 @@ header h1{color:#1e90ff}
   transform:translateY(-2px);
 }
 
-/* ===============================
-   CONTADOR – APPLE VISION / HUD
-   =============================== */
-#counter{
-  position:fixed;
-  right:26px;
-  top:50%;
-  transform:translateY(-50%);
-  width:90px;
-  height:90px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:50;
-}
-
-#counter svg{
-  width:100%;
-  height:100%;
-}
-
-#counter span{
-  position:absolute;
-  font-size:20px;
-  font-weight:700;
-  color:#e5f0ff;
-  text-shadow:
-    0 0 10px rgba(59,130,246,.9),
-    0 0 20px rgba(59,130,246,.6);
-  pointer-events:none;
-}
-
-
-/* reflexo */
-#counter::before{
-  content:"";
-  position:absolute;
-  top:12%;
-  left:14%;
-  width:55%;
-  height:35%;
-  border-radius:50%;
-  background:linear-gradient(
-    to bottom,
-    rgba(255,255,255,.6),
-    rgba(235, 10, 10, 0.05)
-  );
-  filter:blur(6px);
-  pointer-events:none;
-}
-
-/* número */
-#counter span{
-  position:absolute;
-  font-family:'Courier New',monospace;
-  font-size:24px;
-  font-weight:800;
-  color:#08acf8;
-
-  text-shadow:
-    0 0 8px rgba(5, 163, 255, 0.7),
-    0 0 18px rgba(59,130,246,.9);
-
-  transition:text-shadow .3s ease, transform .3s ease;
-}
-
-/* pulso sincronizado */
-.counter-pulse{
-  animation:counterPulse .35s ease;
-}
-
-@keyframes counterPulse{
-  0%{transform:scale(.92)}
-  100%{transform:scale(1)}
-}
-
-/* anel */
-#liquidCircle{
-  filter:drop-shadow(0 0 8px rgba(59,130,246,.6));
-  transition:filter .3s ease;
-}
 
 /* ================= MAIN ================= */
 main{
@@ -293,6 +212,47 @@ button:hover::after{
 }
 
 
+/* ===============================
+   CONTADOR CENTRALIZADO PERFEITO
+================================ */
+
+#counter{
+  text-align:center;
+  font-family:Arial, sans-serif;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Número */
+#counterNumber{
+  font-size:38px;
+  font-weight:900;
+  color:#00bfff;
+
+  text-align:center;
+
+  text-shadow:
+    0 0 12px rgba(0,191,255,1),
+    0 0 30px rgba(0,191,255,.9);
+}
+
+/* Texto abaixo */
+#counter small{
+  margin-top:5px;
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#00bfff;
+
+  text-align:center;
+
+  text-shadow:
+    0 0 12px rgba(0,191,255,1),
+    0 0 30px rgba(0,191,255,.9);
+}
 </style>
 </head>
 
@@ -336,26 +296,38 @@ button:hover::after{
         background-position: 200% center;
       }
     }
+    /* ===============================
+   FLASH PROFISSIONAL AO ATUALIZAR
+================================ */
+
+#counter span{
+  transition: all .25s ease;
+}
+
+.counter-pulse{
+  transform: scale(1.08);
+  text-shadow:
+    0 0 12px rgba(0,191,255,1),
+    0 0 30px rgba(0,191,255,.9),
+    0 0 60px rgba(0,191,255,.7);
+}
   </style>
 </header>
 
-<!-- CONTADOR -->
 <div id="counter">
-  <svg viewBox="0 0 100 100">
+  <span id="counterNumber">0</span>
+  <small>💬Referencias</small>
+</div>
+  </div>
+</div>
     <circle cx="50" cy="50" r="42" stroke="rgba(30,144,255,.25)" stroke-width="8" fill="none"/>
-    <mask id="mask-liquid">
       <rect x="0" y="100" width="100" height="100" fill="white" id="liquid-fill"/>
     </mask>
-    <circle cx="50" cy="50" r="42" stroke="#1e90ff" stroke-width="8" fill="#1e90ff" mask="url(#mask-liquid)"/>
-  </svg>
-  <span>0</span>
 </div>
 
 <main>
   <div id="slider-wrapper">
-    <button class="arrow prev">‹</button>
     <div id="slider"></div>
-    <button class="arrow next">›</button>
   </div>
 <!-- CARROSSEL DE PROVAS -->
 <div style="margin-top:40px; text-align:center;">
