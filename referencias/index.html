@@ -230,7 +230,7 @@ button:hover::after{
 #counterNumber{
   font-size:38px;
   font-weight:900;
-  color:#00bfff;
+  color:hwb(0 100% 0%);
 
   text-align:center;
 
@@ -242,7 +242,7 @@ button:hover::after{
 /* Texto abaixo */
 #counter small{
   margin-top:5px;
-  font-size:12px;
+  font-size:16px;
   letter-spacing:2px;
   text-transform:uppercase;
   color:#00bfff;
@@ -260,12 +260,12 @@ button:hover::after{
 
 <header>
   <h1>
-  ✔️ <span class="titulo-energia">Deixe sua Referencia</span>
+  🌝 <span class="titulo-energia">Deixe sua Referencia</span>
 </h1>
   </h1>
 
   <a class="btn-home" href="https://4sstore.vercel.app/">
-    𝙿𝚊𝚐𝚒𝚗𝚊 𝚒𝚗𝚒𝚌𝚒𝚊𝚕
+    ♻️𝙿𝚊𝚐𝚒𝚗𝚊 𝚒𝚗𝚒𝚌𝚒𝚊𝚕
   </a>
 
   <style>
@@ -315,8 +315,8 @@ button:hover::after{
 </header>
 
 <div id="counter">
-  <span id="counterNumber">0</span>
-  <small>💬Referencias</small>
+  <span id="counterNumber">✔️0</span>
+  <small>📌Referencias</small>
 </div>
   </div>
 </div>
@@ -421,7 +421,7 @@ function render(){
 }
 
 function updateCounter(total){
-  span.textContent=total;
+  span.textContent = `✔️${total}`;
   let percent=(total%100)/100;
   liquidFill.setAttribute("y",100-percent*100);
   liquidFill.setAttribute("height",percent*100);

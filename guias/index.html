@@ -20,6 +20,25 @@ body{
     color:#60a5fa;
     border-bottom:1px solid #1d4ed8;
     box-shadow:0 0 20px #1d4ed8;
+    position:relative;
+}
+
+/* BOTÃO VOLTAR */
+.voltar{
+    position:absolute;
+    left:20px;
+    top:20px;
+    padding:8px 14px;
+    background:#1d4ed8;
+    border:none;
+    color:white;
+    cursor:pointer;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.voltar:hover{
+    background:#3b82f6;
 }
 
 /* BUSCA */
@@ -38,7 +57,7 @@ body{
     font-size:16px;
 }
 
-/* BADGES DE CATEGORIA */
+/* BADGES */
 .badges{
     text-align:center;
     margin-bottom:10px;
@@ -82,7 +101,6 @@ body{
     box-shadow:0 0 20px #3b82f6;
 }
 
-/* THUMBNAIL AJUSTADA */
 .thumb{
     height:150px;
     width:100%;
@@ -92,22 +110,19 @@ body{
     border-radius:12px 12px 0 0;
 }
 
-/* THUMBNAIL AJUSTADA */
 .thumb video{
     width:100%;
     height:100%;
-    object-fit:contain; /* mostra todo o vídeo sem cortar */
-    background:black;   /* preenche as bordas sobrando */
+    object-fit:contain;
+    background:black;
 }
 
-/* TITULO */
 .titulo{
     padding:10px;
     text-align:center;
     font-size:14px;
 }
 
-/* PAGINAÇÃO */
 .paginacao{
     text-align:center;
     margin:20px 0;
@@ -124,11 +139,11 @@ body{
     transition:0.3s;
 }
 
-.paginacao button:hover, .paginacao button.active{
+.paginacao button:hover, 
+.paginacao button.active{
     background:#3b82f6;
 }
 
-/* MODAL */
 .modal{
     position:fixed;
     top:0;
@@ -150,16 +165,17 @@ body{
 </head>
 <body>
 
-<div class="topo">🎬 Galeria Videos Guias e Gameplay</div>
+<div class="topo">
+<button class="voltar" onclick="voltarInicio()">♻️Pagina Inicial</button>
+🎬 Galeria Videos Guias e Gameplay
+</div>
 
 <div class="busca">
 <input type="text" id="search" placeholder="Buscar video...">
 </div>
 
 <div class="badges" id="badges"></div>
-
 <div class="grid" id="grid"></div>
-
 <div class="paginacao" id="paginacao"></div>
 
 <div class="modal" id="modal" onclick="fechar()">
@@ -167,54 +183,68 @@ body{
 </div>
 
 <script>
-// ===== LISTA DE VÍDEOS (adicionar manualmente) =====
+// ===== CONSTANTE PADRÃO =====
+const TODOS = "🎬Todos Videos";
+
+// ===== LISTA DE VÍDEOS =====
 const videos = [
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"Instancia"},
-    {titulo:"Loading", src:"public/videos/test2.mp4", poster:"/guias/loading.gif", categoria:"Gameplay"},
-    {titulo:"Loading", src:"public/videos/test5.mp4", poster:"/guias/loading.gif", categoria:"Build"},
-    {titulo:"Loading", src:"public/videos/test6.mp4", poster:"/guias/loading.gif", categoria:"Build"},
-    {titulo:"Loading", src:"public/videos/test7.mp4", poster:"/guias/loading.gif", categoria:"Guias"},
-    {titulo:"Loading", src:"public/videos/test8.mp4", poster:"/guias/loading.gif", categoria:"Guias"},
-    {titulo:"Loading", src:"public/videos/test3.mp4", poster:"/guias/loading.gif", categoria:"Gameplay"},
-    {titulo:"Loading", src:"public/videos/test4.mp4", poster:"/guias/loading.gif", categoria:"Gameplay"},
-    {titulo:"Loading", src:"public/videos/test9.mp4", poster:"/guias/loading.gif", categoria:"Gameplay"},
-    {titulo:"Loading", src:"public/videos/test10.mp4", poster:"/guias/loading.gif", categoria:"Gameplay"},
-    {titulo:"Loading", src:"public/videos/test11.mp4", poster:"/guias/loading.gif", categoria:"Gameplay"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay"},
 ];
 
 let pagina = 1;
 const porPagina = 8;
-let categoriaAtiva = "Todos Videos";
+let categoriaAtiva = TODOS;
 
 const grid = document.getElementById("grid");
 const paginacao = document.getElementById("paginacao");
 const badgesDiv = document.getElementById("badges");
 const search = document.getElementById("search");
+const modal = document.getElementById("modal");
+const player = document.getElementById("player");
 
-// ===== BADGES DE CATEGORIA =====
+// ===== BADGES =====
 function criarBadges(){
-    const categorias = ["Todos Videos", ...new Set(videos.map(v=>v.categoria))];
+    const categorias = [TODOS, ...new Set(videos.map(v=>v.categoria))];
     badgesDiv.innerHTML="";
+
     categorias.forEach(cat=>{
         const btn = document.createElement("button");
         btn.innerText = cat;
+
         if(cat===categoriaAtiva) btn.classList.add("active");
+
         btn.onclick = ()=>{
-            categoriaAtiva=cat;
-            pagina=1;
+            categoriaAtiva = cat;
+            pagina = 1;
             criarBadges();
             render();
         }
+
         badgesDiv.appendChild(btn);
     });
 }
 
-// ===== RENDER GRID E PAGINAÇÃO =====
+// ===== RENDER =====
 function render(){
     const termo = search.value.toLowerCase();
+
     let filtrados = videos.filter(v=>{
-        const matchCategoria = categoriaAtiva==="Todos Videos" || v.categoria===categoriaAtiva;
+        const matchCategoria =
+            categoriaAtiva===TODOS ||
+            v.categoria===categoriaAtiva;
+
         const matchBusca = v.titulo.toLowerCase().includes(termo);
+
         return matchCategoria && matchBusca;
     });
 
@@ -222,7 +252,6 @@ function render(){
     const fim = inicio + porPagina;
     const lista = filtrados.slice(inicio,fim);
 
-    // Grid
     grid.innerHTML="";
     lista.forEach(v=>{
         const card = document.createElement("div");
@@ -236,7 +265,6 @@ function render(){
         grid.appendChild(card);
     });
 
-    // Paginação
     const totalPaginas = Math.ceil(filtrados.length/porPagina);
     paginacao.innerHTML="";
     for(let i=1;i<=totalPaginas;i++){
@@ -262,10 +290,18 @@ function fechar(){
     player.currentTime=0;
 }
 
-// ===== BUSCA =====
-search.oninput = ()=>{pagina=1; render();}
+// ===== VOLTAR PARA INÍCIO =====
+function voltarInicio(){
+    window.location.href = "https://4sstore.vercel.app"; // altere se necessário
+}
 
-// ===== INICIALIZA =====
+// ===== BUSCA =====
+search.oninput = ()=>{
+    pagina=1;
+    render();
+}
+
+// ===== INIT =====
 criarBadges();
 render();
 </script>
