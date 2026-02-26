@@ -1,384 +1,101 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>RagGuias — Personagens</title>
-<link rel="icon" href="/public/favicon.png" type="image/png">
+<meta charset="UTF-8">
+<title>Em Desenvolvimento</title>
+
 <style>
-  /* === ATRIBUTOS — cores fortes e visíveis === */
-.element-item.el-STR { color:#ffffff; text-shadow:0 0 6px rgba(255,255,255,.8); }
-
-.element-item.el-VIT { color:#ff4d4d; text-shadow:0 0 6px rgba(255,77,77,.8); }
-
-.element-item.el-AGI { color:#4da6ff; text-shadow:0 0 6px rgba(77,166,255,.8); }
-
-.element-item.el-DEX { color:#4dff88; text-shadow:0 0 6px rgba(77,255,136,.8); }
-
-.element-item.el-INT { color:#ffd84d; text-shadow:0 0 6px rgba(255,216,77,.8); }
-
-.element-item.el-LUK { color:#b84dff; text-shadow:0 0 6px rgba(184,77,255,.8); }
-.character-card h3{
-  margin:4px 0 6px;
-  font-size:19px;
-  font-weight:800;
-  letter-spacing:.6px;
-  color:#04A0E9E6;
-  text-shadow:
-    0 0 6px #04A0E9E6
-    0 0 18px #04A0E9E6
-}
-.character-info span{
-  color:#04A0E9E6;
-  font-weight:600;
-  text-shadow:0 0 6px rgba(4, 160, 233,0.9);
-}
-#logo-text{
-  font-size:30px;
-  font-weight:900;
-  letter-spacing:3px;
-  color:transparent;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-image:linear-gradient(90deg,#04A0E9E6,#fff,#04A0E9E6);
-  background-size:300% 100%;
-  text-shadow:0 0 14px rgba(4, 160, 233,0.9);
-  animation:flashLightning 2s infinite;
-}
-.card-actions button,
-.card-actions a{
-  flex:1;
-  padding:8px;
-  border-radius:10px;
-  border:none;
-  background:#020617;
-  color:rgba(4, 160, 233,0.9);
-  font-size:13px;
-  font-weight:600;
-  cursor:pointer;
-  text-decoration:none;
-  box-shadow:0 0 12px rgba(4, 160, 233,0.9);
-}
-
-.card-actions button:hover,
-.card-actions a:hover{
-  box-shadow:0 0 22px rgba(4, 160, 233,0.9);
-}
-#btn-voltar:hover{
-  background:linear-gradient(90deg,#2563eb,#3b82f6);
-  box-shadow:
-    0 0 18px #2563eb,
-    0 0 35px #60a5fa;
-  transform:translateY(-1px);
-}
-
-
-
-#btn-voltar:hover{
-  box-shadow:0 0 26px rgba(4, 160, 233, 0.9);
-}
-.page-btn.active{
-  background:rgba(4, 160, 233,0.9);
-  color:#020617;
-  box-shadow:0 0 16px rgba(4, 160, 233,0.9);
-}
 
 body{
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:radial-gradient(circle at top,#0f172a,#020617);
-  color:#e5e7eb;
-}
-#pagina{max-width:1256px;margin:auto;padding:20px}
-
-/* Header */
-#header{display:flex;align-items:center;gap:15px;margin-bottom:25px}
-#btn-voltar{
-  position:relative;
-  padding:8px 14px;
-  border-radius:10px;
-  border:1px solid transparent;
-  background:#020617;
-  color:#93c5fd;
-  font-weight:bold;
-  cursor:pointer;
-  overflow:hidden;
-  transition:.25s;
+margin:0;
+font-family:Segoe UI;
+background:radial-gradient(circle at top,#0b1a3a,#020617);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh;
+text-align:center;
 }
 
-#btn-voltar::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:10px;
-  padding:1px;
-  background:linear-gradient(
-    120deg,
-    transparent,
-    #3b82f6,
-    transparent
-  );
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;
-  mask-composite:exclude;
-  opacity:0;
+/* CARD CENTRAL */
+
+.box{
+background:#020617;
+border:1px solid #1d4ed8;
+border-radius:14px;
+padding:40px;
+box-shadow:0 0 25px #1d4ed8;
+max-width:400px;
+width:90%;
 }
 
-#btn-voltar:hover::before{
-  opacity:1;
-  animation:borderRun 1.2s linear infinite;
+/* TITULO */
+
+h1{
+color:#60a5fa;
+text-shadow:0 0 15px #3b82f6;
+margin-bottom:10px;
 }
 
+/* TEXTO */
 
-/* Logo */
-#logo-text{
-  font-size:30px;
-  font-weight:900;
-  letter-spacing:3px;
-  color:transparent;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-image:linear-gradient(90deg,#2563eb,#bfdbfe,#2563eb);
-  background-size:300% 100%;
-  text-shadow:0 0 10px rgba(59,130,246,.4);
-  animation:flashLightning 2s infinite;
-}
-@keyframes flashLightning{
-  0%{background-position:0 0}
-  50%{background-position:150% 0}
-  100%{background-position:0 0}
+p{
+color:#93c5fd;
+margin-bottom:25px;
 }
 
-/* Search */
-#search-bar{
-  width:100%;padding:14px;margin-bottom:25px;
-  border-radius:14px;border:none;outline:none;
-  background:#020617;color:#e5e7eb;font-size:16px;
-  box-shadow:0 0 20px rgba(37,99,235,.3)
+/* BOTÃO */
+
+.btn{
+padding:12px 20px;
+border:none;
+border-radius:10px;
+background:linear-gradient(90deg,#2563eb,#1d4ed8);
+color:white;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
 }
 
-/* Grid */
-#character-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:18px
+.btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px #3b82f6;
 }
 
-/* Card */
-.character-card{
-  background:linear-gradient(180deg,#0b1220,#020617);
-  border:1px solid #1e40af;
-  border-radius:18px;padding:14px;
-  box-shadow:0 0 22px rgba(37,99,235,.25);
-  transition:.3s;display:flex;flex-direction:column
-}
-.character-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 0 40px rgba(37,99,235,.5)
-}
-.character-card img{
-  width:100%;height:160px;object-fit:contain;
-  background:#020617;border-radius:14px;margin-bottom:8px
-}
-.character-card h3{
-  margin:4px 0 6px;font-size:18px;
-  color:#93c5fd
-}
-.character-info{font-size:13px;line-height:1.6}
-.character-info span{color:#bfdbfe}
+/* LOADING */
 
-/* Buttons */
-.card-actions{
-  display:flex;gap:8px;margin-top:auto
-}
-.card-actions button,
-.card-actions a{
-  flex:1;padding:8px;border-radius:10px;
-  border:none;
-  background:linear-gradient(90deg,#2563eb,#3b82f6);
-  color:#fff;
-  font-size:13px;text-align:center;
-  cursor:pointer;text-decoration:none
-}
-.card-actions button:hover,
-.card-actions a:hover{
-  filter:brightness(1.1)
+.loader{
+margin:20px auto;
+width:40px;
+height:40px;
+border:4px solid #1d4ed8;
+border-top:4px solid #60a5fa;
+border-radius:50%;
+animation:spin 1s linear infinite;
 }
 
-/* Modal */
-.modal{
-  position:fixed;inset:0;
-  background:rgba(2,6,23,.9);
-  display:none;align-items:center;justify-content:center;
-  z-index:999
-}
-.modal.active{display:flex}
-.modal-box{
-  background:#020617;
-  border:1px solid #1e40af;
-  padding:22px;border-radius:20px;
-  min-width:320px;
-  box-shadow:0 0 40px rgba(37,99,235,.5)
-}
-.modal-box h2{
-  text-align:center;
-  color:#bfdbfe;
-  margin-bottom:15px
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
 }
 
-/* Elementos */
-.element-list{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px
-}
-.element-item{
-  font-size:12px;
-  padding:6px;
-  border-radius:8px;
-  text-align:center;
-  background:#0b1220;
-  border:1px solid #1e40af;
-  color:#cbd5f5
-}
-
-/* Pagination */
-#pagination{
-  display:flex;justify-content:center;
-  gap:10px;margin-top:30px
-}
-.page-btn{
-  padding:8px 14px;border-radius:10px;
-  border:none;background:#020617;color:#e5e7eb;
-  cursor:pointer;font-weight:bold
-}
-.page-btn.active{
-  background:#2563eb;
-  color:#fff
-}
 </style>
 </head>
 
 <body>
-<!-- TODO O RESTO DO SEU HTML E JS PERMANECE 100% IGUAL -->
 
+<div class="box">
 
-<body>
-<div id="pagina">
+<h1>🚧 Página em Desenvolvimento</h1>
 
-<div id="header">
-  <button id="btn-voltar" onclick="location.href='https://4sstore.vercel.app/'">PAGINA INICIAL</button>
-  <div id="logo-text">Guias & Dicas de Classes</div>
-</div>
+<p>Estamos preparando algo épico para você.</p>
 
-<input id="search-bar" placeholder="Pesquisar personagem...">
+<div class="loader"></div>
 
-<div id="character-grid"></div>
-<div id="pagination"></div>
+<button class="btn" onclick="history.back()">Voltar</button>
 
 </div>
-
-<!-- Modal -->
-<div class="modal" id="modal">
-  <div class="modal-box">
-    <h2 id="modal-title"></h2>
-    <div class="element-list" id="modal-elements"></div>
-  </div>
-</div>
-
-<script>
-/* ===== PERSONAGENS ===== */
-const characters=[
-  {name:"Cavaleiro Rúnico",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_rk.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Guardião Real",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_rg.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Sentinela",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_ra.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Trovador",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_mw_m.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Mecânico",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_mn.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Bioquimico",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_gn.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Arcebispo",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_ab.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Shura",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_sr.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Musa",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_mw_f.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Sicário",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_gc.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Renegado",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_sc.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Arcano",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_wl.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Feiticeiro",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/bio-labo/mob_md_s_h_w_b_so.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Insurgente",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/gunslinger/job2_gs_002.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Mestre Estelar",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/taekwon-kid/job2_tk_003.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Ceifador de Alma",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/taekwon-kid/job2_tk_007.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Super Aprendiz",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/supernovice/job2_sn_003.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Kagerou",img:"/public/kagerou.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Oboro",img:"/public/oboro.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-  {name:"Invocador",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/job2/summoner/job2_do_021.png",lv:"Killer",hp:"Alto",sp:"Baixo",class:"Razoavel",element:"Classe Boa pra jogar Solo",link:"#",elements:{STR:"1",AGI:"1",VIT:"1",INT:"1",DEX:"1",LUK:"1"}},
-];
-
-/* ===== PERSONAGENS ===== */
-
-const perPage=8;
-let currentPage=1;
-let filtered=[...characters];
-
-const grid=document.getElementById("character-grid");
-const pagination=document.getElementById("pagination");
-
-function render(){
-  grid.innerHTML="";
-  const start=(currentPage-1)*perPage;
-  filtered.slice(start,start+perPage).forEach(c=>{
-    grid.innerHTML+=`
-    <div class="character-card">
-      <img src="${c.img}">
-      <h3>${c.name}</h3>
-      <div class="character-info">
-        <div><span>Função:</span> ${c.lv}</div>
-        <div><span>Dano:</span> ${c.hp}   <span>Defesa:</span> ${c.sp}</div>
-        <div><span>Skills:</span> ${c.class}</div>
-        <div><span>Obs:</span> ${c.element}</div>
-      </div>
-      <div class="card-actions">
-        <button onclick='openModal("${c.name}",${JSON.stringify(c.elements)})'>Atributos</button>
-        <a href="${c.link}" target="_blank">Referencia</a>
-      </div>
-    </div>`;
-  });
-  renderPagination();
-}
-
-function renderPagination(){
-  pagination.innerHTML="";
-  const pages=Math.ceil(filtered.length/perPage);
-  for(let i=1;i<=pages;i++){
-    pagination.innerHTML+=`<button class="page-btn ${i===currentPage?"active":""}" onclick="currentPage=${i};render()">${i}</button>`;
-  }
-}
-
-document.getElementById("search-bar").addEventListener("input",e=>{
-  const q=e.target.value.toLowerCase();
-  filtered=characters.filter(c=>c.name.toLowerCase().includes(q));
-  currentPage=1;render();
-});
-
-function openModal(name,elements){
-  document.getElementById("modal-title").textContent=name+" — Atributos";
-  const list=document.getElementById("modal-elements");
-  list.innerHTML="";
-  for(const e in elements){
-    const cls="el-"+e.replace(" ","-");
-    list.innerHTML+=`<div class="element-item ${cls}">${e}: ${elements[e]}</div>`;
-  }
-  document.getElementById("modal").classList.add("active");
-}
-
-document.getElementById("modal").onclick=e=>{
-  if(e.target.id==="modal") e.target.classList.remove("active");
-};
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape") document.getElementById("modal").classList.remove("active");
-});
-
-render();
-</script>
 
 </body>
 </html>
