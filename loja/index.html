@@ -778,7 +778,43 @@ nav a:hover{
  text-overflow:ellipsis;
  color:#e5e7eb;
 }
+/* =========================
+   MOBILE FIX CARRINHO
+========================= */
+@media (max-width: 768px){
 
+  #cartModal{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    background:rgba(0,0,0,.6);
+  }
+
+  .cart-box{
+    width:100%;
+    max-width:100%;
+    max-height:90vh;
+
+    border-radius:20px 20px 0 0;
+    padding:18px;
+
+    animation: slideUpMobile .3s ease;
+  }
+
+  @keyframes slideUpMobile{
+    from{
+      transform:translateY(100%);
+      opacity:0;
+    }
+    to{
+      transform:translateY(0);
+      opacity:1;
+    }
+  }
+
+}
 
 </style>
 </head>
@@ -937,6 +973,7 @@ const phone="5524999561861";
 const perPage=15;
 let page=1;
 let currentCategories="all";
+
 
 /* PRODUTOS */
 const productsData=[];
