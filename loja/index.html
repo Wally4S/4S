@@ -686,10 +686,10 @@ nav a:hover{
         <span class="promo-text">
             Simulador de Visuais 
             <a href="https://www.meurag.com/simulador-visual" target="_blank">
-                Site do Simulador👈🏼
+                 Click👈🏼
             </a>
             <span class="desconto"></span> 
-             Direitos Reservados #MeuRag
+            Direitos Reservados #MeuRag
         </span>
     </strong>
 </header>
@@ -704,7 +704,20 @@ nav a:hover{
     margin-right: 6px;
     font-size: 20px;
 }
+.promo-text a{
+    text-decoration: none; /* remove a linha */
+    color: #ffffff;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
 
+.promo-text a:hover{
+    color: #00ff66;
+    text-shadow:
+        0 0 5px #00ff66,
+        0 0 10px #00ff66,
+        0 0 20px #00ff66;
+}
 nav{
     display:flex;
     justify-content:flex-end;
@@ -1780,7 +1793,7 @@ document.addEventListener('click', e=>{
   padding:4px 10px;
   border:none;
   border-radius:8px;
-  background:#64eb25;
+  background:#2563eb;
   color:#fff;
   cursor:pointer;
 }
