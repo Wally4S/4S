@@ -122,13 +122,19 @@ header::after{
 }
 
 
+.logo{
+  perspective:600px;
+}
+
 .logo img{
   width:75px;
   height:75px;
-  border-radius:0px;
+  transition: transform 0.7s ease, filter 0.3s;
 }
+
 .logo img:hover{
-  transform: scale(1.1);
+  transform: rotateY(360deg) scale(1.1);
+  filter: drop-shadow(0 0 10px #3b82f6);
 }
 nav a{
   color:#cbd5f5;
