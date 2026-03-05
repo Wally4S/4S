@@ -835,11 +835,15 @@ nav a:hover{
     <strong>
         <span class="emoji">✔️</span>
         <span class="promo-text">
-            5 Visuais ou mais 
-            <span class="desconto">-15%</span> 
-            Do Valor da Compra
+            Simulador de Visuais 
+            <a href="https://www.meurag.com/simulador-visual" target="_blank">
+                Site do Simulador👈🏼
+            </a>
+            <span class="desconto"></span> 
+             Direitos Reservados #MeuRag
         </span>
     </strong>
+</header>
 
     <nav>
         <a href="https://4sstore.vercel.app/">♻️𝙿𝚊𝚐𝚒𝚗𝚊 𝙸𝚗𝚒𝚌𝚒𝚊𝚕</a>
@@ -852,28 +856,17 @@ nav a:hover{
             font-size: 20px; /* mesmo tamanho do texto */
         }
 
-        .promo-text {
-            font-size: 20px; /* 🔥 aqui está o ajuste */
-            font-weight: 800;
-            letter-spacing: 1px;
+        .promo-text a{
+text-decoration:none;
+color:#a855f7;
+font-weight:600;
+}
 
-            background: linear-gradient(
-                90deg,
-                #ffffff 0%,
-                #ffffff 40%,
-                #00e1ff 50%,
-                #ffffff 60%,
-                #ffffff 100%
-            );
-            background-size: 200% auto;
+.promo-text a:hover{
+color:#00ff88;
+}
 
-            color: transparent;
-            background-clip: text;
-            -webkit-background-clip: text;
-
-            animation: brilhoCorrendo 3s linear infinite;
-        }
-
+  
         @keyframes brilhoCorrendo {
             0% { background-position: -200% center; }
             100% { background-position: 200% center; }
