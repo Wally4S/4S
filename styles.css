@@ -356,3 +356,15 @@ footer{
   }
 
 }
+/* Ajuste global de escala do site */
+html, body{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  transform: scale(0.96); /* reduz cerca de 4% */
+  transform-origin: top center;
+  width: 104.2%; /* compensa o espaço lateral causado pelo scale */
+  overflow-x: hidden; /* evita barra lateral */
+}

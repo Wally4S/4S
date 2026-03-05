@@ -753,6 +753,17 @@ nav{
     <div class="cart-total" style="margin-top:10px; font-size:14px;">
       Total: R$ <span id="total">0</span>
     </div>
+<script>
+function closeCart(){
+  document.getElementById("cartModal").style.display = "none";
+}
+
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Escape") {
+    closeCart();
+  }
+});
+</script>
 
     <!-- BOTÃO WHATSAPP -->
     <button 
@@ -1390,6 +1401,7 @@ render();
     e.preventDefault();
     alert("Você não pode acessar o menu de contexto.");
   });
+  
 </script>
 <script>
 /* ===== RPG EFFECTS: BUY BUTTON + PRICE ===== */
