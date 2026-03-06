@@ -1281,141 +1281,239 @@ function changeQty(id, d) {
   updateCartBtn();
 }
 
-function renderCart() {
-  let t = 0;
-  cartItems.innerHTML = "";
+function renderCart(){
 
-  cart.forEach(i => {
+let t = 0;
+cartItems.innerHTML = "";
 
-    const product = productsData.find(p => p.id === i.id);
-    const img = product ? product.img : "";
-
-    const sub = i.price * i.qty;
-    t += sub;
-
-    cartItems.innerHTML += `
-      <div class="cart-item" style="
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        gap:14px;
-        padding:14px;
-        margin-bottom:14px;
-        background:rgba(15,23,42,.6);
-        border-radius:18px;
-        transition:.25s;
-      "
-      onmouseover="this.style.boxShadow='0 0 20px rgba(59,130,246,.35)'"
-      onmouseout="this.style.boxShadow='none'"
-      >
-        
-        <img src="${img}" style="
-          width:85px;
-          height:85px;
-          object-fit:contain;
-          border-radius:22px;
-          background:#fff;
-          padding:6px;
-          display:block;
-          transition:.25s;
-        "
-        onmouseover="this.style.transform='scale(1.05)'"
-        onmouseout="this.style.transform='scale(1)'"
-        >
-
-        <div style="flex:1;">
-          <span style="
-            display:block;
-            font-size:14px;
-            margin-bottom:8px;
-          ">${i.name}</span>
-
-          <div style="display:flex;align-items:center;gap:12px;">
-
-            <button onclick="changeQty(${i.id},-1)" style="
-              width:34px;
-              height:34px;
-              border:none;
-              border-radius:50%;
-              background:#dc2626;
-              color:#fff;
-              font-size:18px;
-              cursor:pointer;
-              box-shadow:0 0 12px rgba(220,38,38,.7);
-            ">−</button>
-
-            <span style="min-width:20px;text-align:center;">
-              ${i.qty}
-            </span>
-
-            <button onclick="changeQty(${i.id},1)" style="
-              width:34px;
-              height:34px;
-              border:none;
-              border-radius:50%;
-              background:#16a34a;
-              color:#fff;
-              font-size:18px;
-              cursor:pointer;
-              box-shadow:0 0 12px rgba(22,163,74,.7);
-            ">+</button>
-
-          </div>
-        </div>
-
-        <span style="
-          font-weight:600;
-          font-size:15px;
-          color:#facc15;
-        ">
-          R$ ${sub.toFixed(2)}
-        </span>
-
-      </div>`;
-  });
-
-  let qtdItens = 0;
+let qtdItens = 0;
 cart.forEach(i => qtdItens += i.qty);
+
+/* BARRA DE PROGRESSO COM TEXTO */
+
+const progresso = Math.min((qtdItens/5)*100,100);
+
+let textoBarra = `${qtdItens}/5 itens para liberar 15%`;
+
+if(qtdItens >= 5){
+textoBarra = "🔥 DESCONTO DE 15% LIBERADO!";
+}
+
+cartItems.innerHTML += `
+
+<div style="margin-bottom:16px">
+
+<div style="
+height:18px;
+background:#0f172a;
+border-radius:30px;
+overflow:hidden;
+position:relative;
+box-shadow:
+inset 0 0 8px rgba(0,0,0,.7),
+0 0 6px rgba(34,197,94,.25);
+">
+
+<div style="
+height:100%;
+width:${progresso}%;
+background:linear-gradient(90deg,#22c55e,#4ade80,#22c55e);
+background-size:200% 100%;
+animation:progressGlow 2s linear infinite;
+transition:width .5s;
+box-shadow:0 0 12px rgba(34,197,94,.7);
+"></div>
+
+<div style="
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:12px;
+font-weight:600;
+color:#fff;
+letter-spacing:.3px;
+text-shadow:0 0 6px rgba(0,0,0,.6);
+pointer-events:none;
+">
+
+${textoBarra}
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+/* ITENS DO CARRINHO */
+
+cart.forEach(i => {
+
+const product = productsData.find(p => p.id === i.id);
+const img = product ? product.img : "";
+
+const sub = i.price * i.qty;
+t += sub;
+
+cartItems.innerHTML += `
+
+<div style="
+display:flex;
+align-items:center;
+gap:12px;
+margin-bottom:12px;
+padding:6px 2px;
+">
+
+<img src="${img}" style="
+width:60px;
+height:60px;
+object-fit:contain;
+border-radius:10px;
+background:#fff;
+padding:4px;
+">
+
+<div style="flex:1">
+
+<div style="
+font-size:14px;
+font-weight:500;
+margin-bottom:6px;
+line-height:1.2;
+">
+${i.name}
+</div>
+
+<div style="display:flex;align-items:center;gap:10px">
+
+<button onclick="changeQty(${i.id},-1)" style="
+width:28px;
+height:28px;
+border:none;
+border-radius:50%;
+background:#dc2626;
+color:#fff;
+font-size:16px;
+cursor:pointer;
+">−</button>
+
+<span style="
+min-width:18px;
+text-align:center;
+font-size:14px;
+">
+${i.qty}
+</span>
+
+<button onclick="changeQty(${i.id},1)" style="
+width:28px;
+height:28px;
+border:none;
+border-radius:50%;
+background:#16a34a;
+color:#fff;
+font-size:16px;
+cursor:pointer;
+">+</button>
+
+</div>
+
+</div>
+
+<div style="
+font-weight:600;
+font-size:14px;
+color:#facc15;
+min-width:60px;
+text-align:right;
+">
+R$ ${sub.toFixed(2)}
+</div>
+
+</div>
+
+`;
+
+});
+
+/* DESCONTO */
 
 let desconto = 0;
 
 if(qtdItens >= 5){
-  desconto = t * 0.15;/* AJUSTAR % DE DESCONTO*/
+desconto = t * 0.15;
 }
 
 let totalFinal = t - desconto;
 
 total.innerText = totalFinal.toFixed(2);
 
-/* AVISO INTELIGENTE DE DESCONTO */
-const aviso = document.getElementById("descontoAviso");
 
-if(qtdItens >= 5){
+/* ANIMAÇÃO DO CONTADOR DO CARRINHO */
 
-  aviso.style.display = "block";
-  aviso.innerText = "🔥 DESCONTO DE 15% APLICADO ✔️";
+const cartCount = document.querySelector(".cart-count");
 
-}else{
+if(cartCount){
 
-  const faltam = 5 - qtdItens;
+cartCount.style.transition = "transform .2s";
 
-  aviso.style.display = "block";
-  aviso.innerText = `⚡ ADICIONE MAIS ${faltam} ITEM E GANHE 15% DE DESCONTO 🤑`;
+cartCount.style.transform = "scale(1.35)";
+
+setTimeout(()=>{
+cartCount.style.transform = "scale(1)";
+},200);
 
 }
-  updateCartBtn();
+
+updateCartBtn();
 }
 
+
+/* ABRIR MODAL */
 
 function openCart(){
-  document.getElementById("cartModal").style.display = "flex";
-  renderCart();
+
+document.getElementById("cartModal").style.display="flex";
+renderCart();
+if(!document.getElementById("progressAnim")){
+
+const style = document.createElement("style");
+style.id="progressAnim";
+
+style.innerHTML=`
+
+@keyframes progressGlow{
+
+0%{
+background-position:0% 0%;
+}
+
+100%{
+background-position:200% 0%;
+}
+
+}
+
+`;
+
+document.head.appendChild(style);
+
+}
+
 }
 
 function closeCart(){
-  document.getElementById("cartModal").style.display = "none";
-}
 
+document.getElementById("cartModal").style.display="none";
+
+}
 
 function checkout() {
 
