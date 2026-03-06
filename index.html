@@ -137,7 +137,7 @@ header::after{
   filter: drop-shadow(0 0 10px #3b82f6);
 }
 nav a{
-  color:#cbd5f5;
+  color:#fdfdfd;
   text-decoration:none;
   margin-left:18px;
   padding:8px 14px;
@@ -497,14 +497,67 @@ footer{
     <a href="/guias">🎬Galeria</a>
     <a href="/referencias">📌Referências</a>
   </nav>
+
+  <!-- Letreiro animado -->
+  <div class="marquee-container">
+    <div class="marquee">🚨PROMOÇÃO ATIVA ACIMA DE 5 PRODUTOS -15% NO VALOR DO CARRINHO🚨</div>
+  </div>
 </header>
 
 <style>
-/* Deixa o cursor indicar que é clicável e anima a logo */
-.logo-link {
-  position: relative; /* referência para o tooltip */
+/* Header relativo para referência de posição do letreiro */
+header {
+  position: relative;
+}
+
+/* Letreiro absoluto, sobre os links, sem interferir */
+.marquee-container {
+  position: absolute;
+  top: 70%; /* centraliza na altura dos links */
+  left: 0;
+  width: 100%;
+  height: 2em; /* altura do texto, não altera nada */
+  overflow: hidden;
+  pointer-events: none; /* garante que os links continuem clicáveis */
+}
+
+/* Texto animado só com letras e glow, sem fundo nenhum */
+.marquee {
   display: inline-block;
-  transition: transform 0.2s ease, filter 0.2s ease;
+  white-space: nowrap;
+  padding-left: 100%;
+  animation: marquee 10s linear infinite, glow 2s ease-in-out infinite;
+  font-weight: bold;
+  font-size: 1em;
+  
+  /* Apenas cor das letras */
+  color: #e5e7eb;
+
+  /* Glow / brilho neon */
+  text-shadow: 
+    0 0 5px hsl(0, 77%, 46%),
+    0 0 10px hsl(0, 77%, 46%),
+    0 0 15px #ffffff;
+
+  background: none;           /* garante que não haja fundo */
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
+}
+
+/* Movimento horizontal */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Glow pulsante */
+@keyframes glow {
+  0%, 100% { 
+    text-shadow: 0 0 5px #00eeff00, 0 0 10px #31414200, 0 0 15px #ffffff00; 
+  }
+  50% { 
+    text-shadow: 0 0 10px hsl(0, 77%, 46%), 0 0 20px #00eeff00, 0 0 30px #ffffff00; 
+  }
 }
 
 .logo-link:hover {
@@ -834,6 +887,70 @@ apply();
   });
 })();
 </script>
+<!-- Botões de subir -->
+<button class="scrollTopBtn left">&#8679;</button>
+<button class="scrollTopBtn right">&#8679;</button>
 
+<style>
+.scrollTopBtn {
+  position: fixed;
+  bottom: 10px;
+  font-size: 2rem;
+  color: #ffffff; /* azul fluorescente */
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff, 0 0 15px #ffffff;
+  z-index: 1000;
+  transition: opacity 0.3s, transform 0.2s;
+  animation: pulse 2s ease-in-out infinite, glow 2s ease-in-out infinite;
+}
+
+.scrollTopBtn.left { left: 20px; }
+.scrollTopBtn.right { right: 20px; }
+
+.scrollTopBtn:hover {
+  transform: scale(1.3);
+}
+
+/* Pulsar leve */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+</style>
+
+<script>
+// Seleciona os botões
+const scrollBtns = document.querySelectorAll('.scrollTopBtn');
+
+// Mostra/oculta os botões no final da página
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const windowHeight = window.innerHeight;
+  const docHeight = document.documentElement.scrollHeight;
+
+  scrollBtns.forEach(btn => {
+    if (scrollTop + windowHeight >= docHeight - 10) {
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+    } else {
+      btn.style.opacity = '0';
+      btn.style.pointerEvents = 'none';
+    }
+  });
+});
+
+// Ao clicar, sobe ao topo suavemente
+scrollBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</script>
 </body>
+
 </html>
