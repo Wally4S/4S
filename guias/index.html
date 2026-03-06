@@ -2,6 +2,8 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>4S STORE • Videos</title>
 <style>
 body{
@@ -94,7 +96,89 @@ body{
     border-radius:12px;
     overflow:hidden;
     transition:0.3s;
+    position:relative;
 }
+
+.card{
+    width:260px;
+    background:#020617;
+    border:1px solid #1d4ed8;
+    border-radius:12px;
+    overflow:hidden;
+    transition:0.3s;
+    position:relative;
+}
+
+/* BADGE CREDITOS NEON */
+.credito{
+    position:absolute;
+    top:8px;
+    left:8px;
+
+    padding:4px 10px;
+    font-size:11px;
+    font-weight:bold;
+
+    background:linear-gradient(90deg,#1d4ed8,#3b82f6);
+    border-radius:8px;
+
+    color:#fff;
+
+    text-shadow:0 0 6px #93c5fd;
+
+    letter-spacing:0.5px;
+
+    z-index:10;
+
+    animation:glowBadge 2s infinite alternate;
+}
+@keyframes glowBadge{
+
+0%{
+    box-shadow:
+    0 0 5px #3b82f6,
+    0 0 10px #1d4ed8,
+    inset 0 0 5px rgba(255,255,255,0.15);
+}
+
+100%{
+    box-shadow:
+    0 0 10px #60a5fa,
+    0 0 20px #3b82f6,
+    inset 0 0 8px rgba(255,255,255,0.25);
+}
+
+}
+
+/* TOOLTIP */
+.credito::after{
+    content:attr(data-credito);
+    position:absolute;
+    bottom:-28px;
+    left:0;
+
+    background:#020617;
+    border:1px solid #3b82f6;
+    color:#93c5fd;
+
+    padding:4px 8px;
+    border-radius:6px;
+    font-size:11px;
+    white-space:nowrap;
+
+    opacity:0;
+    transform:translateY(5px);
+    transition:0.2s;
+
+    box-shadow:0 0 10px #1d4ed8;
+}
+
+/* mostrar tooltip */
+.credito:hover::after{
+    opacity:1;
+    transform:translateY(0);
+}
+
 
 .card:hover{
     transform:scale(1.05);
@@ -188,27 +272,27 @@ const TODOS = "🎬Todos Videos";
 
 // ===== LISTA DE VÍDEOS =====
 const videos = [
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal XYZ"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal XYZ"},
 
 ];
 
 let pagina = 1;
-const porPagina = 10;
+const porPagina = 8;
 let categoriaAtiva = TODOS;
 
 const grid = document.getElementById("grid");
@@ -262,12 +346,22 @@ function render(){
     lista.forEach(v=>{
         const card = document.createElement("div");
         card.className="card";
-        card.innerHTML=`
-            <div class="thumb" onclick="abrir(this)">
-                <video muted src="${v.src}" poster="${v.poster}"></video>
-            </div>
-            <div class="titulo">${v.titulo}</div>
-        `;
+       card.innerHTML=`
+
+<div class="credito" data-credito="Créditos do Criador: ${v.creditos || "Autor"}">
+🎮 ${v.creditos || "Autor"}
+</div>
+
+
+<div class="thumb" onclick="abrir(this)">
+<video muted src="${v.src}" poster="${v.poster}"></video>
+</div>
+
+<div class="titulo">${v.titulo}</div>
+
+`;
+
+
         grid.appendChild(card);
     });
 
