@@ -126,15 +126,14 @@ header::after{
   perspective:600px;
 }
 
-.logo img{
-  width:75px;
-  height:75px;
-  transition: transform 0.7s ease, filter 0.3s;
+.logo img {
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.logo img:hover{
-  transform: rotateY(180deg) scale(1.1);
-  filter: drop-shadow(0 0 10px #3b82f6);
+.logo img:hover {
+  transform: scale(1.1); /* pulse leve */
+  filter: drop-shadow(0 0 10px #3b82f6); /* destaque suave */
+
 }
 nav a{
   color:#fdfdfd;
