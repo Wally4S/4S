@@ -321,26 +321,13 @@ button:hover::after{
   <div id="slider-wrapper">
     <div id="slider"></div>
   </div>
+
 <!-- GALERIA DE PROVAS -->
 <div style="
 width:100%;
 max-width:900px;
-height:380px;
-margin:auto;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-border-radius:22px;
-border:1px solid rgba(30,144,255,.25);
-
-box-shadow:
-0 0 20px rgba(30,144,255,.18),
-0 15px 40px rgba(0,0,0,.6);
-
-background:#000;
-overflow:hidden;
+margin:40px auto;
+text-align:center;
 ">
 
 <h3 style="
@@ -354,48 +341,58 @@ color:#1e90ff;
 width:100%;
 max-width:900px;
 height:380px;
-margin:auto;
 
-display:flex;
-align-items:center;
-justify-content:center;
-
-border-radius:22px;
-border:1px solid rgba(30,144,255,.25);
+border-radius:18px;
+border:2px solid rgba(30,144,255,.4);
 
 box-shadow:
-0 0 20px rgba(30,144,255,.18),
-0 15px 40px rgba(0,0,0,.6);
+0 0 18px rgba(30,144,255,.25),
+0 10px 30px rgba(0,0,0,.5);
 
-background:#02040a;
 overflow:hidden;
+position:relative;
 ">
+
 <img id="proofCarouselImage"
 style="
 width:100%;
 height:100%;
-object-fit:contain;
-display:block;
+object-fit:cover;
+position:absolute;
+top:0;
+left:0;
 transition:transform .3s ease;
 "
 onmouseover="this.style.transform='scale(1.03)'"
 onmouseout="this.style.transform='scale(1)'"
 >
 
+<video id="proofCarouselVideo"
+style="
+width:100%;
+height:100%;
+object-fit:cover;
+position:absolute;
+top:0;
+left:0;
+display:none;
+"
+controls
+playsinline
+>
+</video>
 </div>
-
 </div>
+<form id="form">
+  <input id="fullname" required placeholder="Nome real">
+  <input id="nickname" required placeholder="Nickname no jogo">
+  <input id="email" type="email" required placeholder="E-mail">
+  <textarea id="message" rows="4" maxlength="400" required placeholder="Sua referência..."></textarea>
+  <button>Enviar</button>
+  <div class="success" id="success">Referência enviada!</div>
+  <div class="error" id="error"></div>
+</form>
 
-
-  <form id="form">
-    <input id="fullname" required placeholder="Nome real">
-    <input id="nickname" required placeholder="Nickname no jogo">
-    <input id="email" type="email" required placeholder="E-mail">
-    <textarea id="message" rows="4" maxlength="400" required placeholder="Sua referência..."></textarea>
-    <button>Enviar</button>
-    <div class="success" id="success">Referência enviada!</div>
-    <div class="error" id="error"></div>
-  </form>
 </main>
 
 <script>
