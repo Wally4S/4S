@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
 <meta charset="UTF-8">
 <title>Referências | 4S Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/public/favicon.png" type="image/png">
 <!-- HTML Meta Tags -->
-<title>4S STORE</title>
 <meta name="description" content="Venda de Produtos de Jogos">
 
 <!-- Facebook Meta Tags -->
@@ -129,24 +127,6 @@ main{
 }
 
 
-/* ================= SETAS ================= */
-.arrow{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  width:42px;
-  height:42px;
-  background:none;
-  border:none;
-  color:#fff;
-  font-size:26px;
-  cursor:pointer;
-  opacity:.6;
-  transition:.25s;
-}
-.arrow:hover{opacity:1;transform:translateY(-50%) scale(1.25)}
-.prev{left:-55px}
-.next{right:-55px}
 
 /* ================= FORM ================= */
 form{
@@ -281,7 +261,6 @@ button:hover::after{
   <h1>
   🌝 <span class="titulo-energia">Deixe sua Referencia</span>
 </h1>
-  </h1>
 
   <a class="btn-home" href="https://4sstore.vercel.app/">
     ♻️𝙿𝚊𝚐𝚒𝚗𝚊 𝚒𝚗𝚒𝚌𝚒𝚊𝚕
@@ -337,55 +316,72 @@ button:hover::after{
   <span id="counterNumber">✔️0</span>
   <small>📌Referencias</small>
 </div>
-  </div>
-</div>
-    <circle cx="50" cy="50" r="42" stroke="rgba(30,144,255,.25)" stroke-width="8" fill="none"/>
-      <rect x="0" y="100" width="100" height="100" fill="white" id="liquid-fill"/>
-    </mask>
-</div>
 
 <main>
   <div id="slider-wrapper">
     <div id="slider"></div>
   </div>
-<!-- CARROSSEL DE PROVAS -->
-<div style="margin-top:40px; text-align:center;">
+<!-- GALERIA DE PROVAS -->
+<div style="
+width:100%;
+max-width:900px;
+height:380px;
+margin:auto;
 
+display:flex;
+align-items:center;
+justify-content:center;
 
-  <h3 style="
-    margin-bottom:20px;
-    color:#1e90ff;
-  ">
-    📸 GALERIA
-  </h3>
+border-radius:22px;
+border:1px solid rgba(30,144,255,.25);
 
-   <img id="proofCarouselImage"
- style="
-  width:100%;
-  max-width:900px;
-  height:380px;
-  object-fit:cover;
-  border-radius:22px;
-  display:block;
-  margin:auto;
+box-shadow:
+0 0 20px rgba(30,144,255,.18),
+0 15px 40px rgba(0,0,0,.6);
 
-  border:1px solid rgba(30,144,255,.25);
+background:#000;
+overflow:hidden;
+">
 
-  box-shadow:
-    0 0 20px rgba(30,144,255,.18),
-    0 15px 40px rgba(0,0,0,.6);
+<h3 style="
+margin-bottom:20px;
+color:#1e90ff;
+">
+📸 GALERIA
+</h3>
 
-  transition:transform .3s ease, box-shadow .3s ease;
+<div style="
+width:100%;
+max-width:900px;
+height:380px;
+margin:auto;
 
-  cursor:default;
+display:flex;
+align-items:center;
+justify-content:center;
+
+border-radius:22px;
+border:1px solid rgba(30,144,255,.25);
+
+box-shadow:
+0 0 20px rgba(30,144,255,.18),
+0 15px 40px rgba(0,0,0,.6);
+
+background:#02040a;
+overflow:hidden;
+">
+<img id="proofCarouselImage"
+style="
+width:100%;
+height:100%;
+object-fit:contain;
+display:block;
+transition:transform .3s ease;
 "
-onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 0 30px rgba(30,144,255,.3), 0 20px 50px rgba(0,0,0,.7)'"
-onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 20px rgba(30,144,255,.18), 0 15px 40px rgba(0,0,0,.6)'"
-onclick="return false;"
+onmouseover="this.style.transform='scale(1.03)'"
+onmouseout="this.style.transform='scale(1)'"
 >
 
-</div>
-    
 </div>
 
 </div>
@@ -599,17 +595,10 @@ const proofImg = document.getElementById("proofCarouselImage");
 
 function updateProof(){
   proofImg.style.opacity = "0";
+
   setTimeout(()=>{
     proofImg.src = proofImages[proofIndex];
-    proofImg.style = `
-  width:100%;
-  height:380px;
-  object-fit:cover;
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,.06);
-  transition:opacity .3s ease;
-`;
-
+    proofImg.style.opacity = "1";
   },200);
 }
 
@@ -648,12 +637,6 @@ proofImg.onclick = function(){
 
   modal.onclick = () => modal.remove();
 };
-document.getElementById("slider").addEventListener("click", function(){
-  if(refs.length > 1){
-    index = (index + 1) % refs.length;
-    render();
-  }
-});
 </script>
 
 </body>
