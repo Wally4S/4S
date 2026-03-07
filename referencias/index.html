@@ -547,21 +547,20 @@ form.addEventListener("submit", async e => {
 
   try{
 
-    const [a,b,c] = await Promise.all([
+    const [a,c] = await Promise.all([
 
-      db.collection("referencias").where("email","==",data.email).get(),
-      db.collection("referencias").where("fullname","==",data.fullname).get(),
-      db.collection("referencias").where("nickname","==",data.nickname).get()
+  db.collection("referencias").where("email","==",data.email).get(),
+  db.collection("referencias").where("nickname","==",data.nickname).get()
 
-    ]);
+]);
 
-    if(!a.empty || !b.empty || !c.empty){
+if(!a.empty || !c.empty){
 
-      error.textContent="Nome, nickname ou e-mail já utilizado.";
-      error.style.display="block";
-      return;
+  error.textContent="Email ou nickname já utilizado.";
+  error.style.display="block";
+  return;
 
-    }
+}
 
     await db.collection("referencias").add(data);
 
