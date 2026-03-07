@@ -403,27 +403,35 @@ onclick="return false;"
 </main>
 
 <script>
+
 firebase.initializeApp({
   apiKey:"AIzaSyBGeptReBViZ9CQoJ2G18SmnaxbnvO3kDw",
   authDomain:"referenciasjogadores.firebaseapp.com",
   projectId:"referenciasjogadores"
 });
-const db=firebase.firestore();
 
-let refs=[],index=0;
-const slider=document.getElementById("slider");
-const span=document.querySelector("#counter span");
-const liquidFill=document.getElementById("liquid-fill");
+const db = firebase.firestore();
+
+let refs = [];
+let index = 0;
+
+const slider = document.getElementById("slider");
+const counterNumber = document.getElementById("counterNumber");
+
+/* ================= RENDER ================= */
 
 function render(){
+
   if(!refs.length) return;
-  const r=refs[index];
+
+  const r = refs[index];
 
   slider.style.opacity="0";
   slider.style.transform="translateY(10px)";
 
   setTimeout(()=>{
-    slider.innerHTML=`
+
+    slider.innerHTML = `
       <div class="card">
         <div class="ref-header">
           <img src="https://cdn3.emoji.gg/emojis/701524-neon-gmail-icon.png">
@@ -433,69 +441,147 @@ function render(){
           </div>
         </div>
         <div class="ref-text">${r.message}</div>
-      </div>`;
+      </div>
+    `;
+
     slider.style.opacity="1";
     slider.style.transform="translateY(0)";
+
   },180);
+
 }
+
+/* ================= CONTADOR ================= */
 
 function updateCounter(total){
-  span.textContent = `✔️${total}`;
-  let percent=(total%100)/100;
-  liquidFill.setAttribute("y",100-percent*100);
-  liquidFill.setAttribute("height",percent*100);
-  span.classList.remove("counter-pulse");void span.offsetWidth;
-  span.classList.add("counter-pulse");
+
+  counterNumber.textContent = `✔️${total}`;
+
+  counterNumber.classList.remove("counter-pulse");
+  void counterNumber.offsetWidth;
+  counterNumber.classList.add("counter-pulse");
+
 }
 
-db.collection("referencias").orderBy("timestamp","desc").onSnapshot(qs=>{
-  refs=[];qs.forEach(d=>refs.push(d.data()));
+/* ================= FIREBASE LISTENER ================= */
+
+db.collection("referencias")
+.orderBy("timestamp","desc")
+.onSnapshot(snapshot=>{
+
+  refs = [];
+
+  snapshot.forEach(doc=>{
+
+    const data = doc.data();
+
+    if(data.timestamp){
+      refs.push(data);
+    }
+
+  });
+
   updateCounter(refs.length);
-  index=0;render();
+
+  index = 0;
+
+  render();
+
 });
 
-setInterval(()=>{if(refs.length){index=(index+1)%refs.length;render()}},6000);
-document.querySelector(".next").onclick=()=>{index=(index+1)%refs.length;render()}
-document.querySelector(".prev").onclick=()=>{index=(index-1+refs.length)%refs.length;render()}
+/* ================= AUTO SLIDE ================= */
 
-/* ENVIO */
-const form=document.getElementById("form");
-const fullname=document.getElementById("fullname");
-const nickname=document.getElementById("nickname");
-const email=document.getElementById("email");
-const message=document.getElementById("message");
-const success=document.getElementById("success");
-const error=document.getElementById("error");
+setInterval(()=>{
 
-form.addEventListener("submit",async e=>{
+  if(refs.length){
+
+    index = (index + 1) % refs.length;
+
+    render();
+
+  }
+
+},6000);
+
+/* ================= CLICK SLIDE ================= */
+
+slider.addEventListener("click",()=>{
+
+  if(refs.length > 1){
+
+    index = (index + 1) % refs.length;
+
+    render();
+
+  }
+
+});
+
+/* ================= ENVIO ================= */
+
+const form = document.getElementById("form");
+const fullname = document.getElementById("fullname");
+const nickname = document.getElementById("nickname");
+const email = document.getElementById("email");
+const message = document.getElementById("message");
+
+const success = document.getElementById("success");
+const error = document.getElementById("error");
+
+form.addEventListener("submit", async e => {
+
   e.preventDefault();
+
   error.style.display="none";
   success.style.display="none";
 
-  const data={
-    fullname:fullname.value.trim(),
-    nickname:nickname.value.trim(),
-    email:email.value.trim(),
-    message:message.value.trim(),
-    timestamp:firebase.firestore.FieldValue.serverTimestamp()
+  const data = {
+
+    fullname: fullname.value.trim(),
+    nickname: nickname.value.trim(),
+    email: email.value.trim(),
+    message: message.value.trim(),
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+
   };
 
-  const [a,b,c]=await Promise.all([
-    db.collection("referencias").where("email","==",data.email).get(),
-    db.collection("referencias").where("fullname","==",data.fullname).get(),
-    db.collection("referencias").where("nickname","==",data.nickname).get()
-  ]);
+  try{
 
-  if(!a.empty||!b.empty||!c.empty){
-    error.textContent="Nome, nickname ou e-mail já utilizado.";
-    error.style.display="block";return;
+    const [a,b,c] = await Promise.all([
+
+      db.collection("referencias").where("email","==",data.email).get(),
+      db.collection("referencias").where("fullname","==",data.fullname).get(),
+      db.collection("referencias").where("nickname","==",data.nickname).get()
+
+    ]);
+
+    if(!a.empty || !b.empty || !c.empty){
+
+      error.textContent="Nome, nickname ou e-mail já utilizado.";
+      error.style.display="block";
+      return;
+
+    }
+
+    await db.collection("referencias").add(data);
+
+    success.style.display="block";
+
+    form.reset();
+
+  }catch(err){
+
+    console.error(err);
+
+    error.textContent="Erro ao enviar referência.";
+    error.style.display="block";
+
   }
 
-  await db.collection("referencias").add(data);
-  success.style.display="block";
-  form.reset();
 });
+
 </script>
+
 <script>
 /* ===== CONFIGURAR IMAGENS AQUI ===== */
 const proofFolder = "/public/provas/";
