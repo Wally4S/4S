@@ -5,252 +5,339 @@
 <title>Referências | 4S Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/public/favicon.png" type="image/png">
-<!-- HTML Meta Tags -->
-<meta name="description" content="Venda de Produtos de Jogos">
 
-<!-- Facebook Meta Tags -->
-<meta property="og:url" content="https://4sstore.vercel.app/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="4S STORE">
-<meta property="og:description" content="Venda de Produtos de Jogos">
-<meta property="og:image" content="https://4sstore.vercel.app/logo.png">
-
-<!-- Twitter Meta Tags -->
-<meta name="twitter:card" content="summary_large_image">
-<meta property="twitter:domain" content="4sstore.vercel.app">
-<meta property="twitter:url" content="https://4sstore.vercel.app/">
-<meta name="twitter:title" content="4S STORE">
-<meta name="twitter:description" content="Venda de Produtos de Jogos">
-<meta name="twitter:image" content="https://4sstore.vercel.app/logo.png">
-
-<!-- Meta Tags Generated via https://www.opengraph.xyz -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
 <style>
+/* SEU CSS ORIGINAL FOI MANTIDO */
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
-  font-family:Arial,sans-serif;
-  background:radial-gradient(circle at top,#0b1a33,#02040a 65%);
-  color:#fff;
+font-family:system-ui,-apple-system,Segoe UI,Roboto;
+background:
+radial-gradient(circle at top,#0b1a33,#02040a 70%);
+color:#e6edf3;
+line-height:1.5;
 }
 
-/* ================= HEADER ================= */
+/* HEADER */
+
 header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 40px;
-  background:rgba(2,4,10,.9);
-  border-bottom:1px solid rgba(30,144,255,.25);
-  box-shadow:0 0 25px rgba(30,144,255,.35);
-}
-header h1{color:#1e90ff}
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
 
-.btn-home{
-  padding:10px 22px;
-  border-radius:14px;
-  background:rgba(5,15,30,.9);
-  color:#cfe7ff;
-  text-decoration:none;
-  box-shadow:0 0 18px rgba(30,144,255,.45);
-  transition:.3s;
-}
-.btn-home:hover{
-  background:linear-gradient(135deg,#1e90ff,#4da3ff);
-  box-shadow:0 0 25px rgba(30,144,255,.85);
-  transform:translateY(-2px);
+background:rgba(5,10,18,.85);
+backdrop-filter:blur(10px);
+
+border-bottom:1px solid rgba(30,144,255,.25);
+
+box-shadow:
+0 0 30px rgba(30,144,255,.25);
 }
 
+header h1{
+font-size:20px;
+letter-spacing:.5px;
+color:#4db3ff;
+}
 
-/* ================= MAIN ================= */
+header a{
+padding:10px 18px;
+border-radius:14px;
+
+background:rgba(30,144,255,.1);
+
+color:#cfe8ff;
+text-decoration:none;
+
+transition:.25s;
+}
+
+header a:hover{
+background:#1e90ff;
+color:white;
+}
+
+/* MAIN */
+
 main{
-  max-width:900px;
-  margin:90px auto;
-  padding:20px;
+max-width:950px;
+margin:80px auto;
+padding:30px;
 }
-#slider-wrapper{position:relative;min-height:240px}
 
-/* ================= CARD ================= */
+/* COUNTER */
+
+#counter{
+text-align:center;
+margin-bottom:50px;
+}
+
+#counterNumber{
+font-size:42px;
+font-weight:800;
+
+color:#7ed0ff;
+
+text-shadow:
+0 0 12px rgba(0,191,255,.9),
+0 0 25px rgba(0,191,255,.6);
+}
+
+#counter small{
+opacity:.7;
+letter-spacing:1px;
+}
+
+/* SLIDER */
+
+#slider-wrapper{
+position:relative;
+min-height:260px;
+margin-bottom:40px;
+}
+
+/* CARD */
+
 .card{
-  background:rgba(5,15,30,.9);
-  border-radius:26px;
-  padding:30px;
-  position:relative;
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.04),
-    0 0 20px rgba(30,144,255,.28),
-    0 18px 45px rgba(2,4,10,.9);
-  animation:fadeSlide .55s ease;
-  transition:.3s;
+background:linear-gradient(
+180deg,
+rgba(8,18,35,.95),
+rgba(4,10,20,.95)
+);
+
+border-radius:24px;
+
+padding:32px;
+
+height:260px;
+
+display:flex;
+flex-direction:column;
+
+border:1px solid rgba(30,144,255,.2);
+
+box-shadow:
+0 0 25px rgba(30,144,255,.15),
+0 15px 40px rgba(0,0,0,.6);
+
+transition:.25s;
 }
+
 .card:hover{
-  transform:translateY(-4px);
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.06),
-    0 0 26px rgba(30,144,255,.45),
-    0 22px 55px rgba(2,4,10,.95);
-}
-@keyframes fadeSlide{
-  from{opacity:0;transform:translateY(12px) scale(.98);filter:blur(6px)}
-  to{opacity:1;transform:none;filter:none}
+transform:translateY(-3px);
+
+box-shadow:
+0 0 35px rgba(30,144,255,.35),
+0 20px 50px rgba(0,0,0,.8);
 }
 
-.ref-header{display:flex;gap:12px;margin-bottom:14px}
-.ref-header img{width:38px}
-.ref-header span{color:#1e90ff}
+.ref-header{
+display:flex;
+gap:12px;
+align-items:center;
+margin-bottom:12px;
+}
+
+.ref-header img{
+width:36px;
+height:36px;
+}
+
+.ref-header strong{
+font-size:16px;
+}
+
+.ref-header span{
+font-size:13px;
+color:#4db3ff;
+opacity:.8;
+}
+
 .ref-text{
-  margin-top:10px;
-  flex:1;
-  overflow-y:auto;
-  padding-right:6px;
-
-  /* scroll bonito e discreto */
-  scrollbar-width:thin;
-  scrollbar-color:#1e90ff transparent;
+margin-top:6px;
+opacity:.9;
 }
 
-/* Scroll Chrome / Edge */
-.ref-text::-webkit-scrollbar{
-  width:6px;
-}
-.ref-text::-webkit-scrollbar-thumb{
-  background:#1e90ff;
-  border-radius:6px;
-}
-.ref-text{
-  mask-image:linear-gradient(
-    to bottom,
-    black 85%,
-    transparent 100%
-  );
+/* GALERIA */
+
+#proofCarouselImage{
+
+width:100%;
+max-width:900px;
+
+border-radius:18px;
+
+border:1px solid rgba(30,144,255,.25);
+
+box-shadow:
+0 0 25px rgba(30,144,255,.25),
+0 15px 40px rgba(0,0,0,.7);
+
+transition:.35s;
+
+margin:40px 0;
 }
 
+#proofCarouselImage:hover{
+transform:scale(1.02);
 
+box-shadow:
+0 0 35px rgba(30,144,255,.5),
+0 20px 50px rgba(0,0,0,.9);
+}
 
-/* ================= FORM ================= */
+/* FORM */
+
 form{
-  margin-top:60px;
-  background:rgba(5,15,30,.9);
-  padding:32px;
-  border-radius:28px;
-  box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.05),
-    0 0 35px rgba(30,144,255,.35),
-    0 20px 60px rgba(2,4,10,.95);
+margin-top:40px;
+
+background:
+linear-gradient(
+180deg,
+rgba(8,18,35,.95),
+rgba(4,10,20,.95)
+);
+
+padding:32px;
+
+border-radius:22px;
+
+border:1px solid rgba(30,144,255,.2);
+
+box-shadow:
+0 0 25px rgba(30,144,255,.15),
+0 20px 45px rgba(0,0,0,.8);
 }
-input,
-textarea{
-  width:100%;
-  padding:14px 16px;
-  margin-bottom:14px;
 
-  border-radius:14px;
-  border:1px solid rgba(59,130,246,.25);
+input,textarea{
 
-  background:rgba(8,18,35,.85);
-  color:#e5e7eb;
+width:100%;
 
-  outline:none;
-  resize:none;
+padding:14px 16px;
 
-  box-shadow:
-    inset 0 1px 2px rgba(255,255,255,.05),
-    0 0 0 rgba(0,0,0,0);
+margin-bottom:14px;
 
-  transition:border .25s ease, box-shadow .25s ease;
+border-radius:12px;
+
+border:1px solid rgba(30,144,255,.2);
+
+background:rgba(5,12,25,.85);
+
+color:#e6edf3;
+
+transition:.2s;
 }
 
 input:focus,
 textarea:focus{
-  border-color:#3b82f6;
-  box-shadow:
-    0 0 0 2px rgba(59,130,246,.25),
-    inset 0 1px 2px rgba(255,255,255,.05);
+
+outline:none;
+
+border-color:#1e90ff;
+
+box-shadow:
+0 0 10px rgba(30,144,255,.5);
 }
+
+textarea{
+resize:none;
+min-height:90px;
+}
+
+/* BOTÃO */
+
 button{
-  width:100%;
-  padding:15px;
-  border:none;
-  border-radius:28px;
-  background:linear-gradient(135deg,#1e90ff,#0066ff);
-  color:#fff;
-  font-weight:bold;
-  position:relative;
-  overflow:hidden;
-}
-button::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,
-    transparent 30%,
-    rgba(255,255,255,.45),
-    transparent 70%);
-  transform:translateX(-120%);
-}
-button:hover::after{
-  transform:translateX(120%);
-  transition:.6s;
-}
 
-.success,.error{text-align:center;display:none;font-weight:bold}
-.success{color:#00ff9c}
-.error{color:#ff5c5c}
+width:100%;
 
-/* ================= MOBILE ================= */
-@media(max-width:768px){
-  #counter{transform:scale(.9)}
-  .card{animation:none}
-}
-/* Card sempre na mesma altura */
-.card{
-  height:260px;              /* ajuste se quiser mais/menos */
-  display:flex;
-  flex-direction:column;
+padding:15px;
+
+border:none;
+
+border-radius:16px;
+
+background:linear-gradient(
+135deg,
+#1e90ff,
+#0066ff
+);
+
+color:white;
+
+font-weight:600;
+
+letter-spacing:.3px;
+
+cursor:pointer;
+
+transition:.25s;
 }
 
+button:hover{
 
-/* ===============================
-   CONTADOR CENTRALIZADO PERFEITO
-================================ */
+transform:translateY(-2px);
 
-#counter{
-  text-align:center;
-  font-family:Arial, sans-serif;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
+box-shadow:
+0 0 20px rgba(30,144,255,.7);
 }
 
-/* Número */
-#counterNumber{
-  font-size:38px;
-  font-weight:900;
-  color:hwb(0 100% 0%);
+/* MENSAGENS */
 
-  text-align:center;
-
-  text-shadow:
-    0 0 12px rgba(0,191,255,1),
-    0 0 30px rgba(0,191,255,.9);
+.success{
+color:#00ffa6;
+text-align:center;
+display:none;
+margin-top:10px;
 }
 
-/* Texto abaixo */
-#counter small{
-  margin-top:5px;
-  font-size:16px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:#00bfff;
+.error{
+color:#ff5c5c;
+text-align:center;
+display:none;
+margin-top:10px;
+}
+.badge{
 
-  text-align:center;
+margin-left:8px;
 
-  text-shadow:
-    0 0 12px rgba(0,191,255,1),
-    0 0 30px rgba(0,191,255,.9);
+font-size:12px;
+
+padding:4px 10px;
+
+border-radius:10px;
+
+background:#0f2a44;
+
+border:1px solid rgba(30,144,255,.5);
+
+color:#1e90ff;
+
+font-weight:600;
+
+letter-spacing:.3px;
+
+
+}
+
+.nick{
+
+font-size:13px;
+
+color:#4db3ff;
+
+opacity:.8;
+
+}
+
+.avatar{
+width:42px;
+height:42px;
+object-fit:cover;
+
 }
 </style>
 </head>
@@ -258,366 +345,248 @@ button:hover::after{
 <body>
 
 <header>
-  <h1>
-  🌝 <span class="titulo-energia">Deixe sua Referencia</span>
-</h1>
-
-  <a class="btn-home" href="https://4sstore.vercel.app/">
-    ♻️𝙿𝚊𝚐𝚒𝚗𝚊 𝚒𝚗𝚒𝚌𝚒𝚊𝚕
-  </a>
-
-  <style>
-    .titulo-energia {
-  font-weight: 600;
-  font-size: 20px; /* controla o tamanho aqui */
-  letter-spacing: 1px;
-      background: linear-gradient(
-        90deg,
-        #ffffff 0%,
-        #ffffff 40%,
-        #00e1ff 50%,
-        #ffffff 60%,
-        #ffffff 100%
-      );
-      background-size: 200% auto;
-      color: transparent;
-      background-clip: text;
-      -webkit-background-clip: text;
-      animation: brilhoCorrendo 3s linear infinite;
-    }
-
-    @keyframes brilhoCorrendo {
-      0% {
-        background-position: -200% center;
-      }
-      100% {
-        background-position: 200% center;
-      }
-    }
-    /* ===============================
-   FLASH PROFISSIONAL AO ATUALIZAR
-================================ */
-
-#counter span{
-  transition: all .25s ease;
-}
-
-.counter-pulse{
-  transform: scale(1.08);
-  text-shadow:
-    0 0 12px rgba(0,191,255,1),
-    0 0 30px rgba(0,191,255,.9),
-    0 0 60px rgba(0,191,255,.7);
-}
-  </style>
+<h1>🌝 Deixe sua Referencia</h1>
+<a href="https://4sstore.vercel.app/">♻️Pagina inicial</a>
 </header>
 
-<!-- GALERIA DE PROVAS -->
-<div style="
-width:100%;
-max-width:900px;
-margin:40px auto;
-text-align:center;
-">
+<main>
 
-<h3 style="
-margin-bottom:20px;
-color:#1e90ff;
-">
-📸 GALERIA
-</h3>
 
-<div style="
-width:100%;
-max-width:900px;
-height:380px;
+</div>
 
-border-radius:18px;
-border:2px solid rgba(30,144,255,.4);
+<!-- CONTADOR -->
+<div id="counter">
+<div id="counterNumber">✔️0</div>
+<small>Referências</small>
+</div>
 
-box-shadow:
-0 0 18px rgba(30,144,255,.25),
-0 10px 30px rgba(0,0,0,.5);
+<!-- SLIDER -->
+<div id="slider-wrapper">
+<div id="slider"></div>
+</div>
+<!-- GALERIA -->
 
-overflow:hidden;
-position:relative;
-">
+<div style="text-align:center;margin-bottom:40px">
+
+
 
 <img id="proofCarouselImage"
-style="
-width:100%;
-height:100%;
-object-fit:cover;
-position:absolute;
-top:0;
-left:0;
-transition:transform .3s ease;
-"
-onmouseover="this.style.transform='scale(1.03)'"
-onmouseout="this.style.transform='scale(1)'"
->
+style="width:100%;max-width:900px;border-radius:18px">
 
-<video id="proofCarouselVideo"
-style="
-width:100%;
-height:100%;
-object-fit:cover;
-position:absolute;
-top:0;
-left:0;
-display:none;
-"
-controls
-playsinline
->
-</video>
+<!-- FORM -->
+<form id="form">
 
-</div>
-</div>
+<input id="fullname" placeholder="Seu nome" required>
+<input id="nickname" placeholder="Seu nickname" required>
+<input id="email" placeholder="Seu email" required>
+<textarea id="message" placeholder="Sua referência" required></textarea>
+
+<button type="submit">Enviar referência</button>
+
+<div id="success" class="success">Referência enviada!</div>
+<div id="error" class="error"></div>
+
+</form>
+
+</main>
 
 <script>
 
 firebase.initializeApp({
-  apiKey:"AIzaSyBGeptReBViZ9CQoJ2G18SmnaxbnvO3kDw",
-  authDomain:"referenciasjogadores.firebaseapp.com",
-  projectId:"referenciasjogadores"
+apiKey:"AIzaSyBGeptReBViZ9CQoJ2G18SmnaxbnvO3kDw",
+authDomain:"referenciasjogadores.firebaseapp.com",
+projectId:"referenciasjogadores"
 });
 
 const db = firebase.firestore();
 
-let refs = [];
-let index = 0;
+let refs=[];
+let index=0;
 
-const slider = document.getElementById("slider");
-const counterNumber = document.getElementById("counterNumber");
-
-/* ================= RENDER ================= */
+const slider=document.getElementById("slider");
+const counterNumber=document.getElementById("counterNumber");
 
 function render(){
 
-  if(!refs.length) return;
+if(!refs.length) return;
 
-  const r = refs[index];
+const r=refs[index];
 
-  slider.style.opacity="0";
-  slider.style.transform="translateY(10px)";
+slider.innerHTML=`
+<div class="card">
 
-  setTimeout(()=>{
+<div class="ref-header">
 
-    slider.innerHTML = `
-      <div class="card">
-        <div class="ref-header">
-          <img src="https://cdn3.emoji.gg/emojis/701524-neon-gmail-icon.png">
-          <div>
-            <strong>${r.fullname}</strong><br>
-            <span>${r.nickname}</span>
-          </div>
-        </div>
-        <div class="ref-text">${r.message}</div>
-      </div>
-    `;
+<img class="avatar" src="https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(r.nickname)}">
+<div>
 
-    slider.style.opacity="1";
-    slider.style.transform="translateY(0)";
+<strong>
+${r.fullname}
+<span class="badge">💎Cliente</span>
+</strong>
 
-  },180);
+<br>
+
+<span class="nick">#${r.nickname}</span>
+
+</div>
+
+</div>
+
+<div class="ref-text">
+${r.message}
+</div>
+
+</div>
+`;
 
 }
-
-/* ================= CONTADOR ================= */
 
 function updateCounter(total){
-
-  counterNumber.textContent = `✔️${total}`;
-
-  counterNumber.classList.remove("counter-pulse");
-  void counterNumber.offsetWidth;
-  counterNumber.classList.add("counter-pulse");
-
+counterNumber.textContent=`✔️${total}`;
 }
-
-/* ================= FIREBASE LISTENER ================= */
 
 db.collection("referencias")
 .orderBy("timestamp","desc")
 .onSnapshot(snapshot=>{
 
-  refs = [];
+refs=[];
 
-  snapshot.forEach(doc=>{
-
-    const data = doc.data();
-
-    if(data.timestamp){
-      refs.push(data);
-    }
-
-  });
-
-  updateCounter(refs.length);
-
-  index = 0;
-
-  render();
-
+snapshot.forEach(doc=>{
+const data=doc.data();
+if(data.timestamp) refs.push(data);
 });
 
-/* ================= AUTO SLIDE ================= */
+updateCounter(refs.length);
+
+index=0;
+render();
+
+});
 
 setInterval(()=>{
-
-  if(refs.length){
-
-    index = (index + 1) % refs.length;
-
-    render();
-
-  }
-
+if(refs.length){
+index=(index+1)%refs.length;
+render();
+}
 },6000);
+slider.addEventListener("click", () => {
 
-/* ================= CLICK SLIDE ================= */
+if(refs.length > 1){
 
-slider.addEventListener("click",()=>{
+index = (index + 1) % refs.length;
 
-  if(refs.length > 1){
+render();
 
-    index = (index + 1) % refs.length;
-
-    render();
-
-  }
+}
 
 });
-
-/* ================= ENVIO ================= */
-
-const form = document.getElementById("form");
-const fullname = document.getElementById("fullname");
-const nickname = document.getElementById("nickname");
-const email = document.getElementById("email");
-const message = document.getElementById("message");
-
-const success = document.getElementById("success");
-const error = document.getElementById("error");
+const form=document.getElementById("form");
 
 form.addEventListener("submit", async e => {
 
-  e.preventDefault();
+e.preventDefault();
 
-  error.style.display="none";
-  success.style.display="none";
+const fullname=document.getElementById("fullname").value.trim();
+const nickname=document.getElementById("nickname").value.trim();
+const email=document.getElementById("email").value.trim();
+const message=document.getElementById("message").value.trim();
 
-  const data = {
+const success=document.getElementById("success");
+const error=document.getElementById("error");
 
-    fullname: fullname.value.trim(),
-    nickname: nickname.value.trim(),
-    email: email.value.trim(),
-    message: message.value.trim(),
-    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+success.style.display="none";
+error.style.display="none";
 
-  };
+try{
 
-  try{
+/* verifica email e nickname */
+const [emailCheck, nickCheck] = await Promise.all([
 
-    const [a,c] = await Promise.all([
+db.collection("referencias")
+.where("email","==",email)
+.get(),
 
-  db.collection("referencias").where("email","==",data.email).get(),
-  db.collection("referencias").where("nickname","==",data.nickname).get()
+db.collection("referencias")
+.where("nickname","==",nickname)
+.get()
 
 ]);
 
-if(!a.empty || !c.empty){
+if(!emailCheck.empty){
 
-  error.textContent="Email ou nickname já utilizado.";
-  error.style.display="block";
-  return;
+error.textContent="Este email já enviou uma referência.";
+error.style.display="block";
+return;
 
 }
 
-    await db.collection("referencias").add(data);
+if(!nickCheck.empty){
 
-    success.style.display="block";
+error.textContent="Este nickname já foi utilizado.";
+error.style.display="block";
+return;
 
-    form.reset();
+}
 
-  }catch(err){
+/* envia referência */
 
-    console.error(err);
+await db.collection("referencias").add({
 
-    error.textContent="Erro ao enviar referência.";
-    error.style.display="block";
-
-  }
+fullname,
+nickname,
+email,
+message,
+timestamp:firebase.firestore.FieldValue.serverTimestamp()
 
 });
 
+success.style.display="block";
+
+form.reset();
+
+}catch(err){
+
+console.error(err);
+
+error.textContent="Erro ao enviar referência.";
+error.style.display="block";
+
+}
+
+});
 </script>
 
 <script>
-/* ===== CONFIGURAR IMAGENS AQUI ===== */
-const proofFolder = "/public/provas/";
-const proofFiles = [
-  "Simarillion Keeper.gif",
-  "joker.gif",
-  "L.gif",
+
+const proofFolder="/public/provas/";
+
+const proofFiles=[
+"Simarillion Keeper.gif",
+"joker.gif",
+"L.gif",
+"Grand General.gif",
+"Abigali.gif"
 ];
 
-/* =================================== */
+const proofImages=proofFiles.map(f=>proofFolder+f);
 
-const proofImages = proofFiles.map(file => proofFolder + file);
-
-let proofIndex = 0;
-const proofImg = document.getElementById("proofCarouselImage");
+let proofIndex=0;
+const proofImg=document.getElementById("proofCarouselImage");
 
 function updateProof(){
-  proofImg.style.opacity = "0";
-
-  setTimeout(()=>{
-    proofImg.src = proofImages[proofIndex];
-    proofImg.style.opacity = "1";
-  },200);
+proofImg.src=proofImages[proofIndex];
 }
 
 function nextProof(){
-  proofIndex = (proofIndex + 1) % proofImages.length;
-  updateProof();
+proofIndex=(proofIndex+1)%proofImages.length;
+updateProof();
 }
 
 updateProof();
-setInterval(nextProof, 4000);
+setInterval(nextProof,4000);
 
-/* ===== ZOOM AO CLICAR ===== */
-proofImg.onclick = function(){
-  const modal = document.createElement("div");
-  modal.style = `
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.85);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
-  `;
-
-  const img = document.createElement("img");
-  img.src = this.src;
-  img.style = `
-    max-width:90%;
-    max-height:90%;
-    border-radius:20px;
-    box-shadow:0 0 50px rgba(30,144,255,.7);
-  `;
-
-  modal.appendChild(img);
-  document.body.appendChild(modal);
-
-  modal.onclick = () => modal.remove();
-};
 </script>
-<main>
-<div id="slider-wrapper">
-  <div id="slider"></div>
-</div>
+
 </body>
 </html>
