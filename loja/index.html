@@ -1336,36 +1336,16 @@ function add(id){
     c.qty++;
   }else{
     cart.push({
-  id: p.id,
-  name: p.name, // aqui pega exatamente "Asas Douradas da Justiça #W"
-  price: p.price,
-  qty: 1
-});
+      id: p.id,
+      name: nomeFinal,   // ✅ agora usa o nome com owner/badge
+      price: p.price,
+      qty: 1
+    });
   }
 
   renderCart();
   updateCartBtn();
 }
-
-
-function changeQty(id, d) {
-  const c = cart.find(i => i.id === id);
-  const p = productsData.find(i => i.id === id);
-  if (!c || !p) return;
-
-  // 🔒 limite de estoque real
-  if (d > 0 && c.qty >= p.baseStock) return;
-
-  c.qty += d;
-
-  if (c.qty <= 0) {
-    cart = cart.filter(i => i.id !== id);
-  }
-
-  renderCart();
-  updateCartBtn();
-}
-
 function renderCart(){
 
 let t = 0;
@@ -1657,15 +1637,17 @@ document.getElementById("cartModal").style.display="none";
 
 function checkout(){
 
-  let msg = "🛒 *Pedido 4S STORE*%0A%0A";
+  let msg = "🛒 *Pedido 4S STORE*\n\n";
 
   cart.forEach(i => {
-    msg += `• ${i.name} x${i.qty}%0A`;
+    msg += `• ${i.name} x${i.qty}\n`;
   });
 
-  msg += `%0A💰 Total: R$ ${total.innerText}`;
+  msg += `\n💰 Total: R$ ${total.innerText}`;
 
-  window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${msg}`);
+  const encodedMsg = encodeURIComponent(msg);
+
+  window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodedMsg}`);
 }
 /* ===============================
    PATCH ESTOQUE SÓ NO CHECKOUT
@@ -2036,10 +2018,10 @@ display:flex;
 align-items:center;
 gap:4px;
 
-font-size:13px;
+font-size:9px;
 font-weight:700;
 
-padding:5px 10px;
+padding:4px 8px;
 
 border-radius:8px;
 
