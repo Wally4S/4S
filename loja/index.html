@@ -1171,8 +1171,7 @@ ADD({id:100,name:"Pack [150] Poção de Guyak",owners:["#W"],price:14.99,stock:1
 ADD({id:101,name:"Pack [40] Fruta dos Gatos",owners:["#W"],price:7.99,stock:1,categories:"🥩consumivel",promo:false,img:"../public/img/Fruta dos Gatos.png"});
 ADD({id:102,name:"Caixa de Cupom Tintura",owners:["#W"],price:3.99,stock:4,categories:"🥩consumivel",promo:false,img:"../public/img/Caixa de Cupom de Tintura.png"});
 /* CARRINHO */
-let cart=JSON.parse(localStorage.getItem("cart"))||[];
-
+let cart = [];
 function updateCartBtn(){
  const q = cart.reduce((s,i)=>s+i.qty,0);
 
@@ -1184,7 +1183,6 @@ function updateCartBtn(){
    setTimeout(()=>cartBtn.classList.remove("bump"),300);
  }
 
- localStorage.setItem("cart",JSON.stringify(cart));
  
 }
 
@@ -1338,11 +1336,11 @@ function add(id){
     c.qty++;
   }else{
     cart.push({
-      id: p.id,
-      name: nomeFinal,
-      price: p.price,
-      qty: 1
-    });
+  id: p.id,
+  name: p.name, // aqui pega exatamente "Asas Douradas da Justiça #W"
+  price: p.price,
+  qty: 1
+});
   }
 
   renderCart();
@@ -1657,29 +1655,18 @@ document.getElementById("cartModal").style.display="none";
 
 }
 
-function checkout() {
+function checkout(){
 
   let msg = "🛒 *Pedido 4S STORE*%0A%0A";
 
   cart.forEach(i => {
-
-    const p = productsData.find(prod => prod.id === i.id);
-
-    let nomeFinal = p.name;
-
-    if(p.owners && p.owners.length){
-      nomeFinal += " " + p.owners.join(" ");
-    }
-
-    msg += `• ${nomeFinal} x${i.qty}%0A`;
-
+    msg += `• ${i.name} x${i.qty}%0A`;
   });
 
   msg += `%0A💰 Total: R$ ${total.innerText}`;
 
   window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${msg}`);
 }
-
 /* ===============================
    PATCH ESTOQUE SÓ NO CHECKOUT
    =============================== */
@@ -1727,19 +1714,6 @@ function checkout() {
 renderCategories();
 render();
 
-
-  // Script de bloqueio Ctrl+U
-  document.onkeydown = function(e) {
-    if (e.ctrlKey && e.key === 'u') {
-      alert("Você não pode visualizar o código-fonte desta página!");
-      return true;
-    }
-    // Bloqueio do botão direito do mouse
-    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-      alert("Você não pode acessar as ferramentas de desenvolvedor.");
-      return true;
-    }
-  };
 
   // Desabilitar o clique com o botão direito do mouse
   document.addEventListener("contextmenu", function(e) {
