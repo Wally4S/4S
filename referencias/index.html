@@ -77,37 +77,52 @@ margin-bottom:50px;
 }
 
 #counterNumber{
-font-size:42px;
-font-weight:800;
-
-color:#7ed0ff;
-
+font-size:60px;
+font-weight:900;
+color:#00ffff;
 text-shadow:
-0 0 12px rgba(0,191,255,.9),
-0 0 25px rgba(0,191,255,.6);
+0 0 10px #00ffff,
+0 0 20px #00ffff,
+0 0 30px #00ffff,
+0 0 40px #00ffff;
+animation:counterGlow 1.5s infinite alternate;
+}
+
+@keyframes counterGlow{
+0%{
+text-shadow:
+0 0 8px #00ffff,
+0 0 16px #00ffff,
+0 0 24px #00ffff;
+}
+100%{
+text-shadow:
+0 0 12px #00ffff,
+0 0 28px #00ffff,
+0 0 40px #00ffff,
+0 0 60px #00ffff;
+}
 }
 
 #counter small{
+display:block;
+margin-top:4px;
+font-size:16px;
 opacity:.7;
+color:#7ed0ff;
 letter-spacing:1px;
+text-transform:uppercase;
+text-shadow:0 0 6px rgba(0,191,255,.5);
 }
 
-/* SLIDER */
-
-#slider-wrapper{
-position:relative;
-min-height:260px;
-margin-bottom:40px;
-}
 
 /* CARD */
 
 .card{
-background:linear-gradient(
-180deg,
-rgba(8,18,35,.95),
-rgba(4,10,20,.95)
-);
+
+background:rgba(10,20,40,0.75);
+
+backdrop-filter:blur(12px);
 
 border-radius:24px;
 
@@ -118,21 +133,24 @@ height:260px;
 display:flex;
 flex-direction:column;
 
-border:1px solid rgba(30,144,255,.2);
+border:1px solid rgba(30,144,255,.35);
 
 box-shadow:
-0 0 25px rgba(30,144,255,.15),
-0 15px 40px rgba(0,0,0,.6);
+0 10px 40px rgba(0,0,0,.8),
+0 0 25px rgba(30,144,255,.25);
+animation:fadeCard .4s ease;
+transition:.35s;
 
-transition:.25s;
 }
 
 .card:hover{
-transform:translateY(-3px);
+
+transform:translateY(-6px) scale(1.02);
 
 box-shadow:
-0 0 35px rgba(30,144,255,.35),
-0 20px 50px rgba(0,0,0,.8);
+0 0 40px rgba(30,144,255,.45),
+0 20px 60px rgba(0,0,0,.9);
+
 }
 
 .ref-header{
@@ -149,6 +167,10 @@ height:36px;
 
 .ref-header strong{
 font-size:16px;
+color:#e6f6ff;
+
+text-shadow:
+0 0 8px rgba(30,144,255,.7);
 }
 
 .ref-header span{
@@ -158,38 +180,43 @@ opacity:.8;
 }
 
 .ref-text{
-margin-top:6px;
+margin-top:10px;
 opacity:.9;
+overflow-wrap:anywhere;
+word-break:break-word;
 }
 
 /* GALERIA */
 
-#proofCarouselImage{
-    width:100%;          /* ocupa toda a largura disponível */
-    max-width:900px;     /* limite máximo de largura */
-    height:auto;         /* altura automática para manter proporção */
-    object-fit:contain;  /* mantém proporção, não corta */
+#proofCarouselImage {
+    width:100%;
+    max-width:900px;
+    height:auto;
+    object-fit:contain;
     border-radius:18px;
     border:1px solid rgba(30,144,255,.25);
-    box-shadow:
-        0 0 25px rgba(30,144,255,.25),
-        0 15px 40px rgba(0,0,0,.7);
-    transition:.35s;
+    box-shadow:0 0 25px rgba(30,144,255,.25),0 15px 40px rgba(0,0,0,.7);
+    transition: transform .35s ease, opacity .5s ease-in-out;
     margin:40px 0;
+    display:block;
+    opacity:0;
 }
 
-/* Opcional: efeito leve de hover, sem zoom */
-#proofCarouselImage:hover{
-    box-shadow:
-        0 0 35px rgba(30,144,255,.5),
-        0 20px 50px rgba(0,0,0,.9);
+#proofCarouselImage.active {
+    opacity:1;
+    transform: scale(1.02);
 }
-#proofCarouselImage:hover{
-transform:scale(1.02);
 
-box-shadow:
-0 0 35px rgba(30,144,255,.5),
-0 20px 50px rgba(0,0,0,.9);
+#proofCarouselImage:hover {
+    transform: scale(1.03);
+    box-shadow:0 0 35px rgba(30,144,255,.5),0 20px 50px rgba(0,0,0,.9);
+}
+/* Container com perspectiva 3D */
+#slider-wrapper{
+  position:relative;
+  min-height:260px;
+  margin-bottom:40px;
+  perspective:1200px;
 }
 
 /* FORM */
@@ -296,11 +323,78 @@ display:none;
 margin-top:10px;
 }
 
+/* ERRO */
+
 .error{
+
 color:#ff5c5c;
 text-align:center;
-display:none;
 margin-top:10px;
+
+animation:errorGlow 1.2s infinite alternate;
+
+}
+
+/* SUCESSO */
+
+.success{
+
+color:#00ffa6;
+text-align:center;
+margin-top:10px;
+
+animation:successGlow 1.2s infinite alternate;
+
+}
+
+/* animação erro */
+
+@keyframes errorGlow{
+
+0%{
+
+opacity:.7;
+
+text-shadow:
+0 0 4px rgba(255,0,0,.4);
+
+}
+
+100%{
+
+opacity:1;
+
+text-shadow:
+0 0 10px rgba(255,0,0,.9),
+0 0 18px rgba(255,0,0,.6);
+
+}
+
+}
+
+/* animação sucesso */
+
+@keyframes successGlow{
+
+0%{
+
+opacity:.7;
+
+text-shadow:
+0 0 4px rgba(0,255,150,.4);
+
+}
+
+100%{
+
+opacity:1;
+
+text-shadow:
+0 0 10px rgba(0,255,150,.9),
+0 0 18px rgba(0,255,150,.6);
+
+}
+
 }
 .badge{
 
@@ -341,6 +435,57 @@ height:42px;
 object-fit:cover;
 
 }
+@keyframes fadeCard{
+
+from{
+opacity:0;
+transform:translateY(10px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+/* ALERTA AMARELO PULSANTE */
+
+.alert{
+
+font-size:12px;
+margin-top:4px;
+
+color:#FFD700; /* amarelo ouro */
+
+animation:alertGlow 1.2s infinite alternate;
+
+}
+
+/* animação glow amarelo */
+
+@keyframes alertGlow{
+
+0%{
+opacity:.7;
+text-shadow:
+0 0 4px rgba(255,215,0,.4); /* glow leve */
+}
+
+100%{
+opacity:1;
+text-shadow:
+0 0 8px rgba(255,215,0,.9),
+0 0 15px rgba(255,215,0,.6); /* glow intenso */
+}
+
+}
+
+#charCount{
+
+font-size:12px;
+opacity:.7;
+
+}
 </style>
 </head>
 
@@ -358,7 +503,7 @@ object-fit:cover;
 
 <!-- CONTADOR -->
 <div id="counter">
-<div id="counterNumber">✔️0</div>
+<div id="counterNumber">🏆0</div>
 <small>Referências</small>
 </div>
 
@@ -387,13 +532,13 @@ object-fit:cover;
 const proofFolder="/public/provas/";
 
 const proofFiles=[
-"Simarillion Keeper.gif",
-"joker.gif",
-"L.gif",
-"Grand General.gif",
-"Abigali.gif",
-"Oshaa.gif",
-"Papa Sisto.gif",
+  "Simarillion Keeper.gif",
+  "joker.gif",
+  "L.gif",
+  "Grand General.gif",
+  "Abigali.gif",
+  "Oshaa.gif",
+  "Papa Sisto.gif",
 ];
 
 const proofImages=proofFiles.map(f=>proofFolder+f);
@@ -402,38 +547,64 @@ let proofIndex=0;
 const proofImg=document.getElementById("proofCarouselImage");
 
 function updateProof(){
+  // fade-out
+  proofImg.classList.remove("active");
+  setTimeout(()=>{
     proofImg.src=proofImages[proofIndex];
-}
-
-function nextProof(){
-    proofIndex=(proofIndex+1)%proofImages.length;
-    updateProof();
+    proofImg.classList.add("active"); // fade-in
+  },200);
 }
 
 // Inicializa
-updateProof();
+proofImg.src = proofImages[proofIndex];
+proofImg.classList.add("active");
 
 // Troca automática a cada 4s
-setInterval(nextProof,4000);
+setInterval(()=>{
+  proofIndex=(proofIndex+1)%proofImages.length;
+  updateProof();
+},4000);
 
 // Troca ao clicar
-proofImg.onclick = nextProof;
+proofImg.onclick = ()=>{
+  proofIndex=(proofIndex+1)%proofImages.length;
+  updateProof();
+}
 </script>
 <!-- FORM -->
-<form id="form">
+<form id="form" class="ref-form">
 
-<input id="fullname" placeholder="Seu nome" required>
-<input id="nickname" placeholder="Seu nickname" required>
-<input id="email" placeholder="Seu email" required>
-<textarea id="message" placeholder="Sua referência" required></textarea>
+<h2>⭐ Enviar Referência</h2>
+
+<div class="form-group">
+<label>Nome</label>
+<input id="fullname" placeholder="Ex: João Silva" required>
+</div>
+
+<div class="form-group">
+<label>Nickname</label>
+<input id="nickname" placeholder="Ex: Player123" required>
+<small id="nickAlert" class="alert"></small>
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input id="email" type="email" placeholder="Ex: email@gmail.com" required>
+<small id="emailAlert" class="alert"></small>
+</div>
+
+<div class="form-group">
+<label>Sua referência</label>
+<textarea id="message" maxlength="300" placeholder="Conte como foi sua experiência comprando na 4S Store..." required></textarea>
+<small id="charCount">0 / 300</small>
+</div>
 
 <button type="submit">Enviar referência</button>
 
-<div id="success" class="success">Referência enviada!</div>
+<div id="success" class="success">✔ Referência enviada!</div>
 <div id="error" class="error"></div>
 
 </form>
-
 </main>
 
 <script>
@@ -489,7 +660,26 @@ ${r.message}
 }
 
 function updateCounter(total){
-counterNumber.textContent=`✔️${total}`;
+
+let start = 0;
+let duration = 800; 
+let stepTime = 10;
+
+let increment = total / (duration / stepTime);
+
+const timer = setInterval(()=>{
+
+start += increment;
+
+if(start >= total){
+start = total;
+clearInterval(timer);
+}
+
+counterNumber.textContent = "🏆" + Math.floor(start);
+
+}, stepTime);
+
 }
 
 db.collection("referencias")
@@ -558,18 +748,18 @@ db.collection("referencias")
 .get()
 
 ]);
-
+// ALERTA EMAIL
 if(!emailCheck.empty){
 
-error.textContent="Este email já enviou uma referência.";
+error.textContent = "❌ Referência não enviada, informações já usadas.";
 error.style.display="block";
 return;
 
 }
-
+// ALERTA NICKNAME
 if(!nickCheck.empty){
 
-error.textContent="Este nickname já foi utilizado.";
+error.textContent = "❌ Referência não enviada, informações já usadas.";
 error.style.display="block";
 return;
 
@@ -602,6 +792,82 @@ error.style.display="block";
 
 });
 </script>
+<script>
 
+/* TODO SEU JS ATUAL */
+
+form.addEventListener("submit", async e => {
+
+e.preventDefault();
+
+/* envio da referencia */
+
+});
+
+/* COLE AQUI EMBAIXO 👇 */
+
+const emailInput = document.getElementById("email");
+const nickInput = document.getElementById("nickname");
+const messageInput = document.getElementById("message");
+
+const emailAlert = document.getElementById("emailAlert");
+const nickAlert = document.getElementById("nickAlert");
+const charCount = document.getElementById("charCount");
+
+/* contador de caracteres */
+
+messageInput.addEventListener("input",()=>{
+charCount.textContent = messageInput.value.length + " / 300";
+});
+
+/* verificar email */
+
+emailInput.addEventListener("blur", async ()=>{
+
+const email = emailInput.value.trim();
+
+if(!email) return;
+
+const check = await db.collection("referencias")
+.where("email","==",email)
+.get();
+
+if(!check.empty){
+
+emailAlert.textContent="⚠ Este email já enviou uma referência.";
+
+}else{
+
+emailAlert.textContent="";
+
+}
+
+});
+
+/* verificar nickname */
+
+nickInput.addEventListener("blur", async ()=>{
+
+const nick = nickInput.value.trim();
+
+if(!nick) return;
+
+const check = await db.collection("referencias")
+.where("nickname","==",nick)
+.get();
+
+if(!check.empty){
+
+nickAlert.textContent="⚠ Este nickname já foi usado.";
+
+}else{
+
+nickAlert.textContent="";
+
+}
+
+});
+
+</script>
 </body>
 </html>
