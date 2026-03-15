@@ -1984,44 +1984,57 @@ function checkout() {
 /* ===============================
    PATCH ESTOQUE SÓ NO CHECKOUT
    =============================== */
-
 (function () {
 
   const originalCheckout = window.checkout;
 
   window.checkout = function () {
 
+    // Atualiza o estoque
     cart.forEach(item => {
-
       const p = productsData.find(p => p.id === item.id);
-
       if (p) {
         p.baseStock = Math.max(0, p.baseStock - item.qty);
       }
-
     });
 
+    // Salva produtos atualizados no localStorage
     localStorage.setItem(
       "products",
       JSON.stringify(
-        productsData.map(p => ({
-          id: p.id,
-          baseStock: p.baseStock
-        }))
+        productsData.map(p => ({ id: p.id, baseStock: p.baseStock }))
       )
     );
 
+    // Chama o checkout original
     originalCheckout.apply(this, arguments);
 
+    // ===============================
+    // Zera o carrinho APÓS finalizar
+    // ===============================
     cart = [];
-
     renderCart();
     render();
     closeCart();
-
   };
 
 })();
+
+/* ===============================
+   ZERA CARRINHO AO DAR F5
+   =============================== */
+window.addEventListener("load", function() {
+  cart = [];
+  updateCartBtn();
+  if(document.getElementById("cartItems")){
+      document.getElementById("cartItems").innerHTML = "";
+      document.getElementById("total").innerText = "0";
+  }
+
+  // opcional: limpar cart salvo no localStorage, se houver
+  localStorage.removeItem("cart");
+});
+
 /* ===============================
    INICIALIZAÇÃO
    =============================== */
