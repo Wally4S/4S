@@ -256,6 +256,12 @@ sorted.sort((a,b)=>{
 let idA=bosses.indexOf(a)
 let idB=bosses.indexOf(b)
 
+let spawnedA=localStorage.getItem("spawned"+idA)
+let spawnedB=localStorage.getItem("spawned"+idB)
+
+if(spawnedA && !spawnedB) return -1
+if(!spawnedA && spawnedB) return 1
+
 let spawnA=localStorage.getItem("spawn"+idA)
 let spawnB=localStorage.getItem("spawn"+idB)
 
@@ -339,6 +345,8 @@ renderCards()
 function resetTimer(id){
 
 localStorage.removeItem("spawn"+id)
+localStorage.removeItem("spawned"+id)
+
 renderCards()
 
 }
@@ -361,6 +369,8 @@ if(remain<=0){
 
 timer.innerText="SPAWN"
 card.classList.add("spawnGlow")
+
+localStorage.setItem("spawned"+id,true)
 
 alarm.play()
 
