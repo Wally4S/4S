@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>ROX Boss Tracker</title>
+
+<style>
+
+body{
+background:#020617;
+font-family:Arial;
+color:white;
+text-align:center;
+}
+
+/* TOP BAR */
+
+.topBar{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.topBar button,
+.topBar a{
+
+background:#2563eb;
+padding:7px 14px;
+border-radius:10px;
+border:none;
+color:white;
+cursor:pointer;
+text-decoration:none;
+transition:.25s;
+
+}
+
+.topBar button:hover,
+.topBar a:hover{
+
+transform:translateY(-2px);
+box-shadow:0 0 15px #3b82f6;
+
+}
+
+/* SEARCH */
+
+.search{
+margin-top:12px;
+padding:7px;
+border-radius:10px;
+border:none;
+width:220px;
+}
+
+/* GRID */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,190px);
+gap:20px;
+justify-content:center;
+margin-top:20px;
+}
+
+/* CARD */
+
+.card{
+background:#020617;
+border-radius:14px;
+overflow:hidden;
+width:190px;
+padding-bottom:10px;
+cursor:pointer;
+transition:.25s;
+position:relative;
+box-shadow:0 0 12px #1e293b;
+}
+
+.card:hover{
+transform:translateY(-5px) scale(1.03);
+box-shadow:0 0 20px #3b82f6;
+}
+
+.card img{
+width:100%;
+height:110px;
+object-fit:contain;
+background:#020617;
+}
+
+/* glass shine */
+
+.card::after{
+
+content:"";
+position:absolute;
+top:-100%;
+left:-100%;
+width:200%;
+height:200%;
+
+background:linear-gradient(
+120deg,
+transparent 40%,
+rgba(255,255,255,0.25) 50%,
+transparent 60%
+);
+
+transform:rotate(25deg);
+opacity:0;
+
+}
+
+.card:hover::after{
+animation:shine 1.2s;
+}
+
+@keyframes shine{
+
+0%{top:-100%;left:-100%;opacity:0}
+40%{opacity:1}
+100%{top:100%;left:100%;opacity:0}
+
+}
+
+/* INFO */
+
+.info{padding:6px;}
+
+.name{font-weight:bold;color:#7dd3fc;}
+
+.map{font-size:12px;color:#94a3b8;}
+
+.timer{margin-top:5px;font-size:16px;}
+
+input{
+width:40%;
+padding:4px;
+margin-top:5px;
+border-radius:8px;
+border:none;
+text-align:center;
+}
+
+button{
+margin-top:5px;
+padding:4px 10px;
+border:none;
+border-radius:8px;
+background:#2563eb;
+color:white;
+cursor:pointer;
+}
+
+/* SPAWN ALERT */
+
+.spawnGlow{
+animation:glow 1s infinite;
+}
+
+@keyframes glow{
+0%{box-shadow:0 0 10px red}
+50%{box-shadow:0 0 35px red}
+100%{box-shadow:0 0 10px red}
+}
+
+/* PAGINAÇÃO */
+
+.pagination{
+margin-top:25px;
+}
+
+.pagination button{
+
+background:#1e40af;
+padding:6px 14px;
+border:none;
+border-radius:8px;
+color:white;
+cursor:pointer;
+margin:5px;
+
+}
+
+.pagination button:hover{
+
+box-shadow:0 0 10px #3b82f6;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topBar">
+
+<a href="https://4sstore.vercel.app/">🏠 Início</a>
+
+<button onclick="filterBoss('all')">Todos</button>
+<button onclick="filterBoss('mvp')">MVP</button>
+<button onclick="filterBoss('mini')">Mini Boss</button>
+
+</div>
+
+<input class="search" placeholder="Buscar boss..." onkeyup="searchBoss(this.value)">
+
+<div class="grid" id="grid"></div>
+
+<div class="pagination">
+
+<button onclick="prevPage()">⬅</button>
+
+<span id="pageInfo"></span>
+
+<button onclick="nextPage()">➡</button>
+
+</div>
+
+<audio id="alarm" loop>
+<source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg">
+</audio>
+
+<script>
+
+Notification.requestPermission()
+
+const alarm=document.getElementById("alarm")
+
+const cardsPerPage=12
+let currentPage=1
+let currentFilter="all"
+
+const bosses=[
+
+{name:"Baphomet",map:"Labyrinth Forest",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/mvp-monster/mob_baphomet.png",type:"mvp"},
+{name:"Dracula",map:"Glast Heim",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/illusion-dungeons/mob_ill_dracula.png",type:"mvp"},
+{name:"Faraó",map:"Pyramid",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/mvp-monster/mob_pharaoh.png",type:"mvp"},
+{name:"Drake",map:"Sunken Ship",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/mvp-monster/mob_drake.png",type:"mvp"},
+{name:"Eddga",map:"Payon Forest",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/mvp-monster/mob_eddga.png",type:"mvp"},
+{name:"Kraken",map:"Payon Forest",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/mvp-monster/mob_kraken.png",type:"mvp"},
+{name:"Maya",map:"Payon Forest",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/mvp-monster/mob_maya.png",type:"mvp"},
+{name:"Flor do Luar",map:"Payon Cave",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/mvp-monster/mob_moonlight.png",type:"mvp"},
+{name:"Orc Hero",map:"Orc Village",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/mvp-monster/mob_ork_hero.png",type:"mvp"},
+{name:"Osiris",map:"Pyramid",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/mvp-monster/mob_osiris.png",type:"mvp"},
+{name:"Doppelganger",map:"Morroc",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/mvp-monster/mob_doppelganger.png",type:"mvp"},
+{name:"Abelha Rainha",map:"Morroc",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/mvp-monster/mob_mistress.png",type:"mvp"},
+{name:"Phreeoni",map:"Morroc",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/mvp-monster/mob_phreeoni.png",type:"mvp"},
+
+{name:"Eclipse",map:"Payon",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/boss-general-monster/mob_eclipse",type:"mini"},
+{name:"Ghostring",map:"Geffen",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/boss-general-monster/111ghostring.png",type:"mini"},
+{name:"Libélula",map:"Mjolnir",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/boss-general-monster/83dragon_fly.png",type:"mini"},
+{name:"Mastering",map:"Prontera",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/event/mob_jp_e_monster_145.png",type:"mini"},
+{name:"Angeling",map:"Prontera",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/boss-general-monster/88angeling.png",type:"mini"},
+{name:"Deviling",map:"Prontera",img:"https://ragnarokonline.gungho.jp/special/fankit/assets/img/monster/boss-general-monster/509deviling.png",type:"mini"}
+
+]
+
+const grid=document.getElementById("grid")
+
+function getFilteredBosses(){
+
+if(currentFilter==="all") return bosses
+
+return bosses.filter(b=>b.type===currentFilter)
+
+}
+
+function renderCards(){
+
+grid.innerHTML=""
+
+let filtered=getFilteredBosses()
+
+let start=(currentPage-1)*cardsPerPage
+let end=start+cardsPerPage
+
+let pageBosses=filtered.slice(start,end)
+
+pageBosses.forEach((boss,i)=>{
+
+let realIndex=bosses.indexOf(boss)
+
+grid.innerHTML+=`
+
+<div class="card"
+data-type="${boss.type}"
+data-name="${boss.name.toLowerCase()}"
+id="card${realIndex}"
+onclick="stopAlarm()">
+
+<img src="${boss.img}">
+
+<div class="info">
+
+<div class="name">${boss.name}</div>
+<div class="map">${boss.map}</div>
+
+<div class="timer">--</div>
+
+<input type="number" placeholder="H" class="h">
+<input type="number" placeholder="M" class="m">
+
+<br>
+
+<button onclick="start(event,${realIndex})">Start</button>
+
+</div>
+
+</div>
+
+`
+
+})
+
+updatePageInfo(filtered.length)
+
+}
+
+function updatePageInfo(total){
+
+let totalPages=Math.ceil(total/cardsPerPage)
+
+document.getElementById("pageInfo").innerText="Página "+currentPage+" / "+totalPages
+
+}
+
+function nextPage(){
+
+currentPage++
+renderCards()
+
+}
+
+function prevPage(){
+
+if(currentPage>1){
+currentPage--
+renderCards()
+}
+
+}
+
+function filterBoss(type){
+
+currentFilter=type
+currentPage=1
+renderCards()
+
+}
+
+function start(event,id){
+
+event.stopPropagation()
+
+let card=document.getElementById("card"+id)
+
+let h=card.querySelector(".h").value||0
+let m=card.querySelector(".m").value||0
+
+let total=(h*3600)+(m*60)
+
+let spawn=Date.now()+total*1000
+
+localStorage.setItem("spawn"+id,spawn)
+
+}
+
+function update(){
+
+document.querySelectorAll(".card").forEach(card=>{
+
+let id=card.id.replace("card","")
+
+let spawn=localStorage.getItem("spawn"+id)
+
+if(!spawn) return
+
+let timer=card.querySelector(".timer")
+
+let remain=(spawn-Date.now())/1000
+
+if(remain<=0){
+
+timer.innerText="SPAWN"
+card.classList.add("spawnGlow")
+
+alarm.play().catch(()=>{})
+
+localStorage.removeItem("spawn"+id)
+
+return
+
+}
+
+let h=Math.floor(remain/3600)
+let m=Math.floor((remain%3600)/60)
+let s=Math.floor(remain%60)
+
+timer.innerText=h+"h "+m+"m "+s+"s"
+
+})
+
+}
+
+setInterval(update,1000)
+
+function stopAlarm(){
+
+alarm.pause()
+alarm.currentTime=0
+
+}
+
+function searchBoss(text){
+
+text=text.toLowerCase()
+
+document.querySelectorAll(".card").forEach(card=>{
+
+let name=card.dataset.name
+
+card.style.display=name.includes(text)?"block":"none"
+
+})
+
+}
+
+renderCards()
+
+</script>
+
+</body>
+</html>
