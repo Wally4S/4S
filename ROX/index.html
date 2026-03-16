@@ -150,7 +150,11 @@ cursor:pointer;
 .spawnGlow{
 animation:glow 1s infinite;
 }
-
+.spawned{
+background:#3b0a0a;
+border:2px solid #ff0000;
+box-shadow:0 0 25px red;
+}
 @keyframes glow{
 0%{box-shadow:0 0 10px red}
 50%{box-shadow:0 0 35px red}
@@ -283,7 +287,9 @@ let realIndex=bosses.indexOf(boss)
 
 grid.innerHTML+=`
 
-<div class="card" data-name="${boss.name.toLowerCase()}" id="card${realIndex}">
+<div class="card ${localStorage.getItem("spawned"+realIndex) ? "spawned spawnGlow" : ""}" 
+data-name="${boss.name.toLowerCase()}" 
+id="card${realIndex}">
 
 <img src="${boss.img}">
 
@@ -368,7 +374,10 @@ let remain=(spawn-Date.now())/1000
 if(remain<=0){
 
 timer.innerText="SPAWN"
+
 card.classList.add("spawnGlow")
+card.classList.add("spawned")
+
 
 localStorage.setItem("spawned"+id,true)
 
@@ -378,8 +387,10 @@ if(Notification.permission==="granted"){
 
 let bossName=bosses[id].name
 
-new Notification("SPAWN!",{
-body: bossName+" acabou de nascer!"
+new Notification("🔥 BOSS SPAWN!",{
+body: bossName+" acabou de nascer!",
+icon: bosses[id].img,
+requireInteraction:true
 })
 
 }
