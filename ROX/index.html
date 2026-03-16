@@ -26,6 +26,10 @@ margin-top:20px;
 .topBar button,
 .topBar a{
 
+display:flex;
+align-items:center;
+justify-content:center;
+
 background:#2563eb;
 padding:7px 14px;
 border-radius:10px;
@@ -200,7 +204,7 @@ box-shadow:0 0 10px #3b82f6;
 
 <a href="https://4sstore.vercel.app/">🏠 Início</a>
 
-<button onclick="filterBoss('all')">BOSS & MINI</button>
+<a href="https://4sstore.vercel.app/ROX/" onclick="filterBoss('all')">BOSS & MINI</a>
 </div>
 
 <input class="search" placeholder="Buscar boss..." onkeyup="searchBoss(this.value)">
