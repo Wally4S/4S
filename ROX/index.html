@@ -365,7 +365,13 @@ card.classList.add("spawnGlow")
 alarm.play()
 
 if(Notification.permission==="granted"){
-new Notification("Boss Spawn!",{body:"Um boss acabou de nascer!"})
+
+let bossName=bosses[id].name
+
+new Notification("SPAWN!",{
+body: bossName+" acabou de nascer!"
+})
+
 }
 
 localStorage.removeItem("spawn"+id)
