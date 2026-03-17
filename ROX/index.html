@@ -214,6 +214,46 @@ box-shadow:0 0 10px #3b82f6;
 </audio>
 
 <script>
+ const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1483556689029370020/fyMxT9BREuDCEGYRx6NjkUPOAuK6aLylMDxAg8qjjdLFSRtR2aAZMBLa_Y8tZ2iCFSum";
+
+// 🔥 COLOQUE AQUI O ID DO CARGO MVP
+const ROLE_MVP_ID = "1483558658888695973";
+
+function enviarDiscord(boss){
+
+  // 🚫 só MVP envia
+  if(boss.type !== "mvp") return;
+
+  fetch(DISCORD_WEBHOOK, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+
+      content: `<@&${ROLE_MVP_ID}>`, // 🔥 menção
+
+      username: "📧ALERTA DE MONSTROS",
+      avatar_url: boss.img,
+
+      embeds: [{
+        title: "BOSS VAI NASCER",
+        description: `🚨  **${boss.name}** Nasceu\n 🗺️ ${boss.map}`,
+        thumbnail: {
+          url: boss.img
+        },
+        color: 16711680,
+        footer: {
+          text: "⚠️Alerta Sempre Enviado 1 Minuto Antes do tempo real"
+        }
+      }]
+
+    })
+  }).catch(()=>{});
+
+}
+
+
 const alarm = document.getElementById("alarm")
 
 document.addEventListener("click", () => {
@@ -384,10 +424,12 @@ function resetTimer(id){
 
 localStorage.removeItem("spawn"+id)
 localStorage.removeItem("spawned"+id)
+localStorage.removeItem("discordSent"+id) // 🔥 NOVO
 
 renderCards()
 
 }
+
 
 function update(){
 
@@ -405,6 +447,14 @@ let timer=card.querySelector(".timer")
 let remain=(spawn-Date.now())/1000
 
 if(remain<=0 && !localStorage.getItem("spawned"+id)){
+
+let boss = bosses[id]
+
+// 🔥 ENVIA PRO DISCORD (1x só)
+if(!localStorage.getItem("discordSent"+id)){
+  enviarDiscord(boss)
+  localStorage.setItem("discordSent"+id,true)
+}
 
 
 timer.innerText="SPAWN"
