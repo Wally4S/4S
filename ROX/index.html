@@ -210,14 +210,21 @@ box-shadow:0 0 10px #3b82f6;
 </div>
 
 <audio id="alarm">
-<source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg">
+<source src="https://actions.google.com/sounds/v1/alarms/medium_bell_ringing_near.ogg">
 </audio>
 
 <script>
+const alarm = document.getElementById("alarm")
+
+document.addEventListener("click", () => {
+  alarm.play().then(() => {
+    alarm.pause()
+    alarm.currentTime = 0
+  }).catch(()=>{})
+}, { once: true })
 
 Notification.requestPermission()
 
-const alarm=document.getElementById("alarm")
 
 const cardsPerPage=12
 let currentPage=1
@@ -388,7 +395,8 @@ document.querySelectorAll(".card").forEach(card=>{
 
 let id=card.id.replace("card","")
 
-let spawn=localStorage.getItem("spawn"+id)
+let spawn=parseInt(localStorage.getItem("spawn"+id))
+
 
 if(!spawn) return
 
@@ -396,7 +404,8 @@ let timer=card.querySelector(".timer")
 
 let remain=(spawn-Date.now())/1000
 
-if(remain<=0){
+if(remain<=0 && !localStorage.getItem("spawned"+id)){
+
 
 timer.innerText="SPAWN"
 
@@ -406,17 +415,48 @@ card.classList.add("spawned")
 
 localStorage.setItem("spawned"+id,true)
 
-alarm.play()
+alarm.volume = 1
+alarm.currentTime = 0
+
+setTimeout(() => {
+  alarm.currentTime = 0
+  alarm.play().catch(()=>{})
+alarm.pause()
+alarm.currentTime = 0
+
+setTimeout(() => {
+  alarm.play().catch(()=>{})
+
+  setTimeout(() => {
+    alarm.pause()
+    alarm.currentTime = 0
+  }, 5000)
+
+}, 100)
+
+  // 🔥 PARA AUTOMATICAMENTE DEPOIS DE 5s
+  setTimeout(() => {
+    alarm.pause()
+    alarm.currentTime = 0
+  }, 5000)
+
+}, 100)
+
+
+
 
 if(Notification.permission==="granted"){
 
 let bossName=bosses[id].name
 
+let boss = bosses[id]
+
 new Notification("🔥 BOSS SPAWN!",{
-body: bossName+" acabou de nascer!",
-icon: bosses[id].img,
-requireInteraction:true
+  body: boss.name + " nasceu em " + boss.map,
+  icon: boss.img,
+  requireInteraction:true
 })
+
 
 }
 
