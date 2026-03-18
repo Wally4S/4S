@@ -16,7 +16,7 @@
 body{
 font-family:system-ui,-apple-system,Segoe UI,Roboto;
 background:
-radial-gradient(circle at top,#0b1a33,#02040a 70%);
+radial-gradient(circle at top,#000000,#02040a 70%);
 color:#e6edf3;
 line-height:1.5;
 }
@@ -29,13 +29,13 @@ justify-content:space-between;
 align-items:center;
 padding:20px 40px;
 
-background:rgba(5,10,18,.85);
+background:rgba(0, 0, 0, 0.85);
 backdrop-filter:blur(10px);
 
-border-bottom:1px solid rgba(30,144,255,.25);
+border-bottom:1px solid rgba(30, 143, 255, 0);
 
 box-shadow:
-0 0 30px rgba(30,144,255,.25);
+0 0 30px rgba(30, 143, 255, 0);
 }
 
 header h1{
@@ -48,7 +48,7 @@ header a{
 padding:10px 18px;
 border-radius:14px;
 
-background:rgba(30,144,255,.1);
+background:rgba(51, 147, 243, 0.973);
 
 color:#cfe8ff;
 text-decoration:none;
@@ -73,34 +73,34 @@ padding:30px;
 
 #counter{
 text-align:center;
-margin-bottom:50px;
+margin-bottom:10px;
 }
 
 #counterNumber{
 font-size:60px;
 font-weight:900;
-color:#00ffff;
+color:#25c7f8;
 text-shadow:
-0 0 10px #00ffff,
-0 0 20px #00ffff,
-0 0 30px #00ffff,
-0 0 40px #00ffff;
+0 0 10px #25c7f8,
+0 0 20px #25c7f8,
+0 0 30px #25c7f8,
+0 0 40px #25c7f8;
 animation:counterGlow 1.5s infinite alternate;
 }
 
 @keyframes counterGlow{
-0%{
+30%{
 text-shadow:
-0 0 8px #00ffff,
-0 0 16px #00ffff,
-0 0 24px #00ffff;
+0 0 8px #25c7f8,
+0 0 16px #25c7f8,
+0 0 24px #25c7f8;
 }
 100%{
 text-shadow:
-0 0 12px #00ffff,
-0 0 28px #00ffff,
-0 0 40px #00ffff,
-0 0 60px #00ffff;
+0 0 12px #25c7f8,
+0 0 28px #25c7f8,
+0 0 40px #25c7f8,
+0 0 60px #25c7f8;
 }
 }
 
@@ -134,7 +134,7 @@ font-size:40px;
 
 .card{
 
-background:rgba(10,20,40,0.75);
+background:rgba(0, 0, 0, 0.75);
 
 backdrop-filter:blur(12px);
 
@@ -208,8 +208,8 @@ word-break:break-word;
     height:auto;
     object-fit:contain;
     border-radius:18px;
-    border:1px solid rgba(30,144,255,.25);
-    box-shadow:0 0 25px rgba(30,144,255,.25),0 15px 40px rgba(0,0,0,.7);
+    border:1px solid rgba(255, 16, 16, 0);
+    box-shadow:0 0 25px rgba(255, 8, 8, 0),0 15px 40px rgba(0,0,0,.7);
     transition: transform .35s ease, opacity .5s ease-in-out;
     margin:40px 0;
     display:block;
@@ -223,7 +223,7 @@ word-break:break-word;
 
 #proofCarouselImage:hover {
     transform: scale(1.03);
-    box-shadow:0 0 35px rgba(30,144,255,.5),0 20px 50px rgba(0,0,0,.9);
+    box-shadow:0 0 35px rgba(5, 9, 255, 0.041),0 20px 50px rgba(0,0,0,.9);
 }
 /* Container com perspectiva 3D */
 #slider-wrapper{
@@ -252,7 +252,7 @@ border-radius:22px;
 border:1px solid rgba(30,144,255,.2);
 
 box-shadow:
-0 0 25px rgba(30,144,255,.15),
+0 0 25px rgba(11, 84, 156, 0.15),
 0 20px 45px rgba(0,0,0,.8);
 }
 
@@ -517,10 +517,10 @@ height:100%;
 object-fit:cover;
 
 border-radius:18px;
-border:1px solid rgba(30,144,255,.25);
+border:1px solid rgba(255, 255, 255, 0);
 
 box-shadow:
-0 0 25px rgba(30,144,255,.25),
+0 0 25px rgba(30, 143, 255, 0),
 0 15px 40px rgba(0,0,0,.7);
 
 transition:.35s;
