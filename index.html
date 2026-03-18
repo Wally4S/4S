@@ -364,7 +364,7 @@ text-decoration:none;
 }
 .socials a:hover img{
   transform:scale(1.3);
-  filter:drop-shadow(0 0 15px #3b82f6) drop-shadow(0 0 10px #60a5fa) drop-shadow(0 0 15px #93c5fd);
+  filter:drop-shadow(0 0 15px #3b83f600) drop-shadow(0 0 10px #60a5fa00) drop-shadow(0 0 15px #93c4fd00);
 }
 
 /* FOOTER */
@@ -374,62 +374,15 @@ footer{
   text-align:center;
   padding:22px;
   font-size:13px;
-  color:#94a3b8;
+  color:#ffffff;
   text-shadow:0 0 8px #3b82f6,0 0 15px #60a5fa;
 }
 
-/* PANEL */
-#panel{
-  position:fixed;
-  inset:0;
-  background:rgba(2,6,23,.95);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
-}
-.panel-box{
-  background:#020114;
-  border:1px solid #3b82f6;
-  border-radius:16px;
-  padding:30px;
-  width:360px;
-  box-shadow:0 0 30px #2563eb,0 0 50px #60a5fa,0 0 70px #93c5fd;
-}
-.panel-box h3{
-  text-align:center;
-  color:#60a5fa;
-  margin-bottom:20px;
-  text-shadow:0 0 15px #3b82f6,0 0 25px #60a5fa,0 0 35px #93c5fd;
-}
-.panel-streamer{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:14px;
-}
-.panel-streamer button{
-  padding:6px 16px;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  font-weight:600;
-  transition: all 0.3s ease;
-}
-.panel-streamer button.on{
-  background:#16a34a;
-  color:#fff;
-  box-shadow:0 0 15px #22c55e,0 0 25px #16a34a,0 0 35px #34d399;
-}
-.panel-streamer button.off{
-  background:#334155;
-  color:#cbd5f5;
-  box-shadow:0 0 8px #2563eb,0 0 12px #60a5fa;
-}
+
 
 /* PULSE ANIMATION */
 @keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(22,163,74,.7)}
+  0%{box-shadow:0 0 0 0 rgba(22, 163, 74, 0)}
   70%{box-shadow:0 0 0 10px rgba(22,163,74,0)}
   100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}
 }
@@ -544,10 +497,6 @@ header {
   </div>
 </section>
 
-<!-- TRAÇO AZUL IGUAL AO HEADER -->
-<div class="banner-divider"></div>
-
-
 <div class="container">
 
 <div class="grid">
@@ -620,24 +569,12 @@ header {
   <a href="https://www.twitch.tv/akuaab" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
   <a href="https://kick.com" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
   <a href="https://www.youtube.com/@AkuaAB" target="_blank"><img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif"></a>
-</div>
-</div>
-
-</div>
 </section>
 
 </div>
 
 <footer>© 2026 4S STORE ⚡Rapido & 💲Barato</footer>
 
-<div id="panel">
-<div class="panel-box">
-<h3>Painel de Streamers</h3>
-<div class="panel-streamer">YuukiiBr <button data-id="1"></button></div>
-<div class="panel-streamer">Noturnolll <button data-id="2"></button></div>
-<div class="panel-streamer">Julliezinha <button data-id="3"></button></div>
-<div class="panel-streamer">AkuaAB <button data-id="4"></button></div>
-</div>
 </div>
 
 <script>
