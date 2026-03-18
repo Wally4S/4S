@@ -1680,10 +1680,10 @@ cart.forEach(i => qtdItens += i.qty);
 
 const progresso = Math.min((qtdItens/5)*100,100);
 
-let textoBarra = `👀${qtdItens}/5 ITENS PARA -15% DESCONTO`;
+let textoBarra = `👀${qtdItens}/5 ITENS PARA -20% DESCONTO`;
 
 if(qtdItens >= 5){
-textoBarra = "🔥 DESCONTO DE -15% LIBERADO✔️";
+textoBarra = "🔥 DESCONTO DE -20% LIBERADO✔️";
 }
 
 cartItems.innerHTML += `
@@ -1841,7 +1841,7 @@ R$ ${sub.toFixed(2)}
 let desconto = 0;
 
 if(qtdItens >= 5){
-desconto = t * 0.15;
+desconto = t * 0.20;
 }
 
 let totalFinal = t - desconto;
