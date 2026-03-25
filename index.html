@@ -7,7 +7,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="/public/favicon.png" type="image/png">
-<head>
   <meta property="og:image" content="https://4sstore.vercel.app/logo.webp">
   <meta name="description" content="Rapido & Barato">
   <meta property="og:title" content="4S STORE">
@@ -438,141 +437,7 @@ img {
   max-width: 100%;
   height: auto;
 }
-.live-wrapper {
-  margin: 80px auto 40px;
-  max-width: 900px;
-}
 
-/* alinhamento perfeito */
-.live-player {
-  width: 100%;
-  aspect-ratio: 16/9;
-  position: relative;
-
-  border-radius: 16px;
-  overflow: hidden;
-
-  background: #020114;
-
-  border: 1px solid #3b82f6;
-}
-
-.live-player::after {
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  padding:1px; /* mais fino */
-
-  background: linear-gradient(
-    90deg,
-    transparent 30%,
-    rgba(59,130,246,0.6),
-    rgba(96,165,250,0.6),
-    rgba(59,130,246,0.6),
-    transparent 70%
-  );
-
-  background-size:200% 100%;
-  animation: energyRun 8s linear infinite;
-
-  pointer-events:none;
-
-  /* 🔥 ISSO AQUI É O MAIS IMPORTANTE */
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-
-  /* glow MUITO mais leve */
-  filter:
-    drop-shadow(0 0 3px rgba(49, 126, 250, 0.4))
-    drop-shadow(0 0 6px rgba(49,126,250,0.4));
-
-  z-index: 2;
-}
-
-/* VÍDEO (FIX DA BORDA PRETA) */
-.live-player video {
-  width: 100%;
-  height: 100%;
-  display: block;
-
-  object-fit: cover; /* 🔥 ESSENCIAL */
-  position: relative;
-  z-index: 1;
-}
-
-/* CONTROLES */
-.live-controls {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 42px;
-
-  display: flex;
-  justify-content: space-between;
-  padding: 0 12px;
-  align-items: center;
-
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-
-  z-index: 3;
-}
-
-.live-controls input {
-  width: 90px;
-}
-
-/* BADGE */
-.live-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 4;
-
-  font-size: 11px;
-  font-weight: bold;
-  padding: 6px 10px;
-  border-radius: 6px;
-
-  color: white;
-  transition: all 0.3s ease;
-}
-
-/* 🔴 AO VIVO */
-.live-on {
-  background: #ff0000;
-  box-shadow: 0 0 10px red;
-  animation: pulse 1.4s infinite;
-}
-
-/* ⚫ OFFLINE */
-.live-off {
-  background: #1f2937;
-  box-shadow: 0 0 6px rgba(0,0,0,0.5);
-}
-
-.live-badge::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  margin-right: 6px;
-  background: white;
-}
-
-@keyframes pulse {
-  0% {transform: scale(1);}
-  50% {transform: scale(1.08);}
-  100% {transform: scale(1);}
-}
 </style>
 
 </head>
@@ -702,25 +567,7 @@ header {
 <a href="/referencias">Acessar</a>
 </div>
 </div>
-<!-- LIVE PLAYER -->
-<div class="live-wrapper">
 
-  <div class="live-header">
-  </div>
-
-  <div class="live-player" id="player">
-
-    <div class="live-badge" id="badge">OFFLINE</div>
-
-    <video id="video" autoplay muted playsinline></video>
-
-    <div class="live-controls">
-      <input type="range" min="0" max="1" step="0.01" value="0" id="volume">
-      <div class="fullscreen" onclick="goFull()">⛶</div>
-    </div>
-
-  </div>
-</div>
 <section class="streamers">
 <h2>🔥𝚂𝚝𝚛𝚎𝚊𝚖𝚎𝚛𝚜 𝚁𝚎𝚌𝚘𝚖𝚎𝚗𝚍𝚊𝚍𝚘𝚜</h2>
 
@@ -882,7 +729,8 @@ apply();
   });
 })();
 
-
+</script>
 </script>
 </body>
+
 </html>
