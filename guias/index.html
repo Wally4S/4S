@@ -57,8 +57,13 @@ body{
     border-radius:12px;
     border:1px solid #D16812;
     background:rgba(209,104,18,0.7),0 0 12px rgba(250,204,21,0.6);
-    color:white;
-    font-size:16px;
+.glow-text {
+  color: rgba(209,104,18,0.7); /* cor principal do texto */
+  text-shadow:
+    0 0 5px rgba(250,204,21,0.6),
+    0 0 10px rgba(250,204,21,0.5),
+    0 0 12px rgba(250,204,21,0.4);
+}    font-size:16px;
 }
 
 /* BADGES */
@@ -258,7 +263,7 @@ const TODOS = "🎬Todos Videos";
 // ===== LISTA DE VÍDEOS =====
 const videos = [
     /* INSTANCIA */
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal"},
+    {titulo:"4S STORE", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal"},
     {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal"},
     {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal"},
     {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal"},
