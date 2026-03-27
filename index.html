@@ -613,7 +613,15 @@ header {
   height: auto;
   display: block;
 }
-
+/* Glow nos botões dos cards (hover mais suave) */
+.card a:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 0 8px #D16812,   /* menor que antes */
+    0 0 16px #FACC15,  /* menor que antes */
+    0 0 24px #D16812;  /* menor que antes */
+  background: linear-gradient(90deg, #FACC15, #D16812);
+}
 </style>
 <link rel="preload" as="image" href="banner.webp">
 <section class="banner">
