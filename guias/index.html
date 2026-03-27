@@ -8,9 +8,9 @@
 <style>
 body{
     margin:0;
-    font-family:Segoe UI;
+    font-family:Segoe UI, system-ui, sans-serif;
     background:radial-gradient(circle at top,#000000,#000000);
-    color:white;
+    color:#ffffff;
 }
 
 /* TOPO */
@@ -19,9 +19,9 @@ body{
     text-align:center;
     font-size:28px;
     font-weight:bold;
-    color:#60a5fa;
-    border-bottom:1px solid #1d4fd800;
-    box-shadow:0 0 20px #1d4fd800;
+    color:#D16812;
+    border-bottom:1px solid rgba(209,104,18,0.2);
+    box-shadow:0 0 25px rgba(209,104,18,0.2);
     position:relative;
 }
 
@@ -31,16 +31,18 @@ body{
     left:20px;
     top:20px;
     padding:8px 14px;
-    background:#1d4ed8;
+    background:linear-gradient(135deg,#D16812,#facc15);
     border:none;
     color:white;
     cursor:pointer;
     border-radius:10px;
     transition:0.3s;
+    box-shadow:0 4px 15px rgba(209,104,18,0.5);
 }
 
 .voltar:hover{
-    background:#3b82f6;
+    transform:translateY(-2px) scale(1.05);
+    box-shadow:0 6px 25px rgba(209,104,18,0.7),0 0 12px rgba(250,204,21,0.6);
 }
 
 /* BUSCA */
@@ -53,7 +55,7 @@ body{
     width:60%;
     padding:12px;
     border-radius:12px;
-    border:1px solid #1d4ed8;
+    border:1px solid #D16812;
     background:#020617;
     color:white;
     font-size:16px;
@@ -68,16 +70,18 @@ body{
 .badges button{
     margin:5px;
     padding:8px 14px;
-    background:#1d4ed8;
+    background:#D16812;
     border:none;
     color:white;
     cursor:pointer;
     border-radius:12px;
     transition:0.3s;
+    box-shadow:0 4px 12px rgba(209,104,18,0.4);
 }
 
 .badges button.active, .badges button:hover{
-    background:#3b82f6;
+    background:linear-gradient(135deg,#D16812,#facc15);
+    box-shadow:0 6px 20px rgba(209,104,18,0.6),0 0 10px rgba(250,204,21,0.5);
 }
 
 /* GRID */
@@ -91,22 +95,18 @@ body{
 
 .card{
     width:260px;
-    background:#020617;
-    border:1px solid #1d4ed8;
-    border-radius:12px;
+    background:rgba(0,0,0,0.63);
+    border:1px solid #D16812;
+    border-radius:16px;
     overflow:hidden;
     transition:0.3s;
     position:relative;
+    box-shadow:0 6px 20px rgba(209,104,18,0.5),0 0 12px rgba(209,104,18,0.4);
 }
 
-.card{
-    width:260px;
-    background:#020617;
-    border:1px solid #1d4ed8;
-    border-radius:12px;
-    overflow:hidden;
-    transition:0.3s;
-    position:relative;
+.card:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px rgba(209,104,18,0.6),0 12px 30px rgba(0,0,0,0.6);
 }
 
 /* BADGE CREDITOS NEON */
@@ -114,40 +114,31 @@ body{
     position:absolute;
     top:8px;
     left:8px;
-
     padding:4px 10px;
     font-size:11px;
     font-weight:bold;
-
-    background:linear-gradient(90deg,#1d4ed8,#3b82f6);
+    background:linear-gradient(90deg,#D16812,#facc15);
     border-radius:8px;
-
-    color:#fff;
-
-    text-shadow:0 0 6px #93c5fd;
-
+    color:#ffffff;
+    text-shadow:0 0 6px #D16812;
     letter-spacing:0.5px;
-
     z-index:10;
-
     animation:glowBadge 2s infinite alternate;
 }
-@keyframes glowBadge{
 
+@keyframes glowBadge{
 0%{
     box-shadow:
-    0 0 5px #3b82f6,
-    0 0 10px #1d4ed8,
+    0 0 5px #D16812,
+    0 0 10px #facc15,
     inset 0 0 5px rgba(255,255,255,0.15);
 }
-
 100%{
     box-shadow:
-    0 0 10px #60a5fa,
-    0 0 20px #3b82f6,
+    0 0 12px #facc15,
+    0 0 20px #D16812,
     inset 0 0 8px rgba(255,255,255,0.25);
 }
-
 }
 
 /* TOOLTIP */
@@ -156,41 +147,31 @@ body{
     position:absolute;
     bottom:-28px;
     left:0;
-
-    background:#020617;
-    border:1px solid #3b82f6;
-    color:#93c5fd;
-
+    background:rgba(0,0,0,0.85);
+    border:1px solid #D16812;
+    color:#facc15;
     padding:4px 8px;
     border-radius:6px;
     font-size:11px;
     white-space:nowrap;
-
     opacity:0;
     transform:translateY(5px);
     transition:0.2s;
-
-    box-shadow:0 0 10px #1d4ed8;
+    box-shadow:0 0 10px #D16812;
 }
 
-/* mostrar tooltip */
 .credito:hover::after{
     opacity:1;
     transform:translateY(0);
 }
 
-
-.card:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 20px #3b82f6;
-}
-
+/* THUMB */
 .thumb{
     height:150px;
     width:100%;
     cursor:pointer;
     overflow:hidden;
-    border-bottom:1px solid #1d4ed8;
+    border-bottom:1px solid #D16812;
     border-radius:12px 12px 0 0;
 }
 
@@ -205,8 +186,11 @@ body{
     padding:10px;
     text-align:center;
     font-size:14px;
+    color:#facc15;
+    text-shadow:0 0 4px #D16812;
 }
 
+/* PAGINAÇÃO */
 .paginacao{
     text-align:center;
     margin:20px 0;
@@ -215,7 +199,7 @@ body{
 .paginacao button{
     margin:5px;
     padding:8px 14px;
-    background:#1d4ed8;
+    background:#D16812;
     border:none;
     color:white;
     cursor:pointer;
@@ -223,11 +207,12 @@ body{
     transition:0.3s;
 }
 
-.paginacao button:hover, 
-.paginacao button.active{
-    background:#3b82f6;
+.paginacao button:hover, .paginacao button.active{
+    background:linear-gradient(135deg,#D16812,#facc15);
+    box-shadow:0 4px 12px rgba(209,104,18,0.5),0 0 10px rgba(250,204,21,0.4);
 }
 
+/* MODAL */
 .modal{
     position:fixed;
     top:0;
@@ -244,14 +229,15 @@ body{
 .modal video{
     width:70%;
     max-width:900px;
+    border:2px solid #D16812;
+    border-radius:12px;
+    box-shadow:0 0 25px rgba(209,104,18,0.6);
 }
 </style>
 </head>
 <body>
 
-<div class="topo">
- 
-</div>
+<div class="topo">🎬 Vídeos da 4S Store</div>
 <button class="voltar" onclick="voltarInicio()">♻️Pagina Inicial</button>
 <div class="busca">
 <input type="text" id="search" placeholder="Buscar video...">
@@ -271,23 +257,38 @@ const TODOS = "🎬Todos Videos";
 
 // ===== LISTA DE VÍDEOS =====
 const videos = [
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal XYZ"},
-    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal XYZ"},
-
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"⚜️Instancia", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"🎮Gameplay", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"📚Build", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal"},
+    {titulo:"Loading", src:"/guias/test.mp4", poster:"/guias/loading.gif", categoria:"💲Farm", creditos:"Canal"},
 ];
 
 let pagina = 1;
@@ -305,20 +306,16 @@ const player = document.getElementById("player");
 function criarBadges(){
     const categorias = [TODOS, ...new Set(videos.map(v=>v.categoria))];
     badgesDiv.innerHTML="";
-
     categorias.forEach(cat=>{
         const btn = document.createElement("button");
         btn.innerText = cat;
-
         if(cat===categoriaAtiva) btn.classList.add("active");
-
         btn.onclick = ()=>{
             categoriaAtiva = cat;
             pagina = 1;
             criarBadges();
             render();
         }
-
         badgesDiv.appendChild(btn);
     });
 }
@@ -326,17 +323,13 @@ function criarBadges(){
 // ===== RENDER =====
 function render(){
     const termo = search.value.toLowerCase();
-
     let filtrados = videos.filter(v=>{
         const matchCategoria =
             categoriaAtiva===TODOS ||
             v.categoria===categoriaAtiva;
-
         const matchBusca = v.titulo.toLowerCase().includes(termo);
-
         return matchCategoria && matchBusca;
     });
-
     const inicio = (pagina-1)*porPagina;
     const fim = inicio + porPagina;
     const lista = filtrados.slice(inicio,fim);
@@ -346,21 +339,16 @@ function render(){
         const card = document.createElement("div");
         card.className="card";
        card.innerHTML=`
-
 <div class="credito" data-credito="Créditos do Criador: ${v.creditos || "Autor"}">
 🎮 ${v.creditos || "Autor"}
 </div>
-
 
 <div class="thumb" onclick="abrir(this)">
 <video muted src="${v.src}" poster="${v.poster}"></video>
 </div>
 
 <div class="titulo">${v.titulo}</div>
-
 `;
-
-
         grid.appendChild(card);
     });
 
@@ -391,14 +379,11 @@ function fechar(){
 
 // ===== VOLTAR PARA INÍCIO =====
 function voltarInicio(){
-    window.location.href = "https://4sstore.vercel.app"; // altere se necessário
+    window.location.href = "https://4sstore.vercel.app";
 }
 
 // ===== BUSCA =====
-search.oninput = ()=>{
-    pagina=1;
-    render();
-}
+search.oninput = ()=>{pagina=1; render();}
 
 // ===== INIT =====
 criarBadges();

@@ -46,11 +46,11 @@ body{
   pointer-events:none;
 
   filter:
-    drop-shadow(0 20px 20px rgba(0,0,0,.6))
-    drop-shadow(0 5px 8px rgba(0,0,0,.4));
+    drop-shadow(0 20px 20px rgb(0, 0, 0))
+    drop-shadow(0 5px 8px rgb(0, 0, 0));
 }
 header{
-  background:linear-gradient(90deg,#000000,#000000);
+  background:linear-gradient(90deg,#0B0B0B,#0B0B0B);
   padding:14px 22px;
 
   display:flex;
@@ -84,11 +84,10 @@ header::after{
     linear-gradient(
       90deg,
       transparent 25%,
-      rgba(59,130,246,.9),
-      rgba(59,130,246,.9),
-      rgba(59,130,246,.9),
-      rgba(59,130,246,.9),
-      rgba(59,130,246,.9),
+      #D16812,
+      #D16812,
+      #D16812,
+      #D16812,
       transparent 75%
     );
 
@@ -108,8 +107,8 @@ header::after{
 
   /* brilho controlado */
   filter:
-    drop-shadow(0 0 4px rgba(59,130,246,.6))
-    drop-shadow(0 0 10px rgba(96,165,250,.5));
+    drop-shadow(0 0 4px #D16812)
+    drop-shadow(0 0 10px#D16812);
 }
 
 /* ANIMAÇÃO */
@@ -129,7 +128,7 @@ header::after{
 
 .logo img:hover {
   transform: scale(1.1); /* pulse leve */
-  filter: drop-shadow(0 0 10px #3b82f6); /* destaque suave */
+  filter: drop-shadow(0 0 10px #D16812); /* destaque suave */
 
 }
 nav a{
@@ -138,12 +137,12 @@ nav a{
   margin-left:18px;
   padding:8px 14px;
   border-radius:8px;
-  text-shadow:0 0 5px #3b82f6;
+  text-shadow:0 0 5px #D16812;
 }
 nav a:hover{
-  background:linear-gradient(90deg,#3b82f6,#60a5fa);
+  background:linear-gradient(90deg,#D16812,#D16812);
   color:#fff;
-  box-shadow:0 0 15px #2563eb,0 0 25px #60a5fa;
+  box-shadow: 0 0 12px rgba(249,115,22,0.8);
 }
 
 /* BANNER */
@@ -158,8 +157,7 @@ nav a:hover{
   position:relative;
   margin-top:-2px;
 
-  box-shadow:
-    inset 0 25px 30px -20px rgba(59,130,246,.35);
+  box-shadow: 0 0 12px rgba(249, 116, 22, 0);
 }
 
 .banner-video{
@@ -182,13 +180,13 @@ nav a:hover{
 
 .banner h1 {
   font-size: 48px;
-  color: #60a5fa;
-  text-shadow: 0 0 15px #3b82f6, 0 0 25px #60a5fa, 0 0 35px #93c5fd;
+  color: #ffffff;
+  text-shadow: 0 0 15px #92501b, 0 0 25px #D16812, 0 0 35px #D16812;
 }
 
 .banner p {
-  color: #cbd5f5;
-  text-shadow: 0 0 8px #3b82f6, 0 0 15px #60a5fa;
+  color: #ffffff;
+  text-shadow: 0 0 8px #D16812, 0 0 15px #D16812;
 }
 
 /* CONTAINER */
@@ -206,10 +204,10 @@ filter:brightness(.5) contrast(1.2);
 .banner-content{position:relative;z-index:1}
 .banner h1{
 font-size:48px;
-color:#60a5fa;
-text-shadow:0 0 15px #3b82f6,0 0 25px #60a5fa;
+color:#ffffff;
+text-shadow:0 0 15px #D16812,0 0 25px #D16812;
 }
-.banner p{color:#cbd5f5}
+.banner p{color:#ffffff}
 
 /* CONTAINER */
 .container{
@@ -226,8 +224,8 @@ text-shadow:0 0 15px #3b82f6,0 0 25px #60a5fa;
 }
 
 .card{
-  background:linear-gradient(180deg,#0b0f2c,#020114);
-  border:1px solid #3b82f6;
+  background:linear-gradient(180deg,#D16812,#D16812);
+  border:1px solid #ffffff;
   border-radius:16px;
   padding:20px 30px 30px; /* espaço extra pro personagem */
   position:relative;
@@ -248,8 +246,8 @@ text-shadow:0 0 15px #3b82f6,0 0 25px #60a5fa;
 
   /* realismo */
   filter:
-    drop-shadow(0 25px 25px rgba(0,0,0,.65))
-    drop-shadow(0 10px 10px rgba(0,0,0,.45));
+    drop-shadow(0 25px 25px rgb(0, 0, 0))
+    drop-shadow(0 10px 10px rgb(0, 0, 0));
 }
 
 /* ===========================
@@ -294,23 +292,23 @@ text-shadow:0 0 15px #3b82f6,0 0 25px #60a5fa;
 transform:translateY(-8px);
 }
 
-.card h3{color:#60a5fa}
+.card h3{color:#000000}
 .card a{
 display:inline-block;
 margin-top:16px;
 padding:10px 22px;
 border-radius:8px;
-background:linear-gradient(90deg,#2563eb,#3b82f6);
-color:#fff;
+background:linear-gradient(90deg,#f7efef44,#c7bab0);
+color:#ffffff;
 text-decoration:none;
 }
 /* STREAMERS */
 .streamers{margin-top:110px}
 .streamers h2{
   text-align:center;
-  color:#60a5fa;
+  color:#ffffff;
   margin-bottom:40px;
-  text-shadow:0 0 12px #3b82f6,0 0 20px #60a5fa,0 0 28px #93c5fd;
+  text-shadow:0 0 12px #ffffff,0 0 20px #ffffff,0 0 28px #ffffff;
 }
 
 .streamer-grid{
@@ -320,8 +318,8 @@ text-decoration:none;
 }
 
 .streamer-card{
-  background:linear-gradient(180deg,#0b0f2c,#020114);
-  border:1px solid #3b82f6;
+  background:linear-gradient(180deg,#D16812,#D16812);
+  border:1px solid #ffffff;
   border-radius:18px;
   padding:26px 20px;
   text-align:center;
@@ -338,10 +336,10 @@ text-decoration:none;
   height:88px;
   border-radius:50%;
   object-fit:cover;
-  border:3px solid #3b82f6;
+  border:3px solid #ffffff;
   margin-bottom:10px;
   transition: all 0.3s ease;
-  box-shadow:0 0 10px #3b82f6;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
 }
 .avatar:hover{
   transform:scale(1.3);
@@ -363,27 +361,27 @@ text-decoration:none;
 }
 .socials a:hover img{
   transform:scale(1.3);
-  filter:drop-shadow(0 0 15px #3b83f600) drop-shadow(0 0 10px #60a5fa00) drop-shadow(0 0 15px #93c4fd00);
+  filter:drop-shadow(0 0 15px #ffffff) drop-shadow(0 0 10px #ffffff00) drop-shadow(0 0 15px #ffffff00);
 }
 
 /* FOOTER */
 footer{
   background:#000000;
-  border-top:1px solid #3b82f6;
+  border-top:1px solid #000000;
   text-align:center;
   padding:22px;
   font-size:13px;
   color:#ffffff;
-  text-shadow:0 0 8px #3b82f6,0 0 15px #60a5fa;
+  text-shadow:0 0 8px #D16812,0 0 15px #D16812;
 }
 
 
 
 /* PULSE ANIMATION */
 @keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(22, 163, 74, 0)}
-  70%{box-shadow:0 0 0 10px rgba(22,163,74,0)}
-  100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}
+  0%{box-shadow:0 0 0 0 rgb(255, 255, 255)}
+  70%{box-shadow:0 0 0 10px rgb(255, 255, 255)}
+  100%{box-shadow:0 0 0 0 rgb(255, 255, 255)}
 }
 /* ===== AURA ANIME ===== */
 .avatar, .card-character{
@@ -393,13 +391,13 @@ footer{
 @keyframes auraPulse{
   from{
     filter:
-      drop-shadow(0 0 8px #60a5fa)
-      drop-shadow(0 0 18px rgba(96,165,250,.6));
+      drop-shadow(0 0 8px #ffffff)
+      drop-shadow(0 0 18px #ffffff);
   }
   to{
     filter:
-      drop-shadow(0 0 18px #2563eb)
-      drop-shadow(0 0 35px rgba(96,165,250,.9));
+      drop-shadow(0 0 18px #D1681200)
+      drop-shadow(0 0 35px #D1681200);
   }
 }
 .banner-divider{
@@ -407,12 +405,12 @@ footer{
   background:linear-gradient(
     90deg,
     transparent,
-    #3b82f6,
-    #60a5fa,
-    #3b82f6,
+    #D16812,
+    #D16812,
+    #D16812,
     transparent
   );
-  box-shadow:0 0 12px #3b82f6;
+  box-shadow: 0 0 12px rgba(249,115,22,0.8);
 }
 /* Otimização geral de animações */
 * {
@@ -482,54 +480,7 @@ header {
   height: auto;
   display: block;
 }
-/* BADGE AO VIVO PROFISSIONAL */
-.live-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
 
-  background: #eff307;
-  color: rgb(0, 0, 0);
-
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-
-  padding: 6px 10px;
-  border-radius: 6px;
-
-  z-index: 3;
-
-  box-shadow:
-    0 0 8px #4cf72a,
-    0 0 18px rgba(30, 243, 59, 0.8);
-
-  animation: livePulse 1.4s infinite ease-in-out;
-}
-
-/* bolinha estilo Twitch */
-.live-badge::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: rgb(43, 231, 5);
-  border-radius: 50%;
-  margin-right: 6px;
-
-  animation: dotBlink 1s infinite;
-}
-
-@keyframes livePulse {
-  0% {transform: scale(1);}
-  50% {transform: scale(1.08);}
-  100% {transform: scale(1);}
-}
-
-@keyframes dotBlink {
-  0%,100% {opacity:1;}
-  50% {opacity:0.3;}
-}
 </style>
 <link rel="preload" as="image" href="banner.webp">
 <section class="banner">
@@ -665,12 +616,12 @@ apply();
   // Script de bloqueio Ctrl+U
   document.onkeydown = function(e) {
     if (e.ctrlKey && e.key === 'u') {
-      alert("Você não pode visualizar o código-fonte desta página!");
+      alert("👀Bloqueado.");
       return false;
     }
     // Bloqueio do botão direito do mouse
     if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-      alert("Você não pode acessar as ferramentas de desenvolvedor.");
+      alert("👀Bloqueado.");
       return false;
     }
   };
@@ -678,58 +629,12 @@ apply();
   // Desabilitar o clique com o botão direito do mouse
   document.addEventListener("contextmenu", function(e) {
     e.preventDefault();
-    alert("Você não pode acessar o menu de contexto.");
+    alert("👀Bloqueado.");
   });
 </script>
 <script>
 
-/* ===== MANA SURGE (HOVER DOS CARDS) ===== */
-(function(){
-  const style = document.createElement("style");
-  style.innerHTML = `
-    .mana-surge{
-      position:absolute;
-      inset:-40%;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at center,
-          rgba(99,102,241,.45),
-          rgba(30,27,75,.35),
-          transparent 65%);
-      opacity:0;
-      transition:opacity .3s ease;
-      animation:manaSpin 3.5s linear infinite;
-      mix-blend-mode:screen;
-    }
 
-    @keyframes manaSpin{
-      to{transform:rotate(360deg)}
-    }
-  `;
-  document.head.appendChild(style);
-
-  document.querySelectorAll(".card, .streamer-card").forEach(card=>{
-    card.style.position = "relative";
-    card.style.overflow = "hidden";
-
-    const surge = document.createElement("div");
-    surge.className = "mana-surge";
-    card.appendChild(surge);
-
-    card.addEventListener("mouseenter",()=>{
-      surge.style.opacity = "1";
-      card.style.boxShadow =
-        "0 0 35px #4338ca, 0 0 65px rgba(99,102,241,.8)";
-    });
-
-    card.addEventListener("mouseleave",()=>{
-      surge.style.opacity = "0";
-      card.style.boxShadow = "";
-    });
-  });
-})();
-
-</script>
 </script>
 </body>
 

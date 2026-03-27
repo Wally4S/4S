@@ -19,7 +19,7 @@
   --text: #ffffff;
   --text-muted: #94a3b8;
 
-  --border: rgba(59,130,246,.4);
+  --border: rgba(249,115,22,.85);
 }
 body{
   font-family:Segoe UI, sans-serif;
@@ -180,7 +180,7 @@ footer{
   padding:24px;
   background:var(--bg-secondary);
 color:var(--text-muted);
-  color:#94a3b8;
+  color:#ffffff;
 }
 
 /* =========================
