@@ -222,7 +222,38 @@ text-shadow:0 0 15px #D16812,0 0 25px #D16812;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:26px;
 }
+/* Glow leve nos cards de produtos/referências/galeria */
+.card {
+  transition: all 0.3s ease, box-shadow 0.4s ease;
+  /* Glow leve permanente */
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.4);
+}
 
+/* Glow ao passar o mouse (hover) */
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 0 18px rgba(249, 115, 22, 0.6),
+    0 0 28px rgba(249, 115, 22, 0.4);
+}
+
+/* Glow leve nos cards de streamers */
+.streamer-card {
+  transition: all 0.3s ease, box-shadow 0.4s ease;
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.3);
+}
+
+.streamer-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 0 18px rgba(249, 115, 22, 0.5),
+    0 0 28px rgba(249, 115, 22, 0.3);
+}
+
+/* Glow nos h3 dentro dos cards */
+.card h3, .streamer-card h4 {
+  text-shadow: 0 0 8px #D16812, 0 0 12px #FACC15;
+}
 .card{
   background:linear-gradient(180deg,#D16812,#D16812);
   border:1px solid #ffffff;
@@ -231,7 +262,40 @@ text-shadow:0 0 15px #D16812,0 0 25px #D16812;
   position:relative;
   overflow:visible;
 }
+.card {
+  background: #000000; /* fundo escuro */
+  border: 2px solid transparent; /* borda base */
+  border-radius: 16px;
+  padding: 20px 30px;
+  position: relative;
+  overflow: visible;
+  transition: all 0.3s ease;
 
+  /* glow sutil inicial */
+  box-shadow: 0 0 12px rgba(209,104,18,0.4);
+}
+
+/* Borda animada igual header */
+.card::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  padding:2px;
+  border-radius:inherit;
+  background: linear-gradient(90deg, transparent 25%, #D16812, #D16812, #D16812, transparent 75%);
+  background-size:300% 100%;
+  animation: energyRun 6s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite:exclude;
+  pointer-events:none;
+  filter: drop-shadow(0 0 6px #D16812) drop-shadow(0 0 12px #D16812);
+}
 /* ===========================
    PERSONAGEM SENTADO (BASE)
 =========================== */
@@ -292,7 +356,7 @@ text-shadow:0 0 15px #D16812,0 0 25px #D16812;
 transform:translateY(-8px);
 }
 
-.card h3{color:#000000}
+.card h3{color:#ffffff}
 .card a{
 display:inline-block;
 margin-top:16px;
@@ -391,8 +455,8 @@ footer{
 @keyframes auraPulse{
   from{
     filter:
-      drop-shadow(0 0 8px #ffffff)
-      drop-shadow(0 0 18px #ffffff);
+      drop-shadow(0 0 8px #ffffff3d)
+      drop-shadow(0 0 18px #ffffff4b);
   }
   to{
     filter:
@@ -435,7 +499,76 @@ img {
   max-width: 100%;
   height: auto;
 }
+.streamer-card {
+  background: #000000; /* fundo escuro */
+  border: 2px solid transparent; /* borda base */
+  border-radius: 18px;
+  padding: 26px 20px;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease, box-shadow 0.4s ease;
+  overflow: visible;
+  z-index: 0;
 
+  /* glow inicial suave */
+  box-shadow: 0 0 12px rgba(209,104,18,0.3);
+}
+
+/* borda animada igual header */
+.streamer-card::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  padding:2px;
+  border-radius:inherit;
+  background: linear-gradient(
+    90deg,
+    transparent 25%,
+    #D16812,
+    #D16812,
+    #D16812,
+    transparent 75%
+  );
+  background-size:300% 100%;
+  animation: energyRun 6s linear infinite;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite:exclude;
+  pointer-events:none;
+  filter: drop-shadow(0 0 6px #d1681265) drop-shadow(0 0 12px #d1681249);
+  z-index: -1;
+}
+
+/* AVATAR COM GLOW LEVE */
+.avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px rgba(209, 104, 18, 0);
+}
+
+/* Hover do avatar */
+.avatar:hover {
+  transform: scale(1.3);
+  box-shadow: 0 0 18px #D16812, 0 0 28px #facc152f;
+}
+
+/* SOCIALS com glow leve ao hover */
+.socials a:hover img {
+  transform: scale(1.3);
+  filter:
+    drop-shadow(0 0 15px #d168124f)
+    drop-shadow(0 0 12px #facc1562);
+}
 </style>
 
 </head>
