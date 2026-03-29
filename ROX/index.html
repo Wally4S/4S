@@ -24,17 +24,73 @@ margin-top:20px;
 }
 
 .topBar a{
+position:relative;
 display:flex;
 align-items:center;
 justify-content:center;
-background:#D16812;
-padding:7px 14px;
-border-radius:10px;
-border:none;
+gap:6px;
+
+padding:8px 16px;
+border-radius:14px;
+
+background:linear-gradient(135deg,#D16812,#ff8c1a);
 color:white;
-cursor:pointer;
+font-size:13px;
+font-weight:bold;
+
 text-decoration:none;
+cursor:pointer;
 transition:.25s;
+
+box-shadow:
+0 0 12px rgba(209,104,18,0.6),
+inset 0 0 6px rgba(255,255,255,0.15);
+}
+
+/* HOVER MAIS FORTE */
+.topBar a:hover{
+transform:translateY(-3px) scale(1.06);
+
+background:linear-gradient(135deg,#ff8c1a,#ffb347);
+
+box-shadow:
+0 0 25px rgba(255,140,26,0.9),
+0 0 40px rgba(209,104,18,0.6);
+}
+
+/* BOTÃO ATIVO */
+.topBar a.active{
+background:linear-gradient(135deg,#ffb347,#ffd27f);
+
+color:#000;
+
+box-shadow:
+0 0 30px rgba(255,180,80,1),
+0 0 60px rgba(255,140,26,0.8);
+}
+
+/* SHINE */
+.topBar a::after{
+content:"";
+position:absolute;
+top:-100%;
+left:-100%;
+width:200%;
+height:200%;
+
+background:linear-gradient(
+120deg,
+transparent 40%,
+rgba(255, 255, 255, 0.35) 50%,
+transparent 60%
+);
+
+transform:rotate(25deg);
+opacity:0;
+}
+
+.topBar a:hover::after{
+animation:shineMenu 1s;
 }
 
 .topBar a:hover{
@@ -66,101 +122,132 @@ margin-top:20px;
 
 .card{
 background:#D16812;
-border-radius:14px;
+border-radius:16px;
 overflow:hidden;
 width:190px;
 padding-bottom:10px;
-transition:.25s;
+transition:.3s;
 position:relative;
-box-shadow:0 0 12px #1e293b;
+box-shadow:0 0 15px rgba(0,0,0,0.6);
+border:1px solid rgba(255,255,255,0.05);
 }
 
+/* HOVER */
 .card:hover{
-transform:translateY(-5px) scale(1.03);
-box-shadow:0 0 20px #351903;
+transform:translateY(-6px) scale(1.04);
+box-shadow:0 0 25px rgba(255, 255, 255, 0.5);
 }
 
+/* IMAGEM */
 .card img{
 width:100%;
 height:110px;
 object-fit:contain;
 background:#ffffff;
+position:relative;
+z-index:1;
 }
 
-/* shine */
-
-.card::after{
+/* OVERLAY DARK (EFEITO GAME) */
+.card::before{
 content:"";
 position:absolute;
-top:-100%;
-left:-100%;
-width:200%;
-height:200%;
-background:linear-gradient(
-120deg,
-transparent 40%,
-rgba(255,255,255,0.25) 50%,
-transparent 60%
-);
-transform:rotate(25deg);
-opacity:0;
+top:0;
+left:0;
+width:100%;
+height:110px;
+background:linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85));
+z-index:2;
 }
 
-.card:hover::after{
-animation:shine 1.2s;
+/* BADGE */
+.badge{
+position:absolute;
+top:6px;
+left:6px;
+padding:3px 8px;
+font-size:11px;
+border-radius:8px;
+font-weight:bold;
+z-index:3;
 }
 
-@keyframes shine{
-0%{top:-100%;left:-100%;opacity:0}
-40%{opacity:1}
-100%{top:100%;left:100%;opacity:0}
-}
+.mvp{ background:#ff0000; }
+.mini{ background:#9333ea; }
+.function{ background:#0ea5e9; }
 
 /* INFO */
+.info{
+padding:8px;
+text-align:left;
+}
 
-.info{padding:6px;}
+/* NOME */
+.name{
+font-weight:bold;
+font-size:15px;
+color:#ffffff;
+text-shadow:0 0 8px rgba(0,0,0,0.8);
+}
 
-.name{font-weight:bold;color:#ffffff;}
+/* MAPA */
+.map{
+font-size:11px;
+color:#ffffff;
+}
 
-.map{font-size:12px;color:#ffffff;}
+/* TIMER ESTILO HUD */
+.timer{
+margin-top:6px;
+font-size:15px;
+font-weight:bold;
+color:#86fd4f;
+text-shadow:0 0 10px rgba(250,204,21,0.6);
+}
 
-.timer{margin-top:5px;font-size:16px;}
-
+/* INPUTS */
 input{
-width:40%;
+width:38%;
 padding:4px;
 margin-top:5px;
-border-radius:8px;
+border-radius:6px;
 border:none;
 text-align:center;
+background:#020617;
+color:white;
 }
 
+/* BOTÕES */
 button{
 margin-top:5px;
-padding:4px 10px;
+padding:5px 10px;
 border:none;
-border-radius:8px;
+border-radius:6px;
 background:#D16812;
-color:rgb(255, 255, 255);
+color:white;
 cursor:pointer;
+transition:.2s;
 }
 
-/* SPAWN ALERT */
+button:hover{
+box-shadow:0 0 10px #D16812;
+}
+
+/* SPAWN PREMIUM */
+.spawned{
+background:linear-gradient(135deg,#3b0a0a,#000);
+border:1px solid red;
+}
 
 .spawnGlow{
-animation:glow 1s infinite;
+animation:glow 1.2s infinite;
 }
-.spawned{
-background:#3b0a0a;
-border:2px solid #ff0000;
-box-shadow:0 0 25px red;
-}
+
 @keyframes glow{
 0%{box-shadow:0 0 10px red}
 50%{box-shadow:0 0 35px red}
 100%{box-shadow:0 0 10px red}
 }
-
 /* PAGINAÇÃO */
 
 .pagination{
@@ -180,7 +267,130 @@ margin:5px;
 .pagination button:hover{
 box-shadow:0 0 10px #D16812;
 }
+/* BOX DE TEMPO */
+.timeBox{
+margin-top:8px;
+display:flex;
+flex-direction:column;
+gap:6px;
+}
 
+/* INPUTS LADO A LADO */
+.timeInputs{
+display:flex;
+gap:6px;
+justify-content:center;
+}
+
+.inputGroup{
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:11px;
+color:#ffffff;
+}
+
+.inputGroup span{
+margin-bottom:2px;
+}
+
+/* INPUT ESTILO GAME */
+.inputGroup input{
+width:50px;
+padding:6px;
+border-radius:8px;
+border:none;
+text-align:center;
+background:#020617;
+color:#ffffff;
+font-weight:bold;
+box-shadow:inset 0 0 6px rgba(0,0,0,0.8);
+}
+
+/* AÇÕES */
+.actions{
+display:flex;
+gap:6px;
+justify-content:center;
+}
+
+/* BOTÃO BASE */
+.btn{
+padding:6px 10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:12px;
+transition:.25s;
+}
+.search:focus{
+letter-spacing:0.5px;
+}
+/* BASE BOTÃO AAA */
+.btn{
+position:relative;
+padding:7px 12px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-size:12px;
+font-weight:bold;
+overflow:hidden;
+transition:.2s;
+}
+.startBtn{
+background:linear-gradient(135deg,#16a34a,#22c55e);
+color:white;
+box-shadow:0 0 12px rgba(34,197,94,0.6);
+}
+
+.startBtn:hover{
+transform:scale(1.07);
+box-shadow:0 0 22px rgba(34,197,94,1);
+}
+.resetBtn{
+background:linear-gradient(135deg,#dc2626,#ef4444);
+color:white;
+box-shadow:0 0 12px rgba(239,68,68,0.6);
+}
+
+.resetBtn:hover{
+transform:scale(1.07);
+box-shadow:0 0 22px rgba(239,68,68,1);
+}
+/* EFEITO CLIQUE REAL */
+.btn:active{
+transform:scale(0.92);
+box-shadow:inset 0 0 10px rgba(0,0,0,0.8);
+}
+
+/* SHINE ANIMADO */
+.btn::after{
+content:"";
+position:absolute;
+top:-100%;
+left:-100%;
+width:200%;
+height:200%;
+background:linear-gradient(
+120deg,
+transparent 40%,
+rgba(255,255,255,0.25) 50%,
+transparent 60%
+);
+transform:rotate(25deg);
+opacity:0;
+}
+
+.btn:hover::after{
+animation:shineBtn 1s;
+}
+
+@keyframes shineBtn{
+0%{top:-100%;left:-100%;opacity:0}
+40%{opacity:1}
+100%{top:100%;left:100%;opacity:0}
+}
 </style>
 </head>
 
@@ -197,7 +407,15 @@ box-shadow:0 0 10px #D16812;
 
 </div>
 
-<input class="search" placeholder="Buscar boss..." onkeyup="searchBoss(this.value)">
+<div class="searchWrapper">
+  <div class="searchBox">
+    <span class="searchIcon">🔎</span>
+    <input 
+      class="search" 
+      placeholder="Buscar boss..."
+      onkeyup="searchBoss(this.value)">
+  </div>
+</div>
 
 <div class="grid" id="grid"></div>
 
@@ -210,7 +428,7 @@ box-shadow:0 0 10px #D16812;
 </div>
 
 <audio id="alarm">
-<source src="https://actions.google.com/sounds/v1/alarms/medium_bell_ringing_near.ogg">
+<source src="../public/som.mp3">
 </audio>
 
 <script>
@@ -219,40 +437,114 @@ box-shadow:0 0 10px #D16812;
 // 🔥 COLOQUE AQUI O ID DO CARGO MVP
 const ROLE_MVP_ID = "1483558658888695973";
 
-function enviarDiscord(boss){
+function getBossColor(name){
+  const colors = {
+    "Morroc": 0x8B0000,
+    "Amon Ra": 0xFFD700,
+    "Faraó": 0xC2B280,
+    "Eddga": 0xFF4500,
+    "Kraken": 0x1E90FF,
+    "Maya": 0x800080,
+    "Vigi do Tempo": 0x00CED1,
+    "Heroi Orc": 0x228B22,
+    "Doppelganger": 0x2F4F4F,
+    "Abelha Rainha": 0xFFCC00,
+    "Phreeoni": 0xDAA520
+  }
 
-  // 🚫 só MVP envia
-  if(boss.type !== "mvp") return;
-
-  fetch(DISCORD_WEBHOOK, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-
-      content: `<@&${ROLE_MVP_ID}>`, // 🔥 menção
-
-      username: "📧ALERTA DE MONSTROS",
-      avatar_url: boss.img,
-
-      embeds: [{
-        title: "BOSS VAI NASCER",
-        description: `🚨  **${boss.name}** Nasceu\n 🗺️ ${boss.map}`,
-        thumbnail: {
-          url: boss.img
-        },
-        color: 16711680,
-        footer: {
-          text: "⚠️Alerta Sempre Enviado 1 Minuto Antes do tempo real"
-        }
-      }]
-
-    })
-  }).catch(()=>{});
-
+  return colors[name] || 16711680 // fallback vermelho
 }
 
+function getBossColor(name){
+  const colors = {
+    "Morroc": 0x8B0000,
+    "Amon Ra": 0xFFD700,
+    "Faraó": 0xC2B280,
+    "Eddga": 0xFF4500,
+    "Kraken": 0x1E90FF,
+    "Maya": 0x800080,
+    "Vigi do Tempo": 0x00CED1,
+    "Heroi Orc": 0x228B22,
+    "Doppelganger": 0x2F4F4F,
+    "Abelha Rainha": 0xFFCC00,
+    "Phreeoni": 0xDAA520
+  }
+
+  return colors[name] || 16711680
+}
+
+function enviarDiscord(boss){
+
+  if(boss.type !== "mvp") return;
+
+  const timestamp = Math.floor(Date.now()/1000)
+
+ fetch(DISCORD_WEBHOOK + "?wait=true", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+
+    content: `<@&${ROLE_MVP_ID}>`,
+
+    username: "🔥 ALERTA MVP",
+    avatar_url: boss.img,
+
+    embeds: [{
+      title: `💀 ${boss.name}`,
+      description:
+`🚨 **SPAWN CONFIRMADO**
+
+🧠 Nasceu <t:${Math.floor(Date.now()/1000)}:R>
+⚔️ **Corra para o local imediatamente!**`,
+
+      color: getBossColor(boss.name),
+
+      fields: [
+        {
+          name: "🗺️ Local",
+          value: `\`${boss.map}\``,
+          inline: true
+        },
+        {
+          name: "🔥 Status",
+          value: "`ATIVO AGORA`",
+          inline: true
+        }
+      ],
+
+      image: {
+        url: boss.img
+      },
+
+      footer: {
+        text: "4S STORE • Sistema de Monitoramento MVP"
+      },
+
+      timestamp: new Date()
+    }]
+
+  })
+})
+.then(res => res.json())
+.then(data => {
+
+  const messageId = data.id
+
+  // ⏱️ APAGA EM 5 MINUTOS
+  setTimeout(() => {
+
+    fetch(`${DISCORD_WEBHOOK}/messages/${messageId}`, {
+      method: "DELETE"
+    })
+
+  }, 60000)
+
+})
+.catch(()=>{})
+
+}
 
 const alarm = document.getElementById("alarm")
 
@@ -365,22 +657,35 @@ id="card${realIndex}">
 
 <img src="${boss.img}">
 
+<div class="badge ${boss.type}">
+  ${boss.type.toUpperCase()}
+</div>
+
 <div class="info">
 
 <div class="name">${boss.name}</div>
 <div class="map">${boss.map}</div>
 
-<div class="timer">--</div>
+<div class="timer">⏰</div>
 
-<input type="number" placeholder="H" class="h">
-<input type="number" placeholder="M" class="m">
+<div class="timeBox">
 
-<br>
+  <div class="timeInputs">
+    <div class="inputGroup">
+      <span>Horas</span>
+      <input type="number" class="h" min="0">
+    </div>
 
-<button onclick="start(${realIndex})">Start</button>
-<button onclick="resetTimer(${realIndex})">Reset</button>
+    <div class="inputGroup">
+      <span>Minutos</span>
+      <input type="number" class="m" min="0">
+    </div>
+  </div>
 
-</div>
+  <div class="actions">
+    <button class="btn startBtn" onclick="start(${realIndex})">▶Start</button>
+    <button class="btn resetBtn" onclick="resetTimer(${realIndex})">⛔Reset</button>
+  </div>
 
 </div>
 
