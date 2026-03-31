@@ -37,8 +37,12 @@ body{
 .header-character{
   position:absolute;
 
-  bottom:-52px; /* metade do corpo pra fora */
-  right:1180px; /* posição horizontal */
+  @media (max-width: 768px) {
+  .header-character {
+    display: none;
+  }
+}
+
 
   width:105px;
 
@@ -569,6 +573,107 @@ img {
     drop-shadow(0 0 15px #d168124f)
     drop-shadow(0 0 12px #facc1562);
 }
+/* PLAYER HLS */
+.hls-container {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 1000px; /* 🔥 limita largura */
+  aspect-ratio: 16 / 9; /* 🔥 mantém proporção OBS */
+  margin-left: auto;
+  margin-right: auto;
+
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+
+  box-shadow: 0 0 12px rgba(209,104,18,0.4);
+}
+
+
+/* borda animada estilo header */
+.hls-container::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  padding:2px;
+  border-radius:inherit;
+  background: linear-gradient(90deg, transparent 25%, #D16812, #D16812, #D16812, transparent 75%);
+  background-size:300% 100%;
+  animation: energyRun 6s linear infinite;
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite:exclude;
+
+  pointer-events:none;
+  filter: drop-shadow(0 0 6px #D16812) drop-shadow(0 0 12px #D16812);
+}
+
+/* vídeo */
+#video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* badge AO VIVO */
+.live-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: red;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+
+  box-shadow: 0 0 10px red;
+  animation: pulseLive 1.5s infinite;
+}
+
+@keyframes pulseLive {
+  0% { box-shadow: 0 0 5px red; }
+  50% { box-shadow: 0 0 20px red; }
+  100% { box-shadow: 0 0 5px red; }
+}
+@media (max-width: 768px) {
+
+  header {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    will-change: transform;
+  transform: translateZ(0);
+  }
+
+  .logo img {
+    max-width: 50px;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  nav a {
+    font-size: 13px;
+    padding: 6px 8px;
+    margin: 0;
+  }
+
+}
+
 </style>
 
 </head>
@@ -778,5 +883,6 @@ apply();
 
 </script>
 </body>
+</script>
 
 </html>

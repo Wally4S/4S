@@ -15,21 +15,25 @@ body{
 
 /* TOPO */
 .topo{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
     padding:20px;
-    text-align:center;
     font-size:28px;
     font-weight:bold;
     color:#D16812;
-    border-bottom:1px solid rgba(209, 104, 18, 0);
-    box-shadow:0 0 25px rgba(209, 104, 18, 0);
+
     position:relative;
 }
+
 
 /* BOTÃO VOLTAR */
 .voltar{
     position:absolute;
-    left:20px;
+    right:20px; /* 🔥 mudou de left pra right */
     top:20px;
+
     padding:8px 14px;
     background:linear-gradient(135deg,#D16812,#facc15);
     border:none;
@@ -39,6 +43,7 @@ body{
     transition:0.3s;
     box-shadow:0 4px 15px rgba(209,104,18,0.5);
 }
+
 
 .voltar:hover{
     transform:translateY(-2px) scale(1.05);
@@ -238,11 +243,20 @@ body{
     border-radius:12px;
     box-shadow:0 0 25px rgba(209,104,18,0.6);
 }
+@media (max-width: 768px){
+  .voltar{
+    right:10px;
+    top:10px;
+    padding:6px 10px;
+    font-size:12px;
+  }
+}
+
 </style>
 </head>
 <body>
 
-<div class="topo">🎬 Vídeos da 4S Store</div>
+<div class="topo">🎬 Vídeos</div>
 <button class="voltar" onclick="voltarInicio()">♻️Pagina Inicial</button>
 <div class="busca">
 <input type="text" id="search" placeholder="Buscar video...">
