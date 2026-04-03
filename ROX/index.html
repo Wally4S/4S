@@ -18,84 +18,94 @@ text-align:center;
 .topBar{
 display:flex;
 justify-content:center;
-gap:10px;
+align-items:center;
+gap:8px;
 flex-wrap:wrap;
-margin-top:20px;
+margin-top:25px;
+position:relative; /* necessário pro botão direita */
+}
+/* BOTÃO "Página Inicial" (o primeiro link) */
+.topBar a:first-child{
+position:absolute;
+right:10px;
+top:-5px;
+
+padding:9px 18px;
+border-radius:20px;
+
+background:linear-gradient(135deg,#ffb347,#ff8c1a);
+color:#000;
+font-size:16px;
+font-weight:bold;
+
+box-shadow:0 0 15px rgba(255,180,80,0.8);
 }
 
+/* mantém hover bonito */
+.topBar a:first-child:hover{
+transform:scale(1.05);
+box-shadow:0 0 25px rgba(255,180,80,1);
+}
+@media (max-width:768px){
+
+.topBar{
+flex-direction:column;
+}
+
+/* botão volta pro fluxo normal no mobile */
+.topBar a:first-child{
+position:static;
+margin-bottom:10px;
+}
+
+}
+
+
+/* BOTÕES */
 .topBar a{
-position:relative;
-display:flex;
+display:inline-flex;
 align-items:center;
 justify-content:center;
-gap:6px;
+gap:5px;
 
-padding:8px 16px;
-border-radius:14px;
+padding:6px 14px; /* 🔥 menor */
+border-radius:20px;
 
 background:linear-gradient(135deg,#D16812,#ff8c1a);
 color:white;
-font-size:13px;
-font-weight:bold;
+font-size:12px; /* 🔥 menor */
+font-weight:600;
 
 text-decoration:none;
 cursor:pointer;
-transition:.25s;
+transition:.2s ease;
+
+white-space:nowrap; /* 🔥 evita quebrar texto */
 
 box-shadow:
-0 0 12px rgba(209,104,18,0.6),
-inset 0 0 6px rgba(255,255,255,0.15);
+0 0 10px rgba(209,104,18,0.5),
+inset 0 0 4px rgba(255,255,255,0.1);
 }
 
-/* HOVER MAIS FORTE */
+/* HOVER */
 .topBar a:hover{
-transform:translateY(-3px) scale(1.06);
+transform:translateY(-2px) scale(1.05);
 
 background:linear-gradient(135deg,#ff8c1a,#ffb347);
 
 box-shadow:
-0 0 25px rgba(255,140,26,0.9),
-0 0 40px rgba(209,104,18,0.6);
+0 0 18px rgba(255,140,26,0.8),
+0 0 30px rgba(209,104,18,0.5);
 }
 
-/* BOTÃO ATIVO */
+/* ATIVO */
 .topBar a.active{
 background:linear-gradient(135deg,#ffb347,#ffd27f);
-
 color:#000;
 
 box-shadow:
-0 0 30px rgba(255,180,80,1),
-0 0 60px rgba(255,140,26,0.8);
-}
-
-/* SHINE */
-.topBar a::after{
-content:"";
-position:absolute;
-top:-100%;
-left:-100%;
-width:200%;
-height:200%;
-
-background:linear-gradient(
-120deg,
-transparent 40%,
-rgba(255, 255, 255, 0.35) 50%,
-transparent 60%
-);
-
-transform:rotate(25deg);
-opacity:0;
-}
-
-.topBar a:hover::after{
-animation:shineMenu 1s;
-}
-
-.topBar a:hover{
-transform:translateY(-2px);
-box-shadow:0 0 15px #D16812;
+0 0 20px rgba(255,180,80,1),
+0 0 40px rgba(255,140,26,0.6);
 }
 
 /* SEARCH */
