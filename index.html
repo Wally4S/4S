@@ -54,25 +54,27 @@ body{
     drop-shadow(0 5px 8px rgb(0, 0, 0));
 }
 header{
-  background:linear-gradient(90deg,#0B0B0B,#0B0B0B);
-  padding:14px 22px;
+  width: 100%;
+  max-width: 1290px;
+
+  margin: 15px auto;
+
+  padding: 14px 18px; /* 🔥 menor pra alinhar visual */
 
   display:flex;
   justify-content:space-between;
   align-items:center;
 
   position:sticky;
-  top:0;
+  top:10px;
   z-index:100;
 
-  /* arredondamento real */
   border-radius:18px;
-
-  /* essencial pro efeito */
   overflow:visible;
 
-
+  background:linear-gradient(90deg,#0B0B0B,#0B0B0B);
 }
+
 
 /* BORDA COM ENERGIA CORRENDO */
 header::after{
@@ -82,23 +84,11 @@ header::after{
   pointer-events:none;
 
   border-radius:inherit;
-  padding:3px;
+  padding:2px;
 
-  background:
-    linear-gradient(
-      90deg,
-      transparent 25%,
-      #D16812,
-      #D16812,
-      #D16812,
-      #D16812,
-      transparent 75%
-    );
+  background: #D16812; /* cor sólida */
 
-  background-size:300% 100%;
-  animation:energyRun 6s ease-in-out infinite;
-
-  /* recorte correto da borda */
+  /* máscara pra virar só borda */
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -109,17 +99,39 @@ header::after{
     linear-gradient(#000 0 0);
   mask-composite:exclude;
 
-  /* brilho controlado */
+  /* glow suave */
   filter:
     drop-shadow(0 0 4px #D16812)
-    drop-shadow(0 0 10px#D16812);
+    drop-shadow(0 0 10px #D16812);
+
+  animation: glowPulse 4s ease-in-out infinite;
 }
 
+
 /* ANIMAÇÃO */
-@keyframes energyRun{
-  from{background-position:0% 50%}
-  to{background-position:300% 50%}
+@keyframes glowPulse {
+  0% {
+    opacity: 0.5;
+    filter:
+      drop-shadow(0 0 3px #D16812)
+      drop-shadow(0 0 6px #D16812);
+  }
+
+  50% {
+    opacity: 1;
+    filter:
+      drop-shadow(0 0 8px #D16812)
+      drop-shadow(0 0 16px #D16812);
+  }
+
+  100% {
+    opacity: 0.5;
+    filter:
+      drop-shadow(0 0 3px #D16812)
+      drop-shadow(0 0 6px #D16812);
+  }
 }
+
 
 
 .logo{
@@ -152,21 +164,37 @@ nav a:hover{
 /* BANNER */
 .banner {
   position: relative;
-  padding:100px 20px;
-  text-align:center;
-  border-radius: 0px;
+
+  width: 100%;
+  max-width: 1280px; /* 🔥 largura padrão 1280 */
+  margin: 20px auto; /* centraliza */
+
+  aspect-ratio: 16 / 9; /* 🔥 mantém 1280x720 proporcional */
+
+  border-radius: 12px; /* leve, não "caixão" */
   overflow: hidden;
+  background: #000;
 }
-.banner{
-  position:relative;
-  margin-top:-2px;
+.banner {
+  box-shadow:
+    0 0 8px #D16812,
+    0 0 18px rgba(209,104,18,0.5),
+    0 0 30px rgba(209,104,18,0.25);
+}
 
-  box-shadow: 0 0 12px rgba(249, 116, 22, 0);
+
+.banner-video {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center 30%; /* 🔥 ajusta foco do personagem */
 }
 
-.banner-video{
-  inset:-1px;
-}
+
 
 .banner::after{
   content:"";
@@ -266,18 +294,25 @@ text-shadow:0 0 15px #D16812,0 0 25px #D16812;
   position:relative;
   overflow:visible;
 }
-.card {
-  background: #000000; /* fundo escuro */
-  border: 2px solid transparent; /* borda base */
-  border-radius: 16px;
-  padding: 20px 30px;
-  position: relative;
-  overflow: visible;
-  transition: all 0.3s ease;
+.card{
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
 
-  /* glow sutil inicial */
-  box-shadow: 0 0 12px rgba(209,104,18,0.4);
+  border-radius: 20px;
+  padding: 24px 30px;
+
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  transition: all 0.35s ease;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.6),
+    0 0 12px rgba(209,104,18,0.2);
 }
+
 
 /* Borda animada igual header */
 .card::after {
@@ -357,8 +392,13 @@ text-shadow:0 0 15px #D16812,0 0 25px #D16812;
 /* BACKGROUND DOS CARDS */
 
 .card:hover{
-transform:translateY(-8px);
+  transform: translateY(-12px) scale(1.02);
+
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.8),
+    0 0 20px rgba(209,104,18,0.4);
 }
+
 
 .card h3{color:#ffffff}
 .card a{
@@ -728,10 +768,10 @@ header {
   background: linear-gradient(90deg, #FACC15, #D16812);
 }
 </style>
-<link rel="preload" as="image" href="banner.webp">
+<link rel="preload" as="image" href="ragzada background.mov">
 <section class="banner">
   <video class="banner-video" autoplay muted loop playsinline>
-    <source src="/public/banner.webm" type="video/webm">
+    <source src="/public/ragzada background.mov" type="video/webm">
   </video>
 
   <div class="banner-content">
