@@ -214,14 +214,7 @@ text-shadow:0 0 15px #D16812,0 0 25px #D16812;
   text-shadow: 0 0 8px #D16812, 0 0 12px #FACC15;
 }
 
-.card{
-  background:linear-gradient(180deg,#D16812,#D16812);
-  border:1px solid #ffffff;
-  border-radius:16px;
-  padding:20px 30px 30px; /* espaço extra pro personagem */
-  position:relative;
-  overflow:visible;
-}
+
 .card{
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
@@ -277,52 +270,32 @@ text-shadow:0 0 15px #D16812,0 0 25px #D16812;
 =========================== */
 .card-character{
   position:absolute;
-  top:-160px;               /* metade do corpo pra fora */
-  left:50%;
+  top:20%;
+  left:70%;
   transform:translateX(-50%);
-  width:180px;
+  
+  width:80px;
+  height:130px;        /* 🔥 força padrão */
+  object-fit:contain;  /* 🔥 mantém proporção */
+
   z-index:10;
   pointer-events:none;
-
-  /* realismo */
-  filter:
-    drop-shadow(0 25px 25px rgb(0, 0, 0))
-    drop-shadow(0 10px 10px rgb(0, 0, 0));
 }
 
-/* ===========================
-   AJUSTE INDIVIDUAL POR CARD
-   (NÃO interfere nos outros)
-=========================== */
 
-/* CARD 1 */
-.grid .card:nth-child(1) .card-character{
-  top:32px;
-  left:65%;
-  transform:translateX(-50%) rotate(-3deg);
+/* CARD  */
+.card-character{
+  position:absolute;
+  top:15px;
+  left:80%;
+  transform:translateX(-50%);
+  width:150px;
 }
-
-/* CARD 2 */
-.grid .card:nth-child(2) .card-character{
-  top:30px;
-  left:70%;
-  transform:translateX(-50%) scale(1.05);
-}
-
-/* CARD 3 */
-.grid .card:nth-child(3) .card-character{
-  top:30px;
-  left:70%;
-  transform:translateX(-50%) rotate(2deg);
-}
-
 /* ===========================
    MICRO MOVIMENTO (REALISMO)
 =========================== */
 .card:hover .card-character{
-  transform:
-    translateX(-50%)
-    translateY(6px);
+  transform: translateX(-50%) translateY(6px);
 }
 
 
@@ -852,7 +825,7 @@ img {
   transition:0.3s;
 }
 
-/* hover ativa o brilho */
+/* hover ON o brilho */
 .hero-buttons a:hover::after{
   animation: btnShine 0.8s forwards;
 }
@@ -941,9 +914,144 @@ img {
     white-space: nowrap;
   }
 }
-.live-badge.latam { background:#D16812; }
-.live-badge.myth { background:#7c3aed; }
-.live-badge.vip { background:#16a34a; }
+/* =========================
+   RESPONSIVO MOBILE REAL
+========================= */
+
+@media (max-width: 768px) {
+
+  /* CONTAINER */
+  .container {
+    padding: 40px 14px;
+  }
+
+  /* GRID CARDS */
+  .grid {
+    grid-template-columns: repeat(2, 1fr); /* 🔥 1 coluna no mobile */
+    gap: 18px;
+  }
+
+  .card {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  /* PERSONAGEM NÃO QUEBRA */
+  .card-character {
+    width: 120px;
+    top: 10px;
+    left: 75%;
+    opacity: 0.9;
+  }
+
+  /* TEXTO DOS CARDS */
+  .card h3 {
+    font-size: 16px;
+  }
+
+  .card p {
+    font-size: 13px;
+  }
+
+  /* BOTÃO */
+  .card a {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  /* =========================
+     STREAMERS MOBILE
+  ========================= */
+
+  .streamers {
+    margin-top: 60px;
+  }
+
+  .streamer-grid {
+    grid-template-columns: repeat(2, 1fr); /* 🔥 2 por linha */
+    gap: 16px;
+  }
+
+  .streamer-card {
+    padding: 14px;
+  }
+
+  /* AVATAR */
+  .avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  /* NOME */
+  .streamer-card h4 {
+    font-size: 13px;
+  }
+
+  /* BADGE AJUSTE MOBILE */
+  .live-badge {
+    font-size: 9px;
+    padding: 4px 8px;
+
+    top: -6px; /* 🔥 sobe mais no mobile */
+  }
+
+  /* SOCIAL ICONS */
+  .socials img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* =========================
+   EXTRA: TELAS MUITO PEQUENAS
+========================= */
+
+@media (max-width: 480px) {
+
+  .streamer-grid {
+    grid-template-columns: repeat(2, 1fr); /* 🔥 1 por linha */
+  }
+
+  .banner h1 {
+    font-size: 24px !important;
+  }
+
+  .banner p {
+    font-size: 12px;
+  }
+}
+.promo-text{
+  font-weight:700;
+  letter-spacing:1px;
+  color:#fff;
+
+  text-shadow:
+    0 0 6px #D16812,
+    0 0 12px #FACC15,
+    0 0 18px rgba(209,104,18,0.6);
+
+  animation: promoPulse 2s ease-in-out infinite;
+}
+
+/* glow respirando leve */
+@keyframes promoPulse{
+  0%{
+    text-shadow:
+      0 0 6px #D16812,
+      0 0 10px #FACC15;
+  }
+  50%{
+    text-shadow:
+      0 0 10px #FACC15,
+      0 0 20px #D16812,
+      0 0 30px #FACC15;
+  }
+  100%{
+    text-shadow:
+      0 0 6px #D16812,
+      0 0 10px #FACC15;
+  }
+}
 </style>
 
 </head>
@@ -1011,26 +1119,25 @@ header {
 <div class="container">
 
 <div class="grid">
+
 <div class="card">
-<img src="/public/produtos.png" class="card-character">
-<h3>🛒Produtos</h3>
-<p>Vitrine de produtos.</p>
-<a href="/loja">Acessar</a>
+<img src="/public/promo1.png" class="card-character">
+<h3>3 Produtos+ 10%</h3>
+<p class="promo-text">PROMOÇÃO ON✔️</p>
 </div>
 
 <div class="card">
-<img src="/public/guias.png" class="card-character">
-<h3>⏰Timer Boss</h3>
-<p>não perca seus MVP.</p>
-<a href="/ROX/">Acessar  </a>
+<img src="/public/promo2.png" class="card-character">
+<h3>5 Produtos+ 20%</h3>
+<p class="promo-text">PROMOÇÃO ON✔️</p>
 </div>
 
 <div class="card">
-<img src="/public/referencias.png" class="card-character">
-<h3>📌Referências</h3>
-<p>Minhas Referencias.</p>
-<a href="/referencias">Acessar</a>
+<img src="/public/promo3.png" class="card-character">
+<h3>10 Produtos+ 30%</h3>
+<p class="promo-text">PROMOÇÃO ON✔️</p>
 </div>
+
 </div>
 
 <section class="streamers">

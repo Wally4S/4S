@@ -1726,12 +1726,21 @@ cart.forEach(i => qtdItens += i.qty);
 
 /* BARRA DE PROGRESSO COM TEXTO */
 
-const progresso = Math.min((qtdItens/5)*100,100);
+let meta = 3;
 
-let textoBarra = `👀${qtdItens}/5 ITENS PARA -20% DESCONTO`;
+if(qtdItens >= 5) meta = 5;
+if(qtdItens >= 10) meta = 10;
 
-if(qtdItens >= 5){
-textoBarra = "🔥 DESCONTO DE -20% LIBERADO✔️";
+const progresso = Math.min((qtdItens / meta) * 100, 100);
+
+let textoBarra = `👀 ${qtdItens}/3 itens → 10% OFF`;
+
+if(qtdItens >= 10){
+  textoBarra = "🔥 30% OFF LIBERADO ✔️";
+}else if(qtdItens >= 5){
+  textoBarra = "⚡ 20% OFF LIBERADO ✔️";
+}else if(qtdItens >= 3){
+  textoBarra = "✨ 10% OFF LIBERADO ✔️";
 }
 
 cartItems.innerHTML += `
@@ -1799,7 +1808,20 @@ cart.forEach(i => {
 const product = productsData.find(p => p.id === i.id);
 const img = product ? product.img : "";
 
-const sub = i.price * i.qty;
+let precoOriginal = i.price * i.qty;
+
+let descontoItem = 0;
+
+if(qtdItens >= 10){
+  descontoItem = 0.30;
+}else if(qtdItens >= 5){
+  descontoItem = 0.20;
+}else if(qtdItens >= 3){
+  descontoItem = 0.10;
+}
+
+let sub = precoOriginal * (1 - descontoItem);
+
 t += sub;
 
 cartItems.innerHTML += `
@@ -1876,7 +1898,27 @@ color:#facc15;
 min-width:60px;
 text-align:right;
 ">
-R$ ${sub.toFixed(2)}
+${descontoItem > 0 ? `
+  <div style="display:flex;flex-direction:column;align-items:flex-end">
+
+    <span style="
+      font-size:11px;
+      color:#9ca3af;
+      text-decoration:line-through;
+    ">
+      R$ ${precoOriginal.toFixed(2)}
+    </span>
+
+    <span style="
+      color:#22c55e;
+      font-weight:700;
+      text-shadow:0 0 8px rgba(34,197,94,.8);
+    ">
+      R$ ${sub.toFixed(2)}
+    </span>
+
+  </div>
+` : `R$ ${sub.toFixed(2)}`}
 </div>
 
 </div>
@@ -1888,10 +1930,19 @@ R$ ${sub.toFixed(2)}
 /* DESCONTO */
 
 let desconto = 0;
+let descontoPercent = 0;
 
-if(qtdItens >= 5){
-desconto = t * 0.20;
+// regras de desconto progressivo
+if(qtdItens >= 10){
+  descontoPercent = 30;
+}else if(qtdItens >= 5){
+  descontoPercent = 20;
+}else if(qtdItens >= 3){
+  descontoPercent = 10;
 }
+
+// cálculo do desconto
+desconto = t * (descontoPercent / 100);
 
 let totalFinal = t - desconto;
 
