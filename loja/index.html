@@ -1810,18 +1810,10 @@ const img = product ? product.img : "";
 
 let precoOriginal = i.price * i.qty;
 
-let descontoItem = 0;
+// sem desconto por item
+let sub = precoOriginal;
 
-if(qtdItens >= 10){
-  descontoItem = 0.30;
-}else if(qtdItens >= 5){
-  descontoItem = 0.20;
-}else if(qtdItens >= 3){
-  descontoItem = 0.10;
-}
-
-let sub = precoOriginal * (1 - descontoItem);
-
+// soma total bruto
 t += sub;
 
 cartItems.innerHTML += `
@@ -1898,28 +1890,7 @@ color:#facc15;
 min-width:60px;
 text-align:right;
 ">
-${descontoItem > 0 ? `
-  <div style="display:flex;flex-direction:column;align-items:flex-end">
-
-    <span style="
-      font-size:11px;
-      color:#9ca3af;
-      text-decoration:line-through;
-    ">
-      R$ ${precoOriginal.toFixed(2)}
-    </span>
-
-    <span style="
-      color:#22c55e;
-      font-weight:700;
-      text-shadow:0 0 8px rgba(34,197,94,.8);
-    ">
-      R$ ${sub.toFixed(2)}
-    </span>
-
-  </div>
-` : `R$ ${sub.toFixed(2)}`}
-</div>
+$R$ ${sub.toFixed(2)}
 
 </div>
 
