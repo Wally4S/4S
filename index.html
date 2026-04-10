@@ -72,64 +72,7 @@ header{
   border-radius:18px;
   overflow:visible;
 
-  background:linear-gradient(90deg,#0B0B0B,#0B0B0B);
-}
-
-
-/* BORDA COM ENERGIA CORRENDO */
-header::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-
-  border-radius:inherit;
-  padding:2px;
-
-  background: #D16812; /* cor sólida */
-
-  /* máscara pra virar só borda */
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;
-
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite:exclude;
-
-  /* glow suave */
-  filter:
-    drop-shadow(0 0 4px #D16812)
-    drop-shadow(0 0 10px #D16812);
-
-  animation: glowPulse 4s ease-in-out infinite;
-}
-
-
-/* ANIMAÇÃO */
-@keyframes glowPulse {
-  0% {
-    opacity: 0.5;
-    filter:
-      drop-shadow(0 0 3px #D16812)
-      drop-shadow(0 0 6px #D16812);
-  }
-
-  50% {
-    opacity: 1;
-    filter:
-      drop-shadow(0 0 8px #D16812)
-      drop-shadow(0 0 16px #D16812);
-  }
-
-  100% {
-    opacity: 0.5;
-    filter:
-      drop-shadow(0 0 3px #D16812)
-      drop-shadow(0 0 6px #D16812);
-  }
+  background:#000000;
 }
 
 
@@ -175,12 +118,7 @@ nav a:hover{
   overflow: hidden;
   background: #000;
 }
-.banner {
-  box-shadow:
-    0 0 8px #D16812,
-    0 0 18px rgba(209,104,18,0.5),
-    0 0 30px rgba(209,104,18,0.25);
-}
+
 
 
 .banner-video {
@@ -243,10 +181,11 @@ text-shadow:0 0 15px #D16812,0 0 25px #D16812;
 
 /* CONTAINER */
 .container{
-  max-width:1200px;
+  max-width:1280px;
   margin:auto;
-  padding:70px 20px;
+  padding:70px 0; /* 🔥 remove lateral */
 }
+
 
 /* CARDS */
 .grid{
@@ -269,23 +208,12 @@ text-shadow:0 0 15px #D16812,0 0 25px #D16812;
     0 0 28px rgba(249, 115, 22, 0.4);
 }
 
-/* Glow leve nos cards de streamers */
-.streamer-card {
-  transition: all 0.3s ease, box-shadow 0.4s ease;
-  box-shadow: 0 0 12px rgba(249, 115, 22, 0.3);
-}
-
-.streamer-card:hover {
-  transform: translateY(-6px);
-  box-shadow:
-    0 0 18px rgba(249, 115, 22, 0.5),
-    0 0 28px rgba(249, 115, 22, 0.3);
-}
 
 /* Glow nos h3 dentro dos cards */
 .card h3, .streamer-card h4 {
   text-shadow: 0 0 8px #D16812, 0 0 12px #FACC15;
 }
+
 .card{
   background:linear-gradient(180deg,#D16812,#D16812);
   border:1px solid #ffffff;
@@ -321,20 +249,29 @@ text-shadow:0 0 15px #D16812,0 0 25px #D16812;
   inset:0;
   padding:2px;
   border-radius:inherit;
-  background: linear-gradient(90deg, transparent 25%, #D16812, #D16812, #D16812, transparent 75%);
-  background-size:300% 100%;
-  animation: energyRun 6s linear infinite;
+
+  background: #D16812; /* 🔥 cor sólida */
+
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
   -webkit-mask-composite:xor;
+
   mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
   mask-composite:exclude;
+
   pointer-events:none;
-  filter: drop-shadow(0 0 6px #D16812) drop-shadow(0 0 12px #D16812);
+
+  /* glow suave igual header */
+  filter:
+    drop-shadow(0 0 4px #D16812)
+    drop-shadow(0 0 10px #D16812);
+
+  animation: glowPulse 4s ease-in-out infinite;
 }
+
 /* ===========================
    PERSONAGEM SENTADO (BASE)
 =========================== */
@@ -412,12 +349,58 @@ text-decoration:none;
 }
 /* STREAMERS */
 .streamers{margin-top:110px}
-.streamers h2{
+.streamer-title{
   text-align:center;
-  color:#ffffff;
-  margin-bottom:40px;
-  text-shadow:0 0 12px #ffffff,0 0 20px #ffffff,0 0 28px #ffffff;
+  margin-bottom:50px;
+  position:relative;
 }
+
+/* TEXTO */
+.streamer-title span{
+  display:inline-block; /* 🔥 resolve alinhamento */
+  text-align:center;
+
+  font-size:28px;
+  font-weight:700;
+  letter-spacing:2px;
+
+  background: linear-gradient(90deg, #fff, #FACC15, #D16812, #fff);
+  background-size: 300%;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: shineText 6s linear infinite;
+}
+
+/* LINHA EMBAIXO */
+.streamer-title::after{
+  content:"";
+  display:block;
+
+  width:180px;
+  height:2px;
+
+  margin:14px auto 0;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #D16812,
+    #FACC15,
+    #D16812,
+    transparent
+  );
+
+  box-shadow: 0 0 12px #D16812;
+}
+
+/* ANIMAÇÃO */
+@keyframes shineText{
+  0%{background-position:0%}
+  100%{background-position:300%}
+}
+
 
 .streamer-grid{
   display:grid;
@@ -426,17 +409,23 @@ text-decoration:none;
 }
 
 .streamer-card{
-  background:linear-gradient(180deg,#D16812,#D16812);
-  border:1px solid #ffffff;
-  border-radius:18px;
-  padding:26px 20px;
-  text-align:center;
-  position:relative;
-  transition: all 0.3s ease, box-shadow 0.4s ease;
+  background: transparent; /* 🔥 remove fundo */
+  border: none; /* 🔥 remove borda */
+  box-shadow: none; /* 🔥 remove caixa */
+  position: relative;
+
+  padding: 20px;
+  text-align: center;
+  position: relative;
+
+  transition: all 0.3s ease;
 }
-.streamer-card:hover{
-  transform:translateY(-6px);
+
+.streamer-card:hover .avatar{
+  transform: scale(1.08);
+  filter: brightness(1.1);
 }
+
 
 /* AVATAR */
 .avatar{
@@ -449,9 +438,11 @@ text-decoration:none;
   transition: all 0.3s ease;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
 }
-.avatar:hover{
-  transform:scale(1.3);
+.avatar{
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
 }
+
+
 
 
 /* SOCIALS */
@@ -492,9 +483,10 @@ footer{
   100%{box-shadow:0 0 0 0 rgb(255, 255, 255)}
 }
 /* ===== AURA ANIME ===== */
-.avatar, .card-character{
+.card-character{
   animation:auraPulse 2.5s infinite alternate;
 }
+
 
 @keyframes auraPulse{
   from{
@@ -543,50 +535,6 @@ img {
   max-width: 100%;
   height: auto;
 }
-.streamer-card {
-  background: #000000; /* fundo escuro */
-  border: 2px solid transparent; /* borda base */
-  border-radius: 18px;
-  padding: 26px 20px;
-  text-align: center;
-  position: relative;
-  transition: all 0.3s ease, box-shadow 0.4s ease;
-  overflow: visible;
-  z-index: 0;
-
-  /* glow inicial suave */
-  box-shadow: 0 0 12px rgba(209,104,18,0.3);
-}
-
-/* borda animada igual header */
-.streamer-card::after {
-  content:"";
-  position:absolute;
-  inset:0;
-  padding:2px;
-  border-radius:inherit;
-  background: linear-gradient(
-    90deg,
-    transparent 25%,
-    #D16812,
-    #D16812,
-    #D16812,
-    transparent 75%
-  );
-  background-size:300% 100%;
-  animation: energyRun 6s linear infinite;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite:exclude;
-  pointer-events:none;
-  filter: drop-shadow(0 0 6px #d1681265) drop-shadow(0 0 12px #d1681249);
-  z-index: -1;
-}
 
 /* AVATAR COM GLOW LEVE */
 .avatar {
@@ -602,9 +550,13 @@ img {
 
 /* Hover do avatar */
 .avatar:hover {
-  transform: scale(1.3);
-  box-shadow: 0 0 18px #D16812, 0 0 28px #facc152f;
+  transform: scale(1.1);
+
+  box-shadow:
+    0 0 8px rgba(209,104,18,0.6),
+    0 0 14px rgba(209,104,18,0.3);
 }
+
 
 /* SOCIALS com glow leve ao hover */
 .socials a:hover img {
@@ -664,25 +616,60 @@ img {
 }
 
 /* badge AO VIVO */
+.streamer-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* garante alinhamento perfeito */
+.streamer-card h4{
+  margin: 10px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  color: #fff;
+
+  text-align: center;
+
+  text-shadow:
+    0 0 6px #D16812,
+    0 0 10px rgba(250,204,21,0.4);
+}
+
+/* BADGE AJUSTADO */
 .live-badge {
   position: absolute;
-  top: 12px;
-  left: 12px;
-  background: red;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 12px;
+
+  top: 0;              /* base */
+  left: 50%;
+  transform: translate(-50%, -50%); /* centraliza e sobe */
+
+  background: rgba(209,104,18,0.7);
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 11px;
   font-weight: bold;
   color: #fff;
 
-  box-shadow: 0 0 10px red;
+  box-shadow: 0 0 8px rgb(255, 255, 255);
   animation: pulseLive 1.5s infinite;
+
+  z-index: 5;
+}
+
+/* offline */
+.live-badge.offline {
+  background: #444;
+  box-shadow: none;
+  animation: none;
 }
 
 @keyframes pulseLive {
-  0% { box-shadow: 0 0 5px red; }
-  50% { box-shadow: 0 0 20px red; }
-  100% { box-shadow: 0 0 5px red; }
+  0% { box-shadow: 0 0 5px rgba(209,104,18,0.7) }
+  50% { box-shadow: 0 0 20px rgba(209,104,18,0.7) }
+  100% { box-shadow: 0 0 5px rgba(209,104,18,0.7) }
 }
 @media (max-width: 768px) {
 
@@ -713,7 +700,250 @@ img {
   }
 
 }
+/* =========================
+   HERO UPGRADE PREMIUM
+   (SEM QUEBRAR LAYOUT)
+========================= */
 
+.banner-content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  max-width:800px;
+  margin:0 auto;
+  padding:20px;
+}
+
+/* TÍTULO PRINCIPAL INSANO */
+.banner-content h1{
+  font-size:60px;
+  margin:0;
+  color:#fff;
+  position:relative;
+
+  text-shadow:
+    0 0 10px #D16812,
+    0 0 25px rgba(209,104,18,0.7),
+    0 0 40px rgba(250,204,21,0.3);
+
+  animation: heroPulse 2.8s ease-in-out infinite;
+}
+
+
+/* SUBTÍTULO */
+.banner-content p{
+  font-size:16px;
+  margin-top:10px;
+  color:#e5e7eb;
+  opacity:0.9;
+  text-shadow:0 0 8px rgba(209,104,18,0.4);
+}
+
+/* TAG BONITA SEM ALTERAR HTML */
+.banner-content::before{
+  content:"⚡ RAPIDO & BARATO";
+  display:inline-block;
+  font-size:11px;
+  letter-spacing:2px;
+  padding:6px 10px;
+  border-radius:6px;
+  background:rgba(209,104,18,0.12);
+  color:#fff;
+  margin-bottom:12px;
+  text-shadow:0 0 8px #D16812;
+}
+
+/* BOTÕES CRIADOS SEM MEXER NO HTML */
+.hero-btns{
+  margin-top:18px;
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+/* se você NÃO tem botões ainda, não quebra nada */
+.hero-btns a{
+  padding:10px 16px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;
+  border:1px solid #D16812;
+  color:#fff;
+  background:rgba(0,0,0,0.4);
+  transition:0.3s;
+}
+
+.hero-btns a:hover{
+  transform:scale(1.05);
+  background:linear-gradient(90deg,#D16812,#FACC15);
+  color:#000;
+  box-shadow:0 0 15px #D16812;
+}
+
+/* ANIMAÇÃO DO TÍTULO */
+@keyframes heroGlow{
+  from{
+    text-shadow:0 0 10px #D16812;
+  }
+  to{
+    text-shadow:0 0 25px #FACC15;
+  }
+}
+/* =========================
+   BOTÃO GAME UI STYLE
+========================= */
+
+.hero-buttons{
+  margin-top:18px;
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+/* botão base estilo game */
+.hero-buttons a{
+  position:relative;
+  padding:12px 18px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:700;
+  letter-spacing:1px;
+
+  color:#fff;
+  background:rgba(0,0,0,0.6);
+
+  border:1px solid rgba(209,104,18,0.6);
+
+  box-shadow:
+    0 0 10px rgba(209,104,18,0.3),
+    inset 0 0 8px rgba(0,0,0,0.6);
+
+  transition:0.2s ease;
+  overflow:hidden;
+}
+
+/* efeito de “press” gamer */
+.hero-buttons a:active{
+  transform:scale(0.92);
+  box-shadow:
+    0 0 5px #D16812,
+    inset 0 0 12px rgba(0,0,0,0.8);
+}
+
+/* brilho passando no botão */
+.hero-buttons a::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-120%;
+  width:80%;
+  height:100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.25),
+    transparent
+  );
+
+  transform: skewX(-25deg);
+  transition:0.3s;
+}
+
+/* hover ativa o brilho */
+.hero-buttons a:hover::after{
+  animation: btnShine 0.8s forwards;
+}
+
+@keyframes btnShine{
+  0%{ left:-120%; }
+  100%{ left:120%; }
+}
+
+/* hover geral */
+.hero-buttons a:hover{
+  transform:translateY(-2px) scale(1.05);
+  border-color:#FACC15;
+  box-shadow:
+    0 0 15px #D16812,
+    0 0 25px rgba(250,204,21,0.4);
+}
+/* =========================
+   CATEGORIAS NO HERO
+========================= */
+
+.hero-categories{
+  margin-top:18px;
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+/* BOTÃO IGUAL CARD (REUTILIZADO) */
+.hero-categories .card-btn{
+  display:inline-block;
+  padding:10px 16px;
+
+  border-radius:12px;
+
+  background: rgba(0,0,0,0.6);
+  border:1px solid rgba(209,104,18,0.4);
+
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+
+  box-shadow:
+    0 0 12px rgba(209,104,18,0.25);
+
+  transition: all 0.25s ease;
+}
+
+/* HOVER IGUAL CARD */
+.hero-categories .card-btn:hover{
+  transform: translateY(-6px) scale(1.05);
+
+  box-shadow:
+    0 0 18px rgba(209,104,18,0.6),
+    0 0 30px rgba(250,204,21,0.3);
+
+  border-color:#FACC15;
+  background: linear-gradient(90deg,#D16812,#FACC15);
+  color:#000;
+}
+@media (max-width: 768px) {
+
+  .banner-content{
+    padding: 14px 10px;
+  }
+
+  .banner-content h1{
+    font-size: 28px !important;
+    line-height: 1.1;
+  }
+
+  .banner-content p{
+    font-size: 13px;
+  }
+
+  .hero-categories{
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .hero-categories .card-btn{
+    font-size: 12px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+}
+.live-badge.latam { background:#D16812; }
+.live-badge.myth { background:#7c3aed; }
+.live-badge.vip { background:#16a34a; }
 </style>
 
 </head>
@@ -721,21 +951,7 @@ img {
 
 <header>
 
-  <div class="logo">
-    <a href="/" class="logo-link">
-      <img src="logo.webp" loading="lazy" alt="Logo 4S Store">
-    </a>
-  </div>
-
-  <nav>
-    <a href="/loja">🛒𝙿𝚛𝚘𝚍𝚞𝚝𝚘𝚜</a>
-    <a href="/guias">🎬Galeria</a>
-    <a href="/ROX/">⏰Timer Boss</a>
-    <a href="/referencias">📌Referências</a>
-  </nav>
-
-  <img src="" class="header-character">
-
+ 
 </header>
 
 <style>
@@ -775,9 +991,21 @@ header {
   </video>
 
   <div class="banner-content">
-    <h1>𝟒𝑺 𝑺𝑻𝑶𝑹𝑬</h1>
-    <p>Melhores preços e promoções</p>
+
+  <h1>𝟒𝑺 𝑺𝑻𝑶𝑹𝑬</h1>
+
+  <p>Melhores preços e promoções</p>
+
+  <!-- CATEGORIAS (igual cards) -->
+  <div class="hero-categories">
+    <a href="/referencias" class="card-btn">📌REFS</a>
+    <a href="/loja" class="card-btn">🛒LOJA</a>
+    <a href="/guias" class="card-btn">🎬VIDEOS</a>
+    <a href="/ROX/" class="card-btn">⏰TIMER</a>
   </div>
+
+</div>
+
 </section>
 
 <div class="container">
@@ -806,52 +1034,91 @@ header {
 </div>
 
 <section class="streamers">
-<h2>🔥𝚂𝚝𝚛𝚎𝚊𝚖𝚎𝚛𝚜 𝚁𝚎𝚌𝚘𝚖𝚎𝚗𝚍𝚊𝚍𝚘𝚜</h2>
+  <h2 class="streamer-title">
+    <span>💎STREAMERS RECOMENDADOS</span>
+  </h2>
 
-<div class="streamer-grid">
+  <div class="streamer-grid">
 
-<!-- STREAMERS -->
-<div class="streamer-card" data-id="1">
-<span class="live">AO VIVO</span>
-<img class="avatar" src="assets/avatars/streamer01.png">
-<h4>𝚈𝚞𝚞𝚔𝚒𝚒𝙱𝚁</h4>
-<div class="socials">
-  <a href="https://www.twitch.tv/yuukiibr" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
-  <a href="https://kick.com/yuukiibr" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
-  <a href="https://www.youtube.com/@YuukiiBr" target="_blank"><img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif"></a>
-</div>
-</div>
+    <!-- YUUKI -->
+    <div class="streamer-card" data-id="1">
+      <span class="live-badge">Latam</span>
+      <img class="avatar" src="assets/avatars/streamer01.png">
+      <h4>YuukiiBR</h4>
 
-<div class="streamer-card" data-id="2">
-<span class="live">AO VIVO</span>
-<img class="avatar" src="assets/avatars/streamer02.png">
-<h4>𝙽𝚘𝚝𝚞𝚛𝚗𝚘𝚕𝚕𝚕</h4>
-<div class="socials">
-  <a href="https://twitch.tv" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
-  <a href="https://kick.com/noturnolll" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
-  <a href="https://www.youtube.com/@noturnoragnarok" target="_blank"><img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif"></a>
-</div>
-</div>
 
-<div class="streamer-card" data-id="3">
-<span class="live">AO VIVO</span>
-<img class="avatar" src="assets/avatars/streamer03.png">
-<h4>𝙹𝚞𝚕𝚕𝚒𝚎𝚣𝚒𝚗𝚑𝚊</h4>
-<div class="socials">
-  <a href="https://www.twitch.tv/julliezinha" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
-  <a href="https://kick.com/meowmeowzinha" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
-  <a href="https://www.youtube.com/@Julliezinhafloquinho" target="_blank"><img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif"></a>
-</div>
-</div>
+      <div class="socials">
+        <a href="https://www.twitch.tv/yuukiibr" target="_blank">
+          <img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif">
+        </a>
+        <a href="https://kick.com/yuukiibr" target="_blank">
+          <img src="https://cdn3.emoji.gg/emojis/65897-kick.gif">
+        </a>
+        <a href="https://www.youtube.com/@YuukiiBr" target="_blank">
+          <img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif">
+        </a>
+      </div>
+    </div>
 
-<div class="streamer-card" data-id="4">
-<span class="live">AO VIVO</span>
-<img class="avatar" src="assets/avatars/streamer04.png">
-<h4>𝙰𝚔𝚞𝚊𝙰𝙱</h4>
-<div class="socials">
-  <a href="https://www.twitch.tv/akuaab" target="_blank"><img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif"></a>
-  <a href="https://kick.com" target="_blank"><img src="https://cdn3.emoji.gg/emojis/65897-kick.gif"></a>
-  <a href="https://www.youtube.com/@AkuaAB" target="_blank"><img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif"></a>
+    <!-- NOTURNO -->
+    <div class="streamer-card" data-id="2">
+      <span class="live-badge">Latam</span>
+      <img class="avatar" src="assets/avatars/streamer02.png">
+      <h4>Noturnolll</h4>
+
+      <div class="socials">
+        <a href="https://twitch.tv" target="_blank">
+          <img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif">
+        </a>
+        <a href="https://kick.com/noturnolll" target="_blank">
+          <img src="https://cdn3.emoji.gg/emojis/65897-kick.gif">
+        </a>
+        <a href="https://www.youtube.com/@noturnoragnarok" target="_blank">
+          <img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif">
+        </a>
+      </div>
+    </div>
+
+    <!-- JULIE -->
+    <div class="streamer-card" data-id="3">
+      <span class="live-badge">Myth</span>
+      <img class="avatar" src="assets/avatars/streamer03.png">
+      <h4>Julliezinha</h4>
+
+
+      <div class="socials">
+        <a href="https://www.twitch.tv/julliezinha" target="_blank">
+          <img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif">
+        </a>
+        <a href="https://kick.com/meowmeowzinha" target="_blank">
+          <img src="https://cdn3.emoji.gg/emojis/65897-kick.gif">
+        </a>
+        <a href="https://www.youtube.com/@Julliezinhafloquinho" target="_blank">
+          <img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif">
+        </a>
+      </div>
+    </div>
+
+    <!-- AKUA -->
+    <div class="streamer-card" data-id="4">
+      <span class="live-badge">Latam</span>
+      <img class="avatar" src="assets/avatars/streamer04.png">
+      <h4>AkuaAB</h4>
+
+      <div class="socials">
+        <a href="https://www.twitch.tv/akuaab" target="_blank">
+          <img src="https://cdn3.emoji.gg/emojis/5135-twitch-turnover.gif">
+        </a>
+        <a href="https://kick.com" target="_blank">
+          <img src="https://cdn3.emoji.gg/emojis/65897-kick.gif">
+        </a>
+        <a href="https://www.youtube.com/@AkuaAB" target="_blank">
+          <img src="https://cdn3.emoji.gg/emojis/9954-youtube1.gif">
+        </a>
+      </div>
+    </div>
+
+  </div>
 </section>
 
 </div>
@@ -861,39 +1128,6 @@ header {
 </div>
 
 <script>
-const panel=document.getElementById("panel");
-const state=JSON.parse(localStorage.getItem("streamers"))||{};
-let buffer="";
-
-function apply(){
-document.querySelectorAll(".streamer-card").forEach(card=>{
-const id=card.dataset.id;
-card.querySelector(".live").style.display=state[id]?"block":"none";
-});
-document.querySelectorAll(".panel-streamer button").forEach(btn=>{
-const id=btn.dataset.id;
-btn.textContent=state[id]?"ON":"OFF";
-btn.className=state[id]?"on":"off";
-});
-localStorage.setItem("streamers",JSON.stringify(state));
-}
-
-document.addEventListener("keydown",e=>{
-buffer+=e.key.toUpperCase();
-if(buffer.includes("4S")) panel.style.display="flex";
-if(e.key==="Escape") panel.style.display="none";
-if(buffer.length>2) buffer=buffer.slice(-2);
-});
-
-document.querySelectorAll(".panel-streamer button").forEach(btn=>{
-btn.onclick=()=>{
-const id=btn.dataset.id;
-state[id]=!state[id];
-apply();
-};
-});
-
-apply();
 </script>
 
 </body>
