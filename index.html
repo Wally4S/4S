@@ -216,65 +216,79 @@ text-shadow:0 0 15px #D16812,0 0 25px #D16812;
 
 
 .card{
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
-
-  border-radius: 20px;
-  padding: 24px 30px;
-
   position: relative;
   overflow: hidden;
 
-  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 18px;
 
-  transition: all 0.35s ease;
+  background: linear-gradient(180deg, #0a0a0a, #000);
+
+  border: 1px solid rgba(209,104,18,0.4);
 
   box-shadow:
-    0 10px 30px rgba(0,0,0,0.6),
-    0 0 12px rgba(209,104,18,0.2);
+    0 0 12px rgba(209,104,18,0.25),
+    inset 0 0 20px rgba(0,0,0,0.8);
+
+  transition: all 0.25s ease;
 }
 
+/* 🔥 LINHA DE ENERGIA PASSANDO */
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:2px;
 
-/* Borda animada igual header */
-.card::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #FACC15,
+    #D16812,
+    transparent
+  );
+
+  animation: energyLine 3s linear infinite;
+}
+
+@keyframes energyLine{
+  0%{ left:-100%; }
+  100%{ left:100%; }
+}
+
+/* 🔥 BORDA MAIS LIMPA (menos poluída) */
+.card::after{
   content:"";
   position:absolute;
   inset:0;
-  padding:2px;
   border-radius:inherit;
-
-  background: #D16812; /* 🔥 cor sólida */
-
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;
-
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite:exclude;
-
   pointer-events:none;
 
-  /* glow suave igual header */
-  filter:
-    drop-shadow(0 0 4px #D16812)
-    drop-shadow(0 0 10px #D16812);
-
-  animation: glowPulse 4s ease-in-out infinite;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.05),
+    0 0 10px rgba(209,104,18,0.25);
 }
 
+/* HOVER MAIS "GAME" */
+.card:hover{
+  transform: translateY(-6px) scale(1.03);
+
+  box-shadow:
+    0 0 20px rgba(209,104,18,0.5),
+    0 0 40px rgba(250,204,21,0.25);
+}
 /* ===========================
    PERSONAGEM SENTADO (BASE)
 =========================== */
 .card-character{
   position:absolute;
-  top:20%;
-  left:70%;
+  top:10%;
+  left:50%;
   transform:translateX(-50%);
   
-  width:80px;
+  width:30px;
   height:130px;        /* 🔥 força padrão */
   object-fit:contain;  /* 🔥 mantém proporção */
 
@@ -286,10 +300,10 @@ text-shadow:0 0 15px #D16812,0 0 25px #D16812;
 /* CARD  */
 .card-character{
   position:absolute;
-  top:15px;
-  left:80%;
+  top:10px;
+  left:70%;
   transform:translateX(-50%);
-  width:150px;
+  width:100px;
 }
 /* ===========================
    MICRO MOVIMENTO (REALISMO)
@@ -310,15 +324,16 @@ text-shadow:0 0 15px #D16812,0 0 25px #D16812;
 }
 
 
-.card h3{color:#ffffff}
-.card a{
-display:inline-block;
-margin-top:16px;
-padding:10px 22px;
-border-radius:8px;
-background:linear-gradient(90deg,#f7efef44,#c7bab0);
-color:#ffffff;
-text-decoration:none;
+.card h3{
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:0.5px;
+
+  color:#fff;
+
+  text-shadow:
+    0 0 6px #D16812,
+    0 0 12px rgba(250,204,21,0.4);
 }
 /* STREAMERS */
 .streamers{margin-top:110px}
@@ -927,30 +942,43 @@ img {
 
   /* GRID CARDS */
   .grid {
-    grid-template-columns: repeat(2, 1fr); /* 🔥 1 coluna no mobile */
-    gap: 18px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* tablets */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
   }
+}
+
+/* celulares pequenos */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
   .card {
-    padding: 18px;
-    border-radius: 16px;
+    padding: 10px;
+    border-radius: 12px;
   }
 
   /* PERSONAGEM NÃO QUEBRA */
   .card-character {
-    width: 120px;
+    width: 70px;
     top: 10px;
-    left: 75%;
+    left: 80%;
     opacity: 0.9;
   }
 
   /* TEXTO DOS CARDS */
   .card h3 {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   .card p {
-    font-size: 13px;
+    font-size: 10px;
   }
 
   /* BOTÃO */
@@ -1021,16 +1049,24 @@ img {
   }
 }
 .promo-text{
+  display:inline-block;
+
+  font-size:11px;
   font-weight:700;
   letter-spacing:1px;
-  color:#fff;
 
-  text-shadow:
-    0 0 6px #D16812,
-    0 0 12px #FACC15,
-    0 0 18px rgba(209,104,18,0.6);
+  padding:4px 8px;
+  border-radius:6px;
 
-  animation: promoPulse 2s ease-in-out infinite;
+  background: rgba(16,185,129,0.1);
+  color:#10B981;
+
+  border:1px solid rgba(16,185,129,0.4);
+
+  box-shadow:
+    0 0 8px rgba(16,185,129,0.4);
+
+  margin-top:6px;
 }
 
 /* glow respirando leve */
@@ -1051,6 +1087,40 @@ img {
       0 0 6px #D16812,
       0 0 10px #FACC15;
   }
+}
+@media (max-width: 768px) {
+
+  .card-character {
+    position: absolute !important;
+
+    top: auto !important;     /* 🔥 mata qualquer top antigo */
+    left: auto !important;
+
+    bottom: -12px !important; /* 🔥 AGORA VAI DESCER */
+    right: -6px !important;
+
+    width: 40px !important;
+    height: auto !important;
+
+    transform: none !important;
+
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+}
+.card-character{
+  position:absolute;
+
+  bottom:-10px;
+  right:-5px;
+
+  width:55px;
+  height:auto;
+
+  object-fit:contain;
+
+  pointer-events:none;
 }
 </style>
 
@@ -1121,19 +1191,19 @@ header {
 <div class="grid">
 
 <div class="card">
-<img src="/public/promo1.png" class="card-character">
+<img src="/public/promo.gif" class="card-character">
 <h3>3 Produtos+ 10%</h3>
 <p class="promo-text">PROMOÇÃO ON✔️</p>
 </div>
 
 <div class="card">
-<img src="/public/promo2.png" class="card-character">
+<img src="/public/promo.gif" class="card-character">
 <h3>5 Produtos+ 20%</h3>
 <p class="promo-text">PROMOÇÃO ON✔️</p>
 </div>
 
 <div class="card">
-<img src="/public/promo3.png" class="card-character">
+<img src="/public/promo.gif" class="card-character">
 <h3>10 Produtos+ 30%</h3>
 <p class="promo-text">PROMOÇÃO ON✔️</p>
 </div>
