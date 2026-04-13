@@ -1122,6 +1122,42 @@ img {
 
   pointer-events:none;
 }
+@media (max-width: 768px) {
+
+  /* tira do banner */
+  .banner .hero-categories{
+    position: absolute;
+    bottom: -55px; /* empurra pra fora do banner */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    width: 100%;
+    padding: 0 10px;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* cria espaço pra não sobrepor as promoções */
+  .container{
+    margin-top: 60px;
+  }
+
+}
+@media (max-width: 768px) {
+
+  .banner .hero-categories{
+    background: rgba(0,0,0,0.7);
+    border-radius: 12px;
+    padding: 10px;
+    backdrop-filter: blur(6px);
+
+    box-shadow: 0 0 12px rgba(209,104,18,0.4);
+  }
+
+}
 </style>
 
 </head>
@@ -1175,14 +1211,16 @@ header {
   <p>Melhores preços e promoções</p>
 
   <!-- CATEGORIAS (igual cards) -->
-  <div class="hero-categories">
-    <a href="/referencias" class="card-btn">📌REFS</a>
-    <a href="/loja" class="card-btn">🛒LOJA</a>
-    <a href="/guias" class="card-btn">🎬VIDEOS</a>
-    <a href="/ROX/" class="card-btn">⏰TIMER</a>
-  </div>
+  </section>
 
+<div class="hero-categories outside">
+  <a href="/referencias" class="card-btn">📌REFS</a>
+  <a href="/loja" class="card-btn">🛒LOJA</a>
+  <a href="/guias" class="card-btn">🎬VIDEOS</a>
+  <a href="/ROX/" class="card-btn">⏰TIMER</a>
 </div>
+
+<div class="container">
 
 </section>
 
